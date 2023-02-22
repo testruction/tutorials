@@ -64,7 +64,7 @@ function waitfor_container_ip()
 
     if [ "${ip}" != "" ]
     then
-        logger -p syslog.error \
+        logger -p syslog.info \
         "Adding record to \"${ip} ${container_name}\" to \"/etc/hosts\""
         echo "${ip} ${container_name}" | sudo tee -a /etc/hosts
     fi
