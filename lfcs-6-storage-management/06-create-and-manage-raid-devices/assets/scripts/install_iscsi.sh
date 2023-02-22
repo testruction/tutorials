@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DISK_COUNT='16'
+DISK_COUNT=${1:-16}
 TARGET_ADDRESS='127.0.0.1'
 TARGET_PORT='53260'
 TARGET_IQN='iqn.0000-00.local.host'
@@ -145,11 +145,11 @@ function add_partitions()
     # create label
     sudo parted -s /dev/disk/by-path/ip-${TARGET_ADDRESS}\:${TARGET_PORT}-iscsi-${TARGET_IQN}\:${lun_name}-lun-1 mklabel msdos
     sudo parted -s /dev/disk/by-path/ip-${TARGET_ADDRESS}\:${TARGET_PORT}-iscsi-${TARGET_IQN}\:${lun_name}-lun-1 unit % mkpart primary ext4 0 100
-    partprobe -s && sleep 1s
+    partprobe -s > /dev/null 2>&1 && sleep 1s
     sudo mkfs -t ext4 /dev/disk/by-path/ip-${TARGET_ADDRESS}\:${TARGET_PORT}-iscsi-${TARGET_IQN}\:${lun_name}-lun-1-part1
   done
 
-  lsblk
+  lsblk --scsi
 }
 
 install_dependencies
