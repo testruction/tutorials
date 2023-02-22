@@ -40,6 +40,7 @@ function waitfor_container()
     then
         logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
+        exit 1
     fi
 
     ((count=count+1))
@@ -73,6 +74,7 @@ function waitfor_container_ip()
     then
         logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current IP address \"${ip}\". Reason: \"Timeout\""
+        exit 1
     fi
 
     ((count=count+1))
