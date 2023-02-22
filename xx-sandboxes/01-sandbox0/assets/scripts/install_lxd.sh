@@ -60,13 +60,13 @@ function waitfor_container_ip()
 
   while [ "${ip}" == "" ]
   do
-    ip=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
+    ip=$(lxc info "${container_name}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
 
     if [ "${ip}" != "" ]
     then
         logger -p syslog.error \
-        "Adding record to \"${CONTAINER_IP} ${CONTAINER_NAME}\" to \"/etc/hosts\""
-        echo "${CONTAINER_IP} ${CONTAINER_NAME}" | sudo tee -a /etc/hosts
+        "Adding record to \"${ip} ${container_name}\" to \"/etc/hosts\""
+        echo "${ip} ${container_name}" | sudo tee -a /etc/hosts
     fi
     
     if [ ${count} -le ${retry} ]
