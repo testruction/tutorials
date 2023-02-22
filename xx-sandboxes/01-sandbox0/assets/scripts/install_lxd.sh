@@ -42,7 +42,7 @@ function waitfor_container()
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
     fi
 
-    count+=1
+    ((count=count+1))
     sleep 1s
   done
 
