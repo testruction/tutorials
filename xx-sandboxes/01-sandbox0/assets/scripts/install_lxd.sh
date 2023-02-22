@@ -29,7 +29,7 @@ function waitfor_container()
 
   state="Unstated yet"
 
-  while [ "${state}" != "Status: Running" ]
+  while [ "${state}" != "Running" ]
   do
     state="$(lxc info ${container_name} | grep "Status" | cut -d ' ' -f 2)"
 
