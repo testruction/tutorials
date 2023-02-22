@@ -1,0 +1,11 @@
+{
+    "title": "Linux Foundation Certified System Admin (2018)",
+    "description": "Practical preparation to the certification",
+    "items": [
+        {
+            "path": "1-log-into-local-remote-graphical-and-text-mode-consoles",
+            "title": "Log into local & remote graphical and text mode consoles",
+            "description": "Introduction to command line shell and SSH"
+        }
+    ]
+}
