@@ -27,7 +27,7 @@ function waitfor_container()
   retry="${2:-'15'}"
   count=0
 
-  state="UNSTATED"
+  state="Unstated yet"
 
   while [ "${state}" != "Running" ]
   do
