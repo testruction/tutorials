@@ -22,7 +22,8 @@
                 {"file": "scripts/install_lxd.sh", "target": "~/", "chmod": "+rwx"},
                 {"file": "scripts/install_salt.sh", "target": "~/", "chmod": "+rwx"},
                 {"file": "scripts/install_iscsi.sh", "target": "~/", "chmod": "+x"},
-                {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+rw"}
+                {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+rw"},
+                {"file": "scripts/generate_files.sh", "target": "~/", "chmod": "+x"}
             ]
         }
     },
