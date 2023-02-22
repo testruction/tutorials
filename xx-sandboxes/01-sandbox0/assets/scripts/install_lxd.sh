@@ -29,7 +29,7 @@ function waitfor_container()
 
   state=""
 
-  while [ "${state}" == "Running" ]
+  while [ "${state}" != "Running" ]
   do
     state="$(lxc in ${container_name} | grep 'Status')"
 
