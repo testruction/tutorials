@@ -36,7 +36,7 @@ function waitfor_container()
     logger -p syslog.notice \
     "Waiting for \"${container_name}\". Current state \"${state}\""
 
-    if [ ${count} -le ${retry} ]
+    if [ ${count} -ge ${retry} ]
     then
         logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
@@ -70,7 +70,7 @@ function waitfor_container_ip()
         echo "${ip} ${container_name}" | sudo tee -a /etc/hosts
     fi
     
-    if [ ${count} -le ${retry} ]
+    if [ ${count} -ge ${retry} ]
     then
         logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current IP address \"${ip}\". Reason: \"Timeout\""
