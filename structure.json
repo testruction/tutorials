@@ -1,13 +1,13 @@
 {
     "items": [
         {
-            "path": "lfcs-2018/1-essential-commands",
-            "title": "LFCS (2018): Essential commands"
+            "path": "lfcs/1-essential-commands",
+            "title": "LFCS - Essential Commands"
         },
-        {"path": "2-operation-of-running-systems"},
-        {"path": "3-user-and-group-management"},
-        {"path": "4-networking"},
-        {"path": "5-service-configuration"},
-        {"path": "6-storage-management"}
+        {"path": "lfcs/2-operation-of-running-systems"},
+        {"path": "lfcs/3-user-and-group-management"},
+        {"path": "lfcs/4-networking"},
+        {"path": "lfcs/5-service-configuration"},
+        {"path": "lfcs/6-storage-management"}
     ]
 }
