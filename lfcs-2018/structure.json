@@ -1,0 +1,12 @@
+{
+    "title": "Linux Foundation Certified System Admin (2018)",
+    "description": "Practical preparation to the certification",
+    "items": [
+        {"path": "1-essential-commands"},
+        {"path": "2-operation-of-running-systems"},
+        {"path": "3-user-and-group-management"},
+        {"path": "4-networking"},
+        {"path": "5-service-configuration"},
+        {"path": "6-storage-management"}
+    ]
+}

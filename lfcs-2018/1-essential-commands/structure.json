@@ -1,0 +1,7 @@
+{
+    "title": "Log into local & remote graphical and text mode consoles",
+    "description": "Introduction to Shell and SSH",
+    "items": [
+        {"path": "1-log-into-local-remote-graphical-and-text-mode-consoles"}
+    ]
+}
