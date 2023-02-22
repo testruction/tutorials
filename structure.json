@@ -9,6 +9,15 @@
         {"path": "lfcs-3-user-and-group-management"},
         {"path": "lfcs-4-networking"},
         {"path": "lfcs-5-service-configuration"},
-        {"path": "lfcs-6-storage-management"}
+        {
+            "path": "lfcs-6-storage-management",
+            "title": "Linux Foundation Certificated System Administrator (LFCS) v2018",
+            "Description": "Storage Management"
+        },
+        {
+            "path": "xx-sandboxes",
+            "title": "Sandboxes",
+            "Description": "Sandboxes used to develop courses"
+        }
     ]
 }

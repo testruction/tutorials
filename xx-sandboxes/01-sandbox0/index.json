@@ -1,0 +1,38 @@
+{
+    "title": "Testruction Devbox",
+    "description": "Developement of the assets used to intialize courses environments",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_ssh.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_lxd.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_salt.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_iscsi.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+r"}
+            ]
+        }
+    },
+    "environment": {
+        "showvisualise": false,
+        "showdashboard": true,
+        "hideintro": false,
+        "uilayout": "terminal-iframe"
+      },
+      "backend": {
+        "imageid": "ubuntu2004"
+      }
+}
