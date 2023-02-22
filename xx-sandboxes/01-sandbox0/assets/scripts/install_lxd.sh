@@ -50,6 +50,39 @@ function waitfor_container()
   "Ready for \"${container_name}\". Current state \"${state}\""
 }
 
+function waitfor_container_ip()
+{
+  container_name="${1}"
+  retry="${2:-'15'}"
+  count=0
+
+  ip=""
+
+  while [ "${ip}" == "" ]
+  do
+    ip=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
+
+    if [ "${ip}" != "" ]
+    then
+        logger -p syslog.error \
+        "Adding record to \"${CONTAINER_IP} ${CONTAINER_NAME}\" to \"/etc/hosts\""
+        echo "${CONTAINER_IP} ${CONTAINER_NAME}" | sudo tee -a /etc/hosts
+    fi
+    
+    if [ ${count} -le ${retry} ]
+    then
+        logger -p syslog.error \
+        "Abandoning for \"${container_name}\". Current IP address \"${ip}\". Reason: \"Timeout\""
+    fi
+
+    ((count=count+1))
+    sleep 1s
+  done
+
+  logger -p syslog.info \
+  "Ready for \"${container_name}\". Current state \"${state}\""
+}
+
 function start_container()
 {
     CONTAINER_NAME="${1:-'u1'}"
@@ -63,12 +96,7 @@ function start_container()
         lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat ${USER_DATA})" --verbose
 
         waitfor_container ${CONTAINER_NAME} ${TIMEOUT}
-
-        CONTAINER_IP=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
-
-        logger -p syslog.error \
-        "Adding record to \"${CONTAINER_IP} ${CONTAINER_NAME}\" to \"/etc/hosts\""
-        echo "${CONTAINER_IP} ${CONTAINER_NAME}" | sudo tee -a /etc/hosts
+        waitfor_container_ip ${CONTAINER_NAME} ${TIMEOUT}
     fi
 }
 
