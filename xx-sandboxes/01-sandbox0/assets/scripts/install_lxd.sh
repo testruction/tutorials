@@ -36,7 +36,7 @@ function waitfor_container()
     logger -p syslog.notice \
     "Waiting for \"${container_name}\". Current state \"${state}\""
 
-    if [ "${count}" -le "${retry}" ]
+    if [ ${count} -le ${retry} ]
     then
         logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
