@@ -29,7 +29,7 @@ function configure_target()
     # create the disk image
     sudo mkdir -p /var/lib/devices
     sudo fallocate -l 1G /var/lib/devices/disk-${disk_id}.img \
-    || logger -p syslog.error -p local0.error \
+    || logger -p syslog.error -p syslog.error \
       "Failed to create disk image \"/var/lib/devices/disk-${disk_id}.img\""
 
     # configure iscsi tgt
@@ -126,11 +126,11 @@ function waitfor_devs()
 {
   while [ "$(find_devs | wc -l)" -ne "${DISK_COUNT}" ]
   do
-    logger -p local0.notice \
+    logger -p syslog.notice \
     "Discovered new virtual devices in \"/dev\" [$(find_devs | wc -l)/${DISK_COUNT}]"
   done
 
-  logger -p local0.info \
+  logger -p syslog.info \
   "Ready ISCSI virtual devices in \"/dev\" [$(find_devs | wc -l)/${DISK_COUNT}]"
 }
 

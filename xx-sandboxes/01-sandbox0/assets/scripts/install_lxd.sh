@@ -31,12 +31,12 @@ function waitfor_container()
   do
     state="$(lxc in ${container_name} | grep 'Status')"
 
-    logger -p local0.notice \
+    logger -p syslog.notice \
     "Waiting for \"${container_name}\". Current state \"${state}\""
 
     if [ "${count}" -le "${retry}"]
     then
-        logger -p local0.error \
+        logger -p syslog.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
     fi
 
@@ -44,7 +44,7 @@ function waitfor_container()
     sleep 1s
   done
 
-  logger -p local0.info \
+  logger -p syslog.info \
   "Ready for \"${container_name}\". Current state \"${state}\""
 }
 
