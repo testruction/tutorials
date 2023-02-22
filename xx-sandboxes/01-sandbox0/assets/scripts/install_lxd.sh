@@ -24,7 +24,7 @@ function configure_lxd()
 function waitfor_container()
 {
   container_name="${1}"
-  retry="${2:-30}"
+  retry="${2:-'15'}"
   state="null"
   count=0
   while [ "${state}" -ne "Running" ]
@@ -47,17 +47,19 @@ function waitfor_container()
   "Ready for \"${container_name}\". Current state \"${state}\""
 }
 
-function start_containers()
+function start_container()
 {
+    CONTAINER_NAME="${1:-'u1'}"
+    USER_DATA=${2:'/tmp/default-user-data.yml'}
+    TIMEOUT="${3:-'15'}"
     DISTRIBUTION=$(lsb_release -is)
     RELEASE=$(lsb_release -cs)
 
     if [ "$(id -un)" = "root" ]
     then
-        CONTAINER_NAME='lxd01'
-        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat /tmp/default-user-data.yml)"
+        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat ${USER_DATA})"
 
-        waitfor_container ${CONTAINER_NAME} 30
+        waitfor_container ${CONTAINER_NAME} ${TIMEOUT}
 
         CONTAINER_IP=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
 
@@ -67,4 +69,4 @@ function start_containers()
 
 install_dependencies
 configure_lxd
-start_containers
+start_container 'lxd01' /tmp/default-user-data.yml 30
