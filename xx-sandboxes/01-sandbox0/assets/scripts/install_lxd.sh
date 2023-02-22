@@ -67,7 +67,7 @@ function start_container()
         CONTAINER_IP=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
 
         logger -p syslog.error \
-        "Adding record to \"{CONTAINER_IP} ${CONTAINER_NAME}\" to \"/etc/hosts\""
+        "Adding record to \"${CONTAINER_IP} ${CONTAINER_NAME}\" to \"/etc/hosts\""
         echo "${CONTAINER_IP} ${CONTAINER_NAME}" | sudo tee -a /etc/hosts
     fi
 }
