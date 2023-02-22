@@ -25,8 +25,10 @@ function waitfor_container()
 {
   container_name="${1}"
   retry="${2:-'15'}"
-  state=""
   count=0
+
+  state=""
+
   while [ "${state}" == "Running" ]
   do
     state="$(lxc in ${container_name} | grep 'Status')"
