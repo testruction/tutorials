@@ -29,9 +29,9 @@ function waitfor_container()
 
   state="Unstated yet"
 
-  while [ "${state}" != "Running" ]
+  while [ "${state}" != "Status: Running" ]
   do
-    state="$(lxc info ${container_name} | grep 'Status')"
+    state="$(lxc info ${container_name} | grep "Status" | cut -d ' ' -f 2)"
 
     logger -p syslog.notice \
     "Waiting for \"${container_name}\". Current state \"${state}\""
@@ -60,7 +60,7 @@ function start_container()
 
     if [ "$(id -un)" = "root" ]
     then
-        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat ${USER_DATA})"
+        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat ${USER_DATA})" --verbose
 
         waitfor_container ${CONTAINER_NAME} ${TIMEOUT}
 
