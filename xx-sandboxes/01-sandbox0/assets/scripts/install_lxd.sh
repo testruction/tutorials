@@ -21,6 +21,32 @@ function configure_lxd()
     
 }
 
+function waitfor_container()
+{
+  container_name="${1}"
+  retry="${2:-30}"
+  state="null"
+  count=0
+  while [ "${state}" -ne "Running" ]
+  do
+    state="$(lxc in ${container_name} | grep 'Status')"
+
+    logger -p local0.notice \
+    "Waiting for \"${container_name}\". Current state \"${state}\""
+
+    if [ "${count}" -le "${retry}"]
+    then
+        logger -p local0.notice \
+        "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
+
+    count+=1
+    sleep 1s
+  done
+
+  logger -p local0.info \
+  "Ready for \"${container_name}\". Current state \"${state}\""
+}
+
 function start_containers()
 {
     DISTRIBUTION=$(lsb_release -is)
@@ -30,6 +56,8 @@ function start_containers()
     then
         CONTAINER_NAME='lxd01'
         lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat /tmp/default-user-data.yml)"
+
+        waitfor_container ${CONTAINER_NAME} 30
 
         CONTAINER_IP=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
 
