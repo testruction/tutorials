@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DISK_COUNT='12'
+DISK_COUNT=${1:-16}
 TARGET_ADDRESS='127.0.0.1'
 TARGET_PORT='53260'
 TARGET_IQN='iqn.0000-00.local.host'
@@ -28,7 +28,7 @@ function configure_target()
     # at /var/lib/devices and use a 10G disk.
     # create the disk image
     sudo mkdir -p /var/lib/devices
-    sudo fallocate -l 1G /var/lib/devices/disk-${disk_id}.img \
+    sudo fallocate -l 512MB /var/lib/devices/disk-${disk_id}.img \
     || logger -p syslog.error -p syslog.error \
       "Failed to create disk image \"/var/lib/devices/disk-${disk_id}.img\""
 
