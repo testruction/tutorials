@@ -1,8 +1,14 @@
 {
     "items": [
         {
-            "path": "lfcs",
-            "title": "Linux Foundation Certified System Administrator (LFC) v2018"
-        }
+            "path": "lfcs-1-essential-commands",
+            "title": "Linux Foundation Certificated System Administrator (LFCS) v2018",
+            "Description": "Essential Commands"
+        },
+        {"path": "lfcs-2-operation-of-running-systems"},
+        {"path": "lfcs-3-user-and-group-management"},
+        {"path": "lfcs-4-networking"},
+        {"path": "lfcs-5-service-configuration"},
+        {"path": "lfcs-6-storage-management"}
     ]
 }
