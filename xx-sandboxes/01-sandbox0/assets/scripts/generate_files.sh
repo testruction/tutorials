@@ -1,5 +1,42 @@
 #!/usr/bin/env bash
 
+set -e
+
+# User accounts
+USERNAME[0]='serena'
+USERNAME[1]='ronaldo'
+USERNAME[2]='ken'
+USERNAME[3]='fatima'
+
+GROUPNAME[0]='sysops'
+GROUPNAME[1]='devops'
+GROUPNAME[2]='finops'
+GROUPNAME[3]='secops'
+
+SHELLPATH='/bin/bash'
+SHELLPATH='/bin/sh'
+SHELLPATH='/bin/dash'
+
+function create_users()
+{
+    for i in ${GROUPNAME[@]}
+    do
+        groupadd "${i}"
+    done
+
+    for u in ${USERNAME[@]}
+    do
+        s=$((RANDOM % ${#SHELLPATH[@]}))
+        shell="${SHELLPATH[$s]}"
+
+        g=$((RANDOM % ${#mode[@]}))
+        group="${GROUPNAME[$g]}"
+
+        useradd --no-user-group --create-home --shell="${shell}" --groups="${group}" "${u}"
+    done
+}
+
+
 function install_dependencies()
 {
     # install tgt and open-iscsi
@@ -56,7 +93,7 @@ function create_lab1_files()
     mkdir -vp /var/lib/lab1
     chmod -R 777 /var/lib/lab1
 
-    for i in {1..1500}
+    for i in {1..2000}
     do
         u=$((RANDOM % ${#mode[@]}))
         g=$((RANDOM % ${#mode[@]}))
@@ -75,8 +112,11 @@ function create_lab1_files()
         fallocate -l ${fsize} ${fname}
         chmod ${fmode} ${fname}
         chattr ${fattr} ${fname}
+
+        echo "${i} ${fname} ${fsize} ${fmode} ${fattr}" | tee -a /var/cache/generated_files
     done
 }
 
+create_users
 install_dependencies
 create_lab1_files
