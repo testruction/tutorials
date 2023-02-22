@@ -1,5 +1,6 @@
 {
     "items": [
-        {"path": "1-log-into-local-remote-graphical-and-text-mode-consoles"}
+        {"path": "01-log-into-local-remote-graphical-and-text-mode-consoles"},
+        {"path": "02-search-for-files"}
     ]
 }
