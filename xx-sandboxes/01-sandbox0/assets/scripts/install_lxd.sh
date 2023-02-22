@@ -31,7 +31,7 @@ function waitfor_container()
 
   while [ "${state}" != "Running" ]
   do
-    state="$(lxc in ${container_name} | grep 'Status')"
+    state="$(lxc info ${container_name} | grep 'Status')"
 
     logger -p syslog.notice \
     "Waiting for \"${container_name}\". Current state \"${state}\""
