@@ -1,5 +1,8 @@
 {
     "items": [
-        { "path": "lfcs-2018"}
+        {
+            "path": "lfcs-2018/1-essential-commands",
+            "title": "LFCS (2018): Essential commands"
+        }
     ]
 }
