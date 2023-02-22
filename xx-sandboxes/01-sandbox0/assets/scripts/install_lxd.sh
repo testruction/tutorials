@@ -36,7 +36,7 @@ function waitfor_container()
 
     if [ "${count}" -le "${retry}"]
     then
-        logger -p local0.notice \
+        logger -p local0.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
 
     count+=1
