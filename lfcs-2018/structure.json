@@ -2,7 +2,11 @@
     "title": "Linux Foundation Certified System Admin (2018)",
     "description": "Practical preparation to the certification",
     "items": [
-        {"path": "1-essential-commands"},
+        {
+            "path": "1-essential-commands",
+            "title": "Log into local & remote graphical and text mode consoles",
+            "description": "Introduction to command line shell and SSH"
+        },
         {"path": "2-operation-of-running-systems"},
         {"path": "3-user-and-group-management"},
         {"path": "4-networking"},
