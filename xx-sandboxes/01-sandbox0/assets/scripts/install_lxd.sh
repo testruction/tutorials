@@ -25,9 +25,9 @@ function waitfor_container()
 {
   container_name="${1}"
   retry="${2:-'15'}"
-  state="null"
+  state=""
   count=0
-  while [ "${state}" -ne "Running" ]
+  while [ "${state}" == "Running" ]
   do
     state="$(lxc in ${container_name} | grep 'Status')"
 
@@ -38,6 +38,7 @@ function waitfor_container()
     then
         logger -p local0.error \
         "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
+    fi
 
     count+=1
     sleep 1s
@@ -50,7 +51,7 @@ function waitfor_container()
 function start_container()
 {
     CONTAINER_NAME="${1:-'u1'}"
-    USER_DATA=${2:'/tmp/default-user-data.yml'}
+    USER_DATA=${2:-'/tmp/default-user-data.yml'}
     TIMEOUT="${3:-'15'}"
     DISTRIBUTION=$(lsb_release -is)
     RELEASE=$(lsb_release -cs)
