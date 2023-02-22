@@ -11,9 +11,6 @@ wait_file() {
 
 echo "done" >> /tmp/killercoda-finished
 
-/usr/local/bin/install_ssh.sh
-/usr/local/bin/install_salt.sh
-/usr/local/bin/install_iscsi.sh
-/usr/local/bin/install_lxd.sh
+~/hello_world.sh
 
 echo "done" >> /tmp/killercoda-background-finished
