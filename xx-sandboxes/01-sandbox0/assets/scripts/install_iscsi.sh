@@ -149,7 +149,7 @@ function add_partitions()
     sudo mkfs -t ext4 /dev/disk/by-path/ip-${TARGET_ADDRESS}\:${TARGET_PORT}-iscsi-${TARGET_IQN}\:${lun_name}-lun-1-part1
   done
 
-  lsblk
+  lsblk --scsi
 }
 
 install_dependencies
