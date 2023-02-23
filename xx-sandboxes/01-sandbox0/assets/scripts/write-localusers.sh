@@ -34,7 +34,7 @@ function create_users()
 
         useradd --no-user-group --create-home --shell="${shell}" --groups="${group}" "${u}"
 
-        echo "${u} ${shell} ${group}" | tee -a /var/cache/generated_files
+        echo "${u} ${shell} ${group}" | tee -a /var/cache/generated_users
     done
 }
 

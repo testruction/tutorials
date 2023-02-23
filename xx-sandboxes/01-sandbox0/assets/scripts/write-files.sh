@@ -54,7 +54,6 @@ function create_lab1_files()
     attr[4]=+A
     attr[5]=-A
 
-
     mkdir -vp /var/lib/lab1
     chmod -R 777 /var/lib/lab1
 
@@ -78,7 +77,16 @@ function create_lab1_files()
         chmod ${fmode} ${fname}
         chattr ${fattr} ${fname}
 
-        echo "${i} ${fname} ${fsize} ${fmode} ${fattr}" | tee -a /var/cache/generated_files
+        if [ -f /var/cache/generated_users ]
+        then
+            owner=$(shuf -n 1 /var/cache/generated_files | awk -F " " '{OFS = ":"}{print $1, $3}')
+            
+            chown "${owner}" ${fname}
+
+            echo "${i} ${fname} ${fsize} ${fmode} ${fattr} ${owner}" | tee -a /var/cache/generated_files
+        else
+            echo "${i} ${fname} ${fsize} ${fmode} ${fattr}" | tee -a /var/cache/generated_files
+        fi
     done
 }
 
