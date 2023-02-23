@@ -23,8 +23,8 @@
                 {"file": "scripts/install-salt.sh", "target": "~/", "chmod": "+rwx"},
                 {"file": "scripts/install-iscsi.sh", "target": "~/", "chmod": "+x"},
                 {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+rw"},
-                {"file": "scripts/write-localusers.sh", "target": "~/", "chmod": "+x"},
-                {"file": "scripts/write-files.sh", "target": "~/", "chmod": "+x"}
+                {"file": "scripts/write-localusers.sh", "target": "~/", "chmod": "+rwx"},
+                {"file": "scripts/write-files.sh", "target": "~/", "chmod": "+rwx"}
             ]
         }
     },
