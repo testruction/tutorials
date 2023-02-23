@@ -72,24 +72,26 @@ function create_lab1_files()
         fattr="${attr[$a]}"
 
         fname="/var/lib/lab1/$(uuidgen)"
-        
-        fallocate -l ${fsize} ${fname}
-        chmod ${fmode} ${fname}
-        chattr ${fattr} ${fname}
 
         if [ -f /var/cache/generated_users ]
         then
-            owner=$(shuf -n 1 /var/cache/generated_files | awk -F " " '{OFS = ":"}{print $1, $3}')
+            owner=$(shuf -n 1 /var/cache/generated_users | awk -F " " '{OFS = ":"}{print $1, $3}')
             
+            fallocate -l ${fsize} ${fname}
             chown "${owner}" ${fname}
+            chmod ${fmode} ${fname}
+            chattr ${fattr} ${fname}
 
             echo "${i} ${fname} ${fsize} ${fmode} ${fattr} ${owner}" | tee -a /var/cache/generated_files
         else
+            fallocate -l ${fsize} ${fname}
+            chmod ${fmode} ${fname}
+            chattr ${fattr} ${fname}
+
             echo "${i} ${fname} ${fsize} ${fmode} ${fattr}" | tee -a /var/cache/generated_files
         fi
     done
 }
 
-create_users
 install_dependencies
 create_lab1_files
