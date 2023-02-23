@@ -36,6 +36,8 @@ function create_users()
 
         echo "${u} ${shell} ${group}" | tee -a /var/cache/generated_users
     done
+
+    echo "root /bin/bash root" | tee -a /var/cache/generated_users
 }
 
 create_users
