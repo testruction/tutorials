@@ -21,22 +21,87 @@ function configure_lxd()
     
 }
 
-function start_containers()
+function waitfor_container()
 {
+  container_name="${1}"
+  retry="${2:-'15'}"
+  count=0
+
+  state="Unstated yet"
+
+  while [ "${state}" != "Running" ]
+  do
+    state="$(lxc info ${container_name} | grep "Status" | cut -d ' ' -f 2)"
+
+    logger -p syslog.notice \
+    "Waiting for \"${container_name}\". Current state \"${state}\""
+
+    if [ ${count} -ge ${retry} ]
+    then
+        logger -p syslog.error \
+        "Abandoning for \"${container_name}\". Current state \"${state}\". Reason: \"Timeout\""
+        exit 1
+    fi
+
+    ((count=count+1))
+    sleep 1s
+  done
+
+  logger -p syslog.info \
+  "Ready for \"${container_name}\". Current state \"${state}\""
+}
+
+function waitfor_container_ip()
+{
+  container_name="${1}"
+  retry="${2:-'15'}"
+  count=0
+
+  ip=""
+
+  while [ "${ip}" == "" ]
+  do
+    ip=$(lxc info "${container_name}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
+
+    if [ "${ip}" != "" ]
+    then
+        logger -p syslog.info \
+        "Adding record to \"${ip} ${container_name}\" to \"/etc/hosts\""
+        echo "${ip} ${container_name}" | sudo tee -a /etc/hosts
+    fi
+    
+    if [ ${count} -ge ${retry} ]
+    then
+        logger -p syslog.error \
+        "Abandoning for \"${container_name}\". Current IP address \"${ip}\". Reason: \"Timeout\""
+        exit 1
+    fi
+
+    ((count=count+1))
+    sleep 1s
+  done
+
+  logger -p syslog.info \
+  "Ready for \"${container_name}\". Current state \"${state}\""
+}
+
+function start_container()
+{
+    CONTAINER_NAME="${1:-'u1'}"
+    USER_DATA=${2:-'/tmp/default-user-data.yml'}
+    TIMEOUT="${3:-'15'}"
     DISTRIBUTION=$(lsb_release -is)
     RELEASE=$(lsb_release -cs)
 
     if [ "$(id -un)" = "root" ]
     then
-        CONTAINER_NAME='lxd01'
-        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat /tmp/default-user-data.yml)"
+        lxc launch "${DISTRIBUTION,,}:${RELEASE}" "${CONTAINER_NAME}" --config=user.user-data="$(cat ${USER_DATA})" --verbose
 
-        CONTAINER_IP=$(lxc info "${CONTAINER_NAME}" | grep -E "eth0\:\sinet\s.*" | awk -F " " '{print $3}')
-
-        echo "${CONTAINER_IP} ${CONTAINER_NAME}" | sudo tee -a /etc/hosts
+        waitfor_container ${CONTAINER_NAME} ${TIMEOUT}
+        waitfor_container_ip ${CONTAINER_NAME} ${TIMEOUT}
     fi
 }
 
 install_dependencies
 configure_lxd
-start_containers
+start_container 'lxd01' /tmp/default-user-data.yml 30
