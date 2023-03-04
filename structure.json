@@ -15,6 +15,11 @@
             "Description": "Storage Management"
         },
         {
+            "path": "fastapi-1-backend-service",
+            "title": "FastAPI: Backend Service",
+            "Description": "Create a FastAPI backend service connected to a relational database"
+        },
+        {
             "path": "xx-sandboxes",
             "title": "Sandboxes",
             "Description": "Sandboxes used to develop courses"

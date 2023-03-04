@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  cockroach-cluster:
+    # this instance exposes the management UI and other instances use it to join the cluster
+    image: cockroachdb/cockroach:v20.1.0
+    command: start --insecure --advertise-addr=db-management
+    volumes:
+      - /cockroach/cockroach-data
+    ports:
+      - "26257:26257"
+      - "8180:8080"
+    healthcheck:
+      test: ["CMD", "/cockroach/cockroach", "node", "status", "--insecure"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  cockroach-node-1:
+    image: cockroachdb/cockroach:v20.1.0
+    command: start --insecure --join=cockroach-cluster --advertise-addr=cockroach-node-1
+    volumes:
+      - /cockroach/cockroach-data
+    depends_on:
+      - cockroach-cluster
+
+  cockroach-node-2:
+    image: cockroachdb/cockroach:v20.1.0
+    command: start --insecure --join=cockroach-cluster --advertise-addr=cockroach-node-2
+    volumes:
+      - /cockroach/cockroach-data
+    depends_on:
+      - cockroach-cluster
+
+  jaeger:
+    image: quay.io/jaegertracing/all-in-one:latest
+    restart: always
+    environment:
+      LOG_LEVEL: debug
+      COLLECTOR_OTLP_ENABLED: 'true'
+    ports:
+      - "${JARGER_WEBUI_PORT:-16686}:16686"
+      - "${OTLP_EXPORTER_PORT:-4317}:4317"
