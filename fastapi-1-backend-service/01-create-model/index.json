@@ -20,7 +20,7 @@
         "assets": {
             "host01": [
                 {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "deploy/docker/docker-compose.yml", "target": "~/", "chmod": "+rw"},
+                {"file": "deploy/docker/docker-compose.yml", "target": "~/", "chmod": "+rw"}
             ]
         }
     },
