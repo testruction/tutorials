@@ -18,3 +18,23 @@ sed -i 's/\.Values\./.Values.backend./g' chart/templates/backend/*.yaml
 ```bash
 sed -i 's/\.Values\./.Values.frontend./g' chart/templates/frontend/*.yaml
 ```{{exec}}
+
+Stage changes in Git.
+
+```bash
+git add .
+```{{exec}}
+
+Review the content of all changes.
+
+```bash
+git status -v
+```{{exec}}
+
+> The service name appears for each computed configuration value.
+
+Record the staged changes.
+
+```bash
+git commit -m 'Updated configuration values'
+```{{exec}}

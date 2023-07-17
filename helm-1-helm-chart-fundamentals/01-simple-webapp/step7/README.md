@@ -1,4 +1,4 @@
-# Prefix Kubernetes resources
+# Suffix Kubernetes resources
 
 Add prefix to all resources names to distinguish `backend` and `frontend` related deployments.
 
@@ -27,4 +27,24 @@ sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
 
 ```bash
 sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+```{{exec}}
+
+Stage changes in Git.
+
+```bash
+git add .
+```{{exec}}
+
+Review the content of all changes.
+
+```bash
+git status -v
+```{{exec}}
+
+> Each Kubernetes resource is now suffixed with their appropriate service.
+
+Record the staged changes.
+
+```bash
+git commit -m 'Added component suffix to resources name'
 ```{{exec}}
