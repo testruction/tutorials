@@ -1,0 +1,36 @@
+{
+    "title": "Simple Webapp",
+    "description": "Learn about how to create from scratch a simple Web application",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_packages.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+    },
+    "environment": {
+        "showvisualise": false,
+        "showdashboard": true,
+        "hideintro": false,
+        "uilayout": "terminal-iframe"
+      },
+      "backend": {
+        "imageid": "kubernetes-k3s-1node-4GB"
+      }
+}
