@@ -12,7 +12,7 @@ Add prefix to all resources names to distinguish `backend` and `frontend` relate
 > - `\s` matches any whitespace character
 > - `.` matches any character (except for line terminators)
 >   - `*` matches the previous token between zero and unlimited times, as many times as possible, giving back as needed (greedy)
->   - `)` en of capturing group
+> - `)` end of capturing group
 > - `$` asserts position at the end of a line
 
 > **Warning**:
