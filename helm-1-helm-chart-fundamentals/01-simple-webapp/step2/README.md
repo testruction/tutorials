@@ -8,7 +8,7 @@ helm create ./chart
 
 This command populates the `chart/` directory with following files.
 
-```shell
+```bash
 chart/
 |-- charts  # Dependant charts
 |-- templates
