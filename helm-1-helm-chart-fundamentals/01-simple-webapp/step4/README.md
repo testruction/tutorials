@@ -11,7 +11,7 @@ vi chart/values.yaml
 Type the following command to position the cursor at the `ReplicaCount` line.
 
 ```text
-:/ReplicaCount
+/ReplicaCount
 ```
 
 Indent all configuration properties and associated comments.
