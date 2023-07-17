@@ -22,5 +22,5 @@ chart/
 |   |-- service.yaml  # Endpoint to expose the service inside the cluster
 |   |-- serviceaccount.yaml  # Service account used interact with the Kubernetes API
 |-- Chart.yaml  # Chart artifact specifications
-|-- values.yaml # Deployment configuration data
+|-- values.yaml  # Deployment configuration data
 ```
