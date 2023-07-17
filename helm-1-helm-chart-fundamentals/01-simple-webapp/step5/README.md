@@ -5,7 +5,7 @@ Configurer commit user name and email.
 ```bash
 git config user.name 'Helm Student'
 git config user.email 'student.helm@testruction.lab'
-```
+```{{exec}}
 
 Stage changes in Git.
 
@@ -25,7 +25,7 @@ Review the content of all changes.
 
 ```bash
 git status -v
-```
+```{{exec}}
 
 Record the staged changes.
 
