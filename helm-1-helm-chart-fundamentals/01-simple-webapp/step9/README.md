@@ -22,3 +22,10 @@ vi chart/templates/frontend/deployment.yaml
 
 1. Type `:%s/containerPort: 80/containerPort: 8000` to change the port from `80` to `8000`
 2. type **`:wq`** to save the change and quit `vi`
+
+
+Stage and record changes.
+
+```bash
+git commit -a -m 'Allocated application services'
+```{{exec}}
