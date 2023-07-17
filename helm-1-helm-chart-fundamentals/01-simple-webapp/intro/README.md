@@ -9,7 +9,7 @@ The objective of this course is to learn how to:
 - Create a base chart using the default structure embeded in the `helm` CLI
 - Create and customize templates for each application components
 - Add the database deployment to the application chart
-- Get hands-on experience on `sed`, `vi` and `yq` tools
+- Get hands-on experience on `git`, `sed`, `vi` and `yq` tools
 
 ### References
 
