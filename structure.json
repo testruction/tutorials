@@ -23,6 +23,11 @@
             "path": "xx-sandboxes",
             "title": "Sandboxes",
             "Description": "Sandboxes used to develop courses"
+        },
+        {
+            "path": "helm-1-helm-chart-fundamentals",
+            "title": "Helm chart fundamentals",
+            "description": "Efficiently develop Helm charts"
         }
     ]
 }
