@@ -6,7 +6,7 @@ Open the configuration file using `vi`.
 
 ```bash
 vi chart/values.yaml
-```
+```{{exec}}
 
 Type the following command to position the cursor at the `ReplicaCount` line.
 
