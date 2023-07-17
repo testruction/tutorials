@@ -1,13 +1,19 @@
 # Clone the Web application source code
 
-Run the following command lines to clone the source code repository of the Web application.
+Clone the source code repository of the Web application.
 
 ```bash
 git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
 
-Run the followign comman line to enter in the cloned repository folder
+Enter in the cloned repository folder
 
 ```bash
 cd fastapi-sqlalchemy-cockroachdb
+```{{exec}}
+
+Create a new branch dedicated to the chart development
+
+```bash
+git checkout -b feature/helm-chart
 ```{{exec}}
