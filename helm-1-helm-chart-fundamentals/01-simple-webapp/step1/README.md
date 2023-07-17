@@ -1,4 +1,4 @@
-# Clone the source code
+# Clone the Web application source code
 
 Run the following command lines to clone the source code repository of the Web application.
 
