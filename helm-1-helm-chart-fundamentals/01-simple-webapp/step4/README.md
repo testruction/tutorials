@@ -1,10 +1,12 @@
-# Create dinstinct configuration sections earch components
+# Create configuration sections for earch components
+
+Create distinct sections for `backend` and `frontend` services in the `Values.yaml`.
 
 Open the configuration file using `vi`.
 
 ```bash
 vi chart/values.yaml
-```{{exec}}
+```
 
 Type the following command to position the cursor at the `ReplicaCount` line.
 
