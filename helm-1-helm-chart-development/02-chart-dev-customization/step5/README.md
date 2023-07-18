@@ -38,7 +38,7 @@ yq -i '
   .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
   .cockroachdb.service.public.type = "LoadBalancer"
 ' chart/values.yaml
-```
+```{{exec}}
 
 Check again the supported number of resources.
 
