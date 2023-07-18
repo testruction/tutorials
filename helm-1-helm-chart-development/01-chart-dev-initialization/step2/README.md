@@ -24,3 +24,9 @@ chart/
 |-- Chart.yaml  # Chart artifact specifications
 |-- values.yaml  # Deployment configuration data
 ```
+
+Exclude dependent charts (subchart) from the Git versionning.
+
+```bash
+echo '**/chart/charts' | tee -a .gitignore
+```
