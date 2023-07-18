@@ -25,9 +25,9 @@
             "Description": "Sandboxes used to develop courses"
         },
         {
-            "path": "helm-1-helm-chart-fundamentals",
-            "title": "Helm chart fundamentals",
-            "description": "Efficiently develop Helm charts"
+            "path": "helm-1-helm-chart-development",
+            "title": "Helm chart development",
+            "description": "Efficiently develop Helm charts from scratch"
         }
     ]
 }

@@ -22,7 +22,7 @@ Update the helpers script to rely on the new global property.
 sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
 ```{{exec}}
 
-Update the deployment notes to display the `frontend` URL.
+Update the deployment notes to display the `frontend` informations.
 
 ```bash
 sed \
