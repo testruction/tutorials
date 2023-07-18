@@ -10,7 +10,7 @@ bats ~/module1.bats \
 Check the local chart consistency with `--dry-run` argument to avoid connection to Kubernetes cluster.
 
 ```bash
-helm template --dry-run
+helm template --dry-run chart/
 ```{{exec}}
 
 > Next tasks will consist in getting the validation successful.
