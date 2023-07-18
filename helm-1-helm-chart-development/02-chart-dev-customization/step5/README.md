@@ -6,7 +6,7 @@ Check the number of resources to be deployed at this stage.
 
 ```bash
 helm template chart/ | grep 'kind' | wc -l
-```
+```{{exec}}
 
 Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
 
@@ -17,13 +17,13 @@ yq -i '
   .dependencies[0].repository = "https://charts.cockroachdb.com/" |
   .dependencies[0].version = "11.0.4"
 ' chart/Chart.yaml
-```
+```{{exec}}
 
 Update the chart depencencies.
 
 ```bash
 helm dependency update chart/
-```
+```{{exec}}
 
 Add the `cockroachdb` configuration section and values.
 
@@ -44,4 +44,4 @@ Check again the supported number of resources.
 
 ```bash
 helm template chart/ | grep 'kind' | wc -l
-```
+```{{exec}}

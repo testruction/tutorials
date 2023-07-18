@@ -12,13 +12,13 @@ yq -i '
   .dependencies[1].repository = "https://jaegertracing.github.io/helm-charts/" |
   .dependencies[1].version = "0.71.10"
 ' chart/Chart.yaml
-```
+```{{exec}}
 
 Update the chart depencencies.
 
 ```bash
 helm dependency update chart/
-```
+```{{exec}}
 
 Add the `jaeger` configuration section and values.
 
@@ -27,10 +27,10 @@ yq -i '
   .jaeger.create = false |
   .jaeger.allInOne.enabled = true
 ' chart/values.yaml
-```
+```{{exec}}
 
 Check the supported number of resources with Jaeger enabled.
 
 ```bash
 helm template --set jaeger.create=true chart/ | grep 'kind' | wc -l
-```
+```{{exec}}
