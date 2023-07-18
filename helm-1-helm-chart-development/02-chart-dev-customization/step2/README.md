@@ -5,7 +5,8 @@
 Create a dedicated template to test the API service of the `backend` component.
 
 ```bash
-cp -v chart/templates/tests/test-connection.yaml chart/templates/tests/test-backend-service.yaml
+cp -v chart/templates/tests/test-connection.yaml \
+      chart/templates/tests/test-backend-service.yaml
 ```{{exec}}
 
 Update the tested URL in order to query 5 `backend` API objects.
@@ -27,7 +28,8 @@ sed \
 Create another template to test the home page of the `frontent` service component.
 
 ```bash
-cp -v chart/templates/tests/test-connection.yaml chart/templates/tests/test-frontend-service.yaml
+cp -v chart/templates/tests/test-connection.yaml \
+      chart/templates/tests/test-frontend-service.yaml
 
 sed \
 -e 's#\(test\)-connection#\1-frontend-service#g' \
