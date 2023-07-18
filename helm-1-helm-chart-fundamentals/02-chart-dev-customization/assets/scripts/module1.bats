@@ -84,6 +84,6 @@
 @test "Update containers ports" {
     cd fastapi-sqlalchemy-cockroachdb
 
-    sed -i 'containerPort: 80/containerPort: 8000' chart/templates/backend/deployment.yaml
-    sed -i 'containerPort: 80/containerPort: 8000' chart/templates/frontend/deployment.yaml
+    sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/backend/deployment.yaml
+    sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/frontend/deployment.yaml
 }
