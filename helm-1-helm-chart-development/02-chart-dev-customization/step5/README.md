@@ -2,13 +2,13 @@
 
 The application relies on a [Cockroach](https://www.cockroachlabs.com) database instance.
 
-Add the condition to the `backend` defenition in order to control the database deployment.
+Check the number of resources to be deployed at this stage.
 
 ```bash
-yq -i '.cockroachdb.ceate = true' chart/values.yaml
+helm template chart/ | grep 'kind' | wc -l
 ```
 
-Add the database Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
+Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
 
 ```bash
 yq -i '
@@ -32,9 +32,16 @@ Add the `cockroachdb` configuration section and values.
 
 ```bash
 yq -i '
+  .cockroachdb.create = true |
   .cockroachdb.init.provisioning.enabled = true |
   .cockroachdb.init.provisioning.users[0].name = "demo" |
   .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
   .cockroachdb.service.public.type = "LoadBalancer"
 ' chart/values.yaml
+```
+
+Check again the supported number of resources.
+
+```bash
+helm template chart/ | grep 'kind' | wc -l
 ```
