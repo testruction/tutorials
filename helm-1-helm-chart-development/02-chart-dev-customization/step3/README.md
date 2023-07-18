@@ -29,3 +29,9 @@ sed \
 -e 's#\(.Values\)\(.*\)#\1.frontend\2#g' \
 -i chart/templates/NOTES.txt
 ```
+
+Check the local chart consistency with `--dry-run` argument to avoid connection to Kubernetes cluster.
+
+```bash
+helm template --dry-run chart/
+```{{exec}}
