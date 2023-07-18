@@ -93,9 +93,10 @@
 
     export SOURCE_URL=$(git config --get remote.origin.url)
 
-    yq '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
-    yq '.home = strenv(SOURCE_URL)' chart/Chart.yaml
-    yq '.description = strenv(SOURCE_URL)' chart/Chart.yaml
+    yq -i '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
+    yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
+    yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
+    yq -i '.appVersion = "1.0.0"'  chart/Chart.yaml
 
     git commit -a -m 'Added source URL to chart definition'
 }

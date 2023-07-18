@@ -13,7 +13,7 @@ export SOURCE_URL=$(git config --get remote.origin.url)
 Allocate the `sources` list.
 
 ```bash
-yq '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
+yq -i '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
 ```
 
 **Home page**:
@@ -21,13 +21,19 @@ yq '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
 Allocate the `home` field.
 
 ```bash
-yq '.home = strenv(SOURCE_URL)' chart/Chart.yaml
+yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
 ```
 
 Update the Chart description.
 
 ```bash
-yq '.description = strenv(SOURCE_URL)' chart/Chart.yaml
+yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
+```
+
+Update the application version to match the images published in the registry.
+
+```bash
+yq -i '.appVersion = "1.0.0"'  chart/Chart.yaml
 ```
 
 Commit changes.
