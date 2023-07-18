@@ -1,7 +1,10 @@
 {
-    "items": [
-        {
-            "path": "01-simple-webapp"
-        }
-    ]
+  "items": [
+    {
+      "path": "01-chart-dev-initialization"
+    },
+    {
+      "path": "02-chart-dev-customization"
+    }
+  ]
 }
