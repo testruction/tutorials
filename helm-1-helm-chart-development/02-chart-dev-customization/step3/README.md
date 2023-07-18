@@ -28,7 +28,7 @@ Update the deployment notes to display the `frontend` informations.
 sed \
 -e 's#\(.Values\)\(.*\)#\1.frontend\2#g' \
 -i chart/templates/NOTES.txt
-```
+```{{exec}}
 
 Check the local chart consistency with `--dry-run` argument to avoid connection to Kubernetes cluster.
 
