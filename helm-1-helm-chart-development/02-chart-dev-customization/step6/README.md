@@ -25,7 +25,16 @@ Add the `jaeger` configuration section and values.
 ```bash
 yq -i '
   .jaeger.create = false |
-  .jaeger.allInOne.enabled = true
+  .jaeger.allInOne.enabled = true |
+  .jaeger.ingester.enabled = false |
+  .jaeger.agent.enabled = false |
+  .jaeger.collector.enabled = false |
+  .jaeger.query.enabled = false |
+  .jaeger.spark.enabled = false |
+  .jaeger.hotrod.enabled = false |
+  .jaeger.provisionDataStore.cassandra = false |
+  .jaeger.provisionDataStore.cassandra = false |
+  .jaeger.provisionDataStore.kafka = false
 ' chart/values.yaml
 ```{{exec}}
 
