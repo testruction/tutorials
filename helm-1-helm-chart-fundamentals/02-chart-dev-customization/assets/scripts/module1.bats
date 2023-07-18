@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 
-@test "Cloned the Web application source code" {
+@test "Clone the Web application source code" {
     git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
     cd fastapi-sqlalchemy-cockroachdb
     git checkout -b feature/helm-chart
