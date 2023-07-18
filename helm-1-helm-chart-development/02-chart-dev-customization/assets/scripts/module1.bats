@@ -88,9 +88,9 @@
     sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/frontend/deployment.yaml
 }
 
-@test "" {
+@test "Update Chart URLs and description" {
     cd fastapi-sqlalchemy-cockroachdb
-    
+
     export SOURCE_URL=$(git config --get remote.origin.url)
 
     yq '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
