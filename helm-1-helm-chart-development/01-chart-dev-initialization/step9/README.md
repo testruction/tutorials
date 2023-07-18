@@ -24,7 +24,7 @@ vi chart/templates/frontend/deployment.yaml
 2. type **`:wq`** to save the change and quit `vi`
 
 
-Stage and record changes.
+Stage and commit changes.
 
 ```bash
 git commit -a -m 'Allocated application services'
