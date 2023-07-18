@@ -22,8 +22,6 @@ Update the helpers script to rely on the new global property.
 sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
 ```{{exec}}
 
-sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/**/serviceaccount.yaml
-
 Update the deployment notes to display the `frontend` URL.
 
 ```bash
