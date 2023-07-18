@@ -3,7 +3,7 @@
 The Helper scripts include conditions to determine wether a resource should be created.
 Currently the evaluation of Service Account creation needs to updated in order to handle both `backend` and `frontend` account provisionning.
 
-Add a new global configuration section and allocate a static service account name to each component.
+Add a new global configuration section to evaluate the service account creation.
 
 > **Note**:
 > The following command line demonstrates how to apply multiple changes using a single `yq` instance.
@@ -12,8 +12,7 @@ Add a new global configuration section and allocate a static service account nam
 ```bash
 yq -i '
   .global.serviceAccount.create = true |
-  .backend.serviceAccount.name = "backend" |
-  .frontend.serviceAccount.name = "frontend"
+  .global.serviceAccount.name = ""
 ' chart/values.yaml
 ```{{exec}}
 
@@ -22,6 +21,8 @@ Update the helpers script to rely on the new global property.
 ```bash
 sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
 ```{{exec}}
+
+sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/**/serviceaccount.yaml
 
 Update the deployment notes to display the `frontend` URL.
 
