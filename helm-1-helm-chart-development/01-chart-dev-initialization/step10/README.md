@@ -24,6 +24,12 @@ Allocate the `home` field.
 yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
 ```
 
+Update the chart name.
+
+```bash
+yq -i '.name = "fastapi"' chart/Chart.yaml
+```
+
 Update the Chart description.
 
 ```bash
