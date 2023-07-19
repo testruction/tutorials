@@ -35,7 +35,7 @@ Update the service account for each component deployment.
 ```bash
 sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
 sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
-```
+```{{exec}}
 
 Stage changes in Git.
 
