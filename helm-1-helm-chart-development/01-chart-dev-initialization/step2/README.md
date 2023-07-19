@@ -29,4 +29,4 @@ Exclude dependent charts (subchart) from the Git versionning.
 
 ```bash
 echo '**/chart/charts' | tee -a .gitignore
-```
+```{{exec}}
