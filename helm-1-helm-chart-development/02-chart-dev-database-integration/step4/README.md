@@ -36,7 +36,7 @@ i
               valueFrom:
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
-                  key: passsword
+                  key: password
 .
 wq
 EOF
