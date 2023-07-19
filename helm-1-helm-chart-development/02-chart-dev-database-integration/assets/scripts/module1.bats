@@ -78,7 +78,7 @@
     git commit -m 'Added component suffix to resources name'
 }
 
-@test "Allocate distinctt container images" {
+@test "Allocate distinct container images" {
     cd fastapi-sqlalchemy-cockroachdb
 
     yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
