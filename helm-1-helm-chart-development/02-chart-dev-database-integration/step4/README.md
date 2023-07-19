@@ -1,6 +1,12 @@
 # Inject environment variables in the backend deployment
 
+Update the deployment to implement environment variables mapped to configuration values and credential secret.
 
+> **Notice**:
+> The following command demonstrates how to insert content to an existing file above a specific line.
+> (i.e. In this case the content is inserted abouve the `ports:` section of the container definition.)
+> The `i` is equivalent to pressing the `i` key to activate the Insert mode (i.e Edit).
+> The `.` is equivalent to pressing the `<Esc>` key to switch back to the Command mode.
 
 ```yaml
 vi -e chart/templates/backend/deployment.yaml <<EOF
@@ -10,7 +16,8 @@ i
             - name: COCKROACH_HOST
               {{- if .Values.cockroachdb.provision }}
               value: {{ .Release.Name }}-cockroachdb-public
-              {{- else }}
+              {{- else if eq "" .Values.backend.database.cockroachdb.host }}
+              {{ fail "backend.database.cockroachdb.host can't be empty if cockroachdb.provision is set to false"}}
               value: {{ .Values.backend.database.cockroachdb.host }}
               {{- end }}
             - name: COCKROACH_PORT
@@ -20,14 +27,14 @@ i
             - name: COCKROACH_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-cockroachdb-init
+                  name: {{ include "chart.fullname" . }}-backend
                   value: username
             - name: COCKROACH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-cockroachdb-init
+                  name: {{ include "chart.fullname" . }}-backend
                   value: passsword
 .
 wq
 EOF
-```
+```{{exec}}
