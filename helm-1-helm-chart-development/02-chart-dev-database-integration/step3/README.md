@@ -1,8 +1,4 @@
-# Add configuration templates
-
-Environment variables are commonly to leverage the configuration enabling the communication between application components.
-
-## Backend
+# Add database credentials provisioning
 
 Add database connection configuration values.
 If `cockroachdb.provision = true`; the default; then those values will be ignored.
