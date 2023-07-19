@@ -27,5 +27,5 @@ vi chart/templates/frontend/deployment.yaml
 Stage and commit changes.
 
 ```bash
-git commit -a -m 'Allocated application services'
+git commit -a -m 'Allocated application service ports'
 ```{{exec}}

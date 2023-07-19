@@ -90,6 +90,8 @@
 
     sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/backend/deployment.yaml
     sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/frontend/deployment.yaml
+
+    git commit -a -m 'Allocated application service ports'
 }
 
 @test "Update Chart URLs and description" {
