@@ -8,15 +8,11 @@ Retreive the URL from the git repository.
 export SOURCE_URL=$(git config --get remote.origin.url)
 ```
 
-**Sources**:
-
 Allocate the `sources` list.
 
 ```bash
 yq -i '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
 ```
-
-**Home page**:
 
 Allocate the `home` field.
 
@@ -40,6 +36,12 @@ Update the application version to match the images published in the registry.
 
 ```bash
 yq -i '.appVersion = "1.0.0"'  chart/Chart.yaml
+```
+
+Check the chart definition changes.
+
+```bash
+helm show chart chart/
 ```
 
 Commit changes.
