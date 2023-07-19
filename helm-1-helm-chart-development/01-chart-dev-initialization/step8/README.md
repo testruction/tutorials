@@ -1,4 +1,4 @@
-# Allocate dinstinct container images
+# Allocate distinctt container images
 
 Update the Open Container Image (OCI) repository of the `backend` and `frontend` services.
 
