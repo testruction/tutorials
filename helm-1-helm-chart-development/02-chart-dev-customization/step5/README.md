@@ -13,7 +13,7 @@ Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_depende
 ```bash
 yq -i '
   .dependencies[0].name = "cockroachdb" |
-  .dependencies[0].condition = "cockroachdb.create" |
+  .dependencies[0].condition = "cockroachdb.provision" |
   .dependencies[0].repository = "https://charts.cockroachdb.com/" |
   .dependencies[0].version = "11.0.4"
 ' chart/Chart.yaml
@@ -32,7 +32,7 @@ Add the `cockroachdb` configuration section and values.
 
 ```bash
 yq -i '
-  .cockroachdb.create = true |
+  .cockroachdb.provision = true |
   .cockroachdb.init.provisioning.enabled = true |
   .cockroachdb.init.provisioning.users[0].name = "demo" |
   .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
