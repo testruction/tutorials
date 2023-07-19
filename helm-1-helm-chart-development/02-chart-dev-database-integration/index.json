@@ -1,6 +1,6 @@
 {
-    "title": "02. Helm chart development: Customatization",
-    "description": "Learn about how to create from scratch a simple Web application",
+    "title": "02. Helm chart development: Database integration",
+    "description": "Learn about how to add a database deployment to an existing chart",
     "difficulty": "easy",
     "time": "20-30 minutes",
     "details": {
