@@ -2,8 +2,8 @@
 
 Update the Open Container Image (OCI) repository of the `backend` and `frontend` services.
 
-* **backend**: `testruction/fastapi-sqlalchemy-cockroachdb/backend`
-* **frontend**: `testruction/fastapi-sqlalchemy-cockroachdb/frontend`
+* **backend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend`
+* **frontend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend`
 
 **Backend**:
 
