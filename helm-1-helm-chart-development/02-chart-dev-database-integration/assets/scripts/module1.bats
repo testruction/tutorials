@@ -105,3 +105,47 @@
 
     git commit -a -m 'Added source URL to chart definition'
 }
+
+@test "Create tests" {
+    cd fastapi-sqlalchemy-cockroachdb
+
+    cp -v chart/templates/tests/test-connection.yaml \
+          chart/templates/tests/test-backend-service.yaml
+
+    sed \
+    -e 's#\(test\)-connection#\1-backend-service#g' \
+    -e 's#\(\}\}\)\(:\)#\1-backend\2#g' \
+    -e 's#\(.Values\)\(.service.port\)#\1.backend\2#g' \
+    -e 's#\(.service.port\s\}\}\)#\1/apis/v1/fakenames?limit=5#g' \
+    -i chart/templates/tests/test-backend-service.yaml
+
+    cp -v chart/templates/tests/test-connection.yaml \
+        chart/templates/tests/test-frontend-service.yaml
+
+    sed \
+    -e 's#\(test\)-connection#\1-frontend-service#g' \
+    -e 's#\(\}\}\)\(:\)#\1-frontend\2#g' \
+    -e 's#\(.Values\)\(.service.port\)#\1.frontend\2#g' \
+    -i chart/templates/tests/test-frontend-service.yaml
+
+    rm -f chart/templates/tests/test-connection.yaml
+}
+
+@test "Update helpers script and deployment notes" {
+    cd fastapi-sqlalchemy-cockroachdb
+
+    yq -i '
+    .global.serviceAccount.create = true |
+    .global.serviceAccount.name = ""
+    ' chart/values.yaml
+
+    sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
+
+    sed \
+    -e 's#\(.Values\)\(.*\)#\1.frontend\2#g' \
+    -i chart/templates/NOTES.txt
+
+    helm template --dry-run chart/
+
+    git commit -a -m 'Finalized initial chart developement'
+}

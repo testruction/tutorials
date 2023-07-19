@@ -16,4 +16,3 @@ The objective of this course is to learn how to:
 The following sources were used to build this lab.
 
 - Helm official documentation: <https://helm.sh/docs/>
-- Argo-CD official chart: <https://artifacthub.io/packages/helm/argo/argo-cd>

@@ -1,4 +1,4 @@
-# Add environment variables
+# Add configuration templates
 
 Environment variables are commonly to leverage the configuration enabling the communication between application components.
 
@@ -13,7 +13,7 @@ yq -i '
   .backend.database.cockroachdb.port = 26257 |
   .backend.database.cockroachdb.username = "root" |
   .backend.database.cockroachdb.password = "password" |
-  .backend.database.cockroachdb.database = null
+  .backend.database.cockroachdb.database = "postgres"
 ' chart/values.yaml
 ```
 
