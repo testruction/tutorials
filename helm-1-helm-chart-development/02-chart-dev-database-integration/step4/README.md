@@ -21,12 +21,12 @@ i
               value: {{ .Release.Name }}-cockroachdb-public
               {{- else if eq "" .Values.backend.database.cockroachdb.host }}
               {{ fail "backend.database.cockroachdb.host can't be empty if cockroachdb.provision is set to false"}}
-              value: {{ .Values.backend.database.cockroachdb.host }}
+              value: {{ .Values.backend.database.cockroachdb.host | quote }}
               {{- end }}
             - name: COCKROACH_PORT
-              value: {{ default "26257" .Values.backend.database.cockroachdb.port }}
+              value: {{ default "26257" .Values.backend.database.cockroachdb.port | quote }}
             - name: COCKROACH_DB
-              value: {{ default "postgres" .Values.backend.database.cockroachdb.database }}
+              value: {{ default "postgres" .Values.backend.database.cockroachdb.database | quote }}
             - name: COCKROACH_USER
               valueFrom:
                 secretKeyRef:
