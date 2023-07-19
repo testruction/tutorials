@@ -31,12 +31,12 @@ i
               valueFrom:
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
-                  value: username
+                  key: username
             - name: COCKROACH_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
-                  value: passsword
+                  key: passsword
 .
 wq
 EOF
