@@ -8,7 +8,7 @@ yq -i '
   .backend.database.cockroachdb.host = null |
   .backend.database.cockroachdb.port = 26257 |
   .backend.database.cockroachdb.username = "root" |
-  .backend.database.cockroachdb.password = "password" |
+  .backend.database.cockroachdb.password = "dummypassword" |
   .backend.database.cockroachdb.database = "postgres"
 ' chart/values.yaml
 ```{{exec}}
@@ -42,7 +42,7 @@ data:
 EOF
 ```{{exec}}
 
-Test the condition where users provisionning is disabled so the default `password` password is rendered.
+Test the condition where users provisionning is disabled so the default `dummypassword` password is rendered.
 
 ```bash
 helm template --set cockroachdb.init.provisioning.enabled=false chart/ \
