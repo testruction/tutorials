@@ -15,7 +15,7 @@ yq -i '
   .backend.database.cockroachdb.password = "password" |
   .backend.database.cockroachdb.database = "postgres"
 ' chart/values.yaml
-```
+```{{exec}}
 
 Create the secret template to be associated to the `backend` deployment.
 
@@ -44,7 +44,7 @@ data:
   password: {{ .Values.backend.database.cockroachdb.password | b64enc | quote }}
   {{- end }}
 EOF
-```
+```{{exec}}
 
 Test the condition where users provisionning is disabled so the default `password` password is rendered.
 
@@ -53,4 +53,4 @@ helm template --set cockroachdb.init.provisioning.enabled=false chart/ \
 | grep -E '\s{2}\password:' \
 | cut -d '"' -f 2 \
 | base64 -d
-```
+```{{exec}}
