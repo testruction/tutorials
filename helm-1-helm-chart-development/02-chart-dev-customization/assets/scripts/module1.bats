@@ -68,6 +68,10 @@
 
     # Frontend
     sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+    
+    # Service Account reference
+    sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
+    sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
 
     git add .
     git status -v
