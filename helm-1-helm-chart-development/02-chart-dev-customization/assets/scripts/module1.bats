@@ -81,8 +81,8 @@
 @test "Allocate dinstinct container images" {
     cd fastapi-sqlalchemy-cockroachdb
 
-    yq -i '.backend.image.repository = "testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
-    yq -i '.frontend.image.repository = "testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
+    yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
+    yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
 }
 
 @test "Update containers ports" {
