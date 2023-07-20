@@ -1,4 +1,4 @@
-# Deploy and populate the database
+# Deploy the chart and populate the database
 
 Deploy the chart to the Kubernetes cluster.
 
@@ -13,7 +13,6 @@ COCKROACH_HOST=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.status.l
 COCKROACH_PORT=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
 
 cd ~/pytest-sqlalchemy-cockroachdb
-pip3 install -r requirements.txt
 
 python3 tests/populate.py --username="admin"
 ```{{exec}}
