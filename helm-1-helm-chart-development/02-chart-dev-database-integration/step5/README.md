@@ -9,12 +9,12 @@ helm install demo chart/
 Populate the database using the dataset provided by the source code tests.
 
 ```bash
-ADDR=$(kubectl get svc app-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-PORT=$(kubectl get svc app-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
-USER=$(yq '.cockroachdb.init.provisioning.users[0].name' chart/values.yaml )
-PASS=$(yq '.cockroachdb.init.provisioning.users[0].password' chart/values.yaml )
+COCKROACH_HOST=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+COCKROACH_PORT=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
+COCKROACH_USER=$(kubectl get secret demo-fastapi-backend -o jsonpath="{.data.username}" | base64 -d)
+COCKROACH_PASSWORD=$(kubectl get secret demo-fastapi-backend -o jsonpath="{.data.password}" | base64 -d)
 
-export COCKROACH_URL="postgresql://${USER}@${ADDR}:${PORT}/postgres"
+export COCKROACH_URL="postgresql://${COCKROACH_USER}@${COCKROACH_HOST}:${COCKROACH_PORT}/postgres"
 
-echo "${PASS}" | cockroach-sql --insecure -f ~/import.sql
+echo "${COCKROACH_PASSWORD}" | cockroach-sql --insecure -f ~/import.sql
 ```
