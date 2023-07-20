@@ -48,7 +48,25 @@ function install_cockroach_sql() {
     cd ~/
 }
 
-configure_kubeconfig
-install_yq
-install_bats_core
-install_cockroach_sql
+function install_cockroach(){
+    VERSION='23.1.5'
+
+    cd /usr/share
+
+    curl -O https://binaries.cockroachdb.com/cockroach-v${VERSION}.linux-amd64.tgz
+    curl -O https://binaries.cockroachdb.com/cockroach-v${VERSION}.linux-amd64.tgz.sha256sum
+    
+    sha256sum -c cockroach-v${VERSION}.linux-amd64.tgz.sha256sum
+
+    tar -xvzf cockroach-v${VERSION}.linux-amd64.tgz
+
+    mkdir -p /usr/local/lib/cockroach
+    ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/lib/libgeos.so /usr/local/lib/cockroach/libgeos.so
+    ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/lib/libgeos_c.so /usr/local/lib/cockroach/libgeos_c.so
+
+    ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/cockroach-sql /usr/local/bin/cockroach-sql
+
+    rm -vrf /usr/share/cockroach-v${VERSION}.linux-amd64.tgz*
+
+    cd ~/
+}
