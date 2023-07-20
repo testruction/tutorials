@@ -38,12 +38,12 @@ function install_cockroach_sql() {
     tar -xvzf cockroach-sql-v${VERSION}.linux-amd64.tgz
 
     mkdir -p /usr/local/lib/cockroach
-    ln -sf cockroach-sql-v${VERSION}.linux-amd64/lib/libgeos.so /usr/local/lib/cockroach/libgeos.so
-    ln -sf cockroach-sql-v${VERSION}.linux-amd64/lib/libgeos_c.so /usr/local/lib/cockroach/libgeos_c.so
+    ln -sf /usr/share/cockroach-sql-v${VERSION}.linux-amd64/lib/libgeos.so /usr/local/lib/cockroach/libgeos.so
+    ln -sf /usr/share/cockroach-sql-v${VERSION}.linux-amd64/lib/libgeos_c.so /usr/local/lib/cockroach/libgeos_c.so
 
-    ln -sf cockroach-sql-v${VERSION}.linux-amd64/cockroach-sql /usr/local/bin/cockroach-sql
+    ln -sf /usr/share/cockroach-sql-v${VERSION}.linux-amd64/cockroach-sql /usr/local/bin/cockroach-sql
 
-    rm -vrf cockroach-sql-v${VERSION}.linux-amd64.tgz*
+    rm -vrf /usr/share/cockroach-sql-v${VERSION}.linux-amd64.tgz*
 
     cd ~/
 }
