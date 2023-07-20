@@ -19,9 +19,10 @@ function install_bats_core() {
     cd bats-core
     ./install.sh /usr/local
     
-    cd ~/
-
+    cd ../
     rm -rf bats-core
+    
+    cd ~/
 }
 
 function install_cockroach_sql() {
