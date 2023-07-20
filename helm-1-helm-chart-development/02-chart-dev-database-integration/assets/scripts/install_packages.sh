@@ -13,14 +13,15 @@ function install_yq(){
 }
 
 function install_bats_core() {
+    cd /usr/share
     git clone https://github.com/bats-core/bats-core.git
     
     cd bats-core
     ./install.sh /usr/local
     
-    rm -rf bats-core
-
     cd ~/
+
+    rm -rf bats-core
 }
 
 function install_cockroach_sql() {
