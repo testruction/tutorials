@@ -1,4 +1,4 @@
-CREATE TABLE fakenames (
+CREATE TABLE IF NOT EXISTS fakenames (
   number INT PRIMARY KEY,
   gender STRING NOT NULL,
   nameset STRING NOT NULL,
