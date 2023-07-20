@@ -71,8 +71,19 @@ function install_cockroach(){
     cd ~/
 }
 
+function install_cockroach_populate()
+{
+    cd ~/
+
+    git clone https://github.com/testruction/pytest-sqlalchemy-cockroachdb
+
+    cd pytest-sqlalchemy-cockroachdb
+    pip3 install -r requirements.txt
+}
+
 configure_kubeconfig
 install_yq
 install_bats_core
-install_cockroach_sql
-install_cockroach
+# install_cockroach_sql
+# install_cockroach
+download_populate
