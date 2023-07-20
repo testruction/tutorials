@@ -86,4 +86,4 @@ install_yq
 install_bats_core
 # install_cockroach_sql
 # install_cockroach
-download_populate
+install_cockroach_populate
