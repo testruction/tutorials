@@ -64,7 +64,7 @@ function install_cockroach(){
     ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/lib/libgeos.so /usr/local/lib/cockroach/libgeos.so
     ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/lib/libgeos_c.so /usr/local/lib/cockroach/libgeos_c.so
 
-    ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/cockroach-sql /usr/local/bin/cockroach-sql
+    ln -sf /usr/share/cockroach-v${VERSION}.linux-amd64/cockroach /usr/local/bin/cockroach
 
     rm -vrf /usr/share/cockroach-v${VERSION}.linux-amd64.tgz*
 
