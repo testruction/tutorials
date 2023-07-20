@@ -70,3 +70,9 @@ function install_cockroach(){
 
     cd ~/
 }
+
+configure_kubeconfig
+install_yq
+install_bats_core
+install_cockroach_sql
+install_cockroach
