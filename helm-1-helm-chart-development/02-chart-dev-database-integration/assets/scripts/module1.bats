@@ -91,6 +91,8 @@
     sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/backend/deployment.yaml
     sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/frontend/deployment.yaml
 
+    sed -i 's#path: /#path: /v1/health#g' chart/templates/*/deployment.yaml
+
     git commit -a -m 'Allocated application service ports'
 }
 
