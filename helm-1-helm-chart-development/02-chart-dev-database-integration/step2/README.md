@@ -11,9 +11,9 @@ Add the environment variables support to both `backend` and `frontend` component
 
 ```bash
 yq -i '
-  .backend.env = []
-  .backend.extraEnv = []
-  .frontend.env = []
+  .backend.env = [] |
+  .backend.extraEnv = [] |
+  .frontend.env = [] |
   .frontend.extraEnv = []
 ' chart/values.yaml
 ```{{exec}}
