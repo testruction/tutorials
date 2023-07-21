@@ -21,7 +21,7 @@ i
           env:
             - name: BACKEND_API_URL
               values: http://{{ .Release.fullname }}-backend
-            {{- with (concat .Values.frontend.env .Values.frontend.  extraEnv )}}
+            {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
 .

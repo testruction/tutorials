@@ -34,7 +34,7 @@ i
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
                   key: password
-            {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
+            {{- with (concat .Values.backend.env .Values.backend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
 .
