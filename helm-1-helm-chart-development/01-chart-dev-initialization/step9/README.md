@@ -23,6 +23,11 @@ vi chart/templates/frontend/deployment.yaml
 1. Type `:%s/containerPort: 80/containerPort: 8000` to change the port from `80` to `8000`
 2. type **`:wq`** to save the change and quit `vi`
 
+Update the deployment readiness and liveness probes HTTP path from `/` to `/v1/health`
+
+```bash
+sed -i 's#path: /#path: /v1/health#g' chart/templates/*/deployment.yaml
+```
 
 Stage and commit changes.
 
