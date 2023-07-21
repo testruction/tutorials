@@ -13,19 +13,21 @@ Update the `frontend` deployment in order to:
 > * The `i` is equivalent to pressing the `i` key to activate the Insert mode (i.e Edit)
 > * The `.` is equivalent to pressing the `<Esc>` key to switch back to the Command mode
 > * The `wq` is equivalent to typing `:wq` to save the file changes and quit `vi`
+>
+> Helm variables must be escaped to prevent the shell interpretation (i.e.`\$fullname`, not just `$fullname`).
 
 ```yaml
-echo '
+vi -e chart/templates/frontend/deployment.yaml <<EOF
 /ports
 i
           env:
             - name: BACKEND_API_URL
-              {{- $fullName := include "chart.fullname" . }}
-              value: {{ print "http://" $fullName "-backend:" .Values.backend.service.port | quote }}
+              {{- \$fullName := include "chart.fullname" . }}
+              value: {{ print "http://" \$fullName "-backend:" .Values.backend.service.port | quote }}
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
 .
 wq
-' | vi -e chart/templates/frontend/deployment.yaml
+EOF
 ```{{exec}}
