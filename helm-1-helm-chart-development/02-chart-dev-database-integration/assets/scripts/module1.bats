@@ -25,11 +25,11 @@
 @test "Create configuration sections for earch components" {
     cd fastapi-sqlalchemy-cockroachdb
 
-    cat chart/values.yaml | head -4 > /tmp/values.yaml 
-    
+    cat chart/values.yaml | head -4 > /tmp/values.yaml
+
     tail +5 chart/values.yaml | yq '{"backend": .}' >> /tmp/values.yaml
     tail +5 chart/values.yaml | yq '{"frontend": .}' >> /tmp/values.yaml
-    
+
     yq /tmp/values.yaml
     mv /tmp/values.yaml chart/values.yaml
 }
@@ -68,7 +68,7 @@
 
     # Frontend
     sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
-    
+
     # Service Account reference
     sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
     sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
@@ -105,7 +105,7 @@
     yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
     yq -i '.name = "fastapi"' chart/Chart.yaml
     yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
-    yq -i '.appVersion = "1.0.0"'  chart/Chart.yaml
+    yq -i '.appVersion = "1.1.0"'  chart/Chart.yaml
 
     git commit -a -m 'Added source URL to chart definition'
 }

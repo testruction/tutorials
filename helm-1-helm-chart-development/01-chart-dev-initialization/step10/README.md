@@ -35,7 +35,7 @@ yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
 Update the application version to match the images published in the registry.
 
 ```bash
-yq -i '.appVersion = "1.0.0"'  chart/Chart.yaml
+yq -i '.appVersion = "1.1.0"'  chart/Chart.yaml
 ```{{exec}}
 
 Check the chart definition changes.
