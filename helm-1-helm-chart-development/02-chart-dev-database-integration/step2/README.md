@@ -17,7 +17,7 @@ yq -i '
   .frontend.env[0].value = "http://backend:8000" |
   .frontend.extraEnv = []
 ' chart/values.yaml
-```
+```{{exec}}
 
 Update `frontend`the deployment to inject both environment variables specified in the `env:` and `extraEnv` configuration sections.
 
