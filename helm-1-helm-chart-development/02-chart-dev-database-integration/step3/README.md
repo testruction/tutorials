@@ -15,7 +15,7 @@ Update the `frontend` deployment in order to:
 > * The `wq` is equivalent to typing `:wq` to save the file changes and quit `vi`
 
 ```yaml
-vi -e chart/templates/frontend/deployment.yaml <<EOF
+echo '
 /ports
 i
           env:
@@ -27,5 +27,5 @@ i
             {{- end }}
 .
 wq
-EOF
+' vi -e chart/templates/frontend/deployment.yaml
 ```{{exec}}
