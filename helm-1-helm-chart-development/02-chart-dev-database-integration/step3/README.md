@@ -27,5 +27,5 @@ i
             {{- end }}
 .
 wq
-' vi -e chart/templates/frontend/deployment.yaml
+' | vi -e chart/templates/frontend/deployment.yaml
 ```{{exec}}
