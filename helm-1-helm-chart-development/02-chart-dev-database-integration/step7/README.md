@@ -15,4 +15,6 @@ COCKROACH_PORT=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.spec.por
 cd ~/pytest-sqlalchemy-cockroachdb
 
 OTEL_SDK_DISABLED=true python3 tests/populate.py --username="admin"
+
+cd ~/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
