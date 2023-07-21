@@ -35,7 +35,7 @@ i
                   name: {{ include "chart.fullname" . }}-backend
                   key: password
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
-            {{- toYaml . | nindent 12 }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
 .
 wq
