@@ -20,7 +20,7 @@ vi -e chart/templates/frontend/deployment.yaml <<EOF
 i
           env:
             - name: BACKEND_API_URL
-              value: http://{{ .Release.fullname }}-backend
+              value: {{ print "http://" .Release.fullname "-backend" | quote }}
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
