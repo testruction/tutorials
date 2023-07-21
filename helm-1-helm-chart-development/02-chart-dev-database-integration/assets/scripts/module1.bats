@@ -105,7 +105,7 @@
     yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
     yq -i '.name = "fastapi"' chart/Chart.yaml
     yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
-    yq -i '.appVersion = "1.1.0"'  chart/Chart.yaml
+    yq -i '.appVersion = "1.1.1"'  chart/Chart.yaml
 
     git commit -a -m 'Added source URL to chart definition'
 }
