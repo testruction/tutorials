@@ -1,49 +1,30 @@
-# Add the database dependency
+# Implement environment variables in the frontend deployment
 
-The application relies on a [Cockroach](https://www.cockroachlabs.com) database instance.
+Update the `frontend` deployment in order to:
 
-Check the number of resources to be deployed at this stage.
-
-```bash
-helm template chart/ | grep 'kind' | wc -l
-```{{exec}}
-
-Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
-
-```bash
-yq -i '
-  .dependencies[0].name = "cockroachdb" |
-  .dependencies[0].condition = "cockroachdb.provision" |
-  .dependencies[0].repository = "https://charts.cockroachdb.com/" |
-  .dependencies[0].version = "11.0.4"
-' chart/Chart.yaml
-```{{exec}}
-
-Update the chart depencencies.
-
-```bash
-helm dependency update chart/
-```{{exec}}
-
-Add the `cockroachdb` configuration section and values.
+1. Configure the `BACKEND_URL` variable  required to establish communication to the `backend` ReSTful API.
+2. Dynamically inject environment variables coming from the `env:` and `extraEnv` configuration sections.
 
 > **Notice**:
-> The section name [must be same as the dependency name](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart).
+> The following command demonstrates how to insert content to an existing file above a specific line.
+> (i.e. In this case the content is inserted abouve the `ports:` section of the container definition.)
+>
+> * The `/port` position the cursor at the proper line and indentation level
+> * The `i` is equivalent to pressing the `i` key to activate the Insert mode (i.e Edit)
+> * The `.` is equivalent to pressing the `<Esc>` key to switch back to the Command mode
+> * The `wq` is equivalent to typing `:wq` to save the file changes and quit `vi`
 
-```bash
-yq -i '
-  .cockroachdb.provision = true |
-  .cockroachdb.init.provisioning.enabled = true |
-  .cockroachdb.init.provisioning.users[0].name = "demo" |
-  .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
-  .cockroachdb.init.provisioning.users[0].options[0] = "LOGIN" |
-  .cockroachdb.service.public.type = "LoadBalancer" |
-  .cockroachdb.tls.enabled=false
-' chart/values.yaml
-```{{exec}}
-
-Check again the supported number of resources.
-
-```bash
-helm template chart/ | grep 'kind' | wc -l
+```yaml
+vi -e chart/templates/frontend/deployment.yaml <<EOF
+/ports
+i
+          env:
+          - name: BACKEND_API_URL
+            values: http://{{ .Release.fullname }}-backend
+          {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+.
+wq
+EOF
 ```{{exec}}
