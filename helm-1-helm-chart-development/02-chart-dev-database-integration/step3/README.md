@@ -1,52 +1,49 @@
-# Add database credentials provisioning
+# Add the database dependency
 
-Add database connection configuration values.
-If `cockroachdb.provision = true`; the default; then those values will be ignored.
+The application relies on a [Cockroach](https://www.cockroachlabs.com) database instance.
+
+Check the number of resources to be deployed at this stage.
+
+```bash
+helm template chart/ | grep 'kind' | wc -l
+```{{exec}}
+
+Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
 
 ```bash
 yq -i '
-  .backend.database.cockroachdb.host = null |
-  .backend.database.cockroachdb.port = 26257 |
-  .backend.database.cockroachdb.username = "root" |
-  .backend.database.cockroachdb.password = "dummypassword" |
-  .backend.database.cockroachdb.database = "postgres"
+  .dependencies[0].name = "cockroachdb" |
+  .dependencies[0].condition = "cockroachdb.provision" |
+  .dependencies[0].repository = "https://charts.cockroachdb.com/" |
+  .dependencies[0].version = "11.0.4"
+' chart/Chart.yaml
+```{{exec}}
+
+Update the chart depencencies.
+
+```bash
+helm dependency update chart/
+```{{exec}}
+
+Add the `cockroachdb` configuration section and values.
+
+> **Notice**:
+> The section name [must be same as the dependency name](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart).
+
+```bash
+yq -i '
+  .cockroachdb.provision = true |
+  .cockroachdb.init.provisioning.enabled = true |
+  .cockroachdb.init.provisioning.users[0].name = "demo" |
+  .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
+  .cockroachdb.init.provisioning.users[0].options[0] = "LOGIN" |
+  .cockroachdb.service.public.type = "LoadBalancer" |
+  .cockroachdb.tls.enabled=false
 ' chart/values.yaml
 ```{{exec}}
 
-Create the secret template to be associated to the `backend` deployment.
-
-> **Notice**:
-> If the chart provision the instance, as well as the users. Then the first defined user will be used.
-> If the chart provision the instance, but not users. Then the default Cockroach credentials specified in the `backend` section will be used.
-> If the chart does provision the instance (i.e `cockroach.provision: false`), then credentials specified in the `backend` section will be used.
-
-```yaml
-cat <<EOF | tee chart/templates/backend/secret.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ include "chart.fullname" . }}-backend
-  labels:
-    {{- include "chart.labels" . | nindent 4 }}
-type: Opaque
-data:
-  {{- if and (eq .Values.cockroachdb.provision true) (eq .Values.cockroachdb.init.provisioning.enabled true) }}
-  {{- with (first .Values.cockroachdb.init.provisioning.users) }}
-  username: {{ .name | b64enc | quote }}
-  password: {{ .password | b64enc | quote }}
-  {{- end }}
-  {{- else }}
-  username: {{ .Values.backend.database.cockroachdb.username | b64enc | quote }}
-  password: {{ .Values.backend.database.cockroachdb.password | b64enc | quote }}
-  {{- end }}
-EOF
-```{{exec}}
-
-Test the condition where users provisionning is disabled so the default `dummypassword` password is rendered.
+Check again the supported number of resources.
 
 ```bash
-helm template --set cockroachdb.init.provisioning.enabled=false chart/ \
-| grep -E '\s{2}\password:' \
-| cut -d '"' -f 2 \
-| base64 -d
+helm template chart/ | grep 'kind' | wc -l
 ```{{exec}}
