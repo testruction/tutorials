@@ -33,10 +33,6 @@ Add the `cockroachdb` configuration section and values.
 ```bash
 yq -i '
   .cockroachdb.provision = true |
-  .cockroachdb.init.provisioning.enabled = true |
-  .cockroachdb.init.provisioning.users[0].name = "demo" |
-  .cockroachdb.init.provisioning.users[0].password = "V3ry1ns3cur3P4ssw0rd" |
-  .cockroachdb.init.provisioning.users[0].options[0] = "LOGIN" |
   .cockroachdb.service.public.type = "LoadBalancer" |
   .cockroachdb.tls.enabled=false
 ' chart/values.yaml
