@@ -28,6 +28,8 @@ cd ~/fastapi-sqlalchemy-cockroachdb
 
 **Links**
 
+Access the application components using the flowing URLs.
+
 * [CockroachDB UI]({{TRAFFIC_HOST1_8080}})
 * [Backend API]({{TRAFFIC_HOST1_80}}/docs)
 * [Backend]({{TRAFFIC_HOST1_80}}/docs)
