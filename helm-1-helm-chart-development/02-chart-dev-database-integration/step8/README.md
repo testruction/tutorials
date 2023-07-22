@@ -5,7 +5,7 @@ Create an environment variables file containing informations related to the depl
 > **Notice**: Leveraging an external file adds a layer of security as it typically contains credentials.
 
 ```bash
-cat EOF <<EOF > ~/.env
+cat <<EOF > ~/.env
   RELEASE_NAME="chartdev"
   BACKEND_HOST=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   BACKEND_PORT=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
@@ -26,19 +26,13 @@ setup() {
   load ~/.env
 }
 
-@test "Check backend health" {
-  curl --fail "http://\${BACKEND_HOST}:\${PORT}/health"
-}
-
 @test "Check backend API" {
-  curl --fail "http://\${BACKEND_HOST}:\${PORT}/v1/fakenames/postgres?limit=5"
-}
-
-@test "Check frontend health" {
-  curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/health"
+  curl --fail "http://\${BACKEND_HOST}:\${BACKEND_PORT}/health"
+  curl --fail "http://\${BACKEND_HOST}:\${BACKEND_PORT}/v1/fakenames/postgres?limit=5"
 }
 
 @test "Check frontend UI" {
+  curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/health"
   curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/"
 }
 EOF
