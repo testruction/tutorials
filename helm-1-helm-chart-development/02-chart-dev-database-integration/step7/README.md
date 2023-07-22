@@ -4,14 +4,11 @@ Deploy the chart to the Kubernetes cluster.
 
 ```bash
 helm install demo \
---set backend.ingress.enabled=true \
---set backend.ingress.hosts[0].host=null \
---set backend.ingress.hosts[0].paths[0].path="/v1" \
---set backend.ingress.hosts[0].paths[0].pathType="Prefix" \
---set frontend.ingress.enabled=true \
---set frontend.ingress.hosts[0].host=null \
---set frontend.ingress.hosts[0].paths[0].path="/" \
---set frontend.ingress.hosts[0].paths[0].pathType="Prefix" \
+--set cockroachdb.service.type=LoadBalancer \
+--set backend.service.type=LoadBalancer \
+--set backend.service.port=8001 \
+--set frontend.service.type=LoadBalancer \
+--set fronted.service.port=8000 \
 chart/
 ```{{exec}}
 
@@ -33,5 +30,5 @@ cd ~/fastapi-sqlalchemy-cockroachdb
 Access the application components using the flowing URLs.
 
 * [CockroachDB UI]({{TRAFFIC_HOST1_8080}})
-* [Backend API]({{TRAFFIC_HOST1_80}}/v1/docs)
-* [Frontend UI]({{TRAFFIC_HOST1_80}}/)
+* [Backend API]({{TRAFFIC_HOST1_8001}}/v1/docs)
+* [Frontend UI]({{TRAFFIC_HOST1_8000}}/)
