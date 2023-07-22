@@ -2,7 +2,7 @@
 
 Create an environment variables file containing informations related to the deployed services deployed.
 
-> **Notice**: Leveraging an external file adds a layer of security as it can typically contains credentials.
+> **Notice**: Leveraging an external file adds a layer of security as it typically contains credentials.
 
 ```bash
 cat EOF <<EOF > ~/.env
