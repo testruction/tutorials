@@ -14,7 +14,11 @@ chart/
 
 Populate the database using the dataset provided by the source code tests.
 
+> **Notice**: the `sleep 3s` is required to let the database clustering to finalize.
+
 ```bash
+sleep 3s
+
 COCKROACH_HOST=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 COCKROACH_PORT=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
 
