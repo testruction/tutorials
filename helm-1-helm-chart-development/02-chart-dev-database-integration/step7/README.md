@@ -5,11 +5,11 @@ Deploy the chart to the Kubernetes cluster.
 ```bash
 helm install demo \
 --set frontent.ingress.enabled=true \
---set frontend.ingress.host[0].host="*" \
---set frontend.ingress.host[0].host.path="/frontend" \
+--set frontend.ingress.hosts[0].host="*" \
+--set frontend.ingress.hosts[0].paths[0].path="/frontend" \
 --set backend.ingress.enabled=true \
---set backend.ingress.host[0].host="*" \
---set backend.ingress.host[0].host.path="/backend" \
+--set backend.ingress.hosts[0].host="*" \
+--set backend.ingress.hosts[0].paths[0].path="/backend" \
 chart/
 ```{{exec}}
 
