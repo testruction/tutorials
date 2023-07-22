@@ -15,7 +15,7 @@ cat EOF <<EOF > ~/.env
 EOF
 ```
 
-Create the unit test files
+Create the [bats-core](https://bats-core.readthedocs.io) unit tests file.
 
 > **Notice**: Shell variable sign `$` must me escaped with a `\` (i.e `\$`).
 
