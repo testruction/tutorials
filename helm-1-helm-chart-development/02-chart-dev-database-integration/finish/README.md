@@ -17,7 +17,7 @@ setup() {
   curl "http://\${HOST}:\${PORT}/v1/fakenames?limit=5"
 }
 
-@test "Check frontend API" {
+@test "Check frontend UI" {
   HOST=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
   
