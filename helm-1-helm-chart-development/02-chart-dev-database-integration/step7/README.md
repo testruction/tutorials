@@ -5,6 +5,8 @@ Deploy the chart to the Kubernetes cluster.
 ```bash
 helm install demo \
 --set frontent.ingress.enabled=true \
+--set frontend.ingress.host[0].host="*"
+--set frontend.ingress.host[0].host.path=""
 chart/
 ```{{exec}}
 
@@ -20,3 +22,6 @@ python3 tests/populate.py --username="admin"
 
 cd ~/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
+
+[CockroachDB UI]({{TRAFFIC_HOST1_8080}})
+[click here]({{TRAFFIC_HOST1_8080}})
