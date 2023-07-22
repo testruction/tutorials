@@ -13,7 +13,7 @@ cat EOF <<EOF > ~/.env
   FRONTEND_HOST=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   FRONTEND_PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
 EOF
-```
+```{{exec}}
 
 Create the [bats-core](https://bats-core.readthedocs.io) unit tests file.
 
@@ -42,10 +42,10 @@ setup() {
   curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/"
 }
 EOF
-```
+```{{exec}}
 
 Run the tests.
 
 ```bash
 bats ~/validate.bats
-```
+```{{exec}}
