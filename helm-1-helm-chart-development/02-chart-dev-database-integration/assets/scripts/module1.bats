@@ -154,11 +154,6 @@
 @test "Cleanup values incompatible with Killercoda" {
   cd fastapi-sqlalchemy-cockroachdb
 
-  yq -i '
-    del(.frontend.ingress.hosts[0].host) |
-    del(.frontend.ingress.hosts[0].host)
-  ' chart/values.yaml
-
   sed \
   -e 's#^\(\s\{16\}name\:\s.*\)#\1-frontend#g' \
   -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-frontend#g' \
