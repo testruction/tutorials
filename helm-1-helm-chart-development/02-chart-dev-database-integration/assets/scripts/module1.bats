@@ -155,6 +155,11 @@
   cd fastapi-sqlalchemy-cockroachdb
 
   sed \
+  -e 's#^\(\s\{16\}name\:\s.*\)#\1-backend#g' \
+  -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-backend#g' \
+  -i chart/templates/backend/ingress.yaml
+
+  sed \
   -e 's#^\(\s\{16\}name\:\s.*\)#\1-frontend#g' \
   -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-frontend#g' \
   -i chart/templates/frontend/ingress.yaml
