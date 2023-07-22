@@ -3,7 +3,9 @@
 Deploy the chart to the Kubernetes cluster.
 
 ```bash
-helm install demo chart/
+helm install demo \
+--set frontent.ingress.enabled=true \
+chart/
 ```{{exec}}
 
 Populate the database using the dataset provided by the source code tests.

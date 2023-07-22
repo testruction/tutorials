@@ -7,7 +7,7 @@ Section | Description
 **`env: []`** | Well-known variables supported by the application
 **`extraEnv: []`** | Temporary variables (i.e test, debug, etc.)
 
-Add the environment variables support to both `backend` and `frontend` components for future purposes.
+Add YAML mappings to enable `backend` and `frontend` support for the environment variables configuration values.
 
 ```bash
 yq -i '

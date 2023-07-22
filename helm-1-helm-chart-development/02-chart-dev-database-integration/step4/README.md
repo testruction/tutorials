@@ -8,7 +8,7 @@ Check the number of resources to be deployed at this stage.
 helm template chart/ | grep 'kind' | wc -l
 ```{{exec}}
 
-Add Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
+Add a YAML sequence for Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
 
 ```bash
 yq -i '
@@ -25,7 +25,7 @@ Update the chart depencencies.
 helm dependency update chart/
 ```{{exec}}
 
-Add the `cockroachdb` configuration section and values.
+Add a YAML mapping for the `cockroachdb` configuration values.
 
 > **Notice**:
 > The section name [must be same as the dependency name](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart).
