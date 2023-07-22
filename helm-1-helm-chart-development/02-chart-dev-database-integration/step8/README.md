@@ -5,8 +5,10 @@ Create an environment variables file containing informations related to the depl
 > **Notice**: Leveraging an external file adds a layer of security as it typically contains credentials.
 
 ```bash
+RELEASE_NAME='chartdev'
+
 cat <<EOF > ~/.env
-  RELEASE_NAME="chartdev"
+  RELEASE_NAME="${RELEASE_NAME}"
 
   BACKEND_HOST=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   BACKEND_PORT=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
