@@ -1,4 +1,4 @@
-# Add database credentials provisioning
+# Implement database credentials provisioning
 
 Add a YAML mapping for database connection configuration values.
 If `cockroachdb.provision = true`; the default; then those values will be ignored.

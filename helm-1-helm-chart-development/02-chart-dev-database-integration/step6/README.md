@@ -1,4 +1,4 @@
-# Implement environment variables in the backend deployment
+# Integrate backend environment variables
 
 Update the deployment to inject environment variables mapped to configuration values and credential secret.
 

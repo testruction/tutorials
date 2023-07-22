@@ -1,4 +1,4 @@
-# Implement environment variables in the frontend deployment
+# Integrate frontend environment variables
 
 Update the `frontend` deployment in order to:
 
