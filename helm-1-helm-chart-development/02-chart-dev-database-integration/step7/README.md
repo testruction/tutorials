@@ -3,8 +3,8 @@
 Deploy the chart to the Kubernetes cluster.
 
 ```bash
-helm install demo \
---set cockroachdb.public.service.type="LoadBalancer" \
+helm install chartdev \
+--set cockroachdb.service.public.type="LoadBalancer" \
 --set backend.service.type="LoadBalancer" \
 --set backend.service.port="8001" \
 --set frontend.service.type="LoadBalancer" \
@@ -15,8 +15,8 @@ chart/
 Populate the database using the dataset provided by the source code tests.
 
 ```bash
-COCKROACH_HOST=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-COCKROACH_PORT=$(kubectl get svc demo-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
+COCKROACH_HOST=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+COCKROACH_PORT=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
 
 cd ~/pytest-sqlalchemy-cockroachdb
 
