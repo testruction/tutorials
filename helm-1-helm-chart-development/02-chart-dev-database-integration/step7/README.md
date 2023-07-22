@@ -4,11 +4,11 @@ Deploy the chart to the Kubernetes cluster.
 
 ```bash
 helm install demo \
---set cockroachdb.service.type=LoadBalancer \
---set backend.service.type=LoadBalancer \
---set backend.service.port=8001 \
---set frontend.service.type=LoadBalancer \
---set fronted.service.port=8000 \
+--set cockroachdb.public.service.type="LoadBalancer" \
+--set backend.service.type="LoadBalancer" \
+--set backend.service.port="8001" \
+--set frontend.service.type="LoadBalancer" \
+--set fronted.service.port="8000" \
 chart/
 ```{{exec}}
 
