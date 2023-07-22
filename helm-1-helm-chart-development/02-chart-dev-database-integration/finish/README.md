@@ -3,7 +3,7 @@
 Test application components to check if the deployment is successful
 
 ```bash
-cat <<EOF > ~/.validate.bats
+cat <<EOF > ~/validate.bats
 #!/usr/bin/env bats
 setup() {
   RELEASE_NAME="chartdev"
@@ -11,18 +11,18 @@ setup() {
 
 @test "Check backend API" {
   HOST=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  PORT=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
+  PORT=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
 
-  curl "http://${HOST}:${PORT}/health"
-  curl "http://${HOST}:${PORT}/v1/fakenames?limit=5"
+  curl "http://\${HOST}:\${PORT}/health"
+  curl "http://\${HOST}:\${PORT}/v1/fakenames?limit=5"
 }
 
 @test "Check frontend API" {
   HOST=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
+  PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
   
-  curl "http://$HOST}:${PORT}/health"
-  curl "http://$HOST}:${PORT}/"
+  curl "http://\${HOST}:\${PORT}/health"
+  curl "http://\${HOST}:\${PORT}/"
 }
 EOF
 
