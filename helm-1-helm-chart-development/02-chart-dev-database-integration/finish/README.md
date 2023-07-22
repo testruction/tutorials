@@ -1,31 +1,52 @@
-# Access the application
+# Automate unit tests and access the application
 
-Test application components to check if the deployment is successful
+Create an environment variables file containing informations related to the deployed services deployed.
+
+> **Notice**: Leveraging an external file adds a layer of security as it can typically contains credentials.
+
+```bash
+cat EOF <<EOF > ~/.env
+  RELEASE_NAME="chartdev"
+  BACKEND_HOST=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  BACKEND_PORT=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+
+  FRONTEND_HOST=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  FRONTEND_PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+EOF
+```
+
+Create the unit test files
+
+> **Notice**: Shell variable sign `$` must me escaped with a `\` (i.e `\$`).
 
 ```bash
 cat <<EOF > ~/validate.bats
 #!/usr/bin/env bats
 setup() {
-  RELEASE_NAME="chartdev"
+  load ~/.env
+}
+
+@test "Check backend health" {
+  curl --fail "http://\${BACKEND_HOST}:\${PORT}/health"
 }
 
 @test "Check backend API" {
-  HOST=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  PORT=$(kubectl get svc chartdev-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+  curl --fail "http://\${BACKEND_HOST}:\${PORT}/v1/fakenames/postgres?limit=5"
+}
 
-  curl "http://\${HOST}:\${PORT}/health"
-  curl "http://\${HOST}:\${PORT}/v1/fakenames?limit=5"
+@test "Check frontend health" {
+  curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/health"
 }
 
 @test "Check frontend UI" {
-  HOST=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  PORT=$(kubectl get svc chartdev-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
-  
-  curl "http://\${HOST}:\${PORT}/health"
-  curl "http://\${HOST}:\${PORT}/"
+  curl --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/"
 }
 EOF
+```
 
+Run the tests.
+
+```bash
 bats ~/validate.bats
 ```
 
