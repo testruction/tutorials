@@ -1,40 +1,22 @@
-# Suffix Kubernetes resources
+# Reflect the new configuration structure in the templates
 
-Add prefix to all resources names to distinguish `backend` and `frontend` related deployments.
+Update `backend` and `frontend` YAML templates according to the new `values.yaml` structure.
 
 > **Regular expression**:
-> - `^` asserts position at start of a line
-> - `(` start of capturing group
-> - `\s` matches any whitespace character
->   - `{2}` matches the previous token exactly 2 times
-> - `name` matches the characters `name` literally (case sensitive)
-> - `\:` matches the character `:` literally (case sensitive)
-> - `\s` matches any whitespace character
-> - `.` matches any character (except for line terminators)
->   - `*` matches the previous token between zero and unlimited times, as many times as possible, giving back as needed (greedy)
-> - `)` end of capturing group
-> - `$` asserts position at the end of a line
-
-> **Warning**:
-> When using `sed`, brackets `()` and curly bracket `{}` have to be escaped with a preceding slash `\` in order to be litterally outputed by the shell (i.e. `bash`, `sh`, `zsh`, etc.)
+> - `\.` matches the character `.` literally (case sensitive)
+> - `Values` matches the characters `Values` literally (case sensitive)
+> - `\.` matches the character `.` literally (case sensitive)
 
 **Backend**:
 
 ```bash
-sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
+sed -i 's/\.Values\./.Values.backend./g' chart/templates/backend/*.yaml
 ```{{exec}}
 
 **Frontend**:
 
 ```bash
-sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
-```{{exec}}
-
-Update the service account for each component deployment.
-
-```bash
-sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
-sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+sed -i 's/\.Values\./.Values.frontend./g' chart/templates/frontend/*.yaml
 ```{{exec}}
 
 Stage changes in Git.
@@ -49,10 +31,10 @@ Review the content of all changes.
 git status -v
 ```{{exec}}
 
-> Each Kubernetes resource is now suffixed with their appropriate service.
+> The service name appears for each computed configuration value.
 
 Record the staged changes.
 
 ```bash
-git commit -m 'Added component suffix to resources name'
+git commit -m 'Updated configuration values'
 ```{{exec}}

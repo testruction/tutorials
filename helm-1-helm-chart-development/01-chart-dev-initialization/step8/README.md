@@ -1,18 +1,72 @@
-# Allocate distinct container images
+# Suffix Kubernetes resources
 
-Update the Open Container Image (OCI) repository of the `backend` and `frontend` services.
+Add prefix to all resources names to distinguish `backend` and `frontend` related deployments.
 
-* **backend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend`
-* **frontend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend`
+> **Regular expression**:
+> - `^` asserts position at start of a line
+> - `(` start of capturing group
+> - `\s` matches any whitespace character
+>   - `{2}` matches the previous token exactly 2 times
+> - `name` matches the characters `name` literally (case sensitive)
+> - `\:` matches the character `:` literally (case sensitive)
+> - `\s` matches any whitespace character
+> - `.` matches any character (except for line terminators)
+>   - `*` matches the previous token between zero and unlimited times, as many times as possible, giving back as needed (greedy)
+> - `)` end of capturing group
+> - `$` asserts position at the end of a line
+
+> **Warning**:
+> When using `sed`, brackets `()` and curly bracket `{}` have to be escaped with a preceding slash `\` in order to be litterally outputed by the shell (i.e. `bash`, `sh`, `zsh`, etc.)
 
 **Backend**:
 
 ```bash
-yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
+sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
 ```{{exec}}
 
 **Frontend**:
 
 ```bash
-yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
+sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+```{{exec}}
+
+Update the service account for each component deployment.
+
+```bash
+sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
+sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+```{{exec}}
+
+Update the service targeted by the ingress resources.
+
+```bash
+sed \
+-e 's#^\(\s\{16\}name\:\s.*\)#\1-backend#g' \
+-e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-backend#g' \
+-i chart/templates/backend/ingress.yaml
+
+sed \
+-e 's#^\(\s\{16\}name\:\s.*\)#\1-frontend#g' \
+-e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-frontend#g' \
+-i chart/templates/frontend/ingress.yaml
+```{{exec}}
+
+Stage changes in Git.
+
+```bash
+git add .
+```{{exec}}
+
+Review the content of all changes.
+
+```bash
+git status -v
+```{{exec}}
+
+> Each Kubernetes resource is now suffixed with their appropriate service.
+
+Record the staged changes.
+
+```bash
+git commit -m 'Added component suffix to resources name'
 ```{{exec}}

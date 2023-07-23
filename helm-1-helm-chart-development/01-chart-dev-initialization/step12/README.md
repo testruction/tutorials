@@ -1,31 +1,45 @@
-# Update helpers script and deployment notes
+# Create tests
 
-The Helper scripts include conditions to determine wether a resource should be created.
-Currently the evaluation of Service Account creation needs to updated in order to handle both `backend` and `frontend` account provisionning.
+> So far the chart tests were not modified and are still pointing to a single application component.
 
-Add a new global configuration section to evaluate the service account creation.
-
-> **Note**:
-> The following command line demonstrates how to apply multiple changes using a single `yq` instance.
-> Notice that boolean value is not surrounded by quotes `""`.
+Create a dedicated template to test the API service of the `backend` component.
 
 ```bash
-yq -i '
-  .global.serviceAccount.create = true |
-  .global.serviceAccount.name = ""
-' chart/values.yaml
+cp -v chart/templates/tests/test-connection.yaml \
+      chart/templates/tests/test-backend-service.yaml
 ```{{exec}}
 
-Update the helpers script to rely on the new global property.
+Update the tested URL in order to query 5 `backend` API objects.
 
-```bash
-sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
-```{{exec}}
-
-Update the deployment notes to display the `frontend` informations.
+> **Notice**:
+> The following command line demonstrates how to apply multiple changes using an single `sed` instance.
+> Only intermediate changes are specified using the `--expression (-e)` argument, and the last with the `--in-place (-i)` which effectively write all changes to the file.
+> The expression separator has been changed from "/" to "#" to better distinguish the `sed` command segments.
 
 ```bash
 sed \
--e 's#\(.Values\)\(.*\)#\1.frontend\2#g' \
--i chart/templates/NOTES.txt
+-e 's#\(test\)-connection#\1-backend-service#g' \
+-e 's#\(\}\}\)\(:\)#\1-backend\2#g' \
+-e 's#\(.Values\)\(.service.port\)#\1.backend\2#g' \
+-e 's#\(.service.port\s\}\}\)#\1/apis/v1/fakenames?limit=5#g' \
+-i chart/templates/tests/test-backend-service.yaml
+```{{exec}}
+
+Create another template to test the home page of the `frontent` service component.
+
+```bash
+cp -v chart/templates/tests/test-connection.yaml \
+      chart/templates/tests/test-frontend-service.yaml
+
+sed \
+-e 's#\(test\)-connection#\1-frontend-service#g' \
+-e 's#\(\}\}\)\(:\)#\1-frontend\2#g' \
+-e 's#\(.Values\)\(.service.port\)#\1.frontend\2#g' \
+-i chart/templates/tests/test-frontend-service.yaml
+```{{exec}}
+
+Remove the de default test template.
+
+```bash
+rm -f chart/templates/tests/test-connection.yaml
 ```{{exec}}

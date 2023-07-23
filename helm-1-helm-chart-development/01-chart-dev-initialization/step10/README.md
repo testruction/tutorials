@@ -1,51 +1,36 @@
-# Update Chart URLs and description
+# Updated containers ports
 
-Add the source and home page URLs to the [chart definitions](https://helm.sh/docs/topics/charts/#the-chartyaml-file).
+Update the listening port to match the FastAPI default listen port.
 
-Retreive the URL from the git repository.
+Open the `backend` deployment template.
 
 ```bash
-export SOURCE_URL=$(git config --get remote.origin.url)
+vi chart/templates/backend/deployment.yaml
 ```{{exec}}
 
-Allocate the `sources` list.
+1. Type **`/containerPort`** to position du cursor to the port exposed by the containerized service.
+2. Type `:s/80/8000` to change the port from `80` to `8000`
+3. type **`:wq`** to save the change and quit `vi` 
+
+Repeat the same operations for the `frontend` deployment, but with fewer steps.
+
+Open the `frontend` deployment template.
 
 ```bash
-yq -i '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
+vi chart/templates/frontend/deployment.yaml
 ```{{exec}}
 
-Allocate the `home` field.
+1. Type `:%s/containerPort: 80/containerPort: 8000` to change the port from `80` to `8000`
+2. type **`:wq`** to save the change and quit `vi`
+
+Update the deployment readiness and liveness probes HTTP path from `/` to `/health`
 
 ```bash
-yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
-```{{exec}}
+sed -i 's#path: /#path: /health#g' chart/templates/*/deployment.yaml
+```
 
-Update the chart name.
-
-```bash
-yq -i '.name = "fastapi"' chart/Chart.yaml
-```{{exec}}
-
-Update the Chart description.
+Stage and commit changes.
 
 ```bash
-yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
-```{{exec}}
-
-Update the application version to match the images published in the registry.
-
-```bash
-yq -i '.appVersion = "1.1.1"'  chart/Chart.yaml
-```{{exec}}
-
-Check the chart definition changes.
-
-```bash
-helm show chart chart/
-```{{exec}}
-
-Commit changes.
-
-```bash
-git commit -a -m 'Added source URL to chart definition'
+git commit -a -m 'Allocated application service ports'
 ```{{exec}}

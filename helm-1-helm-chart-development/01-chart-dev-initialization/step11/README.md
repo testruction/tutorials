@@ -1,45 +1,51 @@
-# Create tests
+# Update Chart packaging specifications
 
-> So far the chart tests were not modified and are still pointing to a single application component.
+Add the source and home page URLs to the [chart definitions](https://helm.sh/docs/topics/charts/#the-chartyaml-file).
 
-Create a dedicated template to test the API service of the `backend` component.
+Retreive the URL from the git repository.
 
 ```bash
-cp -v chart/templates/tests/test-connection.yaml \
-      chart/templates/tests/test-backend-service.yaml
+export SOURCE_URL=$(git config --get remote.origin.url)
 ```{{exec}}
 
-Update the tested URL in order to query 5 `backend` API objects.
-
-> **Notice**:
-> The following command line demonstrates how to apply multiple changes using an single `sed` instance.
-> Only intermediate changes are specified using the `--expression (-e)` argument, and the last with the `--in-place (-i)` which effectively write all changes to the file.
-> The expression separator has been changed from "/" to "#" to better distinguish the `sed` command segments.
+Allocate the `sources` list.
 
 ```bash
-sed \
--e 's#\(test\)-connection#\1-backend-service#g' \
--e 's#\(\}\}\)\(:\)#\1-backend\2#g' \
--e 's#\(.Values\)\(.service.port\)#\1.backend\2#g' \
--e 's#\(.service.port\s\}\}\)#\1/apis/v1/fakenames?limit=5#g' \
--i chart/templates/tests/test-backend-service.yaml
+yq -i '.sources[0] = strenv(SOURCE_URL)' chart/Chart.yaml
 ```{{exec}}
 
-Create another template to test the home page of the `frontent` service component.
+Allocate the `home` field.
 
 ```bash
-cp -v chart/templates/tests/test-connection.yaml \
-      chart/templates/tests/test-frontend-service.yaml
-
-sed \
--e 's#\(test\)-connection#\1-frontend-service#g' \
--e 's#\(\}\}\)\(:\)#\1-frontend\2#g' \
--e 's#\(.Values\)\(.service.port\)#\1.frontend\2#g' \
--i chart/templates/tests/test-frontend-service.yaml
+yq -i '.home = strenv(SOURCE_URL)' chart/Chart.yaml
 ```{{exec}}
 
-Remove the de default test template.
+Update the chart name.
 
 ```bash
-rm -f chart/templates/tests/test-connection.yaml
+yq -i '.name = "fastapi"' chart/Chart.yaml
+```{{exec}}
+
+Update the Chart description.
+
+```bash
+yq -i '.description = strenv(SOURCE_URL)' chart/Chart.yaml
+```{{exec}}
+
+Update the application version to match the images published in the registry.
+
+```bash
+yq -i '.appVersion = "1.1.1"'  chart/Chart.yaml
+```{{exec}}
+
+Check the chart definition changes.
+
+```bash
+helm show chart chart/
+```{{exec}}
+
+Commit changes.
+
+```bash
+git commit -a -m 'Added source URL to chart definition'
 ```{{exec}}

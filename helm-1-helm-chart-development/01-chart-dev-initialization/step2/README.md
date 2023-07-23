@@ -25,8 +25,8 @@ chart/
 |-- values.yaml  # Deployment configuration data
 ```
 
-Exclude dependent charts (subchart) from the Git versionning.
+Exclude dependent charts (i.e dependencies) from the Git versionning.
 
 ```bash
-echo '**/chart/charts' | tee -a .gitignore
+echo '**/charts/*.tgz' | tee -a .gitignore
 ```{{exec}}

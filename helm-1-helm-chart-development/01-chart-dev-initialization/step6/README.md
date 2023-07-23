@@ -1,22 +1,10 @@
-# Reflect the new configuration structure in the templates
+# Record changes to the Git history
 
-Update `backend` and `frontend` YAML templates according to the new `values.yaml` structure.
-
-> **Regular expression**:
-> - `\.` matches the character `.` literally (case sensitive)
-> - `Values` matches the characters `Values` literally (case sensitive)
-> - `\.` matches the character `.` literally (case sensitive)
-
-**Backend**:
+Configurer commit user name and email.
 
 ```bash
-sed -i 's/\.Values\./.Values.backend./g' chart/templates/backend/*.yaml
-```{{exec}}
-
-**Frontend**:
-
-```bash
-sed -i 's/\.Values\./.Values.frontend./g' chart/templates/frontend/*.yaml
+git config user.name 'Helm Student'
+git config user.email 'student.helm@testruction.lab'
 ```{{exec}}
 
 Stage changes in Git.
@@ -25,16 +13,22 @@ Stage changes in Git.
 git add .
 ```{{exec}}
 
+Check the status of Git.
+
+```bash
+git status
+```{{exec}}
+
+> Notice that deleted files does not appear in the list.
+
 Review the content of all changes.
 
 ```bash
 git status -v
 ```{{exec}}
 
-> The service name appears for each computed configuration value.
-
 Record the staged changes.
 
 ```bash
-git commit -m 'Updated configuration values'
+git commit -m 'Initial helm chart commit'
 ```{{exec}}

@@ -1,36 +1,26 @@
-# Updated containers ports
+# Allocate distinct container images
 
-Update the listening port to match the FastAPI default listen port.
+Update the Open Container Image (OCI) repository of the `backend` and `frontend` services.
 
-Open the `backend` deployment template.
+* **backend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend`
+* **frontend**: `ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend`
+
+**Backend**:
 
 ```bash
-vi chart/templates/backend/deployment.yaml
+yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
 ```{{exec}}
 
-1. Type **`/containerPort`** to position du cursor to the port exposed by the containerized service.
-2. Type `:s/80/8000` to change the port from `80` to `8000`
-3. type **`:wq`** to save the change and quit `vi` 
-
-Repeat the same operations for the `frontend` deployment, but with fewer steps.
-
-Open the `frontend` deployment template.
+**Frontend**:
 
 ```bash
-vi chart/templates/frontend/deployment.yaml
+yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
 ```{{exec}}
 
-1. Type `:%s/containerPort: 80/containerPort: 8000` to change the port from `80` to `8000`
-2. type **`:wq`** to save the change and quit `vi`
+Add configuration values to control the deployment of the `backend` and `frontend` services.
 
-Update the deployment readiness and liveness probes HTTP path from `/` to `/health`
-
-```bash
-sed -i 's#path: /#path: /health#g' chart/templates/*/deployment.yaml
-```
-
-Stage and commit changes.
+> **Notice**: The following command demonstrates how to address mappings at once using `yq`.
 
 ```bash
-git commit -a -m 'Allocated application service ports'
+yq -i '.backend.enabled = true | .frontend.enabled = true' chart/valutes.yaml
 ```{{exec}}

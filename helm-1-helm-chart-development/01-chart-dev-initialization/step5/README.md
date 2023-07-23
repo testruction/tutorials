@@ -1,34 +1,22 @@
-# Record changes to the Git history
+# Add conditions to control the deployment
 
-Configurer commit user name and email.
+When a chart supports the deployment of multiple components it is a good practice to add a condition to control the deployment of each components.
 
-```bash
-git config user.name 'Helm Student'
-git config user.email 'student.helm@testruction.lab'
-```{{exec}}
+> **Notice**:
+> [`yq`](https://mikefarah.gitbook.io/yq/) is a multi-platform command line tool dedicated to the querying of YAML file.
+> It also support other data serializtion format like XML, TOML or json.
+> The `-i (--inplace)` applies requested changes directly to to the file.
 
-Stage changes in Git.
+Add a condition to both `backend` and `frontend`.
 
-```bash
-git add .
-```{{exec}}
-
-Check the status of Git.
+**Backend**:
 
 ```bash
-git status
-```{{exec}}
+yq -i '.backend.enabled = true' chart/values.yaml
+```
 
-> Notice that deleted files does not appear in the list.
-
-Review the content of all changes.
+**Frontend**:
 
 ```bash
-git status -v
-```{{exec}}
-
-Record the staged changes.
-
-```bash
-git commit -m 'Initial helm chart commit'
-```{{exec}}
+yq -i '.frontend.enabled = true' chart/values.yaml
+```
