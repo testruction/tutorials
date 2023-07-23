@@ -47,13 +47,8 @@
             ]
         }
     },
-    "environment": {
-        "showvisualise": false,
-        "showdashboard": true,
-        "hideintro": false,
-        "uilayout": "terminal-iframe"
-      },
-      "backend": {
-        "imageid": "kubernetes-k3s-1node-4GB"
-      }
+    "layout": "ide",
+    "backend": {
+      "imageid": "kubernetes-k3s-1node-4GB"
+    }
 }
