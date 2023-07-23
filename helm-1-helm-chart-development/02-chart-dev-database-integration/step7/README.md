@@ -22,10 +22,10 @@ sleep 15s
 COCKROACH_HOST=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 COCKROACH_PORT=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
 
-cd ~/pytest-sqlalchemy-cockroachdb
+cd ~/pytest-sqlalchemy-cockroachdb/src
 
 export OTEL_SDK_DISABLED='true'
-python3 tests/populate.py --username="admin" --disable-tracing
+python3 -m fakenamesservice.data_loader --username="admin"
 
 cd ~/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
