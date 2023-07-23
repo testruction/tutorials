@@ -169,20 +169,6 @@
   -i chart/templates/NOTES.txt
 }
 
-@test "Step 14: Cleanup values incompatible with Killercoda" {
-  cd fastapi-sqlalchemy-cockroachdb
-
-  sed \
-  -e 's#^\(\s\{16\}name\:\s.*\)#\1-backend#g' \
-  -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-backend#g' \
-  -i chart/templates/backend/ingress.yaml
-
-  sed \
-  -e 's#^\(\s\{16\}name\:\s.*\)#\1-frontend#g' \
-  -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-frontend#g' \
-  -i chart/templates/frontend/ingress.yaml
-}
-
 @test "Finalize: Commit changes" {
   cd fastapi-sqlalchemy-cockroachdb
 
