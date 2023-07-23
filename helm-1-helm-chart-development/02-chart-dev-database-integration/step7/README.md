@@ -14,18 +14,17 @@ chart/
 
 Populate the database using the dataset provided by the source code tests.
 
-> **Notice**: the `sleep 15s` is required to let the database clustering to finalize.
+> **Notice**: The `sleep 15s` is required to let the database clustering to finalize.
 
 ```bash
 sleep 15s
 
-COCKROACH_HOST=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-COCKROACH_PORT=$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
-
 cd ~/pytest-sqlalchemy-cockroachdb/src
 
-export OTEL_SDK_DISABLED='true'
-python3 -m fakenamesservice.data_loader --username="admin"
+python3 -m fakenamesservice.data_loader \
+--username="admin" \
+--host="$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')" \
+--port="$(kubectl get svc chartdev-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')"
 
 cd ~/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
