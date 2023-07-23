@@ -1,19 +1,21 @@
 #!/usr/bin/env bats
 
 
-@test "Clone the Web application source code" {
+@test "Step 1: Clone the Web application source code" {
   git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
   cd fastapi-sqlalchemy-cockroachdb
   git checkout -b feature/helm-chart
 }
 
-@test "Created initial chart" {
+@test "Step 2: Created initial chart" {
   cd fastapi-sqlalchemy-cockroachdb
 
   helm create ./chart
+
+  echo '**/charts/*.tgz' | tee -a .gitignore
 }
 
-@test "Create and populate components directories" {
+@test "Step 3: Create and populate components directories" {
   cd fastapi-sqlalchemy-cockroachdb
 
   mkdir -p chart/templates/backend chart/templates/frontend
@@ -22,7 +24,7 @@
   rm -vf chart/templates/*.yaml
 }
 
-@test "Create configuration sections for earch components" {
+@test "Step 4: Create configuration sections for earch components" {
   cd fastapi-sqlalchemy-cockroachdb
 
   cat chart/values.yaml | head -4 > /tmp/values.yaml
@@ -34,7 +36,12 @@
   mv /tmp/values.yaml chart/values.yaml
 }
 
-@test "Record changes to the Git history" {
+@test "Step 5: Add conditions to control the deployment" {
+  yq -i '.backend.enabled = true' chart/values.yaml
+  yq -i '.frontend.enabled = true' chart/valutes.yaml
+}
+
+@test "Step 6: Record changes to the Git history" {
   cd fastapi-sqlalchemy-cockroachdb
 
   git config user.name 'Helm Student'
@@ -47,7 +54,7 @@
   git commit -m 'Initial helm chart commit'
 }
 
-@test "Reflect the new configuration structure in the templates" {
+@test "Step 6: Reflect the new configuration structure in the templates" {
   cd fastapi-sqlalchemy-cockroachdb
 
   # Backend
@@ -61,7 +68,7 @@
   git commit -m 'Updated configuration values'
 }
 
-@test "Suffix Kubernetes resources" {
+@test "Step 8: Suffix Kubernetes resources" {
   cd fastapi-sqlalchemy-cockroachdb
 
   # Backend
@@ -70,23 +77,34 @@
   # Frontend
   sed -i 's/^\(\s\{2\}name\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
 
-  # Service Account reference
+  # Service Account references
   sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-backend/g' chart/templates/backend/*.yaml
   sed -i 's/^\(\s\{6\}serviceAccountName\:\s.*\)$/\1-frontend/g' chart/templates/frontend/*.yaml
+
+  # Ingress references
+  sed \
+  -e 's#^\(\s\{16\}name\:\s.*\)#\1-backend#g' \
+  -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-backend#g' \
+  -i chart/templates/backend/ingress.yaml
+
+  sed \
+  -e 's#^\(\s\{16\}name\:\s.*\)#\1-frontend#g' \
+  -e 's#^\(\s\{14\}serviceName\:\s.*\)#\1-frontend#g' \
+  -i chart/templates/frontend/ingress.yaml
 
   git add .
   git status -v
   git commit -m 'Added component suffix to resources name'
 }
 
-@test "Allocate distinct container images" {
+@test "Step 9: Allocate distinct container images" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
   yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
 }
 
-@test "Update containers ports" {
+@test "Step 10: Update containers ports" {
   cd fastapi-sqlalchemy-cockroachdb
 
   sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/backend/deployment.yaml
@@ -97,7 +115,7 @@
   git commit -a -m 'Allocated application service ports'
 }
 
-@test "Update Chart URLs and description" {
+@test "Step 11: Update Chart packaging specifications" {
   cd fastapi-sqlalchemy-cockroachdb
 
   export SOURCE_URL=$(git config --get remote.origin.url)
@@ -111,7 +129,7 @@
   git commit -a -m 'Added source URL to chart definition'
 }
 
-@test "Create tests" {
+@test "Step 12: Create tests" {
   cd fastapi-sqlalchemy-cockroachdb
 
   cp -v chart/templates/tests/test-connection.yaml \
@@ -136,7 +154,7 @@
   rm -f chart/templates/tests/test-connection.yaml
 }
 
-@test "Update helpers script and deployment notes" {
+@test "Step 13: Update helpers script and deployment notes" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '
@@ -151,7 +169,7 @@
   -i chart/templates/NOTES.txt
 }
 
-@test "Cleanup values incompatible with Killercoda" {
+@test "Step 14: Cleanup values incompatible with Killercoda" {
   cd fastapi-sqlalchemy-cockroachdb
 
   sed \
@@ -165,7 +183,7 @@
   -i chart/templates/frontend/ingress.yaml
 }
 
-@test "Commit changes" {
+@test "Finalize: Commit changes" {
   cd fastapi-sqlalchemy-cockroachdb
 
   helm template --dry-run chart/
