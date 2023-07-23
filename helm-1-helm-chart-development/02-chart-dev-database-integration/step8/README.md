@@ -10,11 +10,14 @@ RELEASE_NAME='chartdev'
 cat <<EOF > ~/.env
   RELEASE_NAME="${RELEASE_NAME}"
 
-  BACKEND_HOST=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  BACKEND_PORT=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+COCKROACH_HOST=$(kubectl get svc ${RELEASE_NAME}-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+COCKROACH_PORT=$(kubectl get svc ${RELEASE_NAME}-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
 
-  FRONTEND_HOST=$(kubectl get svc ${RELEASE_NAME}-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  FRONTEND_PORT=$(kubectl get svc ${RELEASE_NAME}-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+BACKEND_HOST=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+BACKEND_PORT=$(kubectl get svc ${RELEASE_NAME}-fastapi-backend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
+
+FRONTEND_HOST=$(kubectl get svc ${RELEASE_NAME}-fastapi-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+FRONTEND_PORT=$(kubectl get svc ${RELEASE_NAME}-fastapi-frontend -o jsonpath='{.spec.ports[?(@.name == "http")].nodePort}')
 EOF
 ```{{exec}}
 
