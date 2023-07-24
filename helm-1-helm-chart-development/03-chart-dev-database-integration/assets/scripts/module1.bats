@@ -1,13 +1,13 @@
 #!/usr/bin/env bats
 
 
-@test "Step 1: Clone the Web application source code" {
+@test "M1S1: Clone the Web application source code" {
   git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
   cd fastapi-sqlalchemy-cockroachdb
   git checkout -b feature/helm-chart
 }
 
-@test "Step 2: Created initial chart" {
+@test "M1S2: Created initial chart" {
   cd fastapi-sqlalchemy-cockroachdb
 
   helm create ./chart
@@ -15,7 +15,7 @@
   echo '**/charts/*.tgz' | tee -a .gitignore
 }
 
-@test "Step 3: Create and populate components directories" {
+@test "M1S3: Create and populate components directories" {
   cd fastapi-sqlalchemy-cockroachdb
 
   mkdir -p chart/templates/backend chart/templates/frontend
@@ -24,7 +24,7 @@
   rm -vf chart/templates/*.yaml
 }
 
-@test "Step 4: Create configuration sections for earch components" {
+@test "M1S4: Create configuration sections for earch components" {
   cd fastapi-sqlalchemy-cockroachdb
 
   cat chart/values.yaml | head -4 > /tmp/values.yaml
@@ -36,14 +36,14 @@
   mv /tmp/values.yaml chart/values.yaml
 }
 
-@test "Step 5: Add conditions to control the deployment" {
+@test "M1S5: Add conditions to control the deployment" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '.backend.enabled = true' chart/values.yaml
   yq -i '.frontend.enabled = true' chart/values.yaml
 }
 
-@test "Step 6: Record changes to the Git history" {
+@test "M1S6: Record changes to the Git history" {
   cd fastapi-sqlalchemy-cockroachdb
 
   git config user.name 'Helm Student'
@@ -56,7 +56,7 @@
   git commit -m 'Initial helm chart commit'
 }
 
-@test "Step 6: Reflect the new configuration structure in the templates" {
+@test "M1S6: Reflect the new configuration structure in the templates" {
   cd fastapi-sqlalchemy-cockroachdb
 
   # Backend
@@ -70,7 +70,7 @@
   git commit -m 'Updated configuration values'
 }
 
-@test "Step 8: Suffix Kubernetes resources" {
+@test "M1S8: Suffix Kubernetes resources" {
   cd fastapi-sqlalchemy-cockroachdb
 
   # Backend
@@ -99,14 +99,14 @@
   git commit -m 'Added component suffix to resources name'
 }
 
-@test "Step 9: Allocate distinct container images" {
+@test "M1S9: Allocate distinct container images" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend"' chart/values.yaml
   yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
 }
 
-@test "Step 10: Update containers ports" {
+@test "M1S10: Update containers ports" {
   cd fastapi-sqlalchemy-cockroachdb
 
   sed -i 's/containerPort: 80/containerPort: 8000/g' chart/templates/backend/deployment.yaml
@@ -117,7 +117,7 @@
   git commit -a -m 'Allocated application service ports'
 }
 
-@test "Step 11: Update Chart packaging specifications" {
+@test "M1S11: Update Chart packaging specifications" {
   cd fastapi-sqlalchemy-cockroachdb
 
   export SOURCE_URL=$(git config --get remote.origin.url)
@@ -131,7 +131,7 @@
   git commit -a -m 'Added source URL to chart definition'
 }
 
-@test "Step 12: Create tests" {
+@test "M1S12: Create tests" {
   cd fastapi-sqlalchemy-cockroachdb
 
   cp -v chart/templates/tests/test-connection.yaml \
@@ -156,7 +156,7 @@
   rm -f chart/templates/tests/test-connection.yaml
 }
 
-@test "Step 13: Update helpers script and deployment notes" {
+@test "M1S13: Update helpers script and deployment notes" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '
