@@ -14,7 +14,8 @@ yq -i '
   .jaeger.collector.enabled = false |
   .jaeger.query.enabled = false |
   .jaeger.spark.enabled = false |
-  .jaeger.hotrod.enabled = false
+  .jaeger.hotrod.enabled = false |
+  .jaeger.provisionDataStore.cassandra = false
 ' chart/values.yaml
 ```{{exec}}
 
