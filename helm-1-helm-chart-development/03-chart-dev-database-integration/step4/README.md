@@ -14,10 +14,10 @@ vi -e chart/templates/backend/deployment.yaml <<EOF
 i
           env:
             - name: COCKROACH_HOST
-              {{- if .Values.cockroachdb.provision }}
+              {{- if .Values.cockroachdb.enabled }}
               value: {{ print .Release.Name "-cockroachdb-public" | quote }}
               {{- else if eq "" .Values.backend.database.cockroachdb.host }}
-              {{ fail "backend.database.cockroachdb.host can't be empty if cockroachdb.provision is set to false"}}
+              {{ fail "backend.database.cockroachdb.host can't be empty if cockroachdb.enabled is set to false"}}
               value: {{ .Values.backend.database.cockroachdb.host | quote }}
               {{- end }}
             - name: COCKROACH_PORT

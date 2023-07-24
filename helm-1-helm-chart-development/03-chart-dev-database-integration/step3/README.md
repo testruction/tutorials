@@ -1,7 +1,7 @@
 # Implement database credentials provisioning
 
 Add a YAML mapping for database connection configuration values.
-If `cockroachdb.provision = true`; the default; then those values will be ignored.
+If `cockroachdb.enabled = true`; the default; then those values will be ignored.
 
 ```bash
 yq -i '
@@ -30,7 +30,7 @@ metadata:
     {{- include "chart.labels" . | nindent 4 }}
 type: Opaque
 data:
-  {{- if and (eq .Values.cockroachdb.provision true) (eq .Values.cockroachdb.init.provisioning.enabled true) }}
+  {{- if and (eq .Values.cockroachdb.enabled true) (eq .Values.cockroachdb.init.provisioning.enabled true) }}
   {{- with (first .Values.cockroachdb.init.provisioning.users) }}
   username: {{ .name | b64enc | quote }}
   password: {{ .password | b64enc | quote }}

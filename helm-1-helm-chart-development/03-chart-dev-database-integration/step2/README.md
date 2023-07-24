@@ -7,7 +7,7 @@ Add a YAML sequence for Cockroach to the chart [dependencies](https://helm.sh/do
 ```bash
 yq -i '
   .dependencies[0].name = "cockroachdb" |
-  .dependencies[0].condition = "cockroachdb.provision" |
+  .dependencies[0].condition = "cockroachdb.enabled" |
   .dependencies[0].repository = "https://charts.cockroachdb.com/" |
   .dependencies[0].version = "11.1.0"
 ' chart/Chart.yaml
@@ -26,7 +26,7 @@ Add a YAML mapping for the `cockroachdb` configuration values.
 
 ```bash
 yq -i '
-  .cockroachdb.provision = true |
+  .cockroachdb.enabled = true |
   .cockroachdb.init.privisioning=true |
   .cockroachdb.tls.enabled=false
 ' chart/values.yaml
