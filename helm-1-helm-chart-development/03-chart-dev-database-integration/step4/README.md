@@ -6,7 +6,7 @@ Update the `backend` deployment in order to:
 
 1. Configure non-confidential variables required to establish communication to the database.
 2. Retrieve credentials to connect to the database for the secret.
-3. Dynamically inject environment variables coming from the `env:` and `extraEnv` configuration sections.
+3. Dynamically inject environment variables coming from the `env:` and `extraEnv:` configuration sections.
 
 ```yaml
 vi -e chart/templates/backend/deployment.yaml <<EOF

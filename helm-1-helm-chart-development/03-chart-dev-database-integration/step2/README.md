@@ -2,12 +2,6 @@
 
 The application relies on a [Cockroach](https://www.cockroachlabs.com) database instance.
 
-Check the number of resources to be deployed at this stage.
-
-```bash
-helm template chart/ | grep 'kind' | wc -l
-```{{exec}}
-
 Add a YAML sequence for Cockroach to the chart [dependencies](https://helm.sh/docs/helm/helm_dependency/).
 
 ```bash
@@ -36,10 +30,4 @@ yq -i '
   .cockroachdb.init.privisioning=true |
   .cockroachdb.tls.enabled=false
 ' chart/values.yaml
-```{{exec}}
-
-Check again the supported number of resources.
-
-```bash
-helm template chart/ | grep 'kind' | wc -l
 ```{{exec}}
