@@ -1,0 +1,22 @@
+## Tracing dependency integration
+
+> **Disclaimer**: This module is the continuation of the [01. Helm chart development (Initialization)](https://killercoda.com/florianjudithb/course/helm-1-helm-chart-development/01-chart-dev-initialization).
+> From a learning perspective, it is highly recommended to complete this module before starting to this one.
+> However, this course is designed to run any modules in any order.
+
+The previous module consisted to implement the application database as a chart dependency.
+
+### Learning objectives
+
+The objectives of this module is to learn how to:
+
+- Add a tracing collector dependency to chart
+- Leverage `env:` configuration values
+- Get even more hands-on experience on `git`, `sed`, `vi` and `yq` tools
+
+### References
+
+The following sources were used to build this lab.
+
+- Helm official documentation: <https://helm.sh/docs/>
+- Jaeger official chart: <https://artifacthub.io/packages/helm/jaegertracing/jaeger>
