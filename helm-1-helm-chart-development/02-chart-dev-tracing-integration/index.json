@@ -1,0 +1,54 @@
+{
+    "title": "02. Helm chart: Tracing integration",
+    "description": "Learn about how to add a trace collector deployment to an existing chart",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            },
+            {
+                "text": "step3/README.md"
+            },
+            {
+                "text": "step4/README.md"
+            },
+            {
+                "text": "step5/README.md"
+            },
+            {
+                "text": "step6/README.md"
+            },
+            {
+                "text": "step7/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "scripts/install_packages.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+    },
+    "environment": {
+        "showvisualise": false,
+        "showdashboard": true,
+        "hideintro": false,
+        "uilayout": "terminal-iframe"
+      },
+      "backend": {
+        "imageid": "kubernetes-k3s-1node-4GB"
+      }
+}
