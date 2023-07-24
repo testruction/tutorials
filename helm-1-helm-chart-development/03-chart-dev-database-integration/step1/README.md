@@ -4,6 +4,6 @@ Run the [bats-core](https://bats-core.readthedocs.io) script to catchup the task
 
 ```bash
 bats ~/module1.bats \
-bats ~/module2.bats \
+&& bats ~/module2.bats \
 && cd fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
