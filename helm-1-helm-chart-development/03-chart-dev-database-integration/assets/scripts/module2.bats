@@ -80,7 +80,7 @@ wq
 EOF
 }
 
-@test "M2S6: Implement frontend environment variables" {
+@test "M2S7: Implement frontend environment variables" {
   cd fastapi-sqlalchemy-cockroachdb
 
   run vi -e chart/templates/frontend/deployment.yaml <<EOF
