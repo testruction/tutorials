@@ -6,10 +6,10 @@ Add a YAML sequence for Cockroach to the chart [dependencies](https://helm.sh/do
 
 ```bash
 yq -i '
-  .dependencies[0].name = "cockroachdb" |
-  .dependencies[0].condition = "cockroachdb.enabled" |
-  .dependencies[0].repository = "https://charts.cockroachdb.com/" |
-  .dependencies[0].version = "11.1.0"
+  .dependencies[1].name = "cockroachdb" |
+  .dependencies[1].condition = "cockroachdb.enabled" |
+  .dependencies[1].repository = "https://charts.cockroachdb.com/" |
+  .dependencies[1].version = "11.1.0"
 ' chart/Chart.yaml
 ```{{exec}}
 
