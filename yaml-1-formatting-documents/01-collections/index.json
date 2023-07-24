@@ -1,0 +1,36 @@
+{
+    "title": "YAML Collections",
+    "description": "Learn about the different collection types supported by YAML",
+    "difficulty": "easy",
+    "time": "10-20 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "src/sequence-of-scalar.yaml", "target": "~/", "chmod": "+rw"}
+            ]
+        }
+    },
+    "environment": {
+        "showvisualise": false,
+        "showdashboard": true,
+        "hideintro": false,
+        "uilayout": "terminal-iframe"
+      },
+      "backend": {
+        "imageid": "ubuntu2004"
+      }
+}

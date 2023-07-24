@@ -8,6 +8,13 @@ In particular, they help you to:
 * Install packages on a host on which you do not have admin privileges.
 * Keep your global `site-packages/` directory tidy by removing the need to install packages system-wide which you might only need for one project.
 
+Install the `venv` package.
+
+```bash
+sudo apt install -y python3-venv
+```{{execute}}
+
+
 Create the `.venv` virtual environment.
 
 ```bash
@@ -15,3 +22,10 @@ python3 -m venv .venv/
 ```{{execute}}
 
 > **Reminder**: A virtual virtual environment is nothing but
+
+
+Activate the the virtual environment
+
+```bash
+source .venv/bin/activate
+```

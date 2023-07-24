@@ -9,7 +9,7 @@ services:
       - /cockroach/cockroach-data
     ports:
       - "26257:26257"
-      - "8180:8080"
+      - "8080:8080"
     healthcheck:
       test: ["CMD", "/cockroach/cockroach", "node", "status", "--insecure"]
       interval: 5s
