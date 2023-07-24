@@ -36,8 +36,7 @@
             "host01": [
                 {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "scripts/install_packages.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"},
-                {"file": "scripts/import.sql", "target": "~/", "chmod": "+rw"}
+                {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"}
             ]
         }
     },
