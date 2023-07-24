@@ -1,6 +1,6 @@
 ## Database dependency integration
 
-> This module is the continuation of the [01. Helm chart development (Initialization)](https://killercoda.com/florianjudithb/course/helm-1-helm-chart-development/01-chart-dev-initialization).
+> **Disclaimer**: This module is the continuation of the [01. Helm chart development (Initialization)](https://killercoda.com/florianjudithb/course/helm-1-helm-chart-development/01-chart-dev-initialization).
 > From a learning perspective, it is highly recommended to complete this module before starting to this one.
 > However, this course is designed to run any modules in any order.
 
@@ -13,7 +13,7 @@ The objective of this module is to learn how to:
 
 - Add a database dependency to chart
 - Add configuration value to address the dependent chart configuration
-- Secure the credentials to access the database
+- Secure credentials to access the database
 - Implement dedicated environment variables required for the component networking
 - Get more hands-on experience on `git`, `sed`, `vi` and `yq` tools
 
