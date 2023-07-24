@@ -13,7 +13,7 @@ vi -e chart/templates/frontend/deployment.yaml <<EOF
 i
           env:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: http{{ if not .Values.frontend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print Chart.Release "-jaeger-collector") }}:4317
+              value: http{{ if not .Values.frontend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print .Release.Name "-jaeger-collector") }}:4317
             - name: OTEL_EXPORTER_OTLP_INSECURE
               value: {{ .Values.frontend.tracing.insecure | quote }}
             - name: BACKEND_API_URL
