@@ -38,7 +38,7 @@
 
 @test "Step 5: Add conditions to control the deployment" {
   yq -i '.backend.enabled = true' chart/values.yaml
-  yq -i '.frontend.enabled = true' chart/valutes.yaml
+  yq -i '.frontend.enabled = true' chart/values.yaml
 }
 
 @test "Step 6: Record changes to the Git history" {
