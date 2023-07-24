@@ -11,8 +11,9 @@ The previous module consisted to implement the application database as a chart d
 The objectives of this module is to learn how to:
 
 - Add a tracing collector dependency to chart
-- Leverage `env:` configuration values
-- Get even more hands-on experience on `git`, `sed`, `vi` and `yq` tools
+- Leverage dymamic `env:` and `extraEnv:` configuration values
+- Add environment variables support to existing deployments
+- Get more hands-on experience on `git`, `sed`, `vi` and `yq` tools
 
 ### References
 
