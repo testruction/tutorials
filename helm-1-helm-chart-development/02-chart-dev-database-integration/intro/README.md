@@ -5,7 +5,6 @@
 > However, this course is designed to run any modules in any order.
 
 The previous module consisted in initializing a chart for new application composed of a backend and frontend application.
-But their is still some work to do in order to get it deployed.
 
 ### Learning objectives
 
