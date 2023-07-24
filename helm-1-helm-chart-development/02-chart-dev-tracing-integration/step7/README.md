@@ -16,7 +16,7 @@ i
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: http{{ if not .Values.frontend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print \$fullName "-jaeger-collector") }}:4317
             - name: OTEL_EXPORTER_OTLP_INSECURE
-              value: {{ .Values.frontend.tracing.insecure }}
+              value: {{ .Values.frontend.tracing.insecure | quote }}
             - name: BACKEND_API_URL
               value: {{ print "http://" \$fullName "-backend:" .Values.backend.service.port | quote }}
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
