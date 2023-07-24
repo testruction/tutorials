@@ -1,6 +1,6 @@
 ## Database dependency integration
 
-> **Disclaimer**: This module is the continuation of the [01. Helm chart development (Initialization)](https://killercoda.com/florianjudithb/course/helm-1-helm-chart-development/01-chart-dev-initialization).
+> **Disclaimer**: This module is the continuation of the [02. Helm chart development (Database Integration)](https://killercoda.com/florianjudithb/course/helm-1-helm-chart-development/02-chart-dev-database-integration).
 > From a learning perspective, it is highly recommended to complete this module before starting to this one.
 > However, this course is designed to run any modules in any order.
 
