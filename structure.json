@@ -27,7 +27,7 @@
         {
             "path": "helm-1-helm-chart-development",
             "title": "Helm chart development",
-            "description": "Efficiently develop Helm charts from scratch"
+            "description": "Develop a Helm charts for a multi-component application from scratch"
         }
     ]
 }
