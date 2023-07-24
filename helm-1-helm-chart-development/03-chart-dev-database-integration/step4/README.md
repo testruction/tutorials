@@ -12,7 +12,6 @@ Update the `backend` deployment in order to:
 vi -e chart/templates/backend/deployment.yaml <<EOF
 /ports
 i
-          env:
             - name: COCKROACH_HOST
               {{- if .Values.cockroachdb.enabled }}
               value: {{ print .Release.Name "-cockroachdb-public" | quote }}
@@ -34,9 +33,6 @@ i
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
                   key: password
-            {{- with (concat .Values.backend.env .Values.backend.extraEnv )}}
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
 .
 wq
 EOF
