@@ -1,4 +1,4 @@
-# Add the tracing dependency
+# Add trace collector dependency
 
 The application relies on a [Jaeger](https://www.jaegertracing.io) trace collector and visualizer.
 
