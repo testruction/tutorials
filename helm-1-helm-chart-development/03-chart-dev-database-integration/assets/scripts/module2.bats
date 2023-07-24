@@ -47,9 +47,9 @@
     .jaeger.extraEnv[0].name = "COLLECTOR_OTLP_ENABLED" |
     .jaeger.extraEnv[0].value = true |
     .backend.env[0].name = "OTEL_RESOURCE_ATTRIBUTES" |
-    .backend.env[0].value = "ervice.namespace=io.testruction,service.name=backendservice" |
+    .backend.env[0].value = "service.namespace=io.testruction,service.name=backendservice" |
     .frontend.env[0].name = "OTEL_RESOURCE_ATTRIBUTES" |
-    .frontend.env[0].value = "ervice.namespace=io.testruction,service.name=frontendservice"
+    .frontend.env[0].value = "service.namespace=io.testruction,service.name=frontendservice"
   ' chart/values.yaml
 
   yq -i '
