@@ -8,7 +8,7 @@ The previous module consisted in initializing a chart for new application compos
 
 ### Learning objectives
 
-The objective of this module is to learn how to:
+The objectives of this module is to learn how to:
 
 - Add a database dependency to chart
 - Add configuration value to address the dependent chart configuration
