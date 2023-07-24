@@ -19,9 +19,8 @@ vi -e chart/templates/backend/deployment.yaml <<EOF
 /ports
 i
           env:
-            {{- \$fullName := include "chart.fullname" . }}
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: http{{ if not .Values.backend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print \$fullName "-jaeger-collector") }}:4317
+              value: http{{ if not .Values.backend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print Chart.Release "-jaeger-collector") }}:4317
             - name: OTEL_EXPORTER_OTLP_INSECURE
               value: {{ .Values.backend.tracing.insecure | quote }}
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
