@@ -4,7 +4,7 @@
 > From a learning perspective, it is highly recommended to complete this module before starting to this one.
 > However, this course is designed to run any modules in any order.
 
-The previous module consited in initializing a chart for new application composed of a backend and frontend application.
+The previous module consisted in initializing a chart for new application composed of a backend and frontend application.
 But their is still some work to do in order to get it deployed.
 
 ### Learning objectives
