@@ -10,7 +10,7 @@ The previous module consisted in initializing a chart for new application compos
 
 The objectives of this module is to learn how to:
 
-- Add a database dependency to chart
+- Add a database dependency to the chart
 - Add configuration value to address the dependent chart configuration
 - Secure credentials to access the database
 - Implement dedicated environment variables required for the component networking
