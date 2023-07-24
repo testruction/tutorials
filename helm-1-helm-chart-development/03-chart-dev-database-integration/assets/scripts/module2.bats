@@ -63,7 +63,7 @@
 @test "M2S6: Implement backend environment variables" {
   cd fastapi-sqlalchemy-cockroachdb
 
-  vi -e chart/templates/backend/deployment.yaml <<EOF
+  run vi -e chart/templates/backend/deployment.yaml <<EOF
 /ports
 i
           env:
@@ -83,7 +83,7 @@ EOF
 @test "M2S6: Implement frontend environment variables" {
   cd fastapi-sqlalchemy-cockroachdb
 
-  vi -e chart/templates/frontend/deployment.yaml <<EOF
+  run vi -e chart/templates/frontend/deployment.yaml <<EOF
 /ports
 i
           env:
