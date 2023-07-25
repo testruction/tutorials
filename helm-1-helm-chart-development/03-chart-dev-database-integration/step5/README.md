@@ -4,6 +4,9 @@ Deploy the chart to the Kubernetes cluster.
 
 ```bash
 helm install chartdev \
+--set jaeger.allInOne.ingress.enabled="true" \
+--set jaeger.allInOne.ingress.host="" \
+--set cockroachdb.statefulset.replicas="1" \
 --set cockroachdb.service.public.type="LoadBalancer" \
 --set backend.service.type="LoadBalancer" \
 --set backend.service.port="8001" \
