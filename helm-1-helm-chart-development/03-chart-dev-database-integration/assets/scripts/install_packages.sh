@@ -6,10 +6,9 @@ function configure_kubeconfig() {
 }
 
 function install_yq(){
-    sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq \
-    && sudo chmod +x /usr/local/bin/yq
-
-    sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
+    sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
+    
+    sudo chmod +x /usr/local/bin/yq
 }
 
 function install_bats_core() {
@@ -81,7 +80,7 @@ function install_cockroach_populate()
     pip3 install -r requirements.txt
 }
 
-configure_kubeconfig
+# configure_kubeconfig
 install_yq
 install_bats_core
 # install_cockroach_sql
