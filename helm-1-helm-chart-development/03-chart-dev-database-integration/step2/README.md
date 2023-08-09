@@ -9,7 +9,7 @@ yq -i '
   .dependencies[1].name = "cockroachdb" |
   .dependencies[1].condition = "cockroachdb.enabled" |
   .dependencies[1].repository = "https://charts.cockroachdb.com/" |
-  .dependencies[1].version = "11.1.0"
+  .dependencies[1].version = "11.1.5"
 ' chart/Chart.yaml
 ```{{exec}}
 
