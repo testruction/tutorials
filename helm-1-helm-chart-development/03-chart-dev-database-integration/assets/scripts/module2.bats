@@ -107,7 +107,7 @@ EOF
 @test "Finalize: Commit changes" {
   cd fastapi-sqlalchemy-cockroachdb
 
-  helm template chart/ | jq '.spec.template.spec.containers[0].env'
+  helm template chart/
 
   git commit -a -m "Add trace collector support"
 }
