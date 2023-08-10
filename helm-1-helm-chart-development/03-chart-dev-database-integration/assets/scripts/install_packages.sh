@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+function install_pkg() {
+    sudo apt-get update -y
+
+    sudo apt-get install jq nc
+}
+
 function install_k3s() {
     curl -sfL https://get.k3s.io | sh - 
     # Check for Ready node, takes ~30 seconds 
@@ -97,6 +103,7 @@ function untaint_control_plane()
     kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 }
 
+install_pkg
 install_k3s
 configure_kubeconfig
 install_helm
