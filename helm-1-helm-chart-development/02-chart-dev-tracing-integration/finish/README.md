@@ -3,7 +3,7 @@
 Check the resolved environment variables
 
 ```bash
-helm template chart/ | jq '.spec.template.spec.containers[0].env
+helm template chart/ | jq '.spec.template.spec.containers[0].env'
 ```{{exec}}
 
 Commit the change in Git
