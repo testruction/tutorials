@@ -7,6 +7,12 @@ function install_k3s() {
     sudo k3s kubectl get node
 }
 
+function install_helm() {
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+}
+
 function configure_kubeconfig() {
     sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 }
@@ -93,6 +99,7 @@ function untaint_control_plane()
 
 install_k3s
 configure_kubeconfig
+install_helm
 install_yq
 install_bats_core
 # install_cockroach_sql
