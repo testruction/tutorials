@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+function install_k3s() {
+    curl -sfL https://get.k3s.io | sh - 
+    # Check for Ready node, takes ~30 seconds 
+    sudo k3s kubectl get node
+}
+
 function configure_kubeconfig() {
     sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 }
@@ -85,6 +91,7 @@ function untaint_control_plane()
     kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 }
 
+install_k3s
 configure_kubeconfig
 install_yq
 install_bats_core
