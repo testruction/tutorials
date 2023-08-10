@@ -85,10 +85,10 @@ function untaint_control_plane()
     kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 }
 
-# configure_kubeconfig
+configure_kubeconfig
 install_yq
 install_bats_core
 # install_cockroach_sql
 # install_cockroach
 install_cockroach_populate
-untaint_control_plane
+# untaint_control_plane
