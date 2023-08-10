@@ -103,10 +103,10 @@ function untaint_control_plane()
     kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 }
 
-install_pkg
+# install_pkg
 install_k3s
 configure_kubeconfig
-install_helm
+# install_helm
 install_yq
 install_bats_core
 # install_cockroach_sql
