@@ -20,6 +20,8 @@
     .dependencies[0].repository = "https://jaegertracing.github.io/helm-charts" |
     .dependencies[0].version = "0.71.10"
   ' chart/Chart.yaml
+
+  helm dependency update
 }
 
 @test "M2S4: Add the Jaeger deployment configuration" {
