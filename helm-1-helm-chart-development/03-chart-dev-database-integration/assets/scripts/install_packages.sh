@@ -106,7 +106,7 @@ function untaint_control_plane()
 }
 
 # install_pkg
-install_k3s
+# install_k3s
 configure_kubeconfig
 # install_helm
 install_yq
