@@ -1,4 +1,7 @@
-set -x
+#!/usr/bin/env bash
+
+set +x
+clear
 
 echo "Initializing lab environment"
 
