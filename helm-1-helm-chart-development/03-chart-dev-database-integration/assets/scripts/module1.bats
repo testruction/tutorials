@@ -2,7 +2,7 @@
 
 
 @test "M1S1: Clone the Web application source code" {
-  git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
+  git clone --single-branch --branch feature/helm-tutorial https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
   cd fastapi-sqlalchemy-cockroachdb
   git checkout -b feature/helm-chart
 }
