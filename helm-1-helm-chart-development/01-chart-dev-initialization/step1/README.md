@@ -3,7 +3,7 @@
 Clone the source code repository of the Web application.
 
 ```bash
-git clone https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
+git clone --single-branch --branch feature/helm-tutorial https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
 ```{{exec}}
 
 Enter in the cloned repository folder
