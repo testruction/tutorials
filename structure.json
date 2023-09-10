@@ -9,6 +9,11 @@
             "path": "helm-1-helm-chart-development",
             "title": "Helm chart development",
             "description": "Develop a Helm charts for a multi-component application from scratch"
+        },
+        {
+            "path": "backstage-1-internal-development-platform",
+            "title": "Backstage",
+            "description": "Develop a Helm charts for a multi-component application from scratch"
         }
     ]
 }
