@@ -83,9 +83,9 @@ function wait_cockroach_sql()
     echo " DONE"
 }
 
-function install_cockroach_populate()
+function wait_cockroach_populate()
 {
-    echo -n "Populating Cockroach table"
+    echo -n "Retreiving Cockroach table loading scripts"
     while [ ! -f /ks/.install_cockroach_populate ]
     do
         echo -n '.'
