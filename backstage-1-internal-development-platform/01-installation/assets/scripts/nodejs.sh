@@ -4,7 +4,11 @@ set -euo pipefail
 # Install NVM
 NODEJS_VERSION='0.39.5'
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NODEJS_VERSION}/install.sh | bash \
-&& source ~/.bashrc
+&& export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] \
+&& \. "$NVM_DIR/nvm.sh" \
+&& [ -s "$NVM_DIR/bash_completion" ] \
+&& \. "$NVM_DIR/bash_completion"
 
 # Install Node.Js
 nvm install 18 \
@@ -18,4 +22,4 @@ npm install --global yarn \
 && yarn --version
 
 
-touch /ks/.nodejs_installed
+touch /ks/.nodejs_finished

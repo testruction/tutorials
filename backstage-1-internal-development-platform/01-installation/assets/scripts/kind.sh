@@ -15,4 +15,4 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 # Create Kind cluster
 kind create cluster
 
-touch /ks/.kind_installed
+touch /ks/.kind_finished
