@@ -19,7 +19,7 @@ function wait_nodejs()
 
 function wait_kind()
 {
-    echo -n "Installing Kubernetes in Docker cluster."
+    echo -n "Installing Kubernetes in Docker (KinD) cluster."
     while [ ! -f /ks/.kind_finished ]; do
         echo -n '.'
         sleep 1;
