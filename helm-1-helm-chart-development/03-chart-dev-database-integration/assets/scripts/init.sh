@@ -125,6 +125,12 @@ function untaint_control_plane()
     touch /ks/.untaint_control_plane
 }
 
+cat <<EOT > /root/.vimrc
+set expandtab
+set tabstop=2
+set shiftwidth=2
+EOT
+
 # install_pkg
 # install_k3s
 configure_kubeconfig
