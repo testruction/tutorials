@@ -6,4 +6,10 @@ Run the following command to create the Backage application named **backstage-tu
 echo "backstage-tutorial" | npx @backstage/create-app@latest
 ```{{exec}}
 
-The application creation takes around **5 minutes**.
+> The application creation takes approximatly **5 minutes**.
+
+A
+
+```bash
+cd backstage-tutorial/
+```{{exec}}

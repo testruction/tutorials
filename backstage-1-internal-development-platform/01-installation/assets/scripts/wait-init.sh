@@ -27,5 +27,16 @@ function wait_kind()
     echo " DONE"
 }
 
+function wait_yq()
+{
+    echo -n "Installing YQ command line."
+    while [ ! -f /ks/.yq_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
+wait_yq
 wait_nodejs
 wait_kind
