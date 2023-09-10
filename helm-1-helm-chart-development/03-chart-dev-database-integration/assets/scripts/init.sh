@@ -5,6 +5,8 @@ function install_pkg() {
     sudo apt-get update -y
 
     sudo apt-get install jq nc
+
+    touch /ks/.install_pkg
 }
 
 function install_k3s() {
@@ -13,22 +15,30 @@ function install_k3s() {
     sudo k3s kubectl get node
 
     sudo kubectl delete node ubuntu
+
+    touch /ks/.install_k3s
 }
 
 function install_helm() {
     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
     chmod 700 get_helm.sh
     ./get_helm.sh
+
+    touch /ks/.install_helm
 }
 
 function configure_kubeconfig() {
     sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
+
+    touch /ks/.configure_kubeconfig
 }
 
 function install_yq(){
     sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
     
     sudo chmod +x /usr/local/bin/yq
+
+    touch /ks/.install_yq
 }
 
 function install_bats_core() {
@@ -42,6 +52,8 @@ function install_bats_core() {
     rm -rf bats-core
     
     cd ~/
+
+    touch /ks/.install_bats_core
 }
 
 function install_cockroach_sql() {
@@ -65,6 +77,8 @@ function install_cockroach_sql() {
     rm -vrf /usr/share/cockroach-sql-v${VERSION}.linux-amd64.tgz*
 
     cd ~/
+
+    touch /ks/.install_cockroach_sql
 }
 
 function install_cockroach(){
@@ -88,6 +102,8 @@ function install_cockroach(){
     rm -vrf /usr/share/cockroach-v${VERSION}.linux-amd64.tgz*
 
     cd ~/
+
+    touch /ks/.install_cockroach_sql
 }
 
 function install_cockroach_populate()
@@ -98,11 +114,15 @@ function install_cockroach_populate()
 
     cd pytest-sqlalchemy-cockroachdb
     pip3 install -r requirements.txt
+
+    touch /ks/.install_cockroach_populate
 }
 
 function untaint_control_plane()
 {
     kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+
+    touch /ks/.untaint_control_plane
 }
 
 # install_pkg
