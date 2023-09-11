@@ -1,6 +1,6 @@
 {
-    "title": "01. Backstage: Database integration",
-    "description": "Learn about how to create your first Backstage application",
+    "title": "01. Backstage: Basics",
+    "description": "Learn about how to run the Backstage example application",
     "difficulty": "easy",
     "time": "20-30 minutes",
     "details": {
