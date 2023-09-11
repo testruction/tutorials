@@ -14,7 +14,7 @@ Move to the newly created application directory
 cd backstage-tutorial/
 ```{{exec}}
 
-Update the application configuration to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`).
+Create the application configuration to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`).
 
 ```bash
 yq -i '
@@ -23,8 +23,20 @@ yq -i '
 ' ./app-config.local.yaml
 ```{{exec}}
 
+Update the application configuration to allow requests from Killercoda.
+
+```bash
+# Retreive the KillerCoda lab URL
+export KC_URL=$(cat /etc/killercoda/host)
+yq -i '
+  .app.baseUrl = strenv(KC_URL)
+' ./app-config.local.yaml
+```
+
 Run the application in development mode.
 
 ```bash
 yarn dev
 ```{{exec}}
+
+[Click here to open the Web console]({{TRAFFIC_HOST1_3000}})
