@@ -6,10 +6,25 @@ Run the following command to create the Backage application named **backstage-tu
 echo "backstage-tutorial" | npx @backstage/create-app@latest
 ```{{exec}}
 
-> The application creation takes approximatly **5 minutes**.
+> The creation process takes approximatly **5 minutes**.
 
-A
+Move to the newly created application directory
 
 ```bash
 cd backstage-tutorial/
+```{{exec}}
+
+Update the application configuration to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`).
+
+```bash
+yq -i '
+  .app.listen.host = "0.0.0.0" |
+  .app.listen.port = 3000
+' ./app-config.yaml
+```{{exec}}
+
+Run the application in development mode.
+
+```bash
+yarn dev
 ```{{exec}}
