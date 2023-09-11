@@ -20,7 +20,7 @@ Update the application configuration to enable the frontend component to listen 
 yq -i '
   .app.listen.host = "0.0.0.0" |
   .app.listen.port = 3000
-' ./app-config.yaml
+' ./app-config.local.yaml
 ```{{exec}}
 
 Run the application in development mode.

@@ -12,4 +12,5 @@ The objective of this lab is to learn how to:
 
 ## Références
 
-* [**Backage: Getting Started**](https://backstage.io/docs/getting-started/)
+* [Backage: Getting Started](https://backstage.io/docs/getting-started/)
+* [yq](https://mikefarah.gitbook.io/yq/)
