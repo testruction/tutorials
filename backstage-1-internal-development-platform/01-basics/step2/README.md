@@ -6,7 +6,7 @@ In order to enable external access in development mode, settings must be added t
 
 ```bash
 yq '.' ./app-config.yaml
-```
+```{{exec}}
 
 Run the following command line to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`) and accept the traffic from the KillerCoda proxy.
 
