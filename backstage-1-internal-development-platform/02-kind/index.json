@@ -29,6 +29,7 @@
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kind.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"},
                 {"file": "scripts/module2.bats", "target": "~/", "chmod": "+x"}
