@@ -3,4 +3,3 @@ set -euo pipefail
 
 /ks/yq.sh
 /ks/nodejs.sh
-/ks/kind.sh
