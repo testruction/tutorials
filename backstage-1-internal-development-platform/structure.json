@@ -2,6 +2,9 @@
   "items": [
     {
       "path": "01-basics"
+    },
+    {
+      "path": "02-kind"
     }
   ]
 }
