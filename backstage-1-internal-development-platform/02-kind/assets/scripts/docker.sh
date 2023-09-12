@@ -6,6 +6,7 @@ sudo apt-get remove -y \
   'docker.io' \
   'docker-compose' \
   'containerd' \
+&& rm -f /etc/containerd/config.toml \
 && sudo apt-get autoremove -y
 
 # Docker Installation
