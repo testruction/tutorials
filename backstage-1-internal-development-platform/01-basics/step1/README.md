@@ -14,34 +14,18 @@ Move to the newly created application directory
 cd backstage-tutorial/
 ```{{exec}}
 
+By the default the Backstage frontend and backend components listens only on the `localhost (127.0.0.1)` interface.
 Create the application configuration to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`).
 
 ```bash
 yq -i '
   .app.listen.host = "0.0.0.0" |
-  .app.listen.port = 3000 |
-  .backend.listen.host = "0.0.0.0" |
-  .backend.listen.port = 8080
+  .backend.listen.host = "0.0.0.0"
 ' ./app-config.local.yaml
 ```{{exec}}
 
-Update the application configuration to allow requests from Killercoda.
+The `app-config.local.yaml` takes precedence on the default `app-config.yaml` configuration file delivered at the application creation.
 
 ```bash
-# Retreive the KillerCoda lab URL
-export KC_FRONTEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/3000/g')
-export KC_BACKEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/8080/g')
-yq -i '
-  .app.baseUrl = strenv(KC_FRONTEND_URL) |
-  .backend.baseUrl = strenv(KC_BACKEND_URL) |
-  .backend.cors.origin = strenv(KC_FRONTEND_URL)  
-' ./app-config.local.yaml
+yq . load(./app-config.local.yaml) ./app-config.yaml
 ```
-
-Run the application in development mode.
-
-```bash
-yarn dev
-```{{exec}}
-
-[Click here to open the Web console]({{TRAFFIC_HOST1_3000}})

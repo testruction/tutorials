@@ -1,14 +1,9 @@
-# Install KinD
+# Access the Backstage UI
+
+Run the following application in development mode.
 
 ```bash
-# For AMD64 / x86_64
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
+yarn dev
 ```{{exec}}
 
-```bash
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-mv ./kubectl /usr/local/bin/kubectl
-chmod +x /usr/local/bin/kubectl
-```{{exec}}
+[Click here]({{TRAFFIC_HOST1_3000}})  to open the Web console.
