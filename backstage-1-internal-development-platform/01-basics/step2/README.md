@@ -17,8 +17,10 @@ export KC_BACKEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
 
 yq -i '
   .app.listen.host = "0.0.0.0" |
+  .app.listen.port = 3000 |
   .app.baseUrl = strenv(KC_FRONTEND_URL) |
   .backend.listen.host = "0.0.0.0" |
+  .backend.listen.port = 7007 |
   .backend.baseUrl = strenv(KC_BACKEND_URL) |
   .backend.cors.origin = strenv(KC_FRONTEND_URL)
 ' ./app-config.local.yaml
