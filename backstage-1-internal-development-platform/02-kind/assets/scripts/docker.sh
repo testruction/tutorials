@@ -5,7 +5,8 @@ set -euo pipefail
 sudo apt-get remove -y \
   'docker.io' \
   'docker-compose' \
-  'containerd'
+  'containerd' \
+&& sudo apt-get autoremove -y
 
 # Docker Installation
 # Add Docker's official GPG key:
