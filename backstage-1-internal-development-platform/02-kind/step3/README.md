@@ -1,30 +1,52 @@
-# Configure Kubernetes access for 
+# Implement Kubernetes plugins
+
+Install the `@backstage/plugin-kubernetes-backend` package in Backstage Backend component (i.e. `packages/backend`).
 
 ```bash
-yq -i '
-  .kubernetes.serviceLocatorMethod.type = "multiTenant" |
-  .kubernetes.clusterLocatorMethods[0].type = "config" |
-  .kubernetes.clusterLocatorMethods[0].clusters[0].url = "kubernetes.default.svc.cluster.local:443" |
-  .kubernetes.clusterLocatorMethods[0].clusters[0].name = "local" |
-  .kubernetes.clusterLocatorMethods[0].clusters[0].authProvider = "serviceAccount" |
-  .kubernetes.clusterLocatorMethods[0].clusters[0].skipTLSVerify = false |
-  .kubernetes.clusterLocatorMethods[0].clusters[0].skipMetricsLookup = true
-' ./app-config.local.yaml
-```
-
-```bash
-yarn build:backend
-```
-
-```bash
-docker image build . -f packages/backend/Dockerfile --tag backstage:1.0.0
-```
-
-
-Run the following application in development mode.
-
-```bash
-yarn dev
+yarn add --cwd packages/backend @backstage/plugin-kubernetes-backend
 ```{{exec}}
 
-[Click here]({{TRAFFIC_HOST1_3000}})  to open the Web console.
+Download the Kubernetes backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
+
+```bash
+curl -o packages/backend/src/plugins/kubernetes.ts \
+https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
+```{{exec}}
+
+Inject the plugin in the main Backend script `packages/backend/src/index.ts`:
+
+1. Insert the module import.
+
+```typescript
+vi -e packages/backend/src/index.ts <<EOF
+/import { PluginEnvironment }
+i
+import kubernetes from './plugins/kubernetes';
+.
+wq
+EOF
+```{{exec}}
+
+2. Insert the module environment initialization
+
+```typescript
+vi -e packages/backend/src/index.ts <<EOF
+/const appEnv
+i
+  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+.
+wq
+EOF
+```{{exec}}
+
+3. Insert the module route.
+
+```typescript
+vi -e packages/backend/src/index.ts <<EOF
+/apiRouter.use
+i
+  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+.
+wq
+EOF
+```{{exec}}
