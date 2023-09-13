@@ -44,7 +44,7 @@
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kind.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/contour.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "manifests/namespace.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"}
             ]
