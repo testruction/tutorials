@@ -15,7 +15,7 @@ https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/sr
 
 Inject the plugin in the main Backend script `packages/backend/src/index.ts`:
 
-1. Insert the module import.
+* Insert the module import.
 
 ```typescript
 vi -e packages/backend/src/index.ts <<EOF
@@ -27,7 +27,7 @@ wq
 EOF
 ```{{exec}}
 
-2. Insert the module environment initialization
+* Insert the module environment initialization
 
 ```typescript
 vi -e packages/backend/src/index.ts <<EOF
@@ -39,7 +39,7 @@ wq
 EOF
 ```{{exec}}
 
-3. Insert the module route.
+* Insert the module route.
 
 ```typescript
 vi -e packages/backend/src/index.ts <<EOF
