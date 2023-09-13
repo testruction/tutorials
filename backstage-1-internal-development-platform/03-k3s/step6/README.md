@@ -32,9 +32,9 @@ Archive the generated image.
 docker save --output ~/backstage-v1.0.0.tar backstage:1.0.0
 ```{{exec}}
 
-Import the image into the K3S cluster
+Import the image archive into the K3S cluster
 
 ```bash
 k3s ctr images import ~/backstage-v1.0.0.tar \
-&& rm -f ~/backstage-v1.0.0.tar
+&& rm -vf ~/backstage-v1.0.0.tar
 ```{{exec}}
