@@ -12,7 +12,7 @@ The objective of this lab is to learn how to:
 4. Build a container image
 5. Deploy the image to a local Kubernetes cluster
 
-## Références
+## References
 
 * [Backstage: Getting Started](https://backstage.io/docs/getting-started/)
 * [Backstage: Kubernetes integration](https://backstage.io/docs/features/kubernetes/)
