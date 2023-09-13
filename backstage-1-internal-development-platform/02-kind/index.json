@@ -24,6 +24,12 @@
             },
             {
                 "text": "step5/README.md"
+            },
+            {
+                "text": "step6/README.md"
+            },
+            {
+                "text": "step7/README.md"
             }
         ],
         "finish": {
@@ -38,8 +44,8 @@
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kind.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/contour.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"},
-                {"file": "scripts/module2.bats", "target": "~/", "chmod": "+x"}
+                {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"}
             ]
         }
     },
