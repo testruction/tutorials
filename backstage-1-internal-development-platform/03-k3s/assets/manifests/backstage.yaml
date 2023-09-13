@@ -27,9 +27,7 @@ spec:
           image: backstage:1.0.0
           imagePullPolicy: IfNotPresent
           ports:
-            - name: frontend-http
-              containerPort: 3000
-            - name: backend-http
+            - name: http
               containerPort: 7007
           env:
             - name: POSTGRES_HOST
@@ -64,23 +62,8 @@ metadata:
 spec:
   selector:
     app: backstage
-  ports:
-    - name: http
-      port: 3000
-      targetPort: frontend-http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backstage-backend
-  namespace: backstage
-  labels:
-    app: backstage
-    component: backend
-spec:
-  selector:
-    app: backstage
+  type: LoadBalancer
   ports:
     - name: http
       port: 7007
-      targetPort: backend-http
+      targetPort: http
