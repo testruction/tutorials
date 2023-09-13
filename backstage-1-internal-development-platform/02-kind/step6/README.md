@@ -16,7 +16,7 @@ Merge the `app-config.local.yaml` to the `app-config.production.yaml` used when 
 
 ```bash
 yq '. *= load("./app-config.local.yaml")' ./app-config.production.yaml
-```
+```{{exec}}
 
 Build the backstage application.
 
