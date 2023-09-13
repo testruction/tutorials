@@ -47,7 +47,18 @@ function wait_kind()
     echo " DONE"
 }
 
+function wait_contour()
+{
+    echo -n "Deploying Contour ingress controller."
+    while [ ! -f /ks/.contour_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
 wait_yq
 wait_nodejs
 wait_docker
 wait_kind
+wait_contour

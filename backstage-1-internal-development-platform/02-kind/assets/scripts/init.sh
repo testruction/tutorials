@@ -5,3 +5,4 @@ set -euo pipefail
 /ks/nodejs.sh
 /ks/docker.sh
 /ks/kind.sh
+/ks/contour.sh
