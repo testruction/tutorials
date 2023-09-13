@@ -11,7 +11,7 @@ yq -i '. *= load("./app-config.local.yaml")' ./app-config.production.yaml
 Build the backstage application.
 
 ```bash
-yarn build:all
+yarn build:backend
 ```{{exec}}
 
 Update the container build base image tag `16-bullseye-slim` to `18-bullseye-slim`.
