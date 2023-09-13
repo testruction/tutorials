@@ -6,7 +6,7 @@ metadata:
 type: Opaque
 data:
   POSTGRES_USER: YmFja3N0YWdl  # backstage
-  POSTGRES_PASSWORD: a2lsbGVyY29kYQo= # killercoda
+  POSTGRES_PASSWORD: aHVudGVyMg== # hunter2
 ---
 apiVersion: v1
 kind: PersistentVolume
