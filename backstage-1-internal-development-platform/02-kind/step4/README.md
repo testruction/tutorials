@@ -20,13 +20,15 @@ wq
 EOF
 ```{{exec}}
 
-2. Insert the service Entiti
+2. Insert the route to the plugin entity.
 
 ```typescript
-vi -e packages/backend/src/index.ts <<EOF
+vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
 /const serviceEntityPage
-/
+/techdocsContent
+/<\/EntityLayout>
 i
+
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
