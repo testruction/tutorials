@@ -1,5 +1,5 @@
 {
-    "title": "01. Backstage: KinD",
+    "title": "02. Backstage: KinD",
     "description": "Learn about how to run the Backstage in KinD",
     "difficulty": "easy",
     "time": "20-30 minutes",
@@ -18,6 +18,12 @@
             },
             {
                 "text": "step3/README.md"
+            },
+            {
+                "text": "step4/README.md"
+            },
+            {
+                "text": "step5/README.md"
             }
         ],
         "finish": {
