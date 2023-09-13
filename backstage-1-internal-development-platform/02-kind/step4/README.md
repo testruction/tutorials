@@ -8,7 +8,7 @@ yarn add --cwd packages/app @backstage/plugin-kubernetes
 
 Inject the plugin service page in the Frontend `packages/app/src/components/catalog/EntityPage.tsx`:
 
-1. Insert the module import.
+* Insert the module import.
 
 ```typescript
 vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
@@ -20,7 +20,7 @@ wq
 EOF
 ```{{exec}}
 
-2. Insert the route to the plugin entity.
+* Insert the route to the plugin entity.
 
 ```typescript
 vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
