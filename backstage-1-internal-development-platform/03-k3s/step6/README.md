@@ -26,8 +26,15 @@ Build the container image.
 docker image build . -f packages/backend/Dockerfile --tag backstage:1.0.0
 ```{{exec}}
 
-Upload the generated image to the KinD cluster.
+Archive the generated image.
 
 ```bash
-kind load docker-image backstage:1.0.0
+docker save --output ~/backstage-v1.0.0.tar backstage:1.0.0
+```{{exec}}
+
+Import the image into the K3S cluster
+
+```bash
+k3s ctr images import ~/backstage-v1.0.0.tar \
+&& rm -f ~/backstage-v1.0.0.tar
 ```{{exec}}
