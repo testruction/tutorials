@@ -14,3 +14,11 @@ Move to the newly created application directory
 cd backstage-tutorial/
 ```{{exec}}
 
+Initialize the directory as Git repository.
+
+```bash
+git init
+git config user.name "Backstage Tutorial"
+git config user.email "backstage.tutorial@killercoda.local"
+git commit -a -m 'Initial commit'
+```
