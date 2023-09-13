@@ -18,4 +18,4 @@ Deploy the Bastage application.
 kubectl apply -f /root/backstage.yaml
 ```{{exec}}
 
-[Click here]({{TRAFFIC_HOST1_3000}})  to open the Web console.
+[Click here]({{TRAFFIC_HOST1_7007}})  to open the Web console.
