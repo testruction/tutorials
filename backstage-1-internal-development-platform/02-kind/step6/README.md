@@ -20,6 +20,8 @@ Update the container build base image tag `16-bullseye-slim` to `18-bullseye-sli
 sed -i 's/16-bullseye-slim/18-bullseye-slim/' packages/backend/Dockerfile
 ```{{exec}}
 
+Build the container image.
+
 ```bash
 docker image build . -f packages/backend/Dockerfile --tag backstage:1.0.0
 ```{{exec}}
