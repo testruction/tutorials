@@ -18,4 +18,10 @@ Deploy the Bastage application.
 kubectl apply -f /root/backstage.yaml
 ```{{exec}}
 
-[Click here]({{TRAFFIC_HOST1_7007}})  to open the Web console.
+Check the provisionned resources.
+
+```bash
+kubectl -n backstage get pod,svc,deploy,secret,pvc,pv
+```
+
+> [Click here]({{TRAFFIC_HOST1_7007}}) to open the Web console.
