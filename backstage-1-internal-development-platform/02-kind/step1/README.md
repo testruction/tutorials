@@ -20,5 +20,6 @@ Initialize the directory as Git repository.
 git init
 git config user.name "Backstage Tutorial"
 git config user.email "backstage.tutorial@killercoda.local"
-git commit -a -m 'Initial commit'
-```
+git add .
+git commit -m 'Initial commit'
+```{{exec}}
