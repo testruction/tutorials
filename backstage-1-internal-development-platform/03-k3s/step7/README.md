@@ -22,6 +22,6 @@ Check the provisionned resources.
 
 ```bash
 kubectl -n backstage get pod,svc,deploy,secret,pvc,pv
-```
+```{{exec}}
 
 > [Click here]({{TRAFFIC_HOST1_7007}}) to open the Web console.
