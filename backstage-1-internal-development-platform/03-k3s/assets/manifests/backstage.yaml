@@ -5,6 +5,8 @@ metadata:
   namespace: backstage
 type: Opaque
 data:
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
   GITHUB_TOKEN: "UkVEQUNURUQ="
 ---
 apiVersion: apps/v1
@@ -29,11 +31,6 @@ spec:
           ports:
             - name: http
               containerPort: 7007
-          env:
-            - name: POSTGRES_HOST
-              value: postgres
-            - name: POSTGRES_PORT
-              value: "5432"
           envFrom:
             - secretRef:
                 name: postgres-secrets
