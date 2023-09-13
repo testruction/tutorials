@@ -19,7 +19,7 @@ yarn build:backend
 Update the container build base image tag `16-bullseye-slim` to `18-bullseye-slim`.
 
 ```bash
-sed 's/16-bullseye-slim/18-bullseye-slim/' packages/backend/Dockerfile
+sed -i 's/16-bullseye-slim/18-bullseye-slim/' packages/backend/Dockerfile
 ```{{exec}}
 
 ```bash
