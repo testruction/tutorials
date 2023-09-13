@@ -5,9 +5,16 @@ metadata:
   namespace: backstage
 type: Opaque
 data:
+  GITHUB_TOKEN: VG9rZW5Ub2tlblRva2VuVG9rZW5NYWxrb3ZpY2hUb2tlbg==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backstage-env
+  namespace: backstage
+data:
   POSTGRES_HOST: postgres
   POSTGRES_PORT: "5432"
-  GITHUB_TOKEN: VG9rZW5Ub2tlblRva2VuVG9rZW5NYWxrb3ZpY2hUb2tlbg==
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -24,6 +31,13 @@ spec:
       labels:
         app: backstage
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: public.ecr.aws/docker/library/busybox:1.36
+          command:
+            - sh
+            - -c
+            - until true; do nc -vz ${POSTGRES_HOST} ${POSTGRES_PORT}; echo Waiting for database; sleep 1s; done
       containers:
         - name: backstage
           image: backstage:1.0.0
@@ -32,6 +46,8 @@ spec:
             - name: http
               containerPort: 7007
           envFrom:
+            - configMapRef:
+                name: backstage-env
             - secretRef:
                 name: postgres-secrets
             - secretRef:
