@@ -13,7 +13,7 @@ curl -o packages/backend/src/plugins/kubernetes.ts \
 https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
 ```{{exec}}
 
-Edit the **backstage-tutorial/packages/backend/src/index.ts**, then insert the following content **without** the comments:
+Edit the `backstage-tutorial/packages/backend/src/index.ts`, then insert the following content **without** the comments:
 
 ```typescript
 // Above the line beginning by "import { PluginEnvironment }"

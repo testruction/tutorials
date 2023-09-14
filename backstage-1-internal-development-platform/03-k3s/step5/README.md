@@ -6,8 +6,8 @@ In order to enable the access outside of the local host/container, the base URL 
 
 In the case of KillerCoda, this URL is stored in the **/etc/killercoda/host** file.
 
-Copy the entire URL from this file then edit the **app-config.local.yaml** configuration file.
-Replace both backend and frontend base URLs and change the **PORT** mentionned in the URL by **7007**.
+Copy the entire URL from this file then edit the `app-config.local.yaml` configuration file.
+Replace both backend and frontend base URLs and change the `PORT` mentionned in the URL by `7007`.
 
 This should look similar to the example below:
 
