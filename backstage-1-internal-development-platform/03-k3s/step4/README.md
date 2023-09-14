@@ -1,42 +1,33 @@
-# # Implement Kubernetes frontend plugins
+# Add Kubernetes plugin configuration
 
-Install the `@backstage/plugin-kubernetes` package in Backstage Frontend component (i.e. `packages/frontend`).
+Edit the **app-config.production.yaml** configuration file, the append the following settings to bastage Backstage to query the Kubernetes API server.
+
+```yaml
+kubernetes:
+  serviceLocatorMethod:
+    type: multiTenant
+  clusterLocatorMethods:
+    - type: config
+      clusters:
+        - url: kubernetes.default.svc.cluster.local:443
+          name: local
+          authProvider: serviceAccount
+          skipTLSVerify: false
+          skipMetricsLookup: true
+```{{copy}}
+
+<details><summary>Do it for me</summary>
 
 ```bash
-yarn add --cwd packages/app @backstage/plugin-kubernetes
-```{{exec}}
-
-Edit the **packages/app/src/components/catalog/EntityPage.tsx**, then insert the following content **without** the comments:
-
-```typescript
-// Below the line beginning by "import { ReportIssue }".
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-
-// In the "serviceEntityPage",
-// Above the line "</EntityLayout>".
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
-```
-
-<details><summary>Dot it for me</summary>
-
-```typescript
-vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
-/import { ReportIssue }
-a
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-.
-/const serviceEntityPage
-/<\/EntityLayout>
-i
-
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
-.
-w
-EOF
+yq -i '
+  .kubernetes.serviceLocatorMethod.type = "multiTenant" |
+  .kubernetes.clusterLocatorMethods[0].type = "config" |
+  .kubernetes.clusterLocatorMethods[0].clusters[0].url = "kubernetes.default.svc.cluster.local:443" |
+  .kubernetes.clusterLocatorMethods[0].clusters[0].name = "local" |
+  .kubernetes.clusterLocatorMethods[0].clusters[0].authProvider = "serviceAccount" |
+  .kubernetes.clusterLocatorMethods[0].clusters[0].skipTLSVerify = false |
+  .kubernetes.clusterLocatorMethods[0].clusters[0].skipMetricsLookup = true
+' ./app-config.production.yaml
 ```{{exec}}
 
 </details>

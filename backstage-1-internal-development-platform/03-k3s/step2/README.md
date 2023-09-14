@@ -1,27 +1,49 @@
-# Configure access from KillerCoda
+# Implement Kubernetes backend plugins
 
-In developmenet, the Backstage `frontend` and `backend` components listens only on the `localhost (127.0.0.1)` interface , respectively on ports **3000/tcp** and **7007/tcp**.
-
-In order to enable external access in development mode, settings must be added to the `./app-config.local.yaml` file which overrides the default `./app-config.yaml`.
+Install the `@backstage/plugin-kubernetes-backend` package in Backstage Backend component (i.e. `packages/backend`).
 
 ```bash
-yq '.' ./app-config.yaml
+yarn add --cwd packages/backend @backstage/plugin-kubernetes-backend
 ```{{exec}}
 
-Run the following command line to enable the frontend component to listen on all interfaces (i.e `0.0.0.0`) and accept the traffic from the KillerCoda proxy.
+Download the Kubernetes backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
 
 ```bash
-# Retreive the KillerCoda instance URL
-export KC_FRONTEND_URL=$(cat /etc/killercoda/host | sed -e 's/PORT/3000/' -e 's/https/http/')
-export KC_BACKEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
-
-yq -i '
-  .app.listen.host = "0.0.0.0" |
-  .app.listen.port = 3000 |
-  .app.baseUrl = strenv(KC_FRONTEND_URL) |
-  .backend.listen.host = "0.0.0.0" |
-  .backend.listen.port = 7007 |
-  .backend.baseUrl = strenv(KC_BACKEND_URL) |
-  .backend.cors.origin = strenv(KC_FRONTEND_URL)
-' ./app-config.local.yaml
+curl -o packages/backend/src/plugins/kubernetes.ts \
+https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
 ```{{exec}}
+
+Edit the **backstage-tutorial/packages/backend/src/index.ts**, then insert the following content **without** the comments:
+
+```typescript
+// Above the line beginning by "import { PluginEnvironment }"
+import kubernetes from './plugins/kubernetes';
+
+// In the main() function
+// Above the line beginning by "const appEnv"
+  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+// Bellow the line beginning by "apiRouter.use('/search')
+  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+```
+
+<details><summary>Do it for me</summary>
+
+```typescript
+vi -e packages/backend/src/index.ts <<EOF
+/import { PluginEnvironment }
+i
+import kubernetes from './plugins/kubernetes';
+.
+/const appEnv
+i
+  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+.
+/apiRouter.use.*search
+a
+  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+.
+w
+EOF
+```{{exec}}
+
+</details>
