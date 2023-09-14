@@ -48,6 +48,16 @@ function wait_kubeconfig()
     echo " DONE"
 }
 
+function wait_helm()
+{
+    echo -n "Installing Helm."
+    while [ ! -f /ks/.helm_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
 function wait_sampleapp()
 {
     echo -n "Installing Sample App."
@@ -73,5 +83,6 @@ wait_yq
 wait_nodejs
 wait_docker
 wait_kubeconfig
+wait_helm
 wait_sampleapp
 wait_sampledb
