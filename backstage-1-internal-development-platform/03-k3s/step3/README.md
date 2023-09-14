@@ -18,9 +18,12 @@ Edit the **backstage-tutorial/packages/backend/src/index.ts**, then insert the f
 ```typescript
 // Above the line beginning by "import { PluginEnvironment }"
 import kubernetes from './plugins/kubernetes';
+
+// In the main() function
 // Above the line beginning by "const appEnv"
-const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
-// Above the line beginning by "
+  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+// Bellow the line beginning by "apiRouter.use('/search')
+  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
 ```
 
 <details><summary>Do it for me</summary>
@@ -35,8 +38,8 @@ import kubernetes from './plugins/kubernetes';
 i
   const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
 .
-/apiRouter.use
-i
+/apiRouter.use.*search
+o
   apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
 .
 wq
