@@ -1,4 +1,4 @@
-# Backstage
+![Backstage logo](https://raw.githubusercontent.com/cncf/artwork/master/projects/backstage/horizontal/color/backstage-horizontal-color.svg)
 
 This lab walks though the various operations required to configure and run a local Backstage development environment.
 
