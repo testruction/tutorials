@@ -10,7 +10,10 @@ cd ~/sample-app
 helm dependency update chart/
 
 # Deploys the sample application
-helm install --create-namespace --namespace fastapi-demo demo chart/
+helm install --create-namespace --namespace fastapi-demo \
+--set "cockroachdb.statefulset.replicas=1" \
+--set "cockroachdb.storage.persistentVolume.size=1Gi" \
+demo chart/
 ```{{exec}}
 
 Register the sample application component in Backstage.
