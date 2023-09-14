@@ -48,10 +48,20 @@ function wait_kubeconfig()
     echo " DONE"
 }
 
-function wait_dbloader()
+function wait_sampleapp()
 {
-    echo -n "Installing database loader."
-    while [ ! -f /ks/.dbloader_finished ]; do
+    echo -n "Installing Sample App."
+    while [ ! -f /ks/.sampleapp_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
+function wait_sampledb()
+{
+    echo -n "Installing Sample App database loader."
+    while [ ! -f /ks/.sampledb_finished ]; do
         echo -n '.'
         sleep 1;
     done;
@@ -63,4 +73,5 @@ wait_yq
 wait_nodejs
 wait_docker
 wait_kubeconfig
-wait_dbloader
+wait_sampleapp
+wait_sampledb

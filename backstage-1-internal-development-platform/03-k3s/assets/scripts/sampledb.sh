@@ -9,4 +9,4 @@ https://github.com/testruction/pytest-sqlalchemy-cockroachdb
 cd pytest-sqlalchemy-cockroachdb
 pip3 install -r requirements.txt
 
-touch /ks/.dbloader_finished
+touch /ks/.sampledb_finished
