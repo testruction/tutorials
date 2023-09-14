@@ -39,7 +39,8 @@ i
   const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
 .
 /apiRouter.use.*search
-o
+a
+i
   apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
 .
 wq
