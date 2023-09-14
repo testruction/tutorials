@@ -6,26 +6,28 @@ Install the `@backstage/plugin-kubernetes` package in Backstage Frontend compone
 yarn add --cwd packages/app @backstage/plugin-kubernetes
 ```{{exec}}
 
-Inject the plugin service page in the Frontend `packages/app/src/components/catalog/EntityPage.tsx`:
+Edit the **packages/app/src/components/catalog/EntityPage.tsx**, then insert the following content **without** the comments:
 
-* Insert the module import.
+```typescript
+// Below the line beginning by "import { ReportIssue }".
+import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+
+// In the "serviceEntityPage",
+// Above the line "</EntityLayout>".
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+      <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+```
+
+<details><summary>Dot it for me</summary>
 
 ```typescript
 vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
-/import { TechDocsAddons }
-i
+/import { ReportIssue }
+a
 import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
 .
-wq
-EOF
-```{{exec}}
-
-* Insert the route to the plugin entity.
-
-```typescript
-vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
 /const serviceEntityPage
-/techdocsContent
 /<\/EntityLayout>
 i
 
@@ -33,6 +35,8 @@ i
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
 .
-wq
+w
 EOF
 ```{{exec}}
+
+</details>
