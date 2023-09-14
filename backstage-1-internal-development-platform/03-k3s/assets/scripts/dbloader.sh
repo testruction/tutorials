@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd /usr/local/
 
-git clone --single-branch --branch master \
+git clone --single-branch --branch main \
 https://github.com/testruction/pytest-sqlalchemy-cockroachdb
 
 cd pytest-sqlalchemy-cockroachdb
