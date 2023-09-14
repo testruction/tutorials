@@ -1,12 +1,7 @@
 # Build the Backstage production-ready container
 
-The container uses the `app-config.production.yaml` file which leverage PostgreSQL instead of the in-memory SQLite database engine.
-
-Merge the `app-config.local.yaml` to the `app-config.production.yaml` used when running Backstage in a container.
-
-```bash
-yq -i '. *= load("./app-config.local.yaml")' ./app-config.production.yaml
-```{{exec}}
+> Notice:
+>The container uses the `app-config.production.yaml` file which leverage PostgreSQL instead of the in-memory SQLite database engine.
 
 Build the backstage application.
 

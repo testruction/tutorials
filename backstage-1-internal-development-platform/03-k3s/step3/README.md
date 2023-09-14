@@ -1,46 +1,39 @@
-# Implement Kubernetes backend plugins
+# # Implement Kubernetes frontend plugins
 
-Install the `@backstage/plugin-kubernetes-backend` package in Backstage Backend component (i.e. `packages/backend`).
-
-```bash
-yarn add --cwd packages/backend @backstage/plugin-kubernetes-backend
-```{{exec}}
-
-Download the Kubernetes backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
+Install the `@backstage/plugin-kubernetes` package in Backstage Frontend component (i.e. `packages/frontend`).
 
 ```bash
-curl -o packages/backend/src/plugins/kubernetes.ts \
-https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
+yarn add --cwd packages/app @backstage/plugin-kubernetes
 ```{{exec}}
 
-Edit the **backstage-tutorial/packages/backend/src/index.ts**, then insert the following content **without** the comments:
+Edit the **packages/app/src/components/catalog/EntityPage.tsx**, then insert the following content **without** the comments:
 
 ```typescript
-// Above the line beginning by "import { PluginEnvironment }"
-import kubernetes from './plugins/kubernetes';
+// Below the line beginning by "import { ReportIssue }".
+import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
 
-// In the main() function
-// Above the line beginning by "const appEnv"
-  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
-// Bellow the line beginning by "apiRouter.use('/search')
-  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+// In the "serviceEntityPage",
+// Above the line "</EntityLayout>".
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+      <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
 ```
 
-<details><summary>Do it for me</summary>
+<details><summary>Dot it for me</summary>
 
 ```typescript
-vi -e packages/backend/src/index.ts <<EOF
-/import { PluginEnvironment }
-i
-import kubernetes from './plugins/kubernetes';
-.
-/const appEnv
-i
-  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
-.
-/apiRouter.use.*search
+vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
+/import { ReportIssue }
 a
-  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+.
+/const serviceEntityPage
+/<\/EntityLayout>
+i
+
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+      <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
 .
 w
 EOF
