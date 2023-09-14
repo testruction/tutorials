@@ -6,7 +6,7 @@ Install the `@backstage/plugin-kubernetes` package in Backstage Frontend compone
 yarn add --cwd packages/app @backstage/plugin-kubernetes
 ```{{exec}}
 
-Edit the **packages/app/src/components/catalog/EntityPage.tsx**, then insert the following content **without** the comments:
+Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
 
 ```typescript
 // Below the line beginning by "import { ReportIssue }".

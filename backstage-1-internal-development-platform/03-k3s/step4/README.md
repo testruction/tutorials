@@ -1,6 +1,6 @@
 # Add Kubernetes plugin configuration
 
-Edit the **app-config.production.yaml** configuration file, the append the following settings to bastage Backstage to query the Kubernetes API server.
+Edit the `backstage-tutorial/app-config.production.yaml` configuration file, the append the following settings to bastage Backstage to query the Kubernetes API server.
 
 ```yaml
 kubernetes:
