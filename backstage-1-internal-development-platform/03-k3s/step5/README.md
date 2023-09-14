@@ -27,7 +27,7 @@ export KC_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
 
 yq -i '
   .app.baseUrl = strenv(KC_URL) |
-  .backend.baseUrl = strenv(KC_URL) |
+  .backend.baseUrl = strenv(KC_URL)
 ' ./app-config.production.yaml
 ```{{exec}}
 
