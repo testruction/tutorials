@@ -48,7 +48,19 @@ function wait_kubeconfig()
     echo " DONE"
 }
 
+function wait_dbloader()
+{
+    echo -n "Installing database loader."
+    while [ ! -f /ks/.dbloader_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
+
 wait_yq
 wait_nodejs
 wait_docker
 wait_kubeconfig
+wait_dbloader
