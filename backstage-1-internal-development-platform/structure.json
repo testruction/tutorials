@@ -4,10 +4,7 @@
       "path": "01-basics"
     },
     {
-      "path": "02-kind"
-    },
-    {
-      "path": "03-k3s"
+      "path": "02-k8s"
     }
   ]
 }
