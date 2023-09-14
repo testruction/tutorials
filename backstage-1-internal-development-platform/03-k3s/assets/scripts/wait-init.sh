@@ -29,7 +29,7 @@ function wait_nodejs()
 
 function wait_docker()
 {
-    echo -n "Installing Docker Community Edition."
+    echo -n "Installing Docker BuildX plugin."
     while [ ! -f /ks/.docker_finished ]; do
         echo -n '.'
         sleep 1;
