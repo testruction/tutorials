@@ -1,6 +1,6 @@
 {
-    "title": "03. Backstage: K3S",
-    "description": "Learn how to deploy the Backstage in a Kubernetes using Docker and K3S",
+    "title": "02. Backstage: Kubernetes integration",
+    "description": "Learn how to deploy Backstage in Kubernetes using Docker and K3S",
     "difficulty": "easy",
     "time": "20-30 minutes",
     "details": {
