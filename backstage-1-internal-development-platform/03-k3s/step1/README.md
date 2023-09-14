@@ -1,4 +1,4 @@
-# Create Backstage application
+# Create the Backstage application
 
 Run the following command to create the Backage application named **backstage-tutorial**.
 
