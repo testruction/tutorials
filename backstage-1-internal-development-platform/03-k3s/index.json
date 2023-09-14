@@ -43,10 +43,11 @@
                 {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/dbloader.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "manifests/namespace.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
-                {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"}
-            ]
+                {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/populate", "chmod": "+x"}
         }
     },
     "backend": {
