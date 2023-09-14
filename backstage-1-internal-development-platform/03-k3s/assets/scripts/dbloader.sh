@@ -9,4 +9,4 @@ https://github.com/testruction/pytest-sqlalchemy-cockroachdb
 cd pytest-sqlalchemy-cockroachdb
 pip3 install -r requirements.txt
 
-touch /ks/.install_cockroach_populate
+touch /ks/.dbloader_finished
