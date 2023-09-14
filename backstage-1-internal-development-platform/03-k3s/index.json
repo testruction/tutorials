@@ -48,6 +48,7 @@
                 {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/populate", "chmod": "+x"}
+            ]
         }
     },
     "backend": {
