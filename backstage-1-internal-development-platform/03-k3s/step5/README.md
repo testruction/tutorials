@@ -19,6 +19,8 @@ backend:
   baseUrl: https://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-x-x-x-x-7007.saci.r.killercoda.com
 ```
 
+<details><summary>Do it for me</summary>
+
 ```bash
 # Retreive the KillerCoda instance URL
 export KC_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
@@ -28,3 +30,5 @@ yq -i '
   .backend.baseUrl = strenv(KC_URL) |
 ' ./app-config.production.yaml
 ```{{exec}}
+
+</details>
