@@ -40,10 +40,10 @@ i
 .
 /apiRouter.use.*search
 a
-i
   apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
 .
-wq
+w
 EOF
 ```{{exec}}
+
 </details>
