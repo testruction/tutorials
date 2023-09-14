@@ -13,9 +13,17 @@ curl -o packages/backend/src/plugins/kubernetes.ts \
 https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
 ```{{exec}}
 
-Inject the plugin in the main Backend script `packages/backend/src/index.ts`:
+Edit the **backstage-tutorial/packages/backend/src/index.ts**, then insert the following content **without** the comments:
 
-* Insert the module import.
+```typescript
+// Above the line beginning by "import { PluginEnvironment }"
+import kubernetes from './plugins/kubernetes';
+// Above the line beginning by "const appEnv"
+const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+// Above the line beginning by "
+```
+
+<details><summary>Do it for me</summary>
 
 ```typescript
 vi -e packages/backend/src/index.ts <<EOF
@@ -23,26 +31,10 @@ vi -e packages/backend/src/index.ts <<EOF
 i
 import kubernetes from './plugins/kubernetes';
 .
-wq
-EOF
-```{{exec}}
-
-* Insert the module environment initialization
-
-```typescript
-vi -e packages/backend/src/index.ts <<EOF
 /const appEnv
 i
   const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
 .
-wq
-EOF
-```{{exec}}
-
-* Insert the module route.
-
-```typescript
-vi -e packages/backend/src/index.ts <<EOF
 /apiRouter.use
 i
   apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
@@ -50,3 +42,4 @@ i
 wq
 EOF
 ```{{exec}}
+</details>
