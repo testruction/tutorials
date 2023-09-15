@@ -1,35 +1,24 @@
-# Build the Backstage production-ready container
+# Add the sample application to the catalog
 
-> Notice:
->The container uses the `app-config.production.yaml` file which leverage PostgreSQL instead of the in-memory SQLite database engine.
+Edit the `backstage-tutorial/app-config.local.yaml` configuration and add the following content to register the example application entities.
 
-Build the backstage application.
+```yaml
+catalog:
+  locations:
+    - type: file
+      target: ../../../sample-app/catalog-info.yaml
+```{{copy}}
 
-```bash
-yarn build:backend
-```{{exec}}
+> **Notice**:
+> The path to the catalog is relative to the `packages/backend` directory.
 
-Update the container build base image tag `16-bullseye-slim` to `18-bullseye-slim`.
-
-```bash
-sed -i 's/16-bullseye-slim/18-bullseye-slim/' packages/backend/Dockerfile
-```{{exec}}
-
-Build the container image.
+<details><summary>Do it for me</summary>
 
 ```bash
-docker image build . -f packages/backend/Dockerfile --tag backstage:1.0.0
+yq -i '
+  .catalog.locations[0].type = "file" |
+  .catalog.locations[0].target = "../../../sample-app/catalog-info.yaml"
+' app-config.local.yaml
 ```{{exec}}
 
-Archive the generated image.
-
-```bash
-docker save --output ~/backstage-v1.0.0.tar backstage:1.0.0
-```{{exec}}
-
-Import the image archive into the K3S/Containerd runtime.
-
-```bash
-sudo k3s ctr images import ~/backstage-v1.0.0.tar \
-&& rm -vf ~/backstage-v1.0.0.tar
-```{{exec}}
+</details>
