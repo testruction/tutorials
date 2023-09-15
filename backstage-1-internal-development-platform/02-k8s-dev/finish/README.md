@@ -7,24 +7,28 @@
 Deploy the application to the Kubernetes Cluster.
 
 ```bash
-# Move to the sample application
-cd ~/sample-app
-
 # Update Helm chart dependencies
-helm dependency update chart/
+helm dependency update ../sample-app/chart/
 
 # Deploys the sample application
 helm install --create-namespace --namespace fastapi-demo \
 --set "cockroachdb.statefulset.replicas=1" \
+--set cockroachdb.service.public.type="LoadBalancer" \
 --set "cockroachdb.storage.persistentVolume.size=1Gi" \
-demo chart/
+demo ../sample-app/chart/
 ```{{exec}}
 
 Register the sample application component in Backstage.
 
-* [Click here]({{TRAFFIC_HOST1_7007}}) to open the Web console.
-* Click on the **CREATE** button.
-* Click on the **REGISTER EXISTING COMPONENT** button.
-* Use the following URL `https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/catalog-info.yaml`
+* [Click here]({{TRAFFIC_HOST1_3000}}) to open the Web console.
+* Navigate to the **frontend** component, then click on the **Kubernetes** tab.
 
-Once registered, navigate in the **Component** related pages to find the associated kubernetes resources discovered.
+The frontend is in `CrashLoopBackOff` because the database is not populated.
+
+Run the following command to initialize the database.
+
+```bash
+populatedb.sh
+```
+
+Then return the Console to check the pod status.

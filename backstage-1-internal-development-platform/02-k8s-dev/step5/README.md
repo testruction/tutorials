@@ -21,7 +21,7 @@ backend:
     port: 7007
   cors:
     origin: http://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-x-x-x-x-3000.saci.r.killercoda.com
-```
+```{{copy}}
 
 <details><summary>Dot it for me</summary>
 
