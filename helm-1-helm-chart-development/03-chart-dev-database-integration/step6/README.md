@@ -8,7 +8,7 @@ Create an environment variables file containing informations related to the depl
 RELEASE_NAME='chartdev'
 
 cat <<EOF > ~/.env
-  RELEASE_NAME="${RELEASE_NAME}"
+RELEASE_NAME="${RELEASE_NAME}"
 
 COCKROACH_HOST=$(kubectl get svc ${RELEASE_NAME}-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 COCKROACH_PORT=$(kubectl get svc ${RELEASE_NAME}-cockroachdb-public -o jsonpath='{.spec.ports[?(@.name == "grpc")].nodePort}')
