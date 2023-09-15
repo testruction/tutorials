@@ -4,20 +4,20 @@
 > Before continuing, purge the Docker environment to recover some free disk-space.
 > Run: `docker system prune -af --volumes`{{exec}}
 
+> Click on the **Tab1** before continuing.
+
 Deploy the application to the Kubernetes Cluster.
 
 ```bash
-# Move to the sample application
-cd ~/sample-app
-
 # Update Helm chart dependencies
-helm dependency update chart/
+helm dependency update ./sample-app/chart/
 
 # Deploys the sample application
 helm install --create-namespace --namespace fastapi-demo \
---set "cockroachdb.statefulset.replicas=1" \
---set "cockroachdb.storage.persistentVolume.size=1Gi" \
-demo chart/
+--set cockroachdb.statefulset.replicas="1" \
+--set cockroachdb.service.public.type="LoadBalancer" \
+--set cockroachdb.storage.persistentVolume.size="1Gi" \
+demo ./sample-app/chart/
 ```{{exec}}
 
 Register the sample application component in Backstage.
