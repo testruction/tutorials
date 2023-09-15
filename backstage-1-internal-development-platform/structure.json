@@ -4,7 +4,10 @@
       "path": "01-basics"
     },
     {
-      "path": "02-k8s"
+      "path": "02-k8s-dev"
+    },
+    {
+      "path": "02-k8s-prd"
     }
   ]
 }
