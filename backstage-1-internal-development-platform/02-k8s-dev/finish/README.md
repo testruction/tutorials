@@ -10,9 +10,9 @@ helm dependency update ./sample-app/chart/
 
 # Deploys the sample application
 helm install --create-namespace --namespace fastapi-demo \
---set "cockroachdb.statefulset.replicas=1" \
+--set cockroachdb.statefulset.replicas="1" \
 --set cockroachdb.service.public.type="LoadBalancer" \
---set "cockroachdb.storage.persistentVolume.size=1Gi" \
+--set cockroachdb.storage.persistentVolume.size="1Gi" \
 demo ./sample-app/chart/
 ```{{exec}}
 
