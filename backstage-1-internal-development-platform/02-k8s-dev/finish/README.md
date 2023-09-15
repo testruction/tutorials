@@ -27,6 +27,6 @@ Run the following command to initialize the database.
 
 ```bash
 populatedb.sh
-```
+```{{exec}}
 
 Then return the Console to check the pod status.
