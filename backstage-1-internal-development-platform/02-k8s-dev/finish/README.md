@@ -29,4 +29,4 @@ Run the following command to initialize the database.
 populatedb.sh
 ```{{exec}}
 
-Then return the Console to check the pod status.
+Then return the Backstage console to check the pod status.
