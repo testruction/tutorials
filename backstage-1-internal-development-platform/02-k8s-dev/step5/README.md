@@ -10,11 +10,15 @@ Add the following content while ensuring to change the **PORT** section of the U
 ```yaml
 app:
   baseUrl: http://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-x-x-x-x-3000.saci.r.killercoda.com
-  listen: ':3000'
+  listen:
+    host: 0.0.0.0
+    port: 3000
 
 backend:
   baseUrl: https://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-x-x-x-x-7007.saci.r.killercoda.com
-  listen: ':7007'
+  listen:
+    host: 0.0.0.0
+    port: 7007
   cors:
     origin: http://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-x-x-x-x-3000.saci.r.killercoda.com
 ```
