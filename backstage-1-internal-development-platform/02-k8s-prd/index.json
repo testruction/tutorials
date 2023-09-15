@@ -1,5 +1,5 @@
 {
-    "title": "02b. Backstage: Kubernetes integration",
+    "title": "02b. Backstage: Kubernetes integration and deployment",
     "description": "Learn how to deploy Backstage in Kubernetes using Docker and K3S",
     "difficulty": "easy",
     "time": "20-30 minutes",
