@@ -5,6 +5,6 @@ set -euo pipefail
 /ks/nodejs.sh
 # /ks/docker.sh
 /ks/kubeconfig.sh
-# /ks/helm.sh
+/ks/helm.sh
 /ks/sampleapp.sh
 /ks/sampledb.sh
