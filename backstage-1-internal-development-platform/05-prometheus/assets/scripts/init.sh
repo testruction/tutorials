@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# set -euo pipefail
 
 /ks/yq.sh
 /ks/nodejs.sh
@@ -8,6 +8,6 @@ set -euo pipefail
 /ks/helm.sh
 # /ks/bats.sh
 /ks/prometheus.sh
-bash -c /ks/sampleapp.sh
-bash -c /ks/sampledb.sh
-bash -c /ks/backstageapp.sh
+/ks/sampleapp.sh
+/ks/sampledb.sh
+/ks/backstageapp.sh
