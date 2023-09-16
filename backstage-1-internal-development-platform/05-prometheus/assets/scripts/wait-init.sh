@@ -115,7 +115,7 @@ wait_nodejs
 wait_kubeconfig
 wait_helm
 # wait_bats
-wait_prometheus
-# wait_sampleapp
-# wait_sampledb
-# wait_backstageapp
+# wait_prometheus
+wait_sampleapp
+wait_sampledb
+wait_backstageapp

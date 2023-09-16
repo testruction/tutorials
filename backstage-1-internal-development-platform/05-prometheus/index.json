@@ -30,6 +30,7 @@
                 {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/sampleapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/sampledb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
