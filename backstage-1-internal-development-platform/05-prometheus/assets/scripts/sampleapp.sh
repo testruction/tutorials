@@ -5,8 +5,6 @@ cd "${HOME}/"
 
 git clone --single-branch --branch main https://github.com/testruction/fastapi-sqlalchemy-cockroachdb sample-app
 
-cd sample-app/
-
 # Update Helm chart dependencies
 helm dependency update ./sample-app/chart/
 
