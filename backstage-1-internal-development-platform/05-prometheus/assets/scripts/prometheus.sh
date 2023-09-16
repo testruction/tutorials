@@ -12,3 +12,4 @@ helm install \
 --set prometheus.prometheusSpec.resources.limits.memory="500Mi" \
 default prometheus-community/kube-prometheus-stack
 
+touch /ks/.prometheus_finished
