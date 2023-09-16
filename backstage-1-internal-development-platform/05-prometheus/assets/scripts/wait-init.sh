@@ -113,7 +113,7 @@ wait_yq
 wait_nodejs
 # wait_docker
 wait_kubeconfig
-wait_helm
+# wait_helm
 # wait_bats
 # wait_prometheus
 wait_sampleapp
