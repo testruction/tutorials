@@ -1,4 +1,4 @@
-# # Implement Kubernetes frontend plugins
+# Implement Kubernetes frontend plugins
 
 Install the `@backstage/plugin-kubernetes` package in Backstage Frontend component (i.e. `packages/frontend`).
 
