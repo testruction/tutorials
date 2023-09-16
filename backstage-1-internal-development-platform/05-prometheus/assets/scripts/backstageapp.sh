@@ -9,6 +9,8 @@ https://github.com/testruction/backstage-tutorial
 
 cd ~/backstage-tutorial/
 
+touch app-config.local.yaml
+
 # configure backstage plugin
 yq -i '
   .kubernetes.serviceLocatorMethod.type = "multiTenant" |
@@ -37,4 +39,4 @@ yq -i '
 
 popd
 
-touch /ks/.backstage_finished.yaml
+touch /ks/.backstageapp_finished
