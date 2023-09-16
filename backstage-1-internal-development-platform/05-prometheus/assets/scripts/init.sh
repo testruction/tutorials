@@ -6,7 +6,7 @@ set -euo pipefail
 /ks/docker.sh
 /ks/kubeconfig.sh
 /ks/helm.sh
-/ks/bats.sh
+# /ks/bats.sh
 /ks/prometheus.sh
 /ks/sampleapp.sh
 /ks/sampledb.sh
