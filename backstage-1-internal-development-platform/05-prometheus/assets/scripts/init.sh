@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-/ks/yq.sh &
-/ks/nodejs.sh &
+/ks/yq.sh
+/ks/nodejs.sh
+/ks/kubeconfig.sh
+
 # /ks/docker.sh &
-/ks/kubeconfig.sh &
 # /ks/helm.sh &
 # /ks/bats.sh &
 /ks/prometheus.sh &
