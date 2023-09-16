@@ -28,4 +28,8 @@ helm upgrade --install \
 --set frontend.resources.limits.memory="250Mi" \
 demo ./sample-app/chart/
 
+sleep 15s
+
+/usr/local/bin/populatedb.sh
+
 touch /ks/.sampleapp_finished
