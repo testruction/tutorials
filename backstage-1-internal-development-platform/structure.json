@@ -8,6 +8,9 @@
     },
     {
       "path": "02-k8s-prd"
+    },
+    {
+      "path": "05-prometheus"
     }
   ]
 }
