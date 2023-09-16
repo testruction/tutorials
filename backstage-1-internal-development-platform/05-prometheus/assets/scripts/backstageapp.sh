@@ -3,7 +3,9 @@ set -euo pipefail
 
 cd "${HOME}/"
 
-git clone --single-branch --branch feature/kubernetes-plugin https://github.com/testruction/backstage-tutorial
+git clone --single-branch \
+--branch feature/kubernetes-plugin \
+https://github.com/testruction/backstage-tutorial
 
 cd backstage-tutorial/
 
