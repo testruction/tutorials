@@ -25,7 +25,7 @@ import {
     </EntityLayout.Route>
 
 // In the "overviewContent",
-// Above the line "</Grid>".
+// Below the line "<Grid container spacing={3} alignItems="stretch">".
     <Grid item md={8}>
       <EntityPrometheusAlertCard />
     </Grid>
@@ -56,9 +56,9 @@ i
       <EntityPrometheusContent />
     </EntityLayout.Route>
 .
-/const serviceEntityPage
-/<\/Grid>
-i
+/const overviewContent
+/<Grid container
+a
     <Grid item md={8}>
       <EntityPrometheusAlertCard />
     </Grid>
