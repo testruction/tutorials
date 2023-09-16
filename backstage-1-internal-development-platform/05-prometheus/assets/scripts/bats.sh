@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+cd "/tmp/"
+
 git clone https://github.com/bats-core/bats-core.git
 
 cd bats-core

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pushd ~/
+cd "${HOME}/"
 
 git clone --single-branch \
 --branch feature/kubernetes-plugin \
 https://github.com/testruction/backstage-tutorial
 
-cd ~/backstage-tutorial/
+cd backstage-tutorial/
 
 touch app-config.local.yaml
 
@@ -36,7 +36,5 @@ yq -i '
   .catalog.locations[0].type = "file" |
   .catalog.locations[0].target = "../../../sample-app/catalog-info.yaml"
 ' app-config.local.yaml
-
-popd
 
 touch /ks/.backstageapp_finished
