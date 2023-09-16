@@ -8,8 +8,9 @@ yarn add --cwd packages/app @roadiehq/backstage-plugin-prometheus
 
 Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
 
+Below the line beginning by "import { ReportIssue }".
+
 ```typescript
-// Below the line beginning by "import { ReportIssue }".
 import {
   EntityPrometheusContent,
 } from '@roadiehq/backstage-plugin-prometheus';
@@ -17,15 +18,19 @@ import {
   EntityPrometheusAlertCard,  
   EntityPrometheusGraphCard,
 } from '@roadiehq/backstage-plugin-prometheus';
+```
 
-// In the "serviceEntityPage",
-// Above the line "</EntityLayout>".
+At the "serviceEntityPage", above the line "</EntityLayout>".
+
+```typescript
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
+```
 
-// In the "overviewContent",
-// Below the line "<Grid container spacing={3} alignItems="stretch">".
+At the "overviewContent", below the line "{entityWarningContent}".
+
+```typescript
     <Grid item md={8}>
       <EntityPrometheusAlertCard />
     </Grid>
@@ -57,14 +62,16 @@ i
     </EntityLayout.Route>
 .
 /const overviewContent
-/<Grid container
+/{entityWarningContent}
 a
+
     <Grid item md={8}>
       <EntityPrometheusAlertCard />
     </Grid>
     <Grid item md={6}>
       <EntityPrometheusGraphCard />
     </Grid>
+
 .
 w
 EOF
