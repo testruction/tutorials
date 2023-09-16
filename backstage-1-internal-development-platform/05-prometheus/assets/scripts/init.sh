@@ -8,6 +8,6 @@ set -euo pipefail
 /ks/helm.sh
 # /ks/bats.sh
 /ks/prometheus.sh
-/ks/sampleapp.sh
-/ks/sampledb.sh
-/ks/backstageapp.sh
+bash -c /ks/sampleapp.sh
+bash -c /ks/sampledb.sh
+bash -c /ks/backstageapp.sh
