@@ -17,14 +17,14 @@ helm upgrade --install \
 --namespace fastapi-demo \
 --set cockroachdb.statefulset.replicas="1" \
 --set cockroachdb.service.public.type="LoadBalancer" \
+--set cockroachdb.service.ports.http.port="18080" \
 --set cockroachdb.storage.persistentVolume.size="1Gi" \
---set cockroachdb.service.http.port="18080" \
 --set cockroachdb.statefulset.resources.limits.memory="512Mi" \
 --set backend.service.type="LoadBalancer" \
---set backend.service.port="38081" \
+--set backend.service.port="28081" \
 --set backend.resources.limits.memory="250Mi" \
 --set frontend.service.type="LoadBalancer" \
---set frontend.service.port="38080" \
+--set frontend.service.port="28080" \
 --set frontend.resources.limits.memory="250Mi" \
 demo ./sample-app/chart/
 
