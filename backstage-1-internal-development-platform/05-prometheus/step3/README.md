@@ -15,7 +15,7 @@ yarn dev
 ```{{exec}}
 
 > Wait for the message `webpack compiled successfully`.
-> Use following links to access 
-> [Click here]({{TRAFFIC_HOST1_3000}}) for Backstage application.
-> [Click here]({{TRAFFIC_HOST1_9090}}) for Prometheus.
-> [Click here]({{TRAFFIC_HOST1_28081}}) for Sample App API doc.
+> Use following links to access:
+> * [Click here]({{TRAFFIC_HOST1_3000}}) for Backstage application.
+> * [Click here]({{TRAFFIC_HOST1_9090}}) for Prometheus.
+> * [Click here]({{TRAFFIC_HOST1_28081}}) for Sample App API doc.
