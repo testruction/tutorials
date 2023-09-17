@@ -14,4 +14,5 @@ Run the Backstage development server.
 yarn dev
 ```{{exec}}
 
+> Wait for the message `webpack compiled successfully`.
 > [Click here]({{TRAFFIC_HOST1_3000}}) to open the Web console.
