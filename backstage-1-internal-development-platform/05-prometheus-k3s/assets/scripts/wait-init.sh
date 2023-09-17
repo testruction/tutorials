@@ -110,6 +110,17 @@ function wait_backstageapp()
     echo " DONE"
 }
 
+function save_memory()
+{
+    echo "Stop unsused services to save memory"
+
+    sudo systemctl stop k3s
+    sudo systemctl stop docker
+    sudo systemctl stop containerd
+    sudo systemctl stop multipathd
+
+    echo " DONE"
+}
 
 wait_yq
 wait_nodejs
@@ -121,3 +132,5 @@ wait_prometheus
 wait_sampleapp
 wait_sampledb
 wait_backstageapp
+
+save_memory
