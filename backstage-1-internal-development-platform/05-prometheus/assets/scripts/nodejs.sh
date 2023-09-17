@@ -38,4 +38,9 @@ npm install --global yarn \
 && yarn set version ${YARN_VERSION} \
 && yarn --version
 
+NODE_OPTIONS="--max-old-space-size=1500"
+export NODE_OPTIONS
+echo "$NODE_OPTIONS" | tee -a "${HOME}/.bashrc"
+
+
 touch /ks/.nodejs_finished
