@@ -51,7 +51,7 @@ At the **overviewContent**, below the line "{entityWarningContent}".
 </details>
 
 > **Notice**:
-> Entity page integratoin is recommanded as it integrates nicely with the default Backstage layout.
+> Entity page integration is recommanded as it integrates nicely with the default Backstage layout.
 
 
 <details><summary>Dot it for me</summary>
