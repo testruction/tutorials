@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "${HOME}/"
+if [ ! -d "${HOME}/backstage-tutorial" ]
+then
+  git clone --single-branch \
+  --branch feature/kubernetes-plugin \
+  https://github.com/testruction/backstage-tutorial \
+  "${HOME}/backstage-tutorial"
+else
+  cd "${HOME}/backstage-tutorial/"
+  git pull
+fi
 
-git clone --single-branch \
---branch feature/kubernetes-plugin \
-https://github.com/testruction/backstage-tutorial
-
-cd backstage-tutorial/
+cd "${HOME}/backstage-tutorial/"
 
 touch app-config.local.yaml
 
@@ -18,8 +23,11 @@ yq -i '
 ' ./app-config.local.yaml
 
 # Retreive the KillerCoda instance URL
-export KC_FRONTEND_URL=$(cat /etc/killercoda/host | sed -e 's/PORT/3000/' -e 's/https/http/')
-export KC_BACKEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
+KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
+KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
+
+export KC_FRONTEND_URL
+export KC_BACKEND_URL
 
 yq -i '
   .app.listen.host = "0.0.0.0" |
