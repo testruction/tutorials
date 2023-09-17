@@ -1,0 +1,50 @@
+{
+    "title": "04. Backstage: Prometheus integration and deployment [WIP]",
+    "description": "Learn how to setup Backstage to collect entities metrics from Prometheus",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            },
+            {
+                "text": "step3/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/sampleapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/sampledb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "manifests/namespace.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+    }
+}
