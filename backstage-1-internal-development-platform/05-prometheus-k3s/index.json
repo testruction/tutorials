@@ -17,7 +17,8 @@
                 "text": "step2/README.md"
             },
             {
-                "text": "step3/README.md"
+                "text": "step3/README.md",
+                "background": "intro/background.sh"
             }
         ],
         "finish": {
