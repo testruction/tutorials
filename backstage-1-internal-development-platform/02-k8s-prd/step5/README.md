@@ -23,7 +23,7 @@ backend:
 
 ```bash
 # Retreive the KillerCoda instance URL
-export KC_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
+export KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 
 yq -i '
   .app.baseUrl = strenv(KC_URL) |

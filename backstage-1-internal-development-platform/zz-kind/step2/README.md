@@ -12,8 +12,8 @@ Run the following command line to enable the frontend component to listen on all
 
 ```bash
 # Retreive the KillerCoda instance URL
-export KC_FRONTEND_URL=$(cat /etc/killercoda/host | sed -e 's/PORT/3000/' -e 's/https/http/')
-export KC_BACKEND_URL=$(cat /etc/killercoda/host | sed 's/PORT/7007/')
+export KC_FRONTEND_URL=$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)
+export KC_BACKEND_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 
 yq -i '
   .app.listen.host = "0.0.0.0" |
