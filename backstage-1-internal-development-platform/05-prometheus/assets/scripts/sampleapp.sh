@@ -32,13 +32,13 @@ helm upgrade --install \
   --set cockroachdb.service.public.type="LoadBalancer" \
   --set cockroachdb.service.ports.http.port="18080" \
   --set cockroachdb.storage.persistentVolume.size="1Gi" \
-  --set cockroachdb.statefulset.resources.limits.memory="512Mi" \
+  --set cockroachdb.statefulset.resources.limits.memory="254Mi" \
   --set backend.service.type="LoadBalancer" \
   --set backend.service.port="28081" \
-  --set backend.resources.limits.memory="250Mi" \
+  --set backend.resources.limits.memory="128Mi" \
   --set frontend.service.type="LoadBalancer" \
   --set frontend.service.port="28080" \
-  --set frontend.resources.limits.memory="250Mi" \
+  --set frontend.resources.limits.memory="128Mi" \
   demo ./chart/
 
 touch /ks/.sampleapp_finished
