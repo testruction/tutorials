@@ -18,6 +18,12 @@ cd "${HOME}/sample-app/"
 # Update Helm chart dependencies
 helm dependency update ./chart/
 
+until kubectl api-resources --api-group=monitoring.coreos.com
+do
+  echo "Waiting for Prometheus Operator"
+  sleep 2s
+done
+
 # Deploys the sample application
 helm upgrade --install \
   --create-namespace \
