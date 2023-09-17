@@ -20,22 +20,13 @@ import {
 } from '@roadiehq/backstage-plugin-prometheus';
 ```
 
-Prometheus can be integrated either via a widget or an entity page (i.e. a section of the ).
-
 At the **serviceEntityPage**, above the line "</EntityLayout>".
-
-<details><summary><b>Entity Page instegration</b></summary>
 
 ```typescript
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
-
 ```
-
-</details>
-
-<details><summary><b>(alternative): Widget integration</b></summary>
 
 At the **overviewContent**, below the line "{entityWarningContent}".
 
@@ -47,12 +38,6 @@ At the **overviewContent**, below the line "{entityWarningContent}".
       <EntityPrometheusGraphCard />
     </Grid>
 ```
-
-</details>
-
-> **Notice**:
-> Entity page integration is recommanded as it integrates nicely with the default Backstage layout.
-
 
 <details><summary>Dot it for me</summary>
 
@@ -75,6 +60,18 @@ i
     <EntityLayout.Route path="/prometheus" title="Prometheus">
       <EntityPrometheusContent />
     </EntityLayout.Route>
+.
+/const overviewContent
+/{entityWarningContent}
+a
+
+    <Grid item md={8}>
+      <EntityPrometheusAlertCard />
+    </Grid>
+    <Grid item md={6}>
+      <EntityPrometheusGraphCard />
+    </Grid>
+
 .
 w
 EOF
