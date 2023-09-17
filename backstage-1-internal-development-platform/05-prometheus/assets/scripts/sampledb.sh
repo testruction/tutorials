@@ -16,3 +16,15 @@ cd /usr/local/pytest-sqlalchemy-cockroachdb
 pip3 install -r pytest-sqlalchemy-cockroachdb/requirements.txt
 
 touch /ks/.sampledb_finished
+
+until kubectl get svc -n fastapi-demo demo-cockroachdb-public -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+do
+ echo "Waiting for database IP allocation"
+ sleep 1s
+done
+
+sleep 15s
+
+/usr/local/bin/populatedb.sh
+
+touch /ks/.sampledb_finished
