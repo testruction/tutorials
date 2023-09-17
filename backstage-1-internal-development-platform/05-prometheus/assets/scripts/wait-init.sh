@@ -46,6 +46,8 @@ function wait_kubeconfig()
         sleep 1;
     done;
     echo " DONE"
+
+    kubectl get nodes
 }
 
 function wait_helm()
