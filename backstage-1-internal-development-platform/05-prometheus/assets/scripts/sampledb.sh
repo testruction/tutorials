@@ -5,7 +5,8 @@ if [ ! -d /usr/local/pytest-sqlalchemy-cockroachdb ]
 then
   git clone --single-branch \
   --branch main \
-  https://github.com/testruction/pytest-sqlalchemy-cockroachdb
+  https://github.com/testruction/pytest-sqlalchemy-cockroachdb \
+  /usr/local/pytest-sqlalchemy-cockroachdb
 else
   cd /usr/local/pytest-sqlalchemy-cockroachdb
   git pull
