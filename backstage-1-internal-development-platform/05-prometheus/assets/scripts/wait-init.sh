@@ -80,7 +80,7 @@ function wait_prometheus()
 
 function wait_sampleapp()
 {
-    echo -n "Installing Sample App."
+    echo -n "Installing Example App."
     while [ ! -f /ks/.sampleapp_finished ]; do
         echo -n '.'
         sleep 1;
@@ -90,7 +90,7 @@ function wait_sampleapp()
 
 function wait_sampledb()
 {
-    echo -n "Installing Sample App database loader."
+    echo -n "Installing Example App database loader."
     while [ ! -f /ks/.sampledb_finished ]; do
         echo -n '.'
         sleep 1;
