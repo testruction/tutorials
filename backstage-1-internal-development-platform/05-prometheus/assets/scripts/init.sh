@@ -8,7 +8,7 @@ set -euo pipefail
 # /ks/docker.sh &
 # /ks/helm.sh &
 # /ks/bats.sh &
-/ks/prometheus.sh
+/ks/prometheus.sh &
 /ks/sampleapp.sh &
 /ks/sampledb.sh &
 /ks/backstageapp.sh &
