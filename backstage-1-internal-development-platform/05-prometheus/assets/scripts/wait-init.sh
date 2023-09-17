@@ -112,7 +112,7 @@ function wait_backstageapp()
 wait_yq
 wait_nodejs
 # wait_docker
-wait_kubeconfig
+# wait_kubeconfig
 # wait_helm
 # wait_bats
 wait_prometheus

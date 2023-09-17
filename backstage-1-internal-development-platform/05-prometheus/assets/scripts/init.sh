@@ -12,7 +12,7 @@ set -euo pipefail
 
 /ks/yq.sh
 /ks/nodejs.sh
-/ks/kubeconfig.sh
+# /ks/kubeconfig.sh
 
 # /ks/docker.sh &
 # /ks/helm.sh &
