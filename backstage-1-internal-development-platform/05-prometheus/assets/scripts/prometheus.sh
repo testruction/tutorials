@@ -20,7 +20,6 @@ helm upgrade --install \
   --set nodeExporter.enabled="false" \
   --set thanosRuller.enabled="false" \
   --set prometheus.service.type="LoadBalancer" \
-  --set prometheus.prometheusSpec.resources.limits.memory="256Mi" \
   default prometheus-community/kube-prometheus-stack
 
 touch /ks/.prometheus_finished
