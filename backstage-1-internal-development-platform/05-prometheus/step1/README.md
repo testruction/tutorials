@@ -22,9 +22,6 @@ import {
 
 Prometheus can be integrated either via a widget or an entity page (i.e. a section of the ).
 
-> **Notice**:
-> Entity page integratoin is recommanded as it integrates nicely with the default Backstage layout.
-
 At the **serviceEntityPage**, above the line "</EntityLayout>".
 
 <details><summary><b>Entity Page instegration</b></summary>
@@ -53,7 +50,9 @@ At the **overviewContent**, below the line "{entityWarningContent}".
 
 </details>
 
----
+> **Notice**:
+> Entity page integratoin is recommanded as it integrates nicely with the default Backstage layout.
+
 
 <details><summary>Dot it for me</summary>
 
