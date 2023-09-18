@@ -4,6 +4,7 @@ Start the Kubernetes client proxy to allow the Backstage to access the cluster A
 
 ```bash
 kubectl proxy &
+
 ```{{exec}}
 
 > Press **CTRL+C**  to let kubectl proxy running in the background.
