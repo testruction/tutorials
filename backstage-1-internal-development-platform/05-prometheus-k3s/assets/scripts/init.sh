@@ -10,9 +10,9 @@ sudo systemctl stop multipathd
 
 set -euo pipefail
 
+/ks/kubeconfig.sh
 /ks/yq.sh
 /ks/nodejs.sh
-/ks/kubeconfig.sh
 
 # /ks/docker.sh &
 # /ks/helm.sh &
