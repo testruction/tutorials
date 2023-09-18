@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# waits for background init to finish
-
-rm $0
-
-clear
-
 function wait_yq()
 {
     echo -n "Installing YQ command line."
@@ -110,17 +104,19 @@ function wait_backstageapp()
     echo " DONE"
 }
 
-function save_memory()
-{
-    echo "Stop unsused services to save memory"
 
-    sudo systemctl stop k3s
-    sudo systemctl stop docker
-    sudo systemctl stop containerd
-    sudo systemctl stop multipathd
+# waits for background init to finish
 
-    echo " DONE"
-}
+rm $0
+
+clear
+
+echo "Stop unsused services to save memory"
+sudo systemctl stop docker
+sudo systemctl stop containerd
+sudo systemctl stop multipathd
+
+clear
 
 wait_yq
 wait_nodejs
@@ -133,4 +129,4 @@ wait_sampleapp
 wait_sampledb
 wait_backstageapp
 
-save_memory
+sudo systemctl stop k3s
