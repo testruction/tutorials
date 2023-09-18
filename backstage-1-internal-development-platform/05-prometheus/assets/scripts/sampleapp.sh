@@ -38,4 +38,6 @@ helm upgrade --install \
   --set frontend.service.port="28080" \
   demo ./chart/
 
+kubectl label namespace fastapi-demo "prometheus=enabled"
+
 touch /ks/.sampleapp_finished
