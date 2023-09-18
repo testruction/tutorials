@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# waits for background init to finish
-
-rm $0
-
-clear
-
 function wait_yq()
 {
     echo -n "Installing YQ command line."
@@ -46,7 +40,7 @@ function wait_kubeconfig()
         sleep 1;
     done;
     echo " DONE"
-
+    
     kubectl get nodes
 }
 
@@ -111,13 +105,28 @@ function wait_backstageapp()
 }
 
 
+# waits for background init to finish
+
+rm $0
+
+clear
+
+echo "Stop unsused services to save memory"
+sudo systemctl stop docker
+sudo systemctl stop containerd
+sudo systemctl stop multipathd
+
+clear
+
 wait_yq
 wait_nodejs
-wait_kubeconfig
 # wait_docker
+wait_kubeconfig
 # wait_helm
 # wait_bats
 wait_prometheus
 wait_sampleapp
 wait_sampledb
 wait_backstageapp
+
+sudo systemctl stop k3s
