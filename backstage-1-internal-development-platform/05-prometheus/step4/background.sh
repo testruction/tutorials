@@ -14,7 +14,7 @@ do
  sleep 1s
 done
 
-sleep 15s
+sleep 20s
 
 /usr/local/bin/populatedb.sh
 
