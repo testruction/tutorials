@@ -42,7 +42,7 @@ At the **overviewContent**, below the line "{entityWarningContent}".
 <details><summary>Dot it for me</summary>
 
 ```typescript
-vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
+vi -e ${HOME}/backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx <<EOF
 /import { ReportIssue }
 a
 import {
