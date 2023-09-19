@@ -22,7 +22,7 @@
             },
             {
                 "text": "step4/README.md",
-                "background": "step3/background.sh"
+                "background": "step4/background.sh"
             }
         ],
         "finish": {
