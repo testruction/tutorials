@@ -29,8 +29,8 @@ vi -e ${HOME}/sample-app/src/backend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
-    prometheus.io/rule: >
-      (sum(rate(http_requests_total{job="demo-fastapi-backend",status=~"5..|429"}[5m])))
+    prometheus.io/rule: >-
+      (sum(rate(http_requests_total{job="demo-fastapi-backend"\,status=~"5..|429"}[5m])))
       /
       (sum(rate(http_requests_total{job="demo-fastapi-backend"}[5m])))
 .
@@ -41,7 +41,7 @@ vi -e ${HOME}/sample-app/src/frontend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
-    prometheus.io/rule: >
+    prometheus.io/rule: >-
       (sum(rate(http_requests_total{job="demo-fastapi-frontend",status=~"5..|429"}[5m])))
       /
       (sum(rate(http_requests_total{job="demo-fastapi-frontend"}[5m])))
@@ -51,3 +51,9 @@ EOF
 ```{{exec}}
 
 </details>
+
+
+(sum(rate(http_requests_total{job="demo-fastapi-frontend",status=~"5..|429"}[5m])))/(sum(rate(http_requests_total{job="demo-fastapi-frontend"}[5m])))
+
+
+https://60786cca-4710-40ec-bb09-2ae7d6d9ab0f-10-244-8-142-7007.saci.r.killercoda.com/api/proxy/prometheus0/api/query_range?query=(sum(rate(http_requests_total%7Bjob=%22demo-fastapi-backend%22&start=1695155471.126&end=1695159071.126&step=14
