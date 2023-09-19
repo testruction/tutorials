@@ -7,6 +7,8 @@ helm repo update
 helm upgrade --install \
   --namespace monitoring \
   --create-namespace \
+  --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
+  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues="false" \
   --set grafana.enabled="false" \
   --set kubeApiServer.enabled="false" \
   --set kubelet.enabled="false" \
