@@ -20,4 +20,4 @@ Use following links to access the different consoles:
 
 * Backstage application [Click here]({{TRAFFIC_HOST1_3000}}) .
 * Prometheus [Click here]({{TRAFFIC_HOST1_9090}}).
-* Sample App API doc [Click here]({{TRAFFIC_HOST1_28081}}/v1/docs).
+* Sample App API doc [Click here]({{TRAFFIC_HOST1_18180}}/v1/docs).
