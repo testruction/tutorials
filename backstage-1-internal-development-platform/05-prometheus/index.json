@@ -19,6 +19,10 @@
             {
                 "text": "step3/README.md",
                 "background": "step3/background.sh"
+            },
+            {
+                "text": "step4/README.md",
+                "background": "step3/background.sh"
             }
         ],
         "finish": {
