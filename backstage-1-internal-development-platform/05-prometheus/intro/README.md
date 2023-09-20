@@ -1,4 +1,4 @@
-![Backstage logo](https://raw.githubusercontent.com/cncf/artwork/master/projects/backstage/horizontal/color/backstage-horizontal-color.svg)
+![Backstage banner](https://github.com/backstage/backstage/raw/master/docs/assets/headline.png)
 
 This lab walks through the integration and deployment operations required to run a given Backstage application that display metrics data collected from Prometheus.
 
