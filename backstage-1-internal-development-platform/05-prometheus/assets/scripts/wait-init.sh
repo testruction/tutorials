@@ -126,7 +126,7 @@ wait_kubeconfig
 # wait_bats
 wait_prometheus
 wait_sampleapp
-wait_sampledb
+# wait_sampledb
 wait_backstageapp
 
 sudo systemctl stop k3s
