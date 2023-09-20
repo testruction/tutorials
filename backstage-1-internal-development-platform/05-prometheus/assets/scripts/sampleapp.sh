@@ -31,15 +31,12 @@ helm upgrade --install \
   --create-namespace \
   --namespace "${NS}" \
   --set jaeger.create="false" \
-  --set cockroachdb.statefulset.replicas="1" \
-  --set cockroachdb.service.public.type="LoadBalancer" \
-  --set cockroachdb.service.ports.http.port="18280" \
-  --set cockroachdb.storage.persistentVolume.size="1Gi" \
-  --set cockroachdb.serviceMonitor.enabled="true" \
-  --set cockroachdb.serviceMonitor.namespaced="true" \
+  --set cockroachdb.create="false" \
   --set backend.service.type="LoadBalancer" \
   --set backend.service.port="18180" \
   --set backend.serviceMonitor.enabled="true" \
+  --set backend.extraEnv[0].name="DATABASE_ENGINE" \
+  --set backend.extraEnv[0].value="sqlite" \
   --set frontend.service.type="LoadBalancer" \
   --set frontend.service.port="18080" \
   --set frontend.serviceMonitor.enabled="true" \
