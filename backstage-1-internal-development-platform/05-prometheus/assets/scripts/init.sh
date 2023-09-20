@@ -19,5 +19,5 @@ set -euo pipefail
 # /ks/bats.sh &
 /ks/prometheus.sh
 /ks/sampleapp.sh &
-/ks/sampledb.sh &
+# /ks/sampledb.sh &
 /ks/backstageapp.sh &
