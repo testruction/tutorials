@@ -9,6 +9,7 @@ helm upgrade --install \
   --create-namespace \
   --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
   --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues="false" \
+  --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues="false" \
   --set grafana.enabled="false" \
   --set kubeApiServer.enabled="false" \
   --set kubelet.enabled="false" \

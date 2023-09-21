@@ -5,17 +5,21 @@ Edit the `sample-app/src/backend/catalog-info.yaml`, then add the following anno
 ```yaml
 metadata:
   annotions:
+    prometheus.io/alert: >-
+      demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
-      sum by (service)(rate(http_requests_total{status=~"5..|4.."}[5m]))
+      slo:objective:ratio{sloth_service="demo-fastapi-backend"}
 ```
 
 Edit the `sample-app/src/frontend/catalog-info.yaml`, then add the following annotation.
 
-```yml
+```yaml
 metadata:
   annotions:
+    prometheus.io/alert: >-
+      demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
-      sum(rate(http_requests_total{status=~"5..|4.."}[5m]))
+      slo:objective:ratio{sloth_service="demo-fastapi-frontend"}
 ```
 
 <details><summary>Do it for me</summary>
@@ -25,8 +29,10 @@ vi -e ${HOME}/sample-app/src/backend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
+    prometheus.io/alert: >-
+      demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
-      sum by (service)(rate(http_requests_total{status=~"5..|4.."}[5m]))
+      slo:objective:ratio{sloth_service="demo-fastapi-backend"}
 .
 w
 EOF
@@ -35,8 +41,10 @@ vi -e ${HOME}/sample-app/src/frontend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
+    prometheus.io/alert: >-
+      demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
-      sum(rate(http_requests_total{status=~"5..|4.."}[5m]))
+      slo:objective:ratio{sloth_service="demo-fastapi-frontend"}
 .
 w
 EOF
