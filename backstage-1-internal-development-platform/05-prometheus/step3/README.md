@@ -5,10 +5,8 @@ Edit the `sample-app/src/backend/catalog-info.yaml`, then add the following anno
 ```yaml
 metadata:
   annotions:
-    prometheus.io/rule: >
-      (sum(rate(http_requests_total{job="demo-fastapi-backend",status=~"5..|429"}[5m])))
-      /
-      (sum(rate(http_requests_total{job="demo-fastapi-backend"}[5m])))
+    prometheus.io/rule: >-
+      sum by (service)(rate(http_requests_total{status=~"5..|4.."}[5m]))
 ```
 
 Edit the `sample-app/src/frontend/catalog-info.yaml`, then add the following annotation.
@@ -16,10 +14,8 @@ Edit the `sample-app/src/frontend/catalog-info.yaml`, then add the following ann
 ```yml
 metadata:
   annotions:
-    prometheus.io/rule: >
-      (sum(rate(http_requests_total{job="demo-fastapi-frontend",status=~"5..|429"}[5m])))
-      /
-      (sum(rate(http_requests_total{job="demo-fastapi-frontend"}[5m])))
+    prometheus.io/rule: >-
+      sum(rate(http_requests_total{status=~"5..|4.."}[5m]))
 ```
 
 <details><summary>Do it for me</summary>
@@ -30,9 +26,7 @@ vi -e ${HOME}/sample-app/src/backend/catalog-info.yaml <<EOF
 /annotations
 a
     prometheus.io/rule: >-
-      (sum(rate(http_requests_total{job="demo-fastapi-backend"\,status=~"5..|429"}[5m])))
-      /
-      (sum(rate(http_requests_total{job="demo-fastapi-backend"}[5m])))
+      sum by (service)(rate(http_requests_total{status=~"5..|4.."}[5m]))
 .
 w
 EOF
@@ -42,9 +36,7 @@ vi -e ${HOME}/sample-app/src/frontend/catalog-info.yaml <<EOF
 /annotations
 a
     prometheus.io/rule: >-
-      (sum(rate(http_requests_total{job="demo-fastapi-frontend"\,status=~"5..|429"}[5m])))
-      /
-      (sum(rate(http_requests_total{job="demo-fastapi-frontend"}[5m])))
+      sum(rate(http_requests_total{status=~"5..|4.."}[5m]))
 .
 w
 EOF
