@@ -1,12 +1,10 @@
 # Run the Backstage development server
 
-Start the Kubernetes client proxy to allow the Backstage to access the cluster API server.
+Before continuing, check that all Kubernetes Pods are in "Ready" status.
 
 ```bash
-kubectl proxy &
+kubectl get pods --all-namespaces
 ```{{exec}}
-
-> Press **Enter**  to let kubectl proxy running in the background.
 
 Run the Backstage development server.
 
