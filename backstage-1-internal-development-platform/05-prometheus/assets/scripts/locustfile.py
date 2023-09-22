@@ -6,14 +6,14 @@ import random
 class LoadTesting(HttpUser):
     wait_time = between(1, 5)
 
-    @task(1)
+    @task(3)
     def fakenames(self):
         skip = random.randrange(0, 10)
         limit = random.randrange(200, 210)
         self.client.get(f"/v1/fakenames?skip={skip}&limit={limit}")
         # self.client.get("/v1/status/200")
 
-    @task(2)
+    @task(1)
     def http_status_code(self):
         code = random.choice([200,
                               500,
@@ -40,4 +40,4 @@ class LoadTesting(HttpUser):
                               511])
         # self.client.get("/v1/status/200")
         self.client.get(f"/v1/status/{code}")
-        time.sleep(1)
+        time.sleep(random.randrange(1, 7))
