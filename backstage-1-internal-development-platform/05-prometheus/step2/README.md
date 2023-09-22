@@ -31,7 +31,7 @@ At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
 At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
 
 ```typescript
-    <Grid item md={8}>
+    <Grid item md={6}>
       <EntityPrometheusAlertCard />
     </Grid>
     <Grid item md={6}>
@@ -65,7 +65,7 @@ i
 /{entityWarningContent}
 a
 
-    <Grid item md={8}>
+    <Grid item md={6}>
       <EntityPrometheusAlertCard />
     </Grid>
     <Grid item md={6}>
