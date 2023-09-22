@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "path": "01-playground"
+    },
+    {
       "path": "01-basics"
     },
     {
