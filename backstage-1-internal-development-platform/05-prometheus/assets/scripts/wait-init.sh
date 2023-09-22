@@ -105,6 +105,16 @@ function wait_backstageapp()
 }
 
 
+function wait_locust()
+{
+    echo -n "Installing Locust load testing tool."
+    while [ ! -f /ks/.locust_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
 # waits for background init to finish
 
 rm $0

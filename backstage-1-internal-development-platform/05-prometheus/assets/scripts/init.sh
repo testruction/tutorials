@@ -13,6 +13,7 @@ set -euo pipefail
 /ks/kubeconfig.sh
 /ks/yq.sh
 /ks/nodejs.sh
+/ks/locust.sh
 
 # /ks/docker.sh &
 # /ks/helm.sh &
