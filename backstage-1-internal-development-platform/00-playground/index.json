@@ -24,6 +24,7 @@
                 {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
