@@ -9,7 +9,7 @@ class LoadTesting(HttpUser):
     @task(3)
     def fakenames(self):
         skip = random.randrange(0, 10)
-        limit = random.randrange(100, 500)
+        limit = random.randrange(100, 500, 33)
         self.client.get(f"/v1/fakenames?skip={skip}&limit={limit}")
         # self.client.get("/v1/status/200")
 
