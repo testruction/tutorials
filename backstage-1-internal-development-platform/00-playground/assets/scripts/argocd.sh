@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-helm helm repo add argo https://argoproj.github.io/argo-helm
+helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
 helm upgrade --install \
