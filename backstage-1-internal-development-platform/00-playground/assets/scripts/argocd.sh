@@ -5,7 +5,7 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
 helm upgrade --install \
-  --namespace argocd \
+  --namespace argo-cd \
   --create-namespace \
   --set server.service.type="LoadBalancer" \
   --set controller.metrics.enabled="true" \
@@ -21,7 +21,7 @@ helm upgrade --install \
   --set applicationSet.metrics.enabled="true" \
   --set applicationSet.metrics.serviceMonitor="true" \
   --set notifications.metrics.enabled="true" \
-  --set notifications.metrics.serviceMonitor="true"
+  --set notifications.metrics.serviceMonitor="true" \
   default argo/argo-cd
 
 touch /ks/.argocd_finished
