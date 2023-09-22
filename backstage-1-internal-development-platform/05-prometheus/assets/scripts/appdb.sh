@@ -16,4 +16,4 @@ cd /usr/local/pytest-sqlalchemy-cockroachdb
 
 pip3 install -r requirements.txt
 
-touch /ks/.sampledb_finished
+touch /ks/.appdb_finished

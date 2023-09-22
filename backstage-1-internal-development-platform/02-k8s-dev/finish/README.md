@@ -6,14 +6,14 @@ Deploy the application to the Kubernetes Cluster.
 
 ```bash
 # Update Helm chart dependencies
-helm dependency update ./sample-app/chart/
+helm dependency update ./web-app/chart/
 
 # Deploys the sample application
 helm install --create-namespace --namespace fastapi-demo \
 --set cockroachdb.statefulset.replicas="1" \
 --set cockroachdb.service.public.type="LoadBalancer" \
 --set cockroachdb.storage.persistentVolume.size="1Gi" \
-demo ./sample-app/chart/
+demo ./web-app/chart/
 ```{{exec}}
 
 Register the sample application component in Backstage.

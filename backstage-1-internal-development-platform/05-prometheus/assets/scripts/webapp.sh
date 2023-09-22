@@ -4,18 +4,18 @@ set -euo pipefail
 NS="${1:-fastapi-demo}"
 RL="${2:-demo}"
 
-if [ ! -d "${HOME}/sample-app" ]
+if [ ! -d "${HOME}/web-app" ]
 then
   git clone --single-branch \
   --branch main \
   https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
-  "${HOME}/sample-app"
+  "${HOME}/web-app"
 else
-  cd "${HOME}/sample-app/"
+  cd "${HOME}/web-app/"
   git pull
 fi
 
-cd "${HOME}/sample-app/"
+cd "${HOME}/web-app/"
 
 # Update Helm chart dependencies
 helm dependency update ./chart/
@@ -44,4 +44,4 @@ helm upgrade --install \
 
 kubectl label namespace fastapi-demo "prometheus=enabled"
 
-touch /ks/.sampleapp_finished
+touch /ks/.webapp_finished

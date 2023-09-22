@@ -18,6 +18,6 @@ set -euo pipefail
 # /ks/helm.sh &
 # /ks/bats.sh &
 /ks/prometheus.sh
-/ks/sampleapp.sh &
-# /ks/sampledb.sh &
+/ks/webapp.sh &
+# /ks/appdb.sh &
 /ks/backstageapp.sh &

@@ -74,20 +74,20 @@ function wait_prometheus()
     echo " DONE"
 }
 
-function wait_sampleapp()
+function wait_webapp()
 {
     echo -n "Installing Example App."
-    while [ ! -f /ks/.sampleapp_finished ]; do
+    while [ ! -f /ks/.webapp_finished ]; do
         echo -n '.'
         sleep 1;
     done;
     echo " DONE"
 }
 
-function wait_sampledb()
+function wait_appdb()
 {
     echo -n "Installing Example App database loader."
-    while [ ! -f /ks/.sampledb_finished ]; do
+    while [ ! -f /ks/.appdb_finished ]; do
         echo -n '.'
         sleep 1;
     done;
@@ -125,8 +125,8 @@ wait_kubeconfig
 # wait_helm
 # wait_bats
 wait_prometheus
-wait_sampleapp
-# wait_sampledb
+wait_webapp
+# wait_appdb
 wait_backstageapp
 
 sudo systemctl stop k3s
