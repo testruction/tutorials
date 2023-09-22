@@ -1,6 +1,6 @@
 # Run the Backstage development server
 
-Before continuing, check that all Kubernetes Pods are in "Ready" status.
+Before continuing, check that all Kubernetes pods are in **Running** status.
 
 ```bash
 kubectl get pods --all-namespaces

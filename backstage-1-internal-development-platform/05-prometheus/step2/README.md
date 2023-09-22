@@ -8,7 +8,7 @@ yarn add --cwd packages/app @roadiehq/backstage-plugin-prometheus
 
 Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
 
-Below the line beginning by "import { ReportIssue }".
+Below the line beginning by **`import { ReportIssue }`**.
 
 ```typescript
 import {
@@ -20,7 +20,7 @@ import {
 } from '@roadiehq/backstage-plugin-prometheus';
 ```
 
-At the **serviceEntityPage**, above the line "</EntityLayout>".
+At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
 
 ```typescript
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
@@ -28,7 +28,7 @@ At the **serviceEntityPage**, above the line "</EntityLayout>".
     </EntityLayout.Route>
 ```
 
-At the **overviewContent**, below the line "{entityWarningContent}".
+At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
 
 ```typescript
     <Grid item md={8}>
