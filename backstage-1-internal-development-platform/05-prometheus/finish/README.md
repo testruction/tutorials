@@ -1,6 +1,6 @@
 # Generate traffic load on the backend
 
-Open a new tab, then run the following command to generate some traffic to the backend component using [Locust](https://locust.io) and the `~/locustfile.py` script.
+Open a new terminal tab, then run the following command to generate some traffic to the backend component using [Locust](https://locust.io) and the `~/locustfile.py` script.
 
 ```bash
 locust --autostart -f ~/locustfile.py --users 5 --spawn-rate 2 -H http://localhost:18180
@@ -8,6 +8,9 @@ locust --autostart -f ~/locustfile.py --users 5 --spawn-rate 2 -H http://localho
 
 Return to the Backstage console of the **backend** component to observe the prometheus behavior.
 
-Use the following URL to observe the load generator execution.
+Use the following URLs to observe the load generator execution.
 
-* Locust UI [Click here]({{TRAFFIC_HOST1_8089}}).
+* **Locust UI** [Click here]({{TRAFFIC_HOST1_8089}})
+* **Backstage application** [Click here]({{TRAFFIC_HOST1_3000}}) .
+* Prometheus [Click here]({{TRAFFIC_HOST1_9090}}).
+* Sample App API doc [Click here]({{TRAFFIC_HOST1_18180}}/v1/docs).
