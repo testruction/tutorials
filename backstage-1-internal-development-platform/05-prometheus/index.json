@@ -14,7 +14,8 @@
                 "text": "step1/README.md"
             },
             {
-                "text": "step2/README.md"
+                "text": "step2/README.md",
+                "background": "step2/background.sh"
             },
             {
                 "text": "step3/README.md"
@@ -23,8 +24,7 @@
                 "text": "step4/README.md"
             },
             {
-                "text": "step5/README.md",
-                "background": "step5/background.sh"
+                "text": "step5/README.md"
             }
         ],
         "finish": {
