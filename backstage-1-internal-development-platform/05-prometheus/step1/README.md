@@ -5,4 +5,4 @@ The lab initialization process takes approximatly **10 minutes**.
 
 A the end following compnents will be deployed.
 
-![architecture](../assets/diagrams/architecture.png)
+![architecture](../assets/diagrams/architecture.drawio.png)
