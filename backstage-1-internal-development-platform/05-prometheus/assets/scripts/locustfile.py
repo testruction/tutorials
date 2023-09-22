@@ -13,7 +13,7 @@ class LoadTesting(HttpUser):
         self.client.get(f"/v1/fakenames?skip={skip}&limit={limit}")
 
     @task(3)
-    def get(self):
+    def http_status_code(self):
         code = random.randrange(500, 511)
         self.client.get("/v1/status/200")
         self.client.get(f"/v1/status/{code}")
