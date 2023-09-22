@@ -8,7 +8,7 @@ metadata:
     prometheus.io/alert: >-
       demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
-      slo:sli_error:ratio_rate30m{sloth_service="demo-fastapi-backend"}
+      slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-backend"}
 ```
 
 Edit the `web-app/src/frontend/catalog-info.yaml`, then add the following annotation.
@@ -19,7 +19,7 @@ metadata:
     prometheus.io/alert: >-
       demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
-      slo:sli_error:ratio_rate30m{sloth_service="demo-fastapi-frontend"}
+      slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-frontend"}
 ```
 
 > **Notice**
@@ -35,7 +35,7 @@ a
     prometheus.io/alert: >-
       demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
-      slo:objective:ratio{sloth_service="demo-fastapi-backend"}
+      slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-backend"}
 .
 w
 EOF
@@ -47,7 +47,7 @@ a
     prometheus.io/alert: >-
       demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
-      slo:objective:ratio{sloth_service="demo-fastapi-frontend"}
+      slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-frontend"}
 .
 w
 EOF
