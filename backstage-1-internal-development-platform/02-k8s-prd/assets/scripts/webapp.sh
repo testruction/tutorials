@@ -5,6 +5,6 @@ cd ~/
 
 git clone --single-branch --branch main \
 https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
-sample-app
+web-app
 
-touch /ks/.sampleapp_finished
+touch /ks/.webapp_finished

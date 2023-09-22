@@ -44,8 +44,8 @@
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/sampleapp.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/sampledb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
             ]
         }

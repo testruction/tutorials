@@ -58,20 +58,20 @@ function wait_helm()
     echo " DONE"
 }
 
-function wait_sampleapp()
+function wait_webapp()
 {
     echo -n "Installing Sample App."
-    while [ ! -f /ks/.sampleapp_finished ]; do
+    while [ ! -f /ks/.webapp_finished ]; do
         echo -n '.'
         sleep 1;
     done;
     echo " DONE"
 }
 
-function wait_sampledb()
+function wait_appdb()
 {
     echo -n "Installing Sample App database loader."
-    while [ ! -f /ks/.sampledb_finished ]; do
+    while [ ! -f /ks/.appdb_finished ]; do
         echo -n '.'
         sleep 1;
     done;
@@ -84,5 +84,5 @@ wait_nodejs
 wait_docker
 wait_kubeconfig
 wait_helm
-wait_sampleapp
-wait_sampledb
+wait_webapp
+wait_appdb

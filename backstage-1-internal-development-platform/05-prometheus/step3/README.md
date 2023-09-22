@@ -1,56 +1,22 @@
-# Add Prometheus rules to components
+# Add Prometheus plugin configuration
 
-Edit the `sample-app/src/backend/catalog-info.yaml`, then add the following annotation.
-
-```yaml
-metadata:
-  annotions:
-    prometheus.io/alert: >-
-      demo-fastapi-backendHighErrorRate
-    prometheus.io/rule: >-
-      slo:sli_error:ratio_rate30m{sloth_service="demo-fastapi-backend"}
-```
-
-Edit the `sample-app/src/frontend/catalog-info.yaml`, then add the following annotation.
+Edit the `backstage-tutorial/app-config.local.yaml` configuration file, the append the following settings to bastage Backstage to query the Prometheus API endpoint.
 
 ```yaml
-metadata:
-  annotions:
-    prometheus.io/alert: >-
-      demo-fastapi-frontendHighErrorRate
-    prometheus.io/rule: >-
-      slo:sli_error:ratio_rate30m{sloth_service="demo-fastapi-frontend"}
-```
-
-> **Notice**
-> The **rule** and **alert** definitions were devlopped using [Sloth](https://sloth.dev) and deployed as [Prometheus Operator](prometheus-operator.dev) custom resources. Use `kubectl -n fastapi-demo get servicemonitors,prometheusrules`{{exec}} to list the monitoring ressources of the sample application or `kubectl -n fastapi-demo describe servicemonitors,prometheusrules` to review their content.
+proxy:
+  '/prometheus/api':
+    target: http://localhost:9090/api/v1/
+prometheus:
+  proxyPath: /prometheus/api
+```{{copy}}
 
 <details><summary>Do it for me</summary>
 
 ```bash
-vi -e ${HOME}/sample-app/src/backend/catalog-info.yaml <<EOF
-/kind: Component
-/annotations
-a
-    prometheus.io/alert: >-
-      demo-fastapi-backendHighErrorRate
-    prometheus.io/rule: >-
-      slo:objective:ratio{sloth_service="demo-fastapi-backend"}
-.
-w
-EOF
-
-vi -e ${HOME}/sample-app/src/frontend/catalog-info.yaml <<EOF
-/kind: Component
-/annotations
-a
-    prometheus.io/alert: >-
-      demo-fastapi-frontendHighErrorRate
-    prometheus.io/rule: >-
-      slo:objective:ratio{sloth_service="demo-fastapi-frontend"}
-.
-w
-EOF
+yq -i '
+  .proxy.'/prometheus0/api'.target = "http://localhost:9090/api/v1/" |
+  .prometheus.proxyPath = "/prometheus0/api"
+' ${HOME}/backstage-tutorial//app-config.local.yaml
 ```{{exec}}
 
 </details>

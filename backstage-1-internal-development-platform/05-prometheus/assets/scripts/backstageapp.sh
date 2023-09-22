@@ -42,7 +42,7 @@ yq -i '
 # Register Sample Application entities
 yq -i '
   .catalog.locations[0].type = "file" |
-  .catalog.locations[0].target = "../../../sample-app/catalog-info.yaml"
+  .catalog.locations[0].target = "../../../web-app/catalog-info.yaml"
 ' app-config.local.yaml
 
 touch /ks/.backstageapp_finished

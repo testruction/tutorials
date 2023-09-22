@@ -6,7 +6,7 @@ Edit the `backstage-tutorial/app-config.local.yaml` configuration and add the fo
 catalog:
   locations:
     - type: file
-      target: ../../../sample-app/catalog-info.yaml
+      target: ../../../web-app/catalog-info.yaml
 ```{{copy}}
 
 > **Notice**:
@@ -17,7 +17,7 @@ catalog:
 ```bash
 yq -i '
   .catalog.locations[0].type = "file" |
-  .catalog.locations[0].target = "../../../sample-app/catalog-info.yaml"
+  .catalog.locations[0].target = "../../../web-app/catalog-info.yaml"
 ' app-config.local.yaml
 ```{{exec}}
 
