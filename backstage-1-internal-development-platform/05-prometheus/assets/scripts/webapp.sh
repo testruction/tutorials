@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NS="${1:-fastapi-demo}"
-RL="${2:-demo}"
-
 if [ ! -d "${HOME}/web-app" ]
 then
   git clone --single-branch \
@@ -27,6 +24,9 @@ do
 done
 
 # Deploys the sample application
+NS="${1:-fastapi-demo}"
+RL="${2:-demo}"
+
 helm upgrade --install \
   --create-namespace \
   --namespace "${NS}" \
