@@ -4,7 +4,7 @@ Open a new terminal tab, then run the following command to generate some traffic
 
 ```bash
 locust --autostart -f ~/locustfile.py --users 5 --spawn-rate 2 -H http://localhost:18180
-```
+```{{exec}}
 
 Return to the Backstage console of the **backend** component to observe the prometheus behavior.
 
