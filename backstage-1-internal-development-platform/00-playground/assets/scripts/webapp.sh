@@ -7,7 +7,7 @@ RL="${2:-demo}"
 if [ ! -d "${HOME}/web-app" ]
 then
   git clone --single-branch \
-  --branch main \
+  --branch feature/backstage-prometheus \
   https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
   "${HOME}/web-app"
 else
@@ -45,3 +45,4 @@ helm upgrade --install \
 kubectl label namespace fastapi-demo "prometheus=enabled"
 
 touch /ks/.webapp_finished
+
