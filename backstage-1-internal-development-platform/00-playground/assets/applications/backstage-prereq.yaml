@@ -20,12 +20,6 @@ roleRef:
   name: system:aggregate-to-view
 ---
 apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: backstage
-  namespace: backstage
----
-apiVersion: v1
 kind: Secret
 metadata:
   name: backstage-env
