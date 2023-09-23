@@ -9,3 +9,9 @@ Prometheus | [Click here]({{TRAFFIC_HOST1_9090}})
 App frontend | [Click here]({{TRAFFIC_HOST1_18080}})
 App backend | [Click here]({{TRAFFIC_HOST1_18180}})
 Backstage | [Click here]({{TRAFFIC_HOST1_8001}})
+
+Register the example application using the Backstage UI:
+
+```
+https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/feature/backstage-prometheus/catalog-info.yaml
+```{{copy}}
