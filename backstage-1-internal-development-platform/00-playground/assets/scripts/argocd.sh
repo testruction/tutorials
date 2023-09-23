@@ -8,6 +8,7 @@ helm upgrade --install \
   --namespace argo-cd \
   --create-namespace \
   --set server.service.type="LoadBalancer" \
+  --set server.service.servicePortHttp="10080" \
   --set controller.metrics.enabled="true" \
   --set controller.metrics.serviceMonitor.enabled="true" \
   --set dex.metrics.enabled="true" \
