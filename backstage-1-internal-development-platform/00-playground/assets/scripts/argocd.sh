@@ -15,10 +15,11 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
 helm upgrade --install \
+  --wait \
   --namespace argo-cd \
   --create-namespace \
   --set configs.secret.argocdServerAdminPassword="${BCRYPT_PWD}" \
-  --set server.extraArgs[0]=insecure \
+  --set server.extraArgs[0]="--insecure" \
   --set server.service.type="LoadBalancer" \
   --set server.service.servicePortHttp="10080" \
   --set controller.metrics.enabled="true" \
