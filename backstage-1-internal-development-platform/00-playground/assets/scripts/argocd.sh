@@ -38,6 +38,6 @@ helm upgrade --install \
   --set notifications.metrics.serviceMonitor.enabled="true" \
   default argo/argo-cd
 
-argo login  localhost:10080 --skip-test-tls --username "admin" --password "admin"
+argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "admin"
 
 touch /ks/.argocd_finished
