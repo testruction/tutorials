@@ -3,4 +3,4 @@
 FILE=/ks/wait-init.sh; while ! test -f ${FILE}; do clear; sleep 0.1; done; bash ${FILE}
 
 
-argocd app create backstage -f applications/backstage.yaml
+argocd app create backstage -f ~/argo-cd/applications/backstage.yaml
