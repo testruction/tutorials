@@ -109,7 +109,9 @@ spec:
               # on how to get entities into the catalog.
               locations:
                 - type: url
-                  target: https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml
+                  target: https://github.com/testruction/backstage-tutorial/blob/prometheus-plugin/catalog/core/locations.yaml
+                  rules:
+                    - allow: [User, Group, Domain]
             kubernetes:
               serviceLocatorMethod:
                 type: multiTenant
