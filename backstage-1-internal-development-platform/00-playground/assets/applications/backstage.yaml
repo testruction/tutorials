@@ -107,6 +107,11 @@ spec:
               # Overrides the default list locations from app-config.yaml as these contain example data.
               # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
               # on how to get entities into the catalog.
+              import:
+                entityFilename: catalog-info.yaml
+                pullRequestBranchName: backstage-integration
+              rules:
+                - allow: [Component, System, API, Resource, Location]
               locations:
                 - type: url
                   target: https://github.com/testruction/backstage-tutorial/blob/prometheus-plugin/catalog/core/locations.yaml
