@@ -7,6 +7,7 @@ helm repo update
 helm upgrade --install \
   --namespace argo-cd \
   --create-namespace \
+  --set server.insecure=true \
   --set server.service.type="LoadBalancer" \
   --set server.service.servicePortHttp="10080" \
   --set controller.metrics.enabled="true" \
