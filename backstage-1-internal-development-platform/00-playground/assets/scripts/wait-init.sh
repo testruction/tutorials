@@ -149,5 +149,3 @@ wait_argocd
 wait_webapp
 # wait_appdb
 wait_backstageapp
-
-sudo systemctl stop k3s
