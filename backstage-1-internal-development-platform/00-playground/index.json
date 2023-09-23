@@ -40,9 +40,7 @@
 
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
 
-                {"file": "manifests/namespace.yaml", "target": "~/manifests/", "chmod": "+rw"},
-                {"file": "manifests/backstage.yaml", "target": "~/manifests/", "chmod": "+rw"},
-                {"file": "manifests/postgres.yaml", "target": "~/manifests/", "chmod": "+rw"}
+                {"file": "applications/backstage.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"}
             ]
         }
     },

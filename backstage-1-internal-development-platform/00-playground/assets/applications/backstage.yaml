@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backstage
+  namespace: argo-cd
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: beckstage
+  project: default
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 51.1.1
+    helm:
+      releaseName: default
+      valuesObject:
+        backstage:
+          image:
+            registry: ghcr.io
+            repository: testruction/backstage
+            tag: 1.1.0-rc2
+        service:
+          ports:
+            backend: 8008
+        postgresql:
+          enabled: true
+          auth:
+            username: backstage
+            username: hunter2
+
+
+  syncPolicy:
+    automated: {}
+
