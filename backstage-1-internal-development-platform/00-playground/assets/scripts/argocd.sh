@@ -9,19 +9,19 @@ helm upgrade --install \
   --create-namespace \
   --set server.service.type="LoadBalancer" \
   --set controller.metrics.enabled="true" \
-  --set controller.metrics.serviceMonitor="true" \
+  --set controller.metrics.serviceMonitor.enabled="true" \
   --set dex.metrics.enabled="true" \
-  --set dex.metrics.serviceMonitor="true" \
+  --set dex.metrics.serviceMonitor.enabled="true" \
   --set redis.metrics.enabled="true" \
-  --set redis.metrics.serviceMonitor="true" \
+  --set redis.metrics.serviceMonitor.enabled="true" \
   --set server.metrics.enabled="true" \
-  --set server.metrics.serviceMonitor="true" \
+  --set server.metrics.serviceMonitor.enabled="true" \
   --set repoServer.metrics.enabled="true" \
-  --set repoServer.metrics.serviceMonitor="true" \
+  --set repoServer.metrics.serviceMonitor.enabled="true" \
   --set applicationSet.metrics.enabled="true" \
-  --set applicationSet.metrics.serviceMonitor="true" \
+  --set applicationSet.metrics.serviceMonitor.enabled="true" \
   --set notifications.metrics.enabled="true" \
-  --set notifications.metrics.serviceMonitor="true" \
+  --set notifications.metrics.serviceMonitor.enabled="true" \
   default argo/argo-cd
 
 touch /ks/.argocd_finished
