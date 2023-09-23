@@ -5,6 +5,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 
 helm upgrade --install \
+  --wait \
   --namespace monitoring \
   --create-namespace \
   --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
@@ -24,7 +25,5 @@ helm upgrade --install \
   --set thanosRuller.enabled="false" \
   --set prometheus.service.type="LoadBalancer" \
   default prometheus-community/kube-prometheus-stack
-
-kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 touch /ks/.prometheus_finished
