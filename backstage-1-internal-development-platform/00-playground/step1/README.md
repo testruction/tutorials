@@ -13,5 +13,5 @@ Backstage | [Click here]({{TRAFFIC_HOST1_8008}})
 Register the example application using the Backstage UI:
 
 ```
-https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/feature/backstage-prometheus/catalog-info.yaml
+https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/prometheus/catalog-info.yaml
 ```{{copy}}
