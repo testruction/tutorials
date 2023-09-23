@@ -1,5 +1,7 @@
 # Environment
 
+![architecture](../assets/diagrams/architecture.drawio.png)
+
 Application | URL
 --- | ---
 Argo CD | [Click here]({{TRAFFIC_HOST1_11180}})

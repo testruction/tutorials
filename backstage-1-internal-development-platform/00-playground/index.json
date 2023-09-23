@@ -9,7 +9,12 @@
             "foreground": "intro/foreground.sh",
             "background": "intro/background.sh"
         },
-        "steps": [],
+        "steps": [
+            {
+                "text": "step1/README.md",
+                "background": "step1/background.sh"
+            }
+        ],
         "finish": {
             "text": "finish/README.md"
         },
