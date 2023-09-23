@@ -40,7 +40,8 @@
 
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
 
-                {"file": "applications/backstage.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"}
+                {"file": "applications/backstage.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"},
+                {"file": "applications/backstage-prereq.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"}
             ]
         }
     },
