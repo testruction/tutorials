@@ -3,4 +3,5 @@
 FILE=/ks/wait-init.sh; while ! test -f ${FILE}; do clear; sleep 0.1; done; bash ${FILE}
 
 
+kubectl create namespace backstage
 argocd app create backstage -f ~/argo-cd/applications/backstage.yaml

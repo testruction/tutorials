@@ -68,7 +68,7 @@ yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].type = "url" |
   .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].target = "https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml" |
   .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.serviceLocatorMethod.type = "multiTenant" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].type = "multiTenant" |
+  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].type = "config" |
   .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].url = "https://kubernetes.default.svc.cluster.local:443" |  
   .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].name = "local" |
   .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].authProvider = "serviceAccount" |
