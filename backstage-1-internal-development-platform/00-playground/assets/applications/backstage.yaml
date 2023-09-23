@@ -20,6 +20,7 @@ spec:
             registry: ghcr.io
             repository: testruction/backstage
             tag: 1.1.0-rc2
+          serviceAccountName: backstage
           extraEnvVarsSecrets:
             - backstage-env
           appConfig:
@@ -51,7 +52,7 @@ spec:
                 host: 0.0.0.0
                 port: 7007
               csp:
-                connect-src: ["'self'", 'http:', 'https:']
+                connect-src: ['self', 'http:', 'https:']
               # config options: https://node-postgres.com/api/client
               cors:
                 origin: http://localhost:3000
