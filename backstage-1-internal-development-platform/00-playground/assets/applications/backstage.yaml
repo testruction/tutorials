@@ -20,6 +20,8 @@ spec:
             registry: ghcr.io
             repository: testruction/backstage
             tag: 1.1.0-rc2
+          extraEnvVarsSecrets:
+            - backstage-env
           appConfig:
             organization:
               name: testruction.io
