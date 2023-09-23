@@ -87,7 +87,7 @@ spec:
           enabled: true
           auth:
             username: backstage
-            username: hunter2
+            password: hunter2
 
 
   syncPolicy:
