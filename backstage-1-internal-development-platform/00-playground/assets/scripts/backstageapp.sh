@@ -56,23 +56,8 @@ KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 export KC_URL
 yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.app.listen.host = "0.0.0.0" |
-  .spec.source.helm.valuesObject.backstage.appConfig.app.listen.port = 3000 |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.listen.host = "0.0.0.0" |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.listen.port = 7007 |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].type = "url" |
-  .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].target = "https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.serviceLocatorMethod.type = "multiTenant" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].type = "config" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].url = "https://kubernetes.default.svc.cluster.local:443" |  
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].name = "local" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].authProvider = "serviceAccount" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].skipTLSVerify = "false" |
-  .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.clusterLocatorMethods[0].clusters[0].skipMetricsLookup = "true" |
-  .spec.source.helm.valuesObject.backstage.appConfig.proxy.'/prometheus0/api'.target = "http://prometheus-operated.monitoring:9090/api/v1/" |
-  .spec.source.helm.valuesObject.backstage.appConfig.prometheus.proxyPath = "/prometheus0/api"
+  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
 touch /ks/.backstageapp_finished
