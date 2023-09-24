@@ -8,14 +8,14 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: backstage
   project: default
-  source:
-    chart: backstage
-    repoURL: https://backstage.github.io/charts
-    targetRevision: 1.3.0
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     automated: {}
+  source:
+    chart: backstage
+    repoURL: https://backstage.github.io/charts
+    targetRevision: 1.3.0
     helm:
       releaseName: default
       valuesObject:
