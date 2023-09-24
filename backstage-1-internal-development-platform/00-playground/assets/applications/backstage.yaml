@@ -20,7 +20,9 @@ spec:
             registry: ghcr.io
             repository: testruction/backstage
             tag: 1.1.0-rc2
-          serviceAccountName: backstage
+          serviceAccount:
+            create: true
+            name: backstage
           extraEnvVarsSecrets:
             - backstage-env
           appConfig:
