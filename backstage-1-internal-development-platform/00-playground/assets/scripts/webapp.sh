@@ -7,7 +7,7 @@ RL="${2:-demo}"
 if [ ! -d "${HOME}/web-app" ]
 then
   git clone --single-branch \
-  --branch feature/backstage-prometheus \
+  --branch main \
   https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
   "${HOME}/web-app"
 else
