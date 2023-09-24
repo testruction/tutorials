@@ -25,22 +25,14 @@ spec:
             tag: 1.1.0-rc2
           extraEnvVarsSecrets:
             - backstage-env
-          appConfig:
-            organization:
-              name: testruction.io
+          extraAppConfig:
+            # Backstage override configuration for your local development environment
             app:
-              title: Backstage tutorial
               # Should be the same as backend.baseUrl when using the `app-backend` plugin.
               baseUrl: http://localhost
               listen:
                 host: 0.0.0.0
                 port: 3000
-            # Used for enabling authentication, secret is shared by all backend plugins
-            # See https://backstage.io/docs/auth/service-to-service-auth for
-            # information on the format
-            # auth:
-            #   keys:
-            #     - secret: ${BACKEND_SECRET}
             backend:
               # Note that the baseUrl should be the URL that the browser and other clients
               # should use when communicating with the backend, i.e. it needs to be
@@ -53,13 +45,7 @@ spec:
               listen:
                 host: 0.0.0.0
                 port: 7007
-              csp:
-                connect-src: ['self', 'http:', 'https:']
               # config options: https://node-postgres.com/api/client
-              cors:
-                origin: http://localhost:3000
-                methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
-                credentials: false
               database:
                 client: pg
                 connection:
@@ -73,67 +59,29 @@ spec:
                   # ssl:
                   #   ca: # if you have a CA file and want to verify it you can uncomment this section
                   #     $file: <file-path>/ca/server.crt
-            integrations:
-              github:
-                - host: github.com
-                  # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-                  # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
-                  token: ${GITHUB_TOKEN}
-                ### Example for how to add your GitHub Enterprise instance using the API:
-                # - host: ghe.example.net
-                #   apiBaseUrl: https://ghe.example.net/api/v3
-                #   token: ${GHE_TOKEN}
-            proxy:
-              ### Example for how to add a proxy endpoint for the frontend.
-              ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-              # endpoints:
-              #   '/test':
-              #     target: 'https://example.com'
-              #     changeOrigin: true
-              /prometheus0/api:
-                target: http://prometheus-operated.monitoring:9090/api/v1/
-            # Reference documentation http://backstage.io/docs/features/techdocs/configuration
-            # Note: After experimenting with basic setup, use CI/CD to generate docs
-            # and an external cloud storage when deploying TechDocs for production use-case.
-            # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
-            techdocs:
-              builder: 'local' # Alternatives - 'external'
-              generator:
-                runIn: 'docker' # Alternatives - 'local'
-              publisher:
-                type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
-            auth:
-              # see https://backstage.io/docs/auth/ to learn about auth providers
-              providers: {}
-
-            scaffolder:
-              # see https://backstage.io/docs/features/software-templates/configuration for software template options
+              cors:
+                origin: http://localhost:3000
             catalog:
               # Overrides the default list locations from app-config.yaml as these contain example data.
               # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
               # on how to get entities into the catalog.
-              import:
-                entityFilename: catalog-info.yaml
-                pullRequestBranchName: backstage-integration
-              rules:
-                - allow: [Component, System, API, Resource, Location]
               locations:
                 - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/prometheus-plugin/catalog/core/locations.yaml
-                  rules:
-                    - allow: [User, Group, Domain]
+                  target: https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml
             kubernetes:
               serviceLocatorMethod:
                 type: multiTenant
               clusterLocatorMethods:
                 - type: config
                   clusters:
-                    - url: https://kubernetes.default.svc.cluster.local:443
+                    - url: ${KUBERNETES_URL}
                       name: local
                       authProvider: serviceAccount
                       skipTLSVerify: false
                       skipMetricsLookup: true
-
+            proxy:
+              /prometheus0/api:
+                target: ${PROMETHEUS_URL}/api/v1/
             prometheus:
               proxyPath: /prometheus0/api
         service:
