@@ -14,7 +14,7 @@ set -euo pipefail
 /ks/helm.sh
 
 /ks/yq.sh
-/ks/nodejs.sh
+# /ks/nodejs.sh
 /ks/locust.sh
 
 # /ks/docker.sh &
