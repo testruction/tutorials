@@ -60,4 +60,8 @@ yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
+kubectl apply -f ~/deploy/argocd/backstage-rbac.yaml
+
+argocd app create backstage -f ~/deploy/argocd/backstage.yaml
+
 touch /ks/.backstageapp_finished

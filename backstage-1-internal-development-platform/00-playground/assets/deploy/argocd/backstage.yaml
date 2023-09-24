@@ -161,6 +161,8 @@ spec:
                   target: https://github.com/testruction/backstage-tutorial/blob/main/catalog/core/locations.yaml
                   rules:
                     - allow: [User, Group, Domain]
+                - type: url
+                  target: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/prometheus/catalog-info.yaml
             kubernetes:
               serviceLocatorMethod:
                 type: multiTenant
