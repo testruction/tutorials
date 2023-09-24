@@ -34,12 +34,12 @@ helm upgrade --install \
   --set cockroachdb.create="false" \
   --set backend.service.type="LoadBalancer" \
   --set backend.service.port="18180" \
-  --set backend.serviceMonitor.enabled="true" \
+  --set backend.metrics.serviceMonitor.enabled="true" \
   --set backend.extraEnv[0].name="DATABASE_ENGINE" \
   --set backend.extraEnv[0].value="sqlite" \
   --set frontend.service.type="LoadBalancer" \
   --set frontend.service.port="18080" \
-  --set frontend.serviceMonitor.enabled="true" \
+  --set frontend.metrics.serviceMonitor.enabled="true" \
   "${RL}" ./chart/
 
 kubectl label namespace fastapi-demo "prometheus=enabled"
