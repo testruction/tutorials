@@ -144,5 +144,7 @@ spec:
             username: backstage
             password: hunter2
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated: {}
 
