@@ -36,12 +36,16 @@
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
 
-                {"file": "scripts/locustfile.py", "target": "~/", "chmod": "+rw"},
+                {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 
-                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
 
-                {"file": "applications/backstage.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"},
-                {"file": "applications/backstage-prereq.yaml", "target": "~/argo-cd/applications/", "chmod": "+rw"}
+                {"file": "deploy/kubernetes/namespace.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+                {"file": "deploy/kubernetes/backstage.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+                {"file": "deploy/kubernetes/postgres.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+
+                {"file": "deploy/argocd/backstage.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/argocd/backstage-prereq.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
             ]
         }
     },
