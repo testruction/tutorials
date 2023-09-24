@@ -139,7 +139,8 @@ sudo systemctl stop multipathd
 clear
 
 wait_yq
-wait_nodejs
+# wait_nodejs
+wait_locust
 # wait_docker
 wait_kubeconfig
 wait_helm
