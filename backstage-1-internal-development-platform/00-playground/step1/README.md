@@ -13,7 +13,7 @@ Backstage | [Click here]({{TRAFFIC_HOST1_8008}})
 Deploy the Backstage prerequisites.
 
 ```bash
-kubectl apply -f ~/deploy/argocd/backstage-prereq.yaml
+kubectl apply -f ~/deploy/argocd/backstage-rbac.yaml
 ```{{exec}}
 
 Deploy the Backstage application using Argo CD.
