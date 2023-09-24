@@ -51,20 +51,17 @@ yq -i '
 
 # Customize Argo CD application deployment
 # ----------------------------------------
-KC_FRONTEND_URL="$(sed -e 's/PORT/7007/' -e 's/https/http/' /etc/killercoda/host)"
-KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
+KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 
-export KC_FRONTEND_URL
-export KC_BACKEND_URL
-
+export KC_URL
 yq -i '
-  .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_FRONTEND_URL) |
+  .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.app.listen.host = "0.0.0.0" |
   .spec.source.helm.valuesObject.backstage.appConfig.app.listen.port = 3000 |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_BACKEND_URL) |
+  .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.listen.host = "0.0.0.0" |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.listen.port = 7007 |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_FRONTEND_URL) |
+  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].type = "url" |
   .spec.source.helm.valuesObject.backstage.appConfig.catalog.locations[0].target = "https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml" |
   .spec.source.helm.valuesObject.backstage.appConfig.kubernetes.serviceLocatorMethod.type = "multiTenant" |
