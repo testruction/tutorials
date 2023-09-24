@@ -158,7 +158,7 @@ spec:
                 - allow: [Component, System, API, Resource, Location]
               locations:
                 - type: url
-                  target: https://github.com/backstage/backstage-tutorial/blob/master/catalog/core/locations.yaml
+                  target: https://github.com/testruction/backstage-tutorial/blob/main/catalog/core/locations.yaml
                   rules:
                     - allow: [User, Group, Domain]
             kubernetes:
