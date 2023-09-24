@@ -127,7 +127,7 @@ spec:
               #     target: 'https://example.com'
               #     changeOrigin: true
               /prometheus0/api:
-                target: ${PROMETHEUS_URL}/api/v1/
+                target: http://prometheus.monitoring:9090/api/v1/
 
             # Reference documentation http://backstage.io/docs/features/techdocs/configuration
             # Note: After experimenting with basic setup, use CI/CD to generate docs
@@ -160,7 +160,7 @@ spec:
               clusterLocatorMethods:
                 - type: config
                   clusters:
-                    - url: ${KUBERNETES_URL}
+                    - url: kubernetes.default.svc.cluster.local
                       name: local
                       authProvider: serviceAccount
                       skipTLSVerify: false
