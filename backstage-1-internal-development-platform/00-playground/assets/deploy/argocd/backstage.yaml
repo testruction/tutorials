@@ -84,6 +84,26 @@ spec:
                 target: ${PROMETHEUS_URL}/api/v1/
             prometheus:
               proxyPath: /prometheus0/api
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthcheck
+            port: 7007
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 2
+          timeoutSeconds: 2
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthcheck
+            port: 7007
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
         service:
           type: LoadBalancer
           ports:
@@ -93,6 +113,9 @@ spec:
           auth:
             username: backstage
             password: hunter2
+        metrics:
+          serviceMonitor:
+            enabled: true
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
