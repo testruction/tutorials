@@ -1,5 +1,5 @@
 {
-    "title": "02a. Backstage: Kubernetes integration",
+    "title": "03. Backstage: Kubernetes integration",
     "description": "Learn how to configure Backstage for local development with Kubernetes",
     "difficulty": "easy",
     "time": "20-30 minutes",
