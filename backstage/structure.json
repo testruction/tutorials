@@ -10,7 +10,7 @@
       "path": "03-k8s-dev"
     },
     {
-      "path": "03-k8s-in-cluster"
+      "path": "04-k8s-incluster"
     },
     {
       "path": "05-prometheus"
