@@ -36,7 +36,7 @@ helm upgrade --install \
   --set applicationSet.metrics.serviceMonitor.enabled="true" \
   --set notifications.metrics.enabled="true" \
   --set notifications.metrics.serviceMonitor.enabled="true" \
-  default argo/argo-cd
+  gitops argo/argo-cd
 
 argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "admin"
 
