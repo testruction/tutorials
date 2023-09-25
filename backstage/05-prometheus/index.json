@@ -34,6 +34,7 @@
             "host01": [
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
                 {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
@@ -45,11 +46,10 @@
                 {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "manifests/namespace.yaml", "target": "~/", "chmod": "+rw"},
-                {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
-                {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"},
-                {"file": "scripts/locustfile.py", "target": "~/", "chmod": "+rw"},
-                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+
+                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+
+                {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"}
             ]
         }
     },

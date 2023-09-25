@@ -19,8 +19,9 @@ set -euo pipefail
 
 # /ks/docker.sh &
 # /ks/bats.sh &
-/ks/prometheus.sh
+/ks/crds.sh
 /ks/argocd.sh
+/ks/prometheus.sh &
 /ks/webapp.sh &
 # /ks/appdb.sh &
 /ks/backstageapp.sh &

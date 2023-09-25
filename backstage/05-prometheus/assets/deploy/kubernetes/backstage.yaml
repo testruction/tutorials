@@ -35,6 +35,8 @@ metadata:
 data:
   POSTGRES_HOST: postgres
   POSTGRES_PORT: "5432"
+  KUBERNETES_URL: https://kubernetes.default:443
+  PROMETHEUS_URL: http://prometheus-operated.monitoring:9090
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,7 +66,7 @@ spec:
             - until true; do nc -vz ${POSTGRES_HOST} ${POSTGRES_PORT}; echo Waiting for database; sleep 1s; done
       containers:
         - name: backstage
-          image: backstage:1.0.0
+          image: ghcr.io/testruction/backstage:1.1.0-rc2
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
