@@ -1,5 +1,5 @@
 {
-    "title": "02b. Backstage: Kubernetes deployment",
+    "title": "04. Backstage: Kubernetes deployment",
     "description": "Learn how to deploy Backstage in Kubernetes using Docker and K3S",
     "difficulty": "easy",
     "time": "20-30 minutes",
