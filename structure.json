@@ -1,19 +1,19 @@
 {
     "items": [
         {
-            "path": "xx-sandboxes",
-            "title": "Sandboxes",
-            "Description": "Sandboxes used to develop courses"
-        },
-        {
-            "path": "helm-1-helm-chart-development",
+            "path": "helm",
             "title": "Helm chart development",
             "description": "Develop a Helm charts for a multi-component application from scratch"
         },
         {
-            "path": "backstage-1-internal-development-platform",
+            "path": "backstage",
             "title": "Backstage",
             "description": "Develop a Helm charts for a multi-component application from scratch"
-        }
+        },
+        {
+            "path": "sandboxes",
+            "title": "Sandboxes",
+            "Description": "Sandboxes used to develop courses"
+        },
     ]
 }
