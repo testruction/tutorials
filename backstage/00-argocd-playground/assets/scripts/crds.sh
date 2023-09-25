@@ -8,4 +8,4 @@ helm repo update
 
 helm ugprade --install prometheus-operator-crds prometheus-community/prometheus-operator-crds --verison "${VERSION}"
 
-touch /ks/crds_finished
+touch /ks/.crds_finished
