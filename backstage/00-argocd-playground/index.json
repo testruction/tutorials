@@ -1,5 +1,5 @@
 {
-    "title": "00. Backstage Playground",
+    "title": "00. Backstage Playground (Argo CD)",
     "description": "Play with Backstage. Does not have any taks or questions. Created to develop scenarios and test things related to Backstage",
     "difficulty": "easy",
     "time": "20-30 minutes",
@@ -35,6 +35,7 @@
                 {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 

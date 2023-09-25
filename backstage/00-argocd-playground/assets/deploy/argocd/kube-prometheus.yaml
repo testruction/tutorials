@@ -23,6 +23,7 @@ spec:
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             ruleSelectorNilUsesHelmValues: false
+        crds: false
         grafana:
           enabled: false
         kubeApiServer:

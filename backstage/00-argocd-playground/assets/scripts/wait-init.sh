@@ -64,10 +64,10 @@ function wait_bats()
     echo " DONE"
 }
 
-function wait_prometheus()
+function wait_crds()
 {
-    echo -n "Deploying Prometheus Operator."
-    while [ ! -f /ks/.prometheus_finished ]; do
+    echo -n "Deploying Custom Resource Definitions."
+    while [ ! -f /ks/.crds_finished ]; do
         echo -n '.'
         sleep 1;
     done;
@@ -78,6 +78,16 @@ function wait_argocd()
 {
     echo -n "Deploying Argo CD."
     while [ ! -f /ks/.argocd_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
+function wait_prometheus()
+{
+    echo -n "Deploying Prometheus Operator."
+    while [ ! -f /ks/.prometheus_finished ]; do
         echo -n '.'
         sleep 1;
     done;
@@ -145,8 +155,9 @@ wait_locust
 wait_kubeconfig
 wait_helm
 # wait_bats
-wait_prometheus
+wait_crds
 wait_argocd
+wait_prometheus
 wait_webapp
 # wait_appdb
 wait_backstageapp

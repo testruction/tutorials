@@ -1,16 +1,16 @@
 {
   "items": [
     {
-      "path": "00-playground"
+      "path": "00-argocd-playground"
     },
     {
       "path": "01-basics"
     },
     {
-      "path": "02-k8s-dev"
+      "path": "03-k8s-dev"
     },
     {
-      "path": "02-k8s-prd"
+      "path": "03-k8s-in-cluster"
     },
     {
       "path": "05-prometheus"
