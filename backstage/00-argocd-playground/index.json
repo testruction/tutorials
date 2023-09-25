@@ -41,10 +41,6 @@
 
                 {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
 
-                {"file": "deploy/kubernetes/namespace.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
-                {"file": "deploy/kubernetes/backstage.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
-                {"file": "deploy/kubernetes/postgres.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
-
                 {"file": "deploy/argocd/kube-prometheus.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/backstage.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/backstage-rbac.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
