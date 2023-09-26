@@ -1,0 +1,57 @@
+{
+    "title": "00. Backstage Playground (Argo CD)",
+    "description": "Play with Backstage. Does not have any taks or questions. Created to develop scenarios and test things related to Backstage",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md",
+                "background": "step1/background.sh"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/flux.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
+
+                {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+
+                {"file": "deploy/kubernetes/namespace.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+                {"file": "deploy/kubernetes/backstage.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+                {"file": "deploy/kubernetes/postgres.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
+
+                {"file": "deploy/argocd/backstage.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/argocd/backstage-rbac.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+    }
+}
