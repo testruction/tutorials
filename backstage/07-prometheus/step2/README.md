@@ -42,6 +42,8 @@ At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
 <details><summary>Dot it for me</summary>
 
 ```typescript
+yarn add --cwd packages/app @roadiehq/backstage-plugin-prometheus
+
 vi -e ${HOME}/backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx <<EOF
 /import { ReportIssue }
 a

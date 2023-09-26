@@ -6,12 +6,19 @@ Install the `@roadiehq/backstage-plugin-argo-cd-backend` package in Backstage Ba
 yarn add --cwd packages/backend @roadiehq/backstage-plugin-argo-cd-backend
 ```{{exec}}
 
-Download the Kubernetes backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
+In the directory **`packages/backend/src/plugins`**, Create a file named **`argocd.ts` then add the following content.
 
-```bash
-curl -o packages/backend/src/plugins/kubernetes.ts \
-https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
-```{{exec}}
+```typescript
+import { createRouter } from '@roadiehq/backstage-plugin-argo-cd-backend';
+import { PluginEnvironment } from '../types';
+
+export default async function createPlugin({
+  logger,
+  config,
+}: PluginEnvironment) {
+  return await createRouter({ logger, config });
+}
+```{{copy}}
 
 Edit the `backstage-tutorial/packages/backend/src/index.ts`, then insert the following content:
 
@@ -36,6 +43,8 @@ Bellow the line beginning by **`apiRouter.use('/search')`**.
 <details><summary>Do it for me</summary>
 
 ```bash
+yarn add --cwd packages/backend @roadiehq/backstage-plugin-argo-cd-backend
+
 cat << EOF > ${HOME}/backstage-tutorial/packages/backend/src/plugins/argocd.ts
 import { createRouter } from '@roadiehq/backstage-plugin-argo-cd-backend';
 import { PluginEnvironment } from '../types';
