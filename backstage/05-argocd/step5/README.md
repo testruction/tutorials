@@ -1,24 +1,43 @@
-# Run the Backstage development server
+# Add Prometheus rules to components
 
-Before continuing, check that all Kubernetes pods are in **Running** status.
+Edit the `web-app/src/backend/catalog-info.yaml`, then add the following annotation.
+
+```yaml
+metadata:
+  annotations:
+    argocd/app-name: demo
+```
+
+Edit the `web-app/src/frontend/catalog-info.yaml`, then add the following annotation.
+
+```yaml
+metadata:
+  annotations:
+    argocd/app-name: demo
+```
+
+<details><summary>Do it for me</summary>
 
 ```bash
-kubectl get pods --all-namespaces
+vi -e ${HOME}/web-app/src/backend/catalog-info.yaml <<EOF
+/kind: Component
+/annotations
+a
+    argocd/app-name: demo
+    argocd/proxy-url: '/argocd0/api'
+.
+w
+EOF
+
+vi -e ${HOME}/web-app/src/frontend/catalog-info.yaml <<EOF
+/kind: Component
+/annotations
+a
+    argocd/app-name: demo
+    argocd/proxy-url: '/argocd0/api'
+.
+w
+EOF
 ```{{exec}}
 
-Run the Backstage development server.
-
-```bash
-yarn dev
-```{{exec}}
-
-> Wait for the message `webpack compiled successfully`.
-
-Use following links to access the different consoles:
-
-Application | URL
---- | ---
-Backstage | [Click here]({{TRAFFIC_HOST1_8008}})
-Argo CD | [Click here]({{TRAFFIC_HOST1_10080}}) user: **admin**, password: **admin**
-Webapp frontend | [Click here]({{TRAFFIC_HOST1_18080}})
-Webapp backend | [Click here]({{TRAFFIC_HOST1_18180}})
+</details>
