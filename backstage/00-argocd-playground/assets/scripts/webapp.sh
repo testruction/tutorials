@@ -45,4 +45,3 @@ RL="${2:-demo}"
 argocd app create demo -f ~/deploy/argocd/fastapi-demo.yaml
 
 touch /ks/.webapp_finished
-
