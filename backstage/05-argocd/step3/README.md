@@ -34,7 +34,7 @@ Edit the `backstage-tutorial/app-config.local.yaml` configuration file, the appe
 
 ```yaml
 proxy:
-  '/argocd/api':
+  '/argocd0/api':
     target: http://localhost:10080/api/v1/
     changeOrigin: true
     # only if your argocd api has self-signed cert
@@ -62,10 +62,10 @@ ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account backstage)
 export ARGOCD_AUTH_TOKEN
 
 yq -i '
-  .proxy.'/argocd/api'.target = "http://localhost:10080/api/v1/" |
-  .proxy.'/argocd/api'.changeOrigin = true |
-  .proxy.'/argocd/api'.secure = false |
-  .proxy.'/argocd/api'.headers.Cookie.$env = "ARGOCD_AUTH_TOKEN"
+  .proxy.'/argocd0/api'.target = "http://localhost:10080/api/v1/" |
+  .proxy.'/argocd0/api'.changeOrigin = true |
+  .proxy.'/argocd0/api'.secure = false |
+  .proxy.'/argocd0/api'.headers.Cookie.$env = "ARGOCD_AUTH_TOKEN"
 ' ${HOME}/backstage-tutorial/app-config.local.yaml
 ```{{exec}}
 
