@@ -24,6 +24,7 @@ vi -e ${HOME}/web-app/src/backend/catalog-info.yaml <<EOF
 /annotations
 a
     argocd/app-name: demo
+    argocd/proxy-url: '/argocd0/api'
 .
 w
 EOF
@@ -33,6 +34,7 @@ vi -e ${HOME}/web-app/src/frontend/catalog-info.yaml <<EOF
 /annotations
 a
     argocd/app-name: demo
+    argocd/proxy-url: '/argocd0/api'
 .
 w
 EOF
