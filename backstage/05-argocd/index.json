@@ -1,0 +1,60 @@
+{
+    "title": "05. Backstage: Argo CD integration",
+    "description": "Learn how to setup Backstage to collect entities deployment state from ArgoCD",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md",
+                "background": "step2/background.sh"
+            },
+            {
+                "text": "step3/README.md"
+            },
+            {
+                "text": "step4/README.md"
+            },
+            {
+                "text": "step5/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+
+                {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"},
+
+                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+    }
+}
