@@ -64,6 +64,16 @@ function wait_bats()
     echo " DONE"
 }
 
+function wait_crds()
+{
+    echo -n "Deploying Custom Resource Definitions."
+    while [ ! -f /ks/.crds_finished ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
 function wait_argocd()
 {
     echo -n "Deploying Argo CD."
@@ -122,6 +132,7 @@ wait_yq
 wait_nodejs
 # wait_docker
 wait_kubeconfig
+wait_crds
 # wait_helm
 # wait_bats
 wait_argocd

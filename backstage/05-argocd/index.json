@@ -39,6 +39,7 @@
                 {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
