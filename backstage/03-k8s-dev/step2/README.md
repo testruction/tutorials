@@ -9,8 +9,8 @@ yarn add --cwd packages/backend @backstage/plugin-kubernetes-backend
 Download the Kubernetes backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
 
 ```bash
-curl -o packages/backend/src/plugins/kubernetes.ts \
-https://raw.githubusercontent.com/backstage/backstage/master/packages/backend/src/plugins/kubernetes.ts
+curl -sSL -o packages/backend/src/plugins/kubernetes.ts \
+https://github/backstage/backstage/raw/master/packages/backend/src/plugins/kubernetes.ts
 ```{{exec}}
 
 Edit the `backstage-tutorial/packages/backend/src/index.ts`, then insert the following content **without** the comments:

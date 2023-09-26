@@ -6,19 +6,12 @@ Install the `@roadiehq/backstage-plugin-argo-cd-backend` package in Backstage Ba
 yarn add --cwd packages/backend @roadiehq/backstage-plugin-argo-cd-backend
 ```{{exec}}
 
-In the directory **`packages/backend/src/plugins`**, Create a file named **`argocd.ts` then add the following content.
+Download the Argo CD backend initialization script to the plugin directory (i.e. `packages/backend/src/plugins`).
 
-```typescript
-import { createRouter } from '@roadiehq/backstage-plugin-argo-cd-backend';
-import { PluginEnvironment } from '../types';
-
-export default async function createPlugin({
-  logger,
-  config,
-}: PluginEnvironment) {
-  return await createRouter({ logger, config });
-}
-```{{copy}}
+```bash
+curl -sSL -o ${HOME}/backstage-tutorial/packages/backend/src/plugins/argocd.ts \
+https://github.com/RoadieHQ/roadie-backstage-plugins/raw/main/packages/backend/src/plugins/argocd.ts
+```{{exec}}
 
 Edit the `backstage-tutorial/packages/backend/src/index.ts`, then insert the following content:
 
@@ -45,18 +38,8 @@ Bellow the line beginning by **`apiRouter.use('/search')`**.
 ```bash
 yarn add --cwd packages/backend @roadiehq/backstage-plugin-argo-cd-backend
 
-cat << EOF > ${HOME}/backstage-tutorial/packages/backend/src/plugins/argocd.ts
-import { createRouter } from '@roadiehq/backstage-plugin-argo-cd-backend';
-import { PluginEnvironment } from '../types';
-
-export default async function createPlugin({
-  logger,
-  config,
-}: PluginEnvironment) {
-  return await createRouter({ logger, config });
-}
-EOF
-
+curl -sSL -o ${HOME}/backstage-tutorial/packages/backend/src/plugins/argocd.ts \
+https://github.com/RoadieHQ/roadie-backstage-plugins/raw/main/packages/backend/src/plugins/argocd.ts
 
 vi -e ${HOME}/backstage-tutorial/packages/backend/src/index.ts <<EOF
 /import { PluginEnvironment }
