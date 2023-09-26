@@ -1,5 +1,5 @@
 {
-    "title": "04. Backstage: Prometheus integration",
+    "title": "07. Backstage: Prometheus integration",
     "description": "Learn how to setup Backstage to collect entities metrics from Prometheus",
     "difficulty": "easy",
     "time": "20-30 minutes",
