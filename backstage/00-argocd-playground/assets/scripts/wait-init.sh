@@ -36,7 +36,7 @@ wait_until_done "Upgrading Helm." /ks/.helm_finished
 wait_until_done "Deploying Kuberneetes Custom Resource Definitions." /ks/.crds_finished
 wait_until_done "Deploying Argo CD." /ks/.argocd_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
-wait_until_done "Cloning & deploying example WebApp." /ks/.argocd_finished
-wait_until_done "Cloning Backstage tutorial app." /ks/.argocd_finished
+wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
+wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
 
 sudo systemctl stop k3s
