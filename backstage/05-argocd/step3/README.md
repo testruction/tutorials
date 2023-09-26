@@ -56,7 +56,7 @@ kubectl -n argo-cd patch configmap/argocd-cm \
 
 kubectl -n argo-cd patch configmap/argocd-rbac-cm \
 --type='json' \
---patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, backstage, role:readonly\"\n"}]'
+--patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, backstage, role:readonly\n"}]'
 
 ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account backstage)
 export ARGOCD_AUTH_TOKEN
@@ -65,7 +65,7 @@ yq -i '
   .proxy.'/argocd0/api'.target = "http://localhost:10080/api/v1/" |
   .proxy.'/argocd0/api'.changeOrigin = true |
   .proxy.'/argocd0/api'.secure = false |
-  .proxy.'/argocd0/api'.headers.Cookie.$env = "ARGOCD_AUTH_TOKEN"
+  .proxy.'/argocd0/api'.headers.Cookie = "${ARGOCD_AUTH_TOKEN}"
 ' ${HOME}/backstage-tutorial/app-config.local.yaml
 ```{{exec}}
 
