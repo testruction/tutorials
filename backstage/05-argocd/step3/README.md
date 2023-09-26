@@ -1,73 +1,68 @@
-# Add Argo CD plugin configuration
+# Implement Argo CD frontend plugins
 
-Edit the Argo CD configmap to add a new user for the Backstage application.
+Install the `@roadiehq/backstage-plugin-argo-cd` package in Backstage Frontend component (i.e. `packages/frontend`).
 
 ```bash
-kubectl -n argo-cd edit configmap/argocd-cm -n argo-cd
+yarn add --cwd packages/app @roadiehq/backstage-plugin-argo-cd
 ```{{exec}}
 
-Add the following line in the `data:` mapping.
+Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
 
-```yaml
-accounts.backstage: apiKey, login
-```{{copy}}
+Below the line beginning by **`import { ReportIssue }`**.
 
-Edit the Argo CD RBAC configmap to configure the `backstage` account permissions.
+```typescript
+import {
+  EntityArgoCDOverviewCard,
+  isArgocdAvailable
+} from '@roadiehq/backstage-plugin-argo-cd';
+```
 
-```bash
-kubectl -n argo-cd edit configmap/argocd-cm -n argo-cd
-```{{exec}}
+<!--At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
 
-Add the following line in the `policy.csv:` mapping.
+```typescript
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+      <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+``` -->
 
-```yaml
-g, backstage, role:readonly
-```{{copy}}
+At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
 
-Generate the API Key for the `backstage` account, then copy the API key from the prompt.
+```typescript
+    <EntitySwitch>
+      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
+        <Grid item sm={12}>
+          <EntityArgoCDOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+```
 
-```bash
-ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account backstage)
-export ARGOCD_AUTH_TOKEN
-```{{exec}}
+<details><summary>Dot it for me</summary>
 
-Edit the `backstage-tutorial/app-config.local.yaml` configuration file, the append the following settings to bastage Backstage to query the Prometheus API endpoint.
+```typescript
+vi -e ${HOME}/backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx <<EOF
+/import { ReportIssue }
+a
+import {
+  EntityArgoCDOverviewCard,
+  isArgocdAvailable
+} from '@roadiehq/backstage-plugin-argo-cd';
+.
+/const overviewContent
+/{entityWarningContent}
+a
 
-```yaml
-argocd:
-  username: admin
-  password: admin
-  appLocatorMethods:
-    - type: 'config'
-      instances:
-        - name: argoInstance1
-          url: http://localhost:10080
-          token: ${ARGOCD_AUTH_TOKEN} # Token to use to instance 1
-```{{copy}}
+    <EntitySwitch>
+      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
+        <Grid item sm={4}>
+          <EntityArgoCDOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
-
-<details><summary>Do it for me</summary>
-
-```bash
-kubectl -n argo-cd patch configmap/argocd-cm \
---type='json' \
---patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
-
-kubectl -n argo-cd patch configmap/argocd-rbac-cm \
---type='json' \
---patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, backstage, role:readonly\n"}]'
-
-ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account backstage)
-export ARGOCD_AUTH_TOKEN
-
-yq -i '
-  .argocd.username = "admin" |
-  .argocd.password = "admin" |
-  .argocd.appLocatorMethods[0].type = "config" |
-  .argocd.appLocatorMethods[0].instances[0].name = "argoInstance1" |
-  .argocd.appLocatorMethods[0].instances[0].name = "http://localhost:10080" |
-  .argocd.appLocatorMethods[0].instances[0].name = "${ARGOCD_AUTH_TOKEN}"
-' ${HOME}/backstage-tutorial/app-config.local.yaml
+.
+w
+EOF
 ```{{exec}}
 
 </details>
