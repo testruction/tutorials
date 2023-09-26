@@ -23,5 +23,4 @@ set -euo pipefail
 /ks/argocd.sh
 /ks/prometheus.sh &
 /ks/webapp.sh &
-# /ks/appdb.sh &
 /ks/backstageapp.sh &
