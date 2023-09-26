@@ -16,6 +16,9 @@
       "path": "04-k8s-incluster"
     },
     {
+      "path": "05-argocd"
+    },
+    {
       "path": "07-prometheus"
     }
   ]
