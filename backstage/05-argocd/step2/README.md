@@ -17,23 +17,24 @@ import {
 } from '@roadiehq/backstage-plugin-argo-cd';
 ```
 
-At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
+<!--At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
 
 ```typescript
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
-```
+``` -->
 
 At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
 
 ```typescript
-    <Grid item md={6}>
-      <EntityPrometheusAlertCard />
-    </Grid>
-    <Grid item md={6}>
-      <EntityPrometheusGraphCard />
-    </Grid>
+    <EntitySwitch>
+      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
+        <Grid item sm={4}>
+          <EntityArgoCDOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 ```
 
 <details><summary>Dot it for me</summary>
@@ -47,24 +48,17 @@ import {
   isArgocdAvailable
 } from '@roadiehq/backstage-plugin-argo-cd';
 .
-/const serviceEntityPage
-/<\/EntityLayout>
-i
-
-    <EntityLayout.Route path="/prometheus" title="Prometheus">
-      <EntityPrometheusContent />
-    </EntityLayout.Route>
-.
 /const overviewContent
 /{entityWarningContent}
 a
 
-    <Grid item md={6}>
-      <EntityPrometheusAlertCard />
-    </Grid>
-    <Grid item md={6}>
-      <EntityPrometheusGraphCard />
-    </Grid>
+    <EntitySwitch>
+      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
+        <Grid item sm={4}>
+          <EntityArgoCDOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
 .
 w

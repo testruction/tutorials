@@ -11,6 +11,7 @@ sudo systemctl stop multipathd
 set -euo pipefail
 
 /ks/kubeconfig.sh
+/ks/crds.sh
 /ks/yq.sh
 /ks/nodejs.sh
 /ks/locust.sh

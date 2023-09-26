@@ -16,7 +16,7 @@ prometheus:
 yq -i '
   .proxy.'/prometheus0/api'.target = "http://localhost:9090/api/v1/" |
   .prometheus.proxyPath = "/prometheus0/api"
-' ${HOME}/backstage-tutorial//app-config.local.yaml
+' ${HOME}/backstage-tutorial/app-config.local.yaml
 ```{{exec}}
 
 </details>

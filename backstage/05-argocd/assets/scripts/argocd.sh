@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo apt-get update -y
-sudo apt-get install -y apache2-utils
+# sudo apt-get update -y
+# sudo apt-get install -y apache2-utils
 
 sudo curl -sSL -o /usr/local/bin/argocd \
   https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo chmod +x /usr/local/bin/argocd
 
 CLEAR_PWD="admin"
-BCRYPT_PWD=$(htpasswd -nbBC 10 "" $CLEAR_PWD | tr -d ':\n' | sed 's/$2y/$2a/')
+# BCRYPT_PWD=$(htpasswd -nbBC 10 "" $CLEAR_PWD | tr -d ':\n' | sed 's/$2y/$2a/')
+BCRYPT_PWD=$(argocd account bcrypt --password $CLEAR_PWD)
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
