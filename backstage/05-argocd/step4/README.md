@@ -23,8 +23,6 @@ vi -e ${HOME}/web-app/src/backend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
-metadata:
-  annotations:
     argocd/app-name: demo
 .
 w
@@ -34,8 +32,6 @@ vi -e ${HOME}/web-app/src/frontend/catalog-info.yaml <<EOF
 /kind: Component
 /annotations
 a
-metadata:
-  annotations:
     argocd/app-name: demo
 .
 w
