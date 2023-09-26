@@ -31,7 +31,7 @@ wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing Bats-Core testing framework." /ks/.bats_finished
 wait_until_done "Installing Locust.io load generator." /ks/.locust_finished
 # wait_until_done "Installing Docker BuildX plugin" /ks/.docker_finished
-wait_until_done "Configuring Kuberneetes client." /ks/.kubeconfig_finished
+wait_until_done "Configuring Kubernetes client." /ks/.kubeconfig_finished
 wait_until_done "Upgrading Helm." /ks/.helm_finished
 wait_until_done "Deploying Kuberneetes Custom Resource Definitions." /ks/.crds_finished
 wait_until_done "Deploying Argo CD." /ks/.argocd_finished
