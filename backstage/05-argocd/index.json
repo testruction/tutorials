@@ -32,7 +32,7 @@
         },
         "assets": {
             "host01": [
-                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd", "chmod": "+rw"},
+                {"file": "deploy/fastapi-demo.yaml", "target": "~/deploy/argocd", "chmod": "+rw"},
                 
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
