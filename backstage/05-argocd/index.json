@@ -51,7 +51,7 @@
 
                 {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"},
 
-                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
+                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd", "chmod": "+rw"}
             ]
         }
     },
