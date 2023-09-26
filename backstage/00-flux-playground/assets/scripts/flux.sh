@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo apt-get update -y
-sudo apt-get install -y apache2-utils
-
-VERSION='2.10.1'
+VERSION='2.1.1'
 
 sudo mkdir -p /opt/flux/${VERSION}
-sudo curl -sSL -o /opt/flux/${VERSION}/flux_linux_amd64.tar.gz \
+sudo wget -O /opt/flux/${VERSION}/flux_linux_amd64.tar.gz \
   https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VERSION}_linux_amd64.tar.gz
 tar -xvz -C /opt/flux/${VERSION} -f /opt/flux/${VERSION}/flux_linux_amd64.tar.gz
 rm -vf /opt/flux/${VERSION}/flux_linux_amd64.tar.gz
 sudo chmod a+x /opt/flux/${VERSION}/flux
-ln -sf  a+x /opt/flux/${VERSION}/flux /usr/local/bin/flux
-
-CLEAR_PWD="admin"
-BCRYPT_PWD=$(htpasswd -nbBC 10 "" $CLEAR_PWD | tr -d ':\n' | sed 's/$2y/$2a/')
+sudo ln -sf /opt/flux/${VERSION}/flux /usr/local/bin/flux
 
 helm repo add fluxcd-community https://fluxcd-community.github.io/helm-charts
 helm repo update
