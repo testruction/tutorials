@@ -50,7 +50,7 @@ yq -i '
 
 # Customize Argo CD application deployment
 # ----------------------------------------
-KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
+KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
 export KC_URL
 yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
