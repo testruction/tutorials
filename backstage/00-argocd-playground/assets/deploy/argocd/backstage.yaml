@@ -180,4 +180,13 @@ spec:
             prometheus:
               proxyPath: /prometheus0/api
 
+            argocd:
+              # username: admin
+              # password: admin
+              appLocatorMethods:
+                - type: 'config'
+                  instances:
+                    - name: argocd
+                      url: http://gitops-argo-server.argo-cd:10080
+                      token: ${ARGOCD_AUTH_TOKEN}
 
