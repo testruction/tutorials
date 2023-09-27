@@ -40,7 +40,7 @@ argocd:
   appLocatorMethods:
     - type: 'config'
       instances:
-        - name: argoInstance1
+        - name: argocd
           url: http://localhost:10080
           token: ${ARGOCD_AUTH_TOKEN} # Token to use to instance 1
 ```{{copy}}
