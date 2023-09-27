@@ -61,7 +61,6 @@ yq -i '
 
 kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
 
-# argocd app create backstage -f ~/deploy/argocd/backstage.yaml
-kubectl apply -f ${HOME}/deploy/argocd/backstage.yaml
+argocd app create backstage -f ~/deploy/argocd/backstage.yaml
 
 touch /ks/.backstageapp_finished
