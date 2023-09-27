@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-/ks/yq.sh
-/ks/nodejs.sh
-/ks/docker.sh
-/ks/kind.sh
-/ks/contour.sh
