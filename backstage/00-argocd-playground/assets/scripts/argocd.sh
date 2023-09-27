@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo apt-get update -y
-sudo apt-get install -y apache2-utils
-
 sudo curl -sSL -o /usr/local/bin/argocd \
   https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo chmod +x /usr/local/bin/argocd
 
 ADMIN_PWD="admin"
-ADMIN_BCRYPT=$(htpasswd -nbBC 10 "" $ADMIN_PWD | tr -d ':\n' | sed 's/$2y/$2a/')
-
+ADMIN_BCRYPT=$(argocd account bcrypt --password $ADMIN_PWD)
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
@@ -41,7 +37,7 @@ helm upgrade --install \
   --set notifications.metrics.serviceMonitor.enabled="false" \
   gitops argo/argo-cd
 
-argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "admin"
+argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
 
 # GitOps account
 kubectl -n argo-cd patch configmap/argocd-cm \
