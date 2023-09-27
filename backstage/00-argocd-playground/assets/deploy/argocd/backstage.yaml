@@ -162,7 +162,7 @@ spec:
                   rules:
                     - allow: [User, Group, Domain]
                 - type: url
-                  target: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/prometheus/catalog-info.yaml
+                  target: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/catalog-info.yaml
                 - type: url
                   target: https://github.com/testruction/backstage-tutorial/blob/main/service-catalog/paypal/paypal.yaml
             kubernetes:
