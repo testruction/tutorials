@@ -42,7 +42,6 @@ RL="${2:-demo}"
 #   --set frontend.metrics.serviceMonitor.enabled="true" \
 #   "${RL}" ./chart/
 
-# argocd app create demo -f ${HOME}/deploy/argocd/fastapi-demo.yaml
-kubectl apply -f ${HOME}/deploy/argocd/fastapi-demo.yaml
+argocd app create demo -f ${HOME}/deploy/argocd/fastapi-demo.yaml
 
 touch /ks/.webapp_finished
