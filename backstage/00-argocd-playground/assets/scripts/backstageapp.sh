@@ -14,14 +14,6 @@ else
   git pull
 fi
 
-kubectl -n argo-cd patch configmap/argocd-cm \
---type='json' \
---patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
-
-kubectl -n argo-cd patch configmap/argocd-rbac-cm \
---type='json' \
---patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, backstage, role:readonly\n"}]'
-
 # Retreive the KillerCoda instance URL
 KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
 KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
@@ -67,8 +59,9 @@ yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(ARGOCD_AUTH_TOKEN)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
-kubectl apply -f ~/deploy/argocd/backstage-rbac.yaml
+kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
 
-argocd app create backstage -f ~/deploy/argocd/backstage.yaml
+# argocd app create backstage -f ~/deploy/argocd/backstage.yaml
+kubectl apply -f ${HOME}/deploy/argocd/backstage.yaml
 
 touch /ks/.backstageapp_finished
