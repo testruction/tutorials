@@ -52,7 +52,7 @@ yq -i '
   .argocd.appLocatorMethods[0].type = "config" |
   .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
   .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
-  .argocd.appLocatorMethods[0].instances[0].token = "${ARGOCD_AUTH_TOKEN}"
+  .argocd.appLocatorMethods[0].instances[0].token = strenv(ARGOCD_AUTH_TOKEN)
 ' ./app-config.local.yaml
 
 
