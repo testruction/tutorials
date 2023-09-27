@@ -61,6 +61,8 @@ yq -i '
 
 kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
 
+ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account "admin")
+
 argocd app create backstage -f ~/deploy/argocd/backstage.yaml
 
 touch /ks/.backstageapp_finished
