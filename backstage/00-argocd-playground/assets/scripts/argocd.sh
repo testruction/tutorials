@@ -53,6 +53,7 @@ kubectl -n argo-cd patch configmap/argocd-cm \
 --type='json' \
 --patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
 
+# Account RBAC
 kubectl -n argo-cd patch configmap/argocd-rbac-cm \
 --type='json' \
 --patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, sysops, role:admin\ng, backstage, role:readonly\n"}]'
