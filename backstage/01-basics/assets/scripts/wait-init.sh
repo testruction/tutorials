@@ -1,32 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+function wait_until_done()
+{
+    MESSAGE="${1}"
+    FILE_TO_WATCH="${2}"
+    echo -n "${MESSAGE}"
+    while [ ! -f "${FILE_TO_WATCH}" ]; do
+        echo -n '.'
+        sleep 1;
+    done;
+    echo " DONE"
+}
+
 # waits for background init to finish
 
 rm $0
 
 clear
 
-function wait_nodejs()
-{
-    echo -n "Installing Node.JS v18 (LTS)."
-    while [ ! -f /ks/.nodejs_finished ]; do
-        echo -n '.'
-        sleep 1;
-    done;
-    echo " DONE"
-}
-
-function wait_yq()
-{
-    echo -n "Installing YQ command line."
-    while [ ! -f /ks/.yq_finished ]; do
-        echo -n '.'
-        sleep 1;
-    done;
-    echo " DONE"
-}
-
-wait_yq
-wait_nodejs
-
+wait_until_done "Installing YQ command line." /ks/.yq_finished
+wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished

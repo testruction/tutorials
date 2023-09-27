@@ -14,11 +14,6 @@ set -euo pipefail
 /ks/yq.sh
 /ks/nodejs.sh
 /ks/locust.sh
-
-# /ks/docker.sh &
-# /ks/helm.sh &
-# /ks/bats.sh &
 /ks/prometheus.sh
 /ks/webapp.sh &
-# /ks/appdb.sh &
 /ks/backstageapp.sh &
