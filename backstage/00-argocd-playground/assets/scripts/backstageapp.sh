@@ -59,9 +59,10 @@ yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BACKSTAGE_ARGOCD_TOKEN)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
+unset BACKSTAGE_ARGOCD_TOKEN
+
 kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
 
-ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account "admin")
 argocd app create backstage -f ~/deploy/argocd/backstage.yaml
 
 touch /ks/.backstageapp_finished
