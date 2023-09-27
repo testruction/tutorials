@@ -38,5 +38,3 @@ wait_until_done "Deploying Argo CD." /ks/.argocd_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
 wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
-
-sudo systemctl stop k3s
