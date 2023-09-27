@@ -17,11 +17,11 @@ fi
 # Retreive the KillerCoda instance URL
 KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
 KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
-ARGOCD_AUTH_TOKEN=$(argocd account generate-token --account backstage)
+BACKSTAGE_ARGOCD_TOKEN=$(argocd account generate-token --account backstage)
 
 export KC_FRONTEND_URL
 export KC_BACKEND_URL
-export ARGOCD_AUTH_TOKEN
+export BACKSTAGE_ARGOCD_TOKEN
 
 cd "${HOME}/backstage-tutorial/"
 touch app-config.local.yaml
@@ -44,7 +44,7 @@ yq -i '
   .argocd.appLocatorMethods[0].type = "config" |
   .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
   .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
-  .argocd.appLocatorMethods[0].instances[0].token = strenv(ARGOCD_AUTH_TOKEN)
+  .argocd.appLocatorMethods[0].instances[0].token = strenv(BACKSTAGE_ARGOCD_TOKEN)
 ' ./app-config.local.yaml
 
 
@@ -56,7 +56,7 @@ yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(ARGOCD_AUTH_TOKEN)
+  .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BACKSTAGE_ARGOCD_TOKEN)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
 kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
