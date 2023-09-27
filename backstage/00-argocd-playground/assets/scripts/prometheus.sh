@@ -26,6 +26,7 @@ set -euo pipefail
 #   --set prometheus.service.type="LoadBalancer" \
 #   default prometheus-community/kube-prometheus-stack
 
-argocd app create kube-prometheus -f ~/deploy/argocd/kube-prometheus.yaml
+# argocd app create kube-prometheus -f ~/deploy/argocd/kube-prometheus.yaml
+kubectl apply -f ~/deploy/argocd/kube-prometheus.yaml
 
 touch /ks/.prometheus_finished
