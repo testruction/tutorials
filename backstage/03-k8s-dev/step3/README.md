@@ -22,6 +22,8 @@ import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
 <details><summary>Dot it for me</summary>
 
 ```typescript
+yarn add --cwd packages/app @backstage/plugin-kubernetes
+
 vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
 /import { ReportIssue }
 a
