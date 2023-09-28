@@ -10,7 +10,7 @@ Download the Kubernetes backend initialization script to the plugin directory (i
 
 ```bash
 curl -sSL -o packages/backend/src/plugins/kubernetes.ts \
-https://github/backstage/backstage/raw/master/packages/backend/src/plugins/kubernetes.ts
+https://github.com/backstage/backstage/raw/master/packages/backend/src/plugins/kubernetes.ts
 ```{{exec}}
 
 Edit the `backstage-tutorial/packages/backend/src/index.ts`, then insert the following content **without** the comments:
@@ -29,6 +29,11 @@ import kubernetes from './plugins/kubernetes';
 <details><summary>Do it for me</summary>
 
 ```typescript
+yarn add --cwd packages/backend @backstage/plugin-kubernetes-backend
+
+curl -sSL -o packages/backend/src/plugins/kubernetes.ts \
+https://github.com/backstage/backstage/raw/master/packages/backend/src/plugins/kubernetes.ts
+
 vi -e packages/backend/src/index.ts <<EOF
 /import { PluginEnvironment }
 i
