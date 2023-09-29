@@ -10,10 +10,10 @@
       "path": "01-basics"
     },
     {
-      "path": "03-k8s-dev"
+      "path": "03-techdocs"
     },
     {
-      "path": "04-k8s-incluster"
+      "path": "04-kubernetes"
     },
     {
       "path": "05-argocd"
