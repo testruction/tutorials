@@ -20,21 +20,21 @@ helm upgrade --install \
   --set server.service.servicePortHttp="10080" \
   --set controller.metrics.enabled="true" \
   --set controller.metrics.serviceMonitor.enabled="true" \
-  --set dex.enabled="false" \
-  --set dex.metrics.enabled="false" \
-  --set dex.metrics.serviceMonitor.enabled="false" \
+  --set dex.enabled="true" \
+  --set dex.metrics.enabled="true" \
+  --set dex.metrics.serviceMonitor.enabled="true" \
   --set redis.metrics.enabled="true" \
   --set redis.metrics.serviceMonitor.enabled="true" \
   --set server.metrics.enabled="true" \
   --set server.metrics.serviceMonitor.enabled="true" \
   --set repoServer.metrics.enabled="true" \
   --set repoServer.metrics.serviceMonitor.enabled="true" \
-  --set applicationSet.enabled="false" \
-  --set applicationSet.metrics.enabled="false" \
-  --set applicationSet.metrics.serviceMonitor.enabled="false" \
-  --set notifications.enabled="false" \
-  --set notifications.metrics.enabled="false" \
-  --set notifications.metrics.serviceMonitor.enabled="false" \
+  --set applicationSet.enabled="true" \
+  --set applicationSet.metrics.enabled="true" \
+  --set applicationSet.metrics.serviceMonitor.enabled="true" \
+  --set notifications.enabled="true" \
+  --set notifications.metrics.enabled="true" \
+  --set notifications.metrics.serviceMonitor.enabled="true" \
   gitops argo/argo-cd
 
 argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
