@@ -24,13 +24,13 @@ import argocd from './plugins/argocd';
 In the **`main()`** function, above the line beginning by **`const appEnv`**.
 
 ```typescript
-  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
+  const argocdEnv = useHotMemoize(module, () => createEnv('argocd'));
 ```{{copy}}
 
 Bellow the line beginning by **`apiRouter.use('/search')`**.
 
 ```typescript
-  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
+  apiRouter.use('/argocd', await argocd(argocdEnv));
 ```{{copy}}
 
 <details><summary>Do it for me</summary>
