@@ -23,8 +23,8 @@ import {
 At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
 
 ```typescript
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
+    <EntityLayout.Route path="/prometheus" title="Prometheus">
+      <EntityPrometheusContent />
     </EntityLayout.Route>
 ```
 
