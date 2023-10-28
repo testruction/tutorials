@@ -16,11 +16,13 @@ do
 done
 echo " DONE"
 
+set -o allexport
 source /etc/environment
+set +o allexport
 
 flux bootstrap github \
   --token-auth \
-  --owner='testruction' \
+  --owner="${GITHUB_USER}" \
   --repository='fleet-infra-public' \
   --branch='main' \
   --path='clusters/localhost/k3s' \
