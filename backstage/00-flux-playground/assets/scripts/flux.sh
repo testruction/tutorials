@@ -9,8 +9,8 @@ curl -L https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VER
 sudo ln -sf /usr/local/fluxcd/${VERSION}/flux /usr/local/bin/flux
 
 echo -n "Waiting for GitHub personal access token (PAT)."
-while ! grep "GITHUB_TOKEN" /etc/environment
-do
+while grep "GITHUB_TOKEN" /etc/environment 2>&1 /dev/null
+do 
   echo -n '.'
   sleep 1;
 done
