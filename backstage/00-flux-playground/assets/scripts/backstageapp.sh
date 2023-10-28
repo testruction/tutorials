@@ -14,23 +14,19 @@ else
   git pull
 fi
 
-cd "${HOME}/backstage-tutorial/"
-
-touch app-config.local.yaml
-
-# configure backstage plugin
-yq -i '
-  .kubernetes.serviceLocatorMethod.type = "multiTenant" |
-  .kubernetes.clusterLocatorMethods[0].type = "localKubectlProxy"
-' ./app-config.local.yaml
-
 # Retreive the KillerCoda instance URL
 KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
 KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
+BS_ARGO_TOKEN=$(argocd account generate-token --account backstage)
 
 export KC_FRONTEND_URL
 export KC_BACKEND_URL
+export BS_ARGO_TOKEN
 
+cd "${HOME}/backstage-tutorial/"
+touch app-config.local.yaml
+
+# Customize local configuration
 yq -i '
   .app.listen.host = "0.0.0.0" |
   .app.listen.port = 3000 |
@@ -38,30 +34,36 @@ yq -i '
   .backend.listen.host = "0.0.0.0" |
   .backend.listen.port = 7007 |
   .backend.baseUrl = strenv(KC_BACKEND_URL) |
-  .backend.cors.origin = strenv(KC_FRONTEND_URL)
+  .backend.cors.origin = strenv(KC_FRONTEND_URL) |
+  .catalog.locations[0].type = "file" |
+  .catalog.locations[0].target = "../../../web-app/catalog-info.yaml" |
+  .kubernetes.serviceLocatorMethod.type = "multiTenant" |
+  .kubernetes.clusterLocatorMethods[0].type = "localKubectlProxy" |
+  .argocd.username = "admin" |
+  .argocd.password = "admin" |
+  .argocd.appLocatorMethods[0].type = "config" |
+  .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
+  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
+  .argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
 ' ./app-config.local.yaml
 
-# Register Sample Application entities
-yq -i '
-  .catalog.locations[0].type = "file" |
-  .catalog.locations[0].target = "../../../web-app/catalog-info.yaml"
-' app-config.local.yaml
 
-
-
-# Customize Argo CD application deployment
+# Customize Flux CD application deployment
 # ----------------------------------------
-KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
-
+KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
 export KC_URL
 yq -i '
-  .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
-' ${HOME}/deploy/argocd/backstage.yaml
+  .spec.values.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
+  .spec.values.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
+  .spec.values.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
+  .spec.values.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
+' ${HOME}/deploy/flux/apps/backstage/killercoda/helm-release.yaml
 
-kubectl apply -f ~/deploy/argocd/backstage-rbac.yaml
+unset BS_ARGO_TOKEN
 
-argocd app create backstage -f ~/deploy/argocd/backstage.yaml
+kubectl apply -f ${HOME}/deploy/kubernetes/backstage-rbac.yaml
+
+kubectl apply -f ${HOME}/deploy/flux/apps/backstage/base/
+kubectl apply -f ${HOME}/deploy/flux/apps/backstage/killercoda/
 
 touch /ks/.backstageapp_finished

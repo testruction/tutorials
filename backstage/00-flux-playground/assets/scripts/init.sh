@@ -21,7 +21,6 @@ set -euo pipefail
 # /ks/bats.sh &
 /ks/crds.sh
 /ks/flux.sh
-# /ks/prometheus.sh &
-# /ks/webapp.sh &
-# /ks/appdb.sh &
-# /ks/backstageapp.sh &
+/ks/prometheus.sh &
+/ks/webapp.sh &
+/ks/backstageapp.sh &

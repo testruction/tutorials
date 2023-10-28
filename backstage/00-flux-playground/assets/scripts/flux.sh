@@ -1,31 +1,48 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION='2.1.1'
+VERSION="2.1.2"
+mkdir -p /usr/local/fluxcd/${VERSION}/
+cd /usr/local/fluxcd/${VERSION}/
+curl -OfsSL https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VERSION}_linux_amd64.tar.gz | tar -xvzf -
+sudo ln -sf /usr/local/fluxcd/${VERSION}/flux /usr/local/bin/flux
 
-sudo mkdir -p /opt/flux/${VERSION}
-sudo wget -O /opt/flux/${VERSION}/flux_linux_amd64.tar.gz \
-  https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VERSION}_linux_amd64.tar.gz
-tar -xvz -C /opt/flux/${VERSION} -f /opt/flux/${VERSION}/flux_linux_amd64.tar.gz
-rm -vf /opt/flux/${VERSION}/flux_linux_amd64.tar.gz
-sudo chmod a+x /opt/flux/${VERSION}/flux
-sudo ln -sf /opt/flux/${VERSION}/flux /usr/local/bin/flux
+flux install
 
-helm repo add fluxcd-community https://fluxcd-community.github.io/helm-charts
-helm repo update
+cat <<EOF | kubectl apply -f -
 
-helm upgrade --install \
-  --wait \
-  --namespace flux-system \
-  --create-namespace \
-  --set helmController.create="true" \
-  --set imageAutomationController.create="false" \
-  --set kustomizeController.create="true" \
-  --set multitenancy.enabled="true" \
-  --set notificationController.create="false" \
-  --set prometheus.podMonitor.create="true" \
-  --set sourceController.create="true" \
-  --set watchAllNamespaces="true" \
-  gitops fluxcd-community/flux2
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: fsa-demo
+  namespace: flux-system
+spec:
+  prune: true
+  interval: 2m
+  path: "./demo"
+  sourceRef:
+    kind: OCIRepository
+    name: fsa-demo
+  timeout: 3m
+EOF
+
+# argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
+
+# # GitOps account
+# kubectl -n argo-cd patch configmap/argocd-cm \
+# --type='json' \
+# --patch '[{"op": "add", "path": "/data/accounts.sysops", "value": "apiKey,login"}]'
+
+# # Backstage account
+# kubectl -n argo-cd patch configmap/argocd-cm \
+# --type='json' \
+# --patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
+
+# # Account RBAC
+# kubectl -n argo-cd patch configmap/argocd-rbac-cm \
+# --type='json' \
+# --patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, sysops, role:admin\ng, backstage, role:readonly\n"}]'
 
 touch /ks/.flux_finished
