@@ -26,10 +26,14 @@ sudo systemctl stop multipathd
 
 clear
 
-echo -n "Please enter your GitHub personal access token (PAT):" 
-read -s github_token
-echo
-echo "GITHUB_TOKEN=${github_token}" >> /etc/environment
+# echo -n "Please enter your GitHub personal access token (PAT):" 
+read -p "Enter your github user name or organization [testruction]: " username
+username=${username:-'testruction'}
+echo "Enter your Github Personal Access Tokent (PA): "
+read -s token
+token="${token}"
+echo "GITHUB_TOKEN=\"${token}\"" >> /etc/environment
+
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
@@ -38,7 +42,7 @@ wait_until_done "Installing Locust.io load generator." /ks/.locust_finished
 # wait_until_done "Installing Docker BuildX plugin" /ks/.docker_finished
 wait_until_done "Configuring Kubernetes client." /ks/.kubeconfig_finished
 wait_until_done "Upgrading Helm." /ks/.helm_finished
-wait_until_done "Deploying Kuberneetes Custom Resource Definitions." /ks/.crds_finished
+wait_until_done "Deploying Kubernetes Custom Resource Definitions." /ks/.crds_finished
 wait_until_done "Deploying Flux." /ks/.flux_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
