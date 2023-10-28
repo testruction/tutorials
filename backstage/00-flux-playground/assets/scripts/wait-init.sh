@@ -26,13 +26,15 @@ sudo systemctl stop multipathd
 
 clear
 
-# echo -n "Please enter your GitHub personal access token (PAT):" 
-read -p "Enter your github user name or organization [testruction]: " username
-username=${username:-'testruction'}
-echo "Enter your Github Personal Access Tokent (PA): "
-read -s token
-token="${token}"
-echo "GITHUB_TOKEN=\"${token}\"" >> /etc/environment
+echo -n "Please enter your GitHub personal access token (PAT):" 
+read github_user
+github_user="${github_user:-'testruction'}"
+echo "GITHUB_USER=\"${github_user}\"" >> /etc/environment
+
+echo "Enter your Github Personal Access Tokent (PA):"
+read -s github_token
+github_token="${github_token}"
+echo "GITHUB_TOKEN=\"${github_token}\"" >> /etc/environment
 
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
