@@ -41,9 +41,9 @@
 
                 {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
 
-                {"file": "deploy/argocd/kube-prometheus.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/fluxcd/kube-prometheus.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/backstage.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
-                {"file": "deploy/argocd/backstage-rbac.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/kubernetes/backstage-rbac.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
             ]
         }
