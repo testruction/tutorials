@@ -28,7 +28,7 @@ clear
 
 read -p "Please enter your GitHub personal access token (PAT):" GITHUB_TOKEN
 
-echo ${GITHUB_TOKEN} >> /etc/environment
+echo "GITHUB_TOKEN=${GITHUB_TOKEN}" >> /etc/environment
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
