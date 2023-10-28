@@ -4,7 +4,7 @@
       "path": "00-argocd-playground"
     },
     {
-      "path": "00-fluxcd-playground"
+      "path": "00-flux-playground"
     },
     {
       "path": "01-basics"
