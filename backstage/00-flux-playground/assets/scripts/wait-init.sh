@@ -26,7 +26,7 @@ sudo systemctl stop multipathd
 
 clear
 
-echo -n "Enter your Github user name or organization (default: \"testruction\"):" 
+echo "Enter your Github user name or organization (default: \"testruction\"):" 
 read github_user
 github_user="${github_user:-'testruction'}"
 echo "GITHUB_USER=\"${github_user}\"" >> /etc/environment
