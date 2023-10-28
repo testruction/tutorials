@@ -26,9 +26,10 @@ sudo systemctl stop multipathd
 
 clear
 
-read -p "Please enter your GitHub personal access token (PAT):" GITHUB_TOKEN
-
-echo "GITHUB_TOKEN=${GITHUB_TOKEN}" >> /etc/environment
+echo -n "Please enter your GitHub personal access token (PAT):" 
+read -s github_token
+echo
+echo "GITHUB_TOKEN=${github_token}" >> /etc/environment
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
