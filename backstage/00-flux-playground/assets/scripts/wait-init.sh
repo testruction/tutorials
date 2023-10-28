@@ -28,7 +28,7 @@ clear
 
 echo "Enter your Github user name or organization (default: \"testruction\"):" 
 read github_user
-github_user="${github_user:-'testruction'}"
+github_user=${github_user:-'testruction'}
 echo "GITHUB_USER=\"${github_user}\"" >> /etc/environment
 
 echo "Enter your Github Personal Access Tokent (PA):"
