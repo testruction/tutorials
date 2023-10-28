@@ -8,6 +8,13 @@ curl -L https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VER
 | tar -xvzf -
 sudo ln -sf /usr/local/fluxcd/${VERSION}/flux /usr/local/bin/flux
 
+while ! grep "GITHUB_TOKEN" /etc/environment
+do
+  sleep 0.5s
+done
+
+source /etc/environment
+
 flux bootstrap github \
   --token-auth \
   --owner='testruction' \
