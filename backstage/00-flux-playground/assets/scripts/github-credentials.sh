@@ -4,12 +4,11 @@ function get_username()
 {
     
     message="Enter your Github user name or organization (default: \"testruction\"):"
-    echo -n ${message}
 
     # it will read username
-    read user
-    github_user=${user:-testruction}
-    echo GITHUB_USER=\"${github_user}\" >> /tmp/.github_env
+    read -p "${message}" -i 'testruction' user
+
+    echo GITHUB_USER=\"${user}\" >> /tmp/.github_env
 }
 
 function get_password()
