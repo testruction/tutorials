@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: fleet-backsage
+  name: fleet-backstage
   namespace: flux-system
 spec:
   ignore: |
