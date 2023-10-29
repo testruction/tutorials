@@ -22,6 +22,7 @@
             "host01": [
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/github-credentials.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
