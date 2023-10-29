@@ -26,7 +26,7 @@ sudo systemctl stop multipathd
 
 clear
 
-/ks/github-credentials
+/ks/github-credentials.sh
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
