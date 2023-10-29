@@ -51,12 +51,19 @@ yq -i '
 # Customize Flux CD application deployment
 # ----------------------------------------
 KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
-export KC_URL
-yq -i '
-  .spec.values.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
-  .spec.values.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
-  .spec.values.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
-' ${HOME}/deploy/flux/backstage/killercoda/helm-release.yaml
+
+kubectl create namespace backstage
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: killercoda-env
+  namespace: backstage
+data:
+  FRONTEND_URL: ${KC_URL}
+  BACKEND_URL: ${KC_URL}
+EOF
 
 unset BS_ARGO_TOKEN
 
