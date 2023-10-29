@@ -17,7 +17,6 @@ fi
 # Retreive the KillerCoda instance URL
 KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
 KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
-BS_ARGO_TOKEN=$(argocd account generate-token --account backstage)
 
 export KC_FRONTEND_URL
 export KC_BACKEND_URL
@@ -38,13 +37,7 @@ yq -i '
   .catalog.locations[0].type = "file" |
   .catalog.locations[0].target = "../../../web-app/catalog-info.yaml" |
   .kubernetes.serviceLocatorMethod.type = "multiTenant" |
-  .kubernetes.clusterLocatorMethods[0].type = "localKubectlProxy" |
-  .argocd.username = "admin" |
-  .argocd.password = "admin" |
-  .argocd.appLocatorMethods[0].type = "config" |
-  .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
-  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
-  .argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
+  .kubernetes.clusterLocatorMethods[0].type = "localKubectlProxy"
 ' ./app-config.local.yaml
 
 
