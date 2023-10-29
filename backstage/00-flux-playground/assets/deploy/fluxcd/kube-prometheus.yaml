@@ -30,6 +30,6 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: kube-prometheus
+    name: fleet-kube-prometheus
     namespace: flux-system
   targetNamespace: monitoring
