@@ -28,23 +28,5 @@ flux bootstrap github \
   --path='clusters/localhost/development/k3s' \
   --private=false
 
-# argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
-
-# # GitOps account
-# kubectl -n argo-cd patch configmap/argocd-cm \
-# --type='json' \
-# --patch '[{"op": "add", "path": "/data/accounts.sysops", "value": "apiKey,login"}]'
-
-# # Backstage account
-# kubectl -n argo-cd patch configmap/argocd-cm \
-# --type='json' \
-# --patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
-
-# # Account RBAC
-# kubectl -n argo-cd patch configmap/argocd-rbac-cm \
-# --type='json' \
-# --patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, sysops, role:admin\ng, backstage, role:readonly\n"}]'
-
-
 
 touch /ks/.flux_finished
