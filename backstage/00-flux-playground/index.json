@@ -41,7 +41,8 @@
                 {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 
                 {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-
+                
+                {"file": "deploy/fluxcd/weave-gitops.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"},
                 {"file": "deploy/fluxcd/kube-prometheus.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"},
                 {"file": "deploy/fluxcd/backstage.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"},
                 {"file": "deploy/fluxcd/fastapi-demo.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"}
