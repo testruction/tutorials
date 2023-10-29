@@ -55,15 +55,11 @@ export KC_URL
 yq -i '
   .spec.values.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
   .spec.values.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
-  .spec.values.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
-  .spec.values.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
-' ${HOME}/deploy/flux/apps/backstage/killercoda/helm-release.yaml
+  .spec.values.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
+' ${HOME}/deploy/flux/backstage/killercoda/helm-release.yaml
 
 unset BS_ARGO_TOKEN
 
-kubectl apply -f ${HOME}/deploy/kubernetes/backstage-rbac.yaml
-
-kubectl apply -f ${HOME}/deploy/flux/apps/backstage/base/
-kubectl apply -f ${HOME}/deploy/flux/apps/backstage/killercoda/
+kubectl apply -f ${HOME}/deploy/fluxcd/backstage.yaml
 
 touch /ks/.backstageapp_finished

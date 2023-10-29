@@ -44,7 +44,6 @@
 
                 {"file": "deploy/fluxcd/kube-prometheus.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"},
                 {"file": "deploy/fluxcd/backstage.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"},
-                {"file": "deploy/kubernetes/backstage-rbac.yaml", "target": "~/deploy/kubernetes/", "chmod": "+rw"},
                 {"file": "deploy/fluxcd/fastapi-demo.yaml", "target": "~/deploy/fluxcd/", "chmod": "+rw"}
             ]
         }
