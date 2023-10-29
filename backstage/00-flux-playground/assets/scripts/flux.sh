@@ -25,7 +25,7 @@ flux bootstrap github \
   --owner="${GITHUB_USER}" \
   --repository='fleet-infra-public' \
   --branch='main' \
-  --path='clusters/localhost/k3s' \
+  --path='clusters/localhost/development/k3s' \
   --private=false
 
 # argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
