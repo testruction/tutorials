@@ -2,11 +2,27 @@
 
 function get_username()
 {
-    
-    message="Enter your Github user name or organization (default: \"testruction\"):"
+    user=""
+    message="Enter your Github user name or organization (default \"testruction\"):"
+    # this will take password letter by letter
+    while IFS= read -p "${message}" -r -s -n 1 letter
+    do
+        # if you press enter then the condition 
+        # is true and it exit the loop
+        if [[ $letter == $'\0' ]]
+        then
+            break
+        fi
 
-    # it will read username
-    read -p "${message}" -i 'testruction' user
+        # the letter will store in password variable
+        user+=$letter
+
+        # in place of password the asterisk (*) 
+        # will printed
+        message="$letter"
+    done
+    echo
+    # echo "Your password is read with asterisk (*)."
 
     echo GITHUB_USER=\"${user}\" >> /tmp/.github_env
 }
@@ -14,7 +30,7 @@ function get_username()
 function get_password()
 {
     password=""
-    message="Enter your Github Personal Access Tokent (PA):"
+    message="Enter your Github Personal Access Token (PAT):"
     # this will take password letter by letter
     while IFS= read -p "${message}" -r -s -n 1 letter
     do
