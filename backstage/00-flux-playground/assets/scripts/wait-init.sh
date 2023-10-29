@@ -26,16 +26,7 @@ sudo systemctl stop multipathd
 
 clear
 
-echo "Enter your Github user name or organization (default: \"testruction\"):" 
-read github_user
-github_user=${github_user:-'testruction'}
-echo "GITHUB_USER=\"${github_user}\"" >> /etc/environment
-
-echo "Enter your Github Personal Access Tokent (PA):"
-read -s github_token
-github_token="${github_token}"
-echo "GITHUB_TOKEN=\"${github_token}\"" >> /etc/environment
-
+/ks/github-credentials
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 # wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
