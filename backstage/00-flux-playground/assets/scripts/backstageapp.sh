@@ -45,14 +45,15 @@ yq -i '
 # ----------------------------------------
 KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
 
-kubectl create namespace backstage
+kubectl create namespace backstage \
+  -o yaml --dry-run=client > ${HOME}/deploy/backsage-namespace.yaml
+kubectl apply -f ${HOME}/deploy/backsage-namespace.yaml
 
-kubectl -n backstage 0.4.0 generic killercoda-env \
+kubectl -n backstage create secret generic killercoda-env \
   --from-literal="FRONTEND_URL=${KC_URL}" \
   --from-literal="BACKEND_URL=${KC_URL}" \
-  --dry-run=client -o yaml | tee ${HOME}/deploy/kubernetes/killercoda-secret.yaml
-
-kubectl apply -f ${HOME}/deploy/kubernetes/killercoda-secret.yaml
+  --dry-run=client -o yaml > ${HOME}/deploy/killercoda-secret.yaml
+kubectl apply -f ${HOME}/deploy/killercoda-secret.yaml
 
 
 kubectl apply -f ${HOME}/deploy/fluxcd/backstage.yaml
