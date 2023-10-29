@@ -29,15 +29,6 @@ flux bootstrap github \
   --private=false \
   --components-extra='image-reflector-controller,image-automation-controller'
 
-VERSION="0.35.0"
-mkdir -p /usr/local/gitops/${VERSION}/
-cd /usr/local/gitops/${VERSION}/
-curl --silent --location https://github.com/weaveworks/weave-gitops/releases/download/v${VERSION}/gitops-$(uname)-$(uname -m).tar.gz \
-| tar -xvzf -
-sudo ln -sf /usr/local/gitops/${VERSION}/gitops /usr/local/bin/gitops
-
-PASSWORD="admin"
-gitops create dashboard gitops \
-  --password="${PASSWORD}"
+kubectl apply -f ${HOME}/deploy/fluxcd/weave-gitops.yaml
 
 touch /ks/.flux_finished
