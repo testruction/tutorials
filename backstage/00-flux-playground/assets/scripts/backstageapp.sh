@@ -54,18 +54,13 @@ KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
 
 kubectl create namespace backstage
 
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: killercoda-env
-  namespace: backstage
-data:
-  FRONTEND_URL: ${KC_URL}
-  BACKEND_URL: ${KC_URL}
-EOF
+kubectl -n backstage 0.4.0 generic killercoda-env \
+  --from-literal="FRONTEND_URL=${KC_URL}" \
+  --from-literal="BACKEND_URL=${KC_URL}" \
+  --dry-run=client -o yaml | tee ${HOME}/deploy/kubernetes/killercoda-secret.yaml
 
-unset BS_ARGO_TOKEN
+kubectl apply -f ${HOME}/deploy/kubernetes/killercoda-secret.yaml
+
 
 kubectl apply -f ${HOME}/deploy/fluxcd/backstage.yaml
 
