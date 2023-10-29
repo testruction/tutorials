@@ -17,7 +17,7 @@ done
 echo " DONE"
 
 set -o allexport
-source /tmp/github_env
+source /tmp/.github_env
 set +o allexport
 
 flux bootstrap github \
