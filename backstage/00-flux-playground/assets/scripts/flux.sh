@@ -26,7 +26,7 @@ flux bootstrap github \
   --repository='fleet-infra-public' \
   --branch='main' \
   --path='clusters/localhost/development/k3s' \
-  --private=false
-
+  --private=false \
+  --components-extra='image-reflector-controller,image-automation-controller'
 
 touch /ks/.flux_finished
