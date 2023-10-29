@@ -2,8 +2,8 @@
 
 function get_username()
 {
-    user=""
-    message="Enter your Github user name or organization (default \"testruction\"):"
+    user="testruction"
+    message="Enter your Github user name or organization (default: \"testruction\"):"
     # this will take password letter by letter
     while IFS= read -p "${message}" -r -s -n 1 letter
     do
