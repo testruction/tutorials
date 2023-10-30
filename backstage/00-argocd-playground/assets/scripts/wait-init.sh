@@ -6,8 +6,7 @@ function wait_until_done()
     MESSAGE="${1}"
     FILE_TO_WATCH="${2}"
     echo -n "${MESSAGE}"
-    while [ ! -f "${FILE_TO_WATCH}" ]; do
-        echo -n '.'
+    /usr/local/bin/spinner while [ ! -f "${FILE_TO_WATCH}" ]; do
         sleep 1;
     done;
     echo " DONE"
@@ -38,3 +37,4 @@ wait_until_done "Deploying Argo CD." /ks/.argocd_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
 wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
+
