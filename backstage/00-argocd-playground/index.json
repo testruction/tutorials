@@ -39,7 +39,7 @@
 
                 {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 
-                {"file": "utils/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "utils/populatedb", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "utils/spinner", "target": "/usr/local/bin/", "chmod": "+x"},
 
                 {"file": "deploy/argocd/kube-prometheus.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
