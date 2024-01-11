@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
 
-wait_file() {
-  local file="$1"; shift
-  local wait_seconds="${1:-10}"; shift # 10 seconds as default timeout
+# will run in background. can setup various things for the scenario for user not to see
+# DO NOT change file: add changes in init.sh
 
-  until test $((wait_seconds--)) -eq 0 -o -e "$file" ; do sleep 1; done
-
-  ((++wait_seconds))
-}
-
-echo "done" >> /tmp/killercoda-finished
-
-/usr/local/bin/install_packages.sh
-
-echo "done" >> /tmp/killercoda-background-finished
+FILE=/ks/init.sh; while ! test -f ${FILE}; do clear; sleep 0.1; done; bash ${FILE} > /ks/init.log
