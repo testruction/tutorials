@@ -55,8 +55,10 @@
         },
         "assets": {
             "host01": [
-                {"file": "scripts/wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "scripts/install_packages.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"}
             ]
         }
     },
