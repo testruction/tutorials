@@ -36,12 +36,16 @@
             "host01": [
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+
                 {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"},
                 {"file": "scripts/module2.bats", "target": "~/", "chmod": "+x"}
             ]
         }
     },
     "backend": {
-      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
     }
 }
