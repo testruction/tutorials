@@ -1,4 +1,4 @@
-# Clone the Web application source code
+# 1. Clone the Web application source code
 
 Clone the source code repository of the Web application.
 

@@ -1,4 +1,4 @@
-# Update Chart packaging specifications
+# 11. Update Chart packaging specifications
 
 Add the source and home page URLs to the [chart definitions](https://helm.sh/docs/topics/charts/#the-chartyaml-file).
 

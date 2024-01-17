@@ -1,4 +1,4 @@
-# Suffix Kubernetes resources
+# 8. Suffix Kubernetes resources
 
 Add prefix to all resources names to distinguish `backend` and `frontend` related deployments.
 

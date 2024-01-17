@@ -1,4 +1,4 @@
-# Update helpers script and deployment notes
+# 13. Update helpers script and deployment notes
 
 The Helper scripts include conditions to determine wether a resource should be created.
 Currently the evaluation of Service Account creation needs to updated in order to handle both `backend` and `frontend` account provisionning.

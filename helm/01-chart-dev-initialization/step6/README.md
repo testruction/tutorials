@@ -1,4 +1,4 @@
-# Record changes to the Git history
+# 6. Record changes to the Git history
 
 Configurer commit user name and email.
 
