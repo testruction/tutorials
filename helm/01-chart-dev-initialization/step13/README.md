@@ -1,31 +1,41 @@
-# 13. Update helpers script and deployment notes
+# 13. Add extra labels support to helpers script
 
-The Helper scripts include conditions to determine wether a resource should be created.
-Currently the evaluation of Service Account creation needs to updated in order to handle both `backend` and `frontend` account provisionning.
+The Helpers script `templates/_helpers.tpl` is responsible of the labels allocation like `app.kubernetes.io/name` and `app.kubernetes.io/instance` notably used by the service resource to determine the networking association with the workload pod.
 
-Add a new global configuration section to evaluate the service account creation.
+Since the application leverage two components, it is required to add an extra selector label. Either services will randomly send traffic to `backsend` and `frontend` pods.
 
-> **Note**:
-> The following command line demonstrates how to apply multiple changes using a single `yq` instance.
-> Notice that boolean value is not surrounded by quotes `""`.
+The [app.kubernetes.io/component](https://kubernetes.io/docs/reference/labels-annotations-taints/#app-kubernetes-io-component) a well known label to such issue.
 
 ```bash
 yq -i '
-  .global.serviceAccount.create = true |
-  .global.serviceAccount.name = ""
-' chart/values.yaml
+.backend.labels = {} |
+.backend.selectorLabels.[app.kubernetes.io/component] = "backend" |
+.frontend.labels = {} |
+.frontend.selectorLabels.[app.kubernetes.io/component] = "frontend"
+' ${CHART_NAME}/values.yaml
 ```{{exec}}
 
-Update the helpers script to rely on the new global property.
+Update the Helper script to inject the additional labels.
 
 ```bash
-sed -i 's#\(.Values\)\(.serviceAccount\)#\1.global\2#g' chart/templates/_helpers.tpl
-```{{exec}}
-
-Update the deployment notes to display the `frontend` informations.
-
-```bash
-sed \
--e 's#\(.Values\)\(.*\)#\1.frontend\2#g' \
--i chart/templates/NOTES.txt
+vi -e ${CHART_NAME}/templates/_helpers.tpl <<EOF
+/define "${CHART_NAME}.labels"
+a
+{{- if .Values.backend.labels }}
+{{ toYaml .Values.backend.labels }}
+{{- else if .Values.frontend.labels }}
+{{ toYaml .Values.frontend.labels }}
+{{- end -}}
+.
+/define "${CHART_NAME}.selectorLabels"
+/app.kubernetes.io\/instance
+a
+{{- if .Values.backend.selectorLabels }}
+{{ toYaml .Values.backend.selectorLabels }}
+{{- else if .Values.frontend.selectorLabels }}
+{{ toYaml .Values.frontend.selectorLabels }}
+{{- end -}}
+.
+wq
+EOF
 ```{{exec}}

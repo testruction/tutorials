@@ -156,7 +156,39 @@
   rm -f chart/templates/tests/test-connection.yaml
 }
 
-@test "M1S13: Update helpers script and deployment notes" {
+@test "M1S13: Add extra labels support to helpers script" {
+  cd fastapi-sqlalchemy-cockroachdb
+
+  yq -i '
+  .backend.labels = {} |
+  .backend.selectorLabels.[app.kubernetes.io/component] = "backend" |
+  .frontend.labels = {} |
+  .frontend.selectorLabels.[app.kubernetes.io/component] = "frontend"
+  ' ${CHART_NAME}/values.yaml
+
+  vi -e ${CHART_NAME}/templates/_helpers.tpl <<EOF
+/define "${CHART_NAME}.labels"
+a
+{{- if .Values.backend.labels }}
+{{ toYaml .Values.backend.labels }}
+{{- else if .Values.frontend.labels }}
+{{ toYaml .Values.frontend.labels }}
+{{- end -}}
+.
+/define "${CHART_NAME}.selectorLabels"
+/app.kubernetes.io\/instance
+a
+{{- if .Values.backend.selectorLabels }}
+{{ toYaml .Values.backend.selectorLabels }}
+{{- else if .Values.frontend.selectorLabels }}
+{{ toYaml .Values.frontend.selectorLabels }}
+{{- end -}}
+.
+wq
+EOF
+}
+
+@test "M1S14: Update helpers script and deployment notes" {
   cd fastapi-sqlalchemy-cockroachdb
 
   yq -i '
