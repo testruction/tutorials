@@ -161,9 +161,9 @@
 
   yq -i '
   .backend.labels = {} |
-  .backend.selectorLabels.[app.kubernetes.io/component] = "backend" |
+  .backend.selectorLabels.["app.kubernetes.io/component"] = "backend" |
   .frontend.labels = {} |
-  .frontend.selectorLabels.[app.kubernetes.io/component] = "frontend"
+  .frontend.selectorLabels.["app.kubernetes.io/component"] = "frontend"
   ' chart/values.yaml
 
   vi -e chart/templates/_helpers.tpl <<EOF

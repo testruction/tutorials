@@ -4,14 +4,14 @@ The Helpers script `templates/_helpers.tpl` is responsible of the labels allocat
 
 Since the application leverage two components, it is required to add an extra selector label. Either services will randomly send traffic to `backsend` and `frontend` pods.
 
-The [app.kubernetes.io/component](https://kubernetes.io/docs/reference/labels-annotations-taints/#app-kubernetes-io-component) a well known label to such issue.
+The ["app.kubernetes.io/component"](https://kubernetes.io/docs/reference/labels-annotations-taints/#app-kubernetes-io-component) a well known label to such issue.
 
 ```bash
 yq -i '
 .backend.labels = {} |
-.backend.selectorLabels.[app.kubernetes.io/component] = "backend" |
+.backend.selectorLabels.["app.kubernetes.io/component"] = "backend" |
 .frontend.labels = {} |
-.frontend.selectorLabels.[app.kubernetes.io/component] = "frontend"
+.frontend.selectorLabels.["app.kubernetes.io/component"] = "frontend"
 ' chart/values.yaml
 ```{{exec}}
 
