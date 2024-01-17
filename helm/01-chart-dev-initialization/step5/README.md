@@ -1,4 +1,4 @@
-# Add conditions to control the deployment
+# 5. Add conditions to control the deployment
 
 When a chart supports the deployment of multiple components it is a good practice to add a condition to control the deployment of each components.
 

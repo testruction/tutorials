@@ -1,4 +1,4 @@
-# Create initial chart
+# 2. Create initial chart
 
 Create a `chart` directory at the root of the source code repository, using the default structure included in the `helm` command line tool.
 

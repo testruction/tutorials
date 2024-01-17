@@ -1,4 +1,4 @@
-# Create and populate component directories
+# 3. Create and populate component directories
 
 Create distinct template directories for `backend` and `frontend` services.
 

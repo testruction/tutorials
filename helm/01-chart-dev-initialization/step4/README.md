@@ -1,4 +1,4 @@
-# Create configuration sections for earch components
+# 4. Create configuration sections for earch components
 
 Create distinct sections for `backend` and `frontend` services in the `Values.yaml`.
 

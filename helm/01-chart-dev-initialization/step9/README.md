@@ -1,4 +1,4 @@
-# Allocate distinct container images
+# 9. Allocate distinct container images
 
 Update the Open Container Image (OCI) repository of the `backend` and `frontend` services.
 
@@ -15,12 +15,4 @@ yq -i '.backend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockr
 
 ```bash
 yq -i '.frontend.image.repository = "ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend"' chart/values.yaml
-```{{exec}}
-
-Add configuration values to control the deployment of the `backend` and `frontend` services.
-
-> **Notice**: The following command demonstrates how to address mappings at once using `yq`.
-
-```bash
-yq -i '.backend.enabled = true | .frontend.enabled = true' chart/valutes.yaml
 ```{{exec}}

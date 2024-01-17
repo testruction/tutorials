@@ -1,4 +1,4 @@
-# Reflect the new configuration structure in the templates
+# 7. Reflect the new configuration structure in the templates
 
 Update `backend` and `frontend` YAML templates according to the new `values.yaml` structure.
 
