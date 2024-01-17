@@ -13,10 +13,10 @@ Add a condition to both `backend` and `frontend`.
 
 ```bash
 yq -i '.backend.enabled = true' chart/values.yaml
-```
+```{{exec}}
 
 **Frontend**:
 
 ```bash
 yq -i '.frontend.enabled = true' chart/values.yaml
-```
+```{{exec}}
