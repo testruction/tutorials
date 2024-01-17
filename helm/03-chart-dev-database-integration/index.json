@@ -39,6 +39,7 @@
 
                 {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/dbloader.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "scripts/module1.bats", "target": "~/", "chmod": "+x"},
                 {"file": "scripts/module2.bats", "target": "~/", "chmod": "+x"}
