@@ -12,14 +12,14 @@ yq -i '
 .backend.selectorLabels.[app.kubernetes.io/component] = "backend" |
 .frontend.labels = {} |
 .frontend.selectorLabels.[app.kubernetes.io/component] = "frontend"
-' ${CHART_NAME}/values.yaml
+' chart/values.yaml
 ```{{exec}}
 
 Update the Helper script to inject the additional labels.
 
 ```bash
-vi -e ${CHART_NAME}/templates/_helpers.tpl <<EOF
-/define "${CHART_NAME}.labels"
+vi -e chart/templates/_helpers.tpl <<EOF
+/define "chart.labels"
 a
 {{- if .Values.backend.labels }}
 {{ toYaml .Values.backend.labels }}
@@ -27,7 +27,7 @@ a
 {{ toYaml .Values.frontend.labels }}
 {{- end -}}
 .
-/define "${CHART_NAME}.selectorLabels"
+/define "chart.selectorLabels"
 /app.kubernetes.io\/instance
 a
 {{- if .Values.backend.selectorLabels }}
