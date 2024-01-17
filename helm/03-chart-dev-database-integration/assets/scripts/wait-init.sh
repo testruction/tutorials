@@ -24,3 +24,4 @@ rm $0
 clear
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
+wait_until_done "Installing BATS Core command line." /ks/.bats_core_finished
