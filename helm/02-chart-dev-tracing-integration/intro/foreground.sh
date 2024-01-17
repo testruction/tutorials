@@ -1,7 +1,2 @@
 #!/usr/bin/env bash
-
-echo "Initializing lab environment"
-
-sleep 2
-
-/usr/local/bin/wait.sh
+FILE=/ks/wait-init.sh; while ! test -f ${FILE}; do clear; sleep 0.1; done; bash ${FILE}
