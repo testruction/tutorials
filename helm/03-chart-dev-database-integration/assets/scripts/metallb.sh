@@ -22,4 +22,4 @@ EOF
 
 kubectl apply -f /ks/ip-address-pool.yaml
 
-touch /ks/.dbloader_finished
+touch /ks/.metallb_finished

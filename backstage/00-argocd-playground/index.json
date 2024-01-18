@@ -28,6 +28,7 @@
                 {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/metallb.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
@@ -50,6 +51,6 @@
         }
     },
     "backend": {
-      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
     }
 }
