@@ -32,12 +32,22 @@ setup() {
   load ~/.env
 }
 
-@test "Check backend health endpoint" { curl --retry 3 --fail "http://\${BACKEND_HOST}:\${BACKEND_PORT}/health" }
-@test "Check backend API" { curl --retry 3 --fail "http://\${BACKEND_HOST}:\${BACKEND_PORT}/v1/fakenames?limit=5" }
+@test "Check backend health endpoint" {
+    curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/health"
+}
+@test "Check backend API" {
+    curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/v1/fakenames?limit=5"
+}
 
-@test "Check frontend health endpoint" { curl --retry 3 --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/health" }
-@test "Check frontend/backend readiness" { curl --retry 3 --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/status" }
-@test "Check frontend UI" { curl --retry 3 --fail "http://\${FRONTEND_HOST}:\${FRONTEND_PORT}/" }
+@test "Check frontend health endpoint" {
+    curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/health"
+}
+@test "Check frontend/backend connectivity" {
+    curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/status"
+}
+@test "Check frontend UI" {
+    curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/"
+}
 EOF
 ```{{exec}}
 
