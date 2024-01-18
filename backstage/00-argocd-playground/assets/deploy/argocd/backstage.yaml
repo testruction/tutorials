@@ -46,6 +46,8 @@ spec:
           type: LoadBalancer
           ports:
             backend: 8008
+          annotations:
+            metallb.universe.tf/allow-shared-ip: controlplane
         postgresql:
           enabled: true
           auth:
