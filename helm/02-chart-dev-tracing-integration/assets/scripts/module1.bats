@@ -156,33 +156,45 @@
   rm -f chart/templates/tests/test-connection.yaml
 }
 
-@test "M1S13: Add extra labels support to helpers script" {
+@test "M1S13: Add component labels" {
   cd fastapi-sqlalchemy-cockroachdb
 
-  yq -i '
-  .backend.labels = {} |
-  .backend.selectorLabels.["app.kubernetes.io/component"] = "backend" |
-  .frontend.labels = {} |
-  .frontend.selectorLabels.["app.kubernetes.io/component"] = "frontend"
-  ' chart/values.yaml
-
-  vi -e chart/templates/_helpers.tpl <<EOF
-/define "chart.labels"
+  vi -e chart/templates/backend/deployment.yaml <<EOF
+/spec
+/template
+/metadata
+/labels
 a
-{{- if .Values.backend.labels }}
-{{ toYaml .Values.backend.labels }}
-{{- else if .Values.frontend.labels }}
-{{ toYaml .Values.frontend.labels }}
-{{- end -}}
+        app.kubernetes.io/component: backend
 .
-/define "chart.selectorLabels"
-/app.kubernetes.io\/instance
+wq
+EOF
+
+  vi -e chart/templates/backend/service.yaml <<EOF
+/spec
+/selector
 a
-{{- if .Values.backend.selectorLabels }}
-{{ toYaml .Values.backend.selectorLabels }}
-{{- else if .Values.frontend.selectorLabels }}
-{{ toYaml .Values.frontend.selectorLabels }}
-{{- end -}}
+    app.kubernetes.io/component: backend
+.
+wq
+EOF
+
+  vi -e chart/templates/frontend/deployment.yaml <<EOF
+/spec
+/template
+/metadata
+/labels
+a
+        app.kubernetes.io/component: frontend
+.
+wq
+EOF
+
+  vi -e chart/templates/frontend/service.yaml <<EOF
+/spec
+/selector
+a
+    app.kubernetes.io/component: frontend
 .
 wq
 EOF
