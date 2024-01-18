@@ -41,16 +41,19 @@ helm upgrade --install \
 argocd login  localhost:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
 
 # GitOps account
+echo "Allocating \"sysops\" account"
 kubectl -n argo-cd patch configmap/argocd-cm \
 --type='json' \
 --patch '[{"op": "add", "path": "/data/accounts.sysops", "value": "apiKey,login"}]'
 
 # Backstage account
+echo "Allocating \"backstage\" account"
 kubectl -n argo-cd patch configmap/argocd-cm \
 --type='json' \
 --patch '[{"op": "add", "path": "/data/accounts.backstage", "value": "apiKey,login"}]'
 
 # Account RBAC
+echo "Updating RBAC policies"
 kubectl -n argo-cd patch configmap/argocd-rbac-cm \
 --type='json' \
 --patch '[{"op": "add", "path": "/data/policy.csv", "value": "g, sysops, role:admin\ng, backstage, role:readonly\n"}]'
