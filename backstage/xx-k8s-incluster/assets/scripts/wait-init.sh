@@ -21,8 +21,6 @@ clear
 
 echo "Stop unsused services to save memory"
 sudo systemctl stop docker
-sudo systemctl stop containerd
-sudo systemctl stop multipathd
 
 clear
 
@@ -31,4 +29,5 @@ wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
 wait_until_done "Installing Docker BuildX plugin" /ks/.docker_finished
 wait_until_done "Configuring Kubernetes client." /ks/.kubeconfig_finished
 wait_until_done "Upgrading Helm." /ks/.helm_finished
+wait_until_done "Deploying MetalLB." /ks/.metallb_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished

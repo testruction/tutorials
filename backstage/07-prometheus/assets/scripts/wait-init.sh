@@ -21,17 +21,15 @@ clear
 
 echo "Stop unsused services to save memory"
 sudo systemctl stop docker
-sudo systemctl stop containerd
-sudo systemctl stop multipathd
 
 clear
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
 wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
 wait_until_done "Installing Locust.io load generator." /ks/.locust_finished
-wait_until_done "Configuring Kubernetes client." /ks/.kubeconfig_finished
+wait_until_done "Deploying MetalLB." /ks/.metallb_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
 wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
 
-sudo systemctl stop k3s
+sudo systemctl stop kubelet

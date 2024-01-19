@@ -11,16 +11,20 @@ spec:
     targetRevision: HEAD
     helm:
       parameters:
-        - name: backend.service.port
-          value: '18180'
         - name: backend.service.type
           value: LoadBalancer
-        - name: frontend.service.type
-          value: LoadBalancer
-        - name: frontend.service.port
-          value: '18080'
+        - name: backend.service.annotations.\metallb\.universe\.tf/allow-shared-ip
+          value: 'controlplane'
+        - name: backend.service.port
+          value: '18180'
         - name: backend.metrics.serviceMonitor.enabled
           value: 'true'
+        - name: frontend.service.type
+          value: LoadBalancer
+        - name: frontend.service.annotations.\metallb\.universe\.tf/allow-shared-ip
+          value: 'controlplane'
+        - name: frontend.service.port
+          value: '18080'
         - name: frontend.metrics.serviceMonitor.enabled
           value: 'true'
   destination:
