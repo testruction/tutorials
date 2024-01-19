@@ -38,7 +38,8 @@ helm upgrade --install \
   --set notifications.metrics.serviceMonitor.enabled="true" \
   gitops argo/argo-cd
 
-argocd login  '172.30.1.2:10080' --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
+IP_ADDRESS="$(ip route get '8.8.8.8' | grep -oP 'src \K[^ ]+')"
+argocd login  ${IP_ADDRESS}:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
 
 # GitOps account
 echo "Allocating \"sysops\" account"
