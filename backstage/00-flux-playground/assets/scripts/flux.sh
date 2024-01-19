@@ -25,7 +25,7 @@ flux bootstrap github \
   --owner="${GITHUB_USER}" \
   --repository='fleet-infra-public' \
   --branch='main' \
-  --path='clusters/localhost/development/kubeadm' \
+  --path='clusters/localhost/development/killercoda' \
   --private=false \
   --components-extra='image-reflector-controller,image-automation-controller'
 
