@@ -25,8 +25,8 @@ clear
 
 echo "Stop unsused services to save memory"
 sudo systemctl stop docker
-sudo systemctl stop containerd
-sudo systemctl stop multipathd
+# sudo systemctl stop containerd
+# sudo systemctl stop multipathd
 
 clear
 
