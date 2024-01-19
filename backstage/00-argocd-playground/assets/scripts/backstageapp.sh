@@ -63,6 +63,6 @@ unset BS_ARGO_TOKEN
 
 kubectl apply -f ${HOME}/deploy/argocd/backstage-rbac.yaml
 
-argocd app create backstage -f ~/deploy/argocd/backstage.yaml
+argocd app create backstage -f ~/deploy/argocd/backstage.yaml --upsert
 
 touch /ks/.backstageapp_finished
