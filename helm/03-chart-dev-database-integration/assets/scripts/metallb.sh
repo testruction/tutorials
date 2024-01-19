@@ -9,6 +9,8 @@ helm upgrade --install metallb \
   --wait \
   metallb/metallb
 
+IP_ADDRESS="$(ip route get '8.8.8.8' | grep -oP 'src \K[^ ]+')"
+
 cat <<EOF | tee /ks/ip-address-pool.yaml
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -17,7 +19,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 172.30.1.2/32
+  - ${IP_ADDRESS}/32
 EOF
 
 kubectl apply -f /ks/ip-address-pool.yaml
