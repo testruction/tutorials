@@ -1,6 +1,6 @@
 ![Backstage logo](https://raw.githubusercontent.com/cncf/artwork/master/projects/backstage/horizontal/color/backstage-horizontal-color.svg)
 
-This lab walks through the integration and deployment operations required to run a given Backstage application in a Kubernetes cluster managed by K3S.
+This lab walks through the integration and deployment operations required to run a given Backstage application in a Kubernetes cluster.
 
 ## Learning objectives
 

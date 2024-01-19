@@ -93,6 +93,8 @@ kind: Service
 metadata:
   name: backstage
   namespace: backstage
+  annotations:
+    metallb.universe.tf/allow-shared-ip: controlplane
   labels:
     app: backstage
     component: app

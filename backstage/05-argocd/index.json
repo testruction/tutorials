@@ -40,17 +40,17 @@
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
 
-                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/metallb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"},
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
@@ -59,6 +59,6 @@
         }
     },
     "backend": {
-      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
     }
 }

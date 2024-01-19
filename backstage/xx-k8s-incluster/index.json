@@ -1,6 +1,6 @@
 {
     "title": "04. Backstage: Kubernetes deployment",
-    "description": "Learn how to deploy Backstage in Kubernetes using Docker and K3S",
+    "description": "Learn how to deploy Backstage in Kubernetes using Docker and Containerd CLI",
     "difficulty": "easy",
     "time": "20-30 minutes",
     "details": {
@@ -39,22 +39,25 @@
             "host01": [
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+
                 {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/metallb.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+
                 {"file": "manifests/namespace.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/backstage.yaml", "target": "~/", "chmod": "+rw"},
                 {"file": "manifests/postgres.yaml", "target": "~/", "chmod": "+rw"},
+
                 {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
             ]
         }
     },
     "backend": {
-      "imageid": "kubernetes-k3s-1node-4GB-rapid"
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
     },
     "interface": {
         "layout": "ide"
