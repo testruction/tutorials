@@ -60,7 +60,7 @@ spec:
           image:
             registry: ghcr.io
             repository: testruction/backstage/all-in-one
-            tag: 1.19.0
+            tag: 1.19.1
           # extraEnvVarsSecrets:
           #   - backstage-env
           appConfig:
