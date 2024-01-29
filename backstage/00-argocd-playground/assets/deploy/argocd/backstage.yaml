@@ -166,7 +166,7 @@ spec:
                 - type: url
                   target: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/catalog-info.yaml
                 - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/main/entities/paypal/catalog-info.yaml
+                  target: https://github.com/testruction/backstage-tutorial/blob/main/catalog-info.yaml
                 - type: url
                   target: https://github.com/testruction/backstage-tutorial/blob/main/entities/paypal/catalog-info.yaml
                 - type: url
