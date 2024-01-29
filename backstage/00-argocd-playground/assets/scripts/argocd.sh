@@ -18,7 +18,7 @@ helm upgrade --install \
   --set server.extraArgs[0]="--insecure" \
   --set server.service.type="LoadBalancer" \
   --set server.service.servicePortHttp="10080" \
-  --set server.service.annotations."metallb\.universe\.tf/allow-shared-ip"="controlplane" \
+  --set server.service.annotations."metallb\.universe\.tf/allow-shared-ip"="edge-endpoint" \
   --set controller.metrics.enabled="true" \
   --set controller.metrics.serviceMonitor.enabled="true" \
   --set dex.enabled="true" \

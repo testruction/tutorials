@@ -10,7 +10,7 @@ helm upgrade --install \
   --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
   --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues="false" \
   --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues="false" \
-  --set prometheus.service.annotations.\metallb\.universe\.tf/allow-shared-ip="controlplane" \
+  --set prometheus.service.annotations.\metallb\.universe\.tf/allow-shared-ip="edge-endpoint" \
   --set grafana.enabled="false" \
   --set kubeApiServer.enabled="false" \
   --set kubelet.enabled="false" \

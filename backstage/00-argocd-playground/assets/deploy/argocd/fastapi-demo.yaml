@@ -14,7 +14,7 @@ spec:
         - name: backend.service.type
           value: LoadBalancer
         - name: backend.service.annotations.\metallb\.universe\.tf/allow-shared-ip
-          value: 'controlplane'
+          value: 'edge-endpoint'
         - name: backend.service.port
           value: '18180'
         - name: backend.metrics.serviceMonitor.enabled
@@ -22,7 +22,7 @@ spec:
         - name: frontend.service.type
           value: LoadBalancer
         - name: frontend.service.annotations.\metallb\.universe\.tf/allow-shared-ip
-          value: 'controlplane'
+          value: 'edge-endpoint'
         - name: frontend.service.port
           value: '18080'
         - name: frontend.metrics.serviceMonitor.enabled
