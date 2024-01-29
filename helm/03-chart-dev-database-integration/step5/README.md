@@ -5,7 +5,7 @@ Deploy the chart to the Kubernetes cluster.
 ```bash
 helm upgrade --install chartdev \
 --set cockroachdb.service.public.type="LoadBalancer" \
---set cockroachdb.service.public."annotations.metallb\.universe\.tf/allow-shared-ip"="controlplane" \
+--set cockroachdb.service.public."annotations.metallb\.universe\.tf/allow-shared-ip"="edge-endpoint" \
 --set backend.service.type="LoadBalancer" \
 --set backend.service.port="8001" \
 --set frontend.service.type="LoadBalancer" \
@@ -33,9 +33,9 @@ cd ~/fastapi-sqlalchemy-cockroachdb
 ```bash
 kubectl patch svc chartdev-fastapi-backend \
 --type='json' \
---patch='[{"op": "add", "path": "/metadata/annotations/metallb.universe.tf~1allow-shared-ip", "value":"controlplane"}]'
+--patch='[{"op": "add", "path": "/metadata/annotations/metallb.universe.tf~1allow-shared-ip", "value":"edge-endpoint"}]'
 
 kubectl patch svc chartdev-fastapi-frontend \
 --type='json' \
---patch='[{"op": "add", "path": "/metadata/annotations/metallb.universe.tf~1allow-shared-ip", "value":"controlplane"}]'
+--patch='[{"op": "add", "path": "/metadata/annotations/metallb.universe.tf~1allow-shared-ip", "value":"edge-endpoint"}]'
 ```{{exec}}
