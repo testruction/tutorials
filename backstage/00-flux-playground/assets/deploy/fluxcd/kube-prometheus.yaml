@@ -26,7 +26,7 @@ metadata:
 spec:
   force: false
   interval: 5m
-  path: ./infrastructure/prometheus-community/kube-prometheus-stack/killercoda
+  path: ./infrastructure/prometheus-community/kube-prometheus-stack/localhost
   prune: true
   sourceRef:
     kind: GitRepository
