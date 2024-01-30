@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="2.1.2"
+VERSION="2.2.2"
 mkdir -p /usr/local/fluxcd/${VERSION}/
 cd /usr/local/fluxcd/${VERSION}/
 curl --silent --location https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VERSION}_linux_amd64.tar.gz \
