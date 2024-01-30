@@ -53,6 +53,11 @@ spec:
           auth:
             username: backstage
             password: hunter2
+          primary:
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
         metrics:
           serviceMonitor:
             enabled: true
