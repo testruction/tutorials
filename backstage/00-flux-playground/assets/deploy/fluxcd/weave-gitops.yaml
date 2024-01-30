@@ -9,7 +9,7 @@ spec:
     # exclude all
     /*
     # include charts directory
-    !/apps/weaveworks/gitops/
+    !/infrastructure/weaveworks/gitops
   interval: 1m
   ref:
     branch: main
