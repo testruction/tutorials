@@ -26,7 +26,7 @@ metadata:
 spec:
   force: false
   interval: 5m
-  path: ./apps/backstage/localhost
+  path: ./apps/backstage/killercoda
   prune: true
   sourceRef:
     kind: GitRepository
