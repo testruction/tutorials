@@ -43,7 +43,7 @@ yq -i '
 
 # Customize Flux CD application deployment
 # ----------------------------------------
-KC_URL=$(sed 's/PORT/8008/' /etc/killercoda/host)
+KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 
 kubectl create namespace backstage \
   -o yaml --dry-run=client > ${HOME}/deploy/backsage-namespace.yaml
