@@ -104,5 +104,5 @@ spec:
   type: LoadBalancer
   ports:
     - name: http
-      port: 8008
+      port: 7007
       targetPort: http

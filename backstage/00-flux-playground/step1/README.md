@@ -10,7 +10,7 @@ locust --autostart -f ~/tests/locustfile.py --users 5 --spawn-rate 2 -H http://l
 
 Application | URL
 --- | ---
-Backstage | [Click here]({{TRAFFIC_HOST1_8008}})
+Backstage | [Click here]({{TRAFFIC_HOST1_7007}})
 Weave GitOps (FluxUI) | [Click here]({{TRAFFIC_HOST1_9001}}) user: **admin**, password: **admin**
 Prometheus | [Click here]({{TRAFFIC_HOST1_9090}})
 Demo App frontend | [Click here]({{TRAFFIC_HOST1_18080}})

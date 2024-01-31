@@ -45,7 +45,7 @@ spec:
         service:
           type: LoadBalancer
           ports:
-            backend: 8008
+            backend: 7007
           annotations:
             metallb.universe.tf/allow-shared-ip: edge-endpoint
         postgresql:
@@ -92,7 +92,7 @@ spec:
               # all interfaces, the most permissive setting. The right value depends on your specific deployment.
               listen:
                 host: 0.0.0.0
-                port: 8008
+                port: 7007
 
               csp:
                 connect-src: ["'self'", 'http:', 'https:']
