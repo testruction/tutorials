@@ -5,7 +5,8 @@
 Use the following command to generate some load on the Demo App.
 
 ```bash
-locust --autostart -f ~/tests/locustfile.py --users 5 --spawn-rate 2 -H http://localhost:18180
+BACKEND_HOST=$(kubectl get svc -n fastapi-demo demo-fastapi-backend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+locust --autostart -f ~/tests/locustfile.py --users 5 --spawn-rate 2 -H http://${BACKEND_HOST}:18180
 ```{{exec}}
 
 Application | URL
