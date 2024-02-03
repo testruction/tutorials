@@ -10,8 +10,8 @@ cd "/opt/yq/${APP_VERSION}/"
 sudo wget https://github.com/mikefarah/yq/releases/download/v${APP_VERSION}/yq_linux_amd64.tar.gz
 tar xvzf yq_linux_amd64.tar.gz
 ./install-man-page.sh
+sudo chmod -v +x /opt/yq/${APP_VERSION}/yq_linux_amd64
 ln -sf /opt/yq/${APP_VERSION}/yq_linux_amd64 /usr/local/bin/yq
-sudo chmod +x /usr/local/bin/yq
 
 rm -vf yq_linux_amd64.tar.gz
 
