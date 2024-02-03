@@ -25,6 +25,6 @@ sudo systemctl stop docker
 clear
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
-wait_until_done "Installing Bats command line." /ks/.bats_finished
+wait_until_done "Installing Bats-Core command line." /ks/.bats_core_finished
 wait_until_done "Installing Node JS binaries." /ks/.nodejs_finished
 
