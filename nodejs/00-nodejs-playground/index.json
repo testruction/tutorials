@@ -1,0 +1,34 @@
+{
+    "title": "00. Node.js Playground (LTS)",
+    "description": "Play with Node.js. Does not have any taks or questions. Created to develop scenarios and test things related to Node.js",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "ubuntu-4GB"
+    }
+}
