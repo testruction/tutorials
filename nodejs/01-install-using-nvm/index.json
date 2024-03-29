@@ -1,0 +1,30 @@
+{
+    "title": "01. Install Node using NVM",
+    "description": "Learn how to install the Node runtime using the recommanded approach base on Node Version Manager (NVM)",
+    "difficulty": "easy",
+    "time": "5-15 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        }
+    },
+    "backend": {
+      "imageid": "ubuntu-4GB"
+    },
+    "interface": {
+        "layout": "ide"
+    }
+}

@@ -2,6 +2,9 @@
   "items": [
     {
       "path": "00-nodejs-playground"
+    },
+    {
+      "path": "01-install-using-nvm"
     }
   ]
 }
