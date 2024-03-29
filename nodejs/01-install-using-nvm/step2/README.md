@@ -20,12 +20,6 @@ Enabled command completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 ```{{exec}}
 
-
-&& \. "$NVM_DIR/nvm.sh" \
-&& [ -s "$NVM_DIR/bash_completion" ] \
-&& \. "$NVM_DIR/bash_completion"
-```{{exec}}
-
 Check that NVM is operable in the current session by checking the installed version.
 
 ```shell
