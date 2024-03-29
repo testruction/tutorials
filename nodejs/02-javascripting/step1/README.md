@@ -1,4 +1,4 @@
-## INTRODUCTION (Exercise 1 of 20)  
+## Introduction _(Exercise 1 of 20)_
    
 To keep things organized, let's create a folder for this workshop.  
 
