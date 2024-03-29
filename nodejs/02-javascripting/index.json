@@ -12,6 +12,21 @@
         "steps": [
             {
                 "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            },
+            {
+                "text": "step3/README.md"
+            },
+            {
+                "text": "step4/README.md"
+            },
+            {
+                "text": "step5/README.md"
+            },
+            {
+                "text": "step6/README.md"
             }
         ],
         "finish": {
