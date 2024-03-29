@@ -3,22 +3,21 @@ set -euo pipefail
 
 # Install Node.Js
 sudo apt-get update -y
-
 sudo apt-get install -y \
     'ca-certificates' \
     'curl' \
-    'gnupg'
+    'gnupg' \
+sudo mkdir -p /etc/apt/keyrings
 
-# Install NVM
-NODEJS_VERSION='0.39.7'
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NODEJS_VERSION}/install.sh | bash
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+NODE_MAJOR=18
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
+  | sudo tee /etc/apt/sources.list.d/nodesource.list
 
-nvm install 20
-nvm use 20
+sudo apt-get update -y
+sudo apt-get install nodejs -y
 
 npm install -g javascripting
 
