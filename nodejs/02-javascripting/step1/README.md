@@ -1,23 +1,22 @@
 ## Introduction _(Exercise 1 of 20)_
    
-To keep things organized, let's create a folder for this workshop.  
+To keep things organized, let's create a folder for this workshop.
 
-Run this command to make a directory called javascripting (or something  
-else if you like):  
+Run this command to make a directory called javascripting (or something else if you like):
 
-```shell 
+```bash
 mkdir javascripting  
 ```{{exec}}
 
 Change directory into the javascripting folder:  
- 
-```shell
+
+```bash
 cd javascripting  
 ```{{exec}}
 
 Create a file named introduction.js:  
 
-```shell
+```bash
 touch introduction.js  
 ```{{exec}} 
    
@@ -31,7 +30,7 @@ console.log('hello')
 
 Save the file, then check to see if your program is correct by running this command:  
 
-```shell   
+```bash
      javascripting verify introduction.js  
 ```{{exec}}
 
@@ -39,15 +38,4 @@ By the way, throughout this tutorial, you can give the file you work with any na
 
 ```bash   
 javascripting verify catsAreAwesome.js  
-```
-
-─────────────────────────────────────────────────────────────────────────────  
-Need help? View the README for this workshop:  
-(https://github.com/workshopper/javascripting)  
-
-─────────────────────────────────────────────────────────────────────────────  
-   
-> To print these instructions again, run: `javascripting print`                 
-> To execute your program in a test environment, run: `javascripting run program`.js                                                                  
-> To verify your program, run: `javascripting verify program.js`                
-> For help run: `javascripting help`
+```{{exec}}
