@@ -8,12 +8,6 @@ Run to following command to install the latest version.
 nvm install --lts
 ```{{exec}}
 
-Activate the LTS version.
-
-```shell
-nvm use --lts
-```{{exec}}
-
 Let's install the [previous LTS version](https://endoflife.date/nodejs)
 
 ```shell
@@ -26,8 +20,16 @@ Check the current active version.
 node --version
 ```{{exec}}
 
-Activate the previous lts version and check the version again.
+Notice that the latest installed version is automatically activated.
+
+Reactivate the LTS, then check the version again.
 
 ```shell
-nvm use 18 && node --version
+nvm use --lts && node --version
+```{{exec}}
+
+Run the following command to activate the 18.x version.
+
+```shell
+nvm use 18
 ```{{exec}}
