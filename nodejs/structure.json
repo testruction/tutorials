@@ -5,6 +5,9 @@
     },
     {
       "path": "01-install-using-nvm"
+    },
+    {
+      "path": "02-javascripting"
     }
   ]
 }
