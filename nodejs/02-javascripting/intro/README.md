@@ -11,4 +11,4 @@ The objective of this course is to learn how to:
 
 ### Credits
 
-This course is basically a transcript of the **Javascripting** course published une the "BSD 2-Clause" by the [NodeSchool](https://nodeschool.io).
+This course is basically a transcript of the **Javascripting** course published under "BSD 2-Clause" license by the [NodeSchool](https://nodeschool.io).
