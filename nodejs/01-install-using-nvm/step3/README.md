@@ -20,7 +20,7 @@ Check the current active version.
 node --version
 ```{{exec}}
 
-Notice that the latest installed version is automatically activated.
+> **Notice**: The latest installed version is automatically activated.
 
 Reactivate the LTS, then check the version again.
 
