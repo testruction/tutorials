@@ -14,6 +14,8 @@ console.log(example)
 
 > **Node**: To change the value that the example variable references, we need to use the equals sign again, this time with the `example.replace()` method to the right of the equals sign.
 
+---
+
 ## The challenge:  
   
 Create a file named `revising-strings.js`.
