@@ -24,4 +24,4 @@ Check that NVM is operable in the current session by checking the installed vers
 
 ```shell
 nvm --version
-```
+```{{exec}}
