@@ -5,9 +5,7 @@
     "time": "5-15 minutes",
     "details": {
         "intro": {
-            "text": "intro/README.md",
-            "foreground": "intro/foreground.sh",
-            "background": "intro/background.sh"
+            "text": "intro/README.md"
         },
         "steps": [
             {
