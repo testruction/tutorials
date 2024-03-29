@@ -6,7 +6,7 @@ sudo apt-get update -y
 sudo apt-get install -y \
     'ca-certificates' \
     'curl' \
-    'gnupg' \
+    'gnupg'
 sudo mkdir -p /etc/apt/keyrings
 
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
