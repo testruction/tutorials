@@ -16,61 +16,99 @@
                 "verify": "step1/verify.sh"
             },
             {
-                "text": "step2/README.md"
+                "text": "step2/README.md",
+                "foreground": "step2/foreground.sh",
+                "verify": "step2/verify.sh"
             },
             {
-                "text": "step3/README.md"
+                "text": "step3/README.md",
+                "foreground": "step3/foreground.sh",
+                "verify": "step3/verify.sh"
             },
             {
-                "text": "step4/README.md"
+                "text": "step4/README.md",
+                "foreground": "step4/foreground.sh",
+                "verify": "step4/verify.sh"
             },
             {
-                "text": "step5/README.md"
+                "text": "step5/README.md",
+                "foreground": "step5/foreground.sh",
+                "verify": "step5/verify.sh"
             },
             {
-                "text": "step6/README.md"
+                "text": "step6/README.md",
+                "foreground": "step6/foreground.sh",
+                "verify": "step6/verify.sh"
             },
             {
-                "text": "step7/README.md"
+                "text": "step7/README.md",
+                "foreground": "step7/foreground.sh",
+                "verify": "step7/verify.sh"
             },
             {
-                "text": "step8/README.md"
+                "text": "step8/README.md",
+                "foreground": "step8/foreground.sh",
+                "verify": "step8/verify.sh"
             },
             {
-                "text": "step9/README.md"
+                "text": "step9/README.md",
+                "foreground": "step9/foreground.sh",
+                "verify": "step9/verify.sh"
             },
             {
-                "text": "step10/README.md"
+                "text": "step10/README.md",
+                "foreground": "step10/foreground.sh",
+                "verify": "step10/verify.sh"
             },
             {
-                "text": "step11/README.md"
+                "text": "step11/README.md",
+                "foreground": "step11/foreground.sh",
+                "verify": "step11/verify.sh"
             },
             {
-                "text": "step12/README.md"
+                "text": "step12/README.md",
+                "foreground": "step12/foreground.sh",
+                "verify": "step12/verify.sh"
             },
             {
-                "text": "step13/README.md"
+                "text": "step13/README.md",
+                "foreground": "step13/foreground.sh",
+                "verify": "step13/verify.sh"
             },
             {
-                "text": "step14/README.md"
+                "text": "step14/README.md",
+                "foreground": "step14/foreground.sh",
+                "verify": "step14/verify.sh"
             },
             {
-                "text": "step15/README.md"
+                "text": "step15/README.md",
+                "foreground": "step15/foreground.sh",
+                "verify": "step15/verify.sh"
             },
             {
-                "text": "step16/README.md"
+                "text": "step16/README.md",
+                "foreground": "step16/foreground.sh",
+                "verify": "step16/verify.sh"
             },
             {
-                "text": "step17/README.md"
+                "text": "step17/README.md",
+                "foreground": "step17/foreground.sh",
+                "verify": "step17/verify.sh"
             },
             {
-                "text": "step18/README.md"
+                "text": "step18/README.md",
+                "foreground": "step18/foreground.sh",
+                "verify": "step18/verify.sh"
             },
             {
-                "text": "step19/README.md"
+                "text": "step19/README.md",
+                "foreground": "step19/foreground.sh",
+                "verify": "step19/verify.sh"
             },
             {
-                "text": "step20/README.md"
+                "text": "step20/README.md",
+                "foreground": "step20/foreground.sh",
+                "verify": "step20/verify.sh"
             }
         ],
         "finish": {
