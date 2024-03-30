@@ -1,6 +1,4 @@
-# JAVASCRIPTING  
-   
-## VARIABLES (Exercise 2 of 20)  
+## Variables _(Exercise 2 of 20)_
   
 A variable is a name that can reference a specific value. Variables are declared using let followed by the variable's name.  
   
