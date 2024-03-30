@@ -11,7 +11,9 @@
         },
         "steps": [
             {
-                "text": "step1/README.md"
+                "text": "step1/README.md",
+                "foreground": "step1/foreground.sh",
+                "verify": "step1/verify.sh"
             },
             {
                 "text": "step2/README.md"
@@ -86,7 +88,7 @@
         }
     },
     "backend": {
-      "imageid": "ubuntu-4GB"
+      "imageid": "ubuntu"
     },
     "interface": {
         "layout": "ide"
