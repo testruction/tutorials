@@ -1,5 +1,5 @@
 {
-    "title": "03. Stream adventure",
+    "title": "04. Stream adventure",
     "description": "Learn to compose streaming interfaces with `.pipe()`.",
     "difficulty": "easy",
     "time": "20-30 minutes",
