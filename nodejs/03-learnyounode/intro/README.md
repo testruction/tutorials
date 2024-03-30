@@ -1,4 +1,4 @@
-## Javascripting
+## Learn you node
 
 This lab walks though the basics of asynchronous programming and HTTP serving using Javascript.
 
@@ -11,4 +11,4 @@ The objective of this course is to learn how to:
 
 ### Credits
 
-This course is basically a transcript of the **learnyounode** course published under "BSD 2-Clause" license by the [NodeSchool](https://nodeschool.io).
+This course is basically a transcript of the **learnyounode** course published under "MIT" license by the [NodeSchool](https://nodeschool.io).
