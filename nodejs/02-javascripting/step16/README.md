@@ -24,8 +24,6 @@ example['pizza']
 
 The two lines of code above will both return `yummy`.
 
----
-
 ## The challenge:
 
 Create a file named object-`properties.js`.
@@ -44,4 +42,4 @@ Check to see if your program is correct by running this command:
 
 ```bash
 javascripting verify object-properties.js
-```
+```{{exec}}

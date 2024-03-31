@@ -20,14 +20,14 @@ The filtered variable will now only contain cat and dog.
    
 ## The challenge:
 
-Create a file named array-`filtering.js`.
-In that file, define a variable named numbers that references this array:  
+Create a file named `array-filtering.js`.
+In that file, define a variable named `numbers` that references this array:  
 
 ```javascript
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-Like above, define a variable named filtered that references the result of `numbers.filter()`.
+Like above, define a variable named `filtered` that references the result of `numbers.filter()`.
 
 The function that you pass to the `.filter()` method will look something like this:
 
@@ -43,4 +43,4 @@ Check to see if your program is correct by running this command:
 
 ```bash
 javascripting verify array-filtering.js
-```
+```{{exec}}

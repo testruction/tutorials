@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select objects
+javascripting select 'OBJECTS'

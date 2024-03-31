@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select array-filtering
+javascripting select 'ARRAY FILTERING'

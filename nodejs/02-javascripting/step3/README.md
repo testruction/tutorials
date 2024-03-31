@@ -12,11 +12,9 @@ String values are surrounded by either single or double quotation marks.
 
 > **Node**: Try to stay consistent. In this workshop we'll only use single quotation marks.
 
----
-
 ## The challenge:
    
-For this challenge, create a file named strings.js.
+For this challenge, create a file named `strings.js`.
    
 In that file create a variable named someString like this:
 

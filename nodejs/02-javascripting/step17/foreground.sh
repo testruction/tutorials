@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select object-keys
+javascripting select 'OBJECT KEYS'

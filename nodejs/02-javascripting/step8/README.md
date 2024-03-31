@@ -2,20 +2,18 @@
 
 Sometimes you will need to turn a number into a string.
 
-In those instances you will use the .toString() method. Here's an example:
+In those instances you will use the **.toString()** method. Here's an example:
 
 ```javascript
 let n = 256
 n = n.toString()
 ```
 
----
-
 ## The challenge:
 
 Create a file named `number-to-string.js`.
 
-In that file define a variable named n that references the number 128;
+In that file define a variable named `n` that references the number `128`;
 
 Call the `.toString()` method on the n variable.
 
