@@ -17,13 +17,11 @@ console.log(keys)
 
 The above code will print an array of strings, where each string is a key in the car object. `['make', 'model', 'year']`
 
----
-
 ## The challenge:  
 
 Create a file named `object-keys.js`.
 
-In that file, define a variable named car like this:
+In that file, define a variable named `car` like this:
 
 ```javascript
 const car = {
@@ -33,7 +31,7 @@ const car = {
 }
 ```
 
-Then define another variable named keys like this:
+Then define another variable named `keys` like this:
 
 ```javascript
 const keys = Object.keys(car)

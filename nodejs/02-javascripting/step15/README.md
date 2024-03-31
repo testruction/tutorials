@@ -2,6 +2,8 @@
 
 Objects are lists of values similar to arrays, except values are identified by keys instead of integers.
 
+> Think of a dictionnary that constains key-value pairs.
+
 Here is an example:
 
 ```javascript
@@ -11,13 +13,11 @@ const foodPreferences = {
 }  
 ```
 
----
-
 ## The challenge:  
   
 Create a file named `objects.js`.
 
-In that file, define a variable named pizza like this:
+In that file, define a variable named `pizza` like this:
 
 ```javascript
 const pizza = {  
@@ -27,10 +27,10 @@ const pizza = {
 }  
 ```
 
-Use `console.log()` to print the pizza object to the terminal.
+Use `console.log()` to print the `pizza` object to the terminal.
 
 Check to see if your program is correct by running this command:
 
 ```bash
 javascripting verify objects.js
-```
+```{{exec}}

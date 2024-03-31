@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select if-statement
+javascripting select 'IF STATEMENT'

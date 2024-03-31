@@ -21,5 +21,6 @@ sudo apt-get update -y
 sudo apt-get install nodejs -y
 
 npm install -g javascripting
+mkdir -p /root/javascripting
 
 touch /ks/.nodejs_finished

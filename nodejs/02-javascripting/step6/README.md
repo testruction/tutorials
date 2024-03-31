@@ -8,7 +8,7 @@ Numbers can be integers, like 2, 14, or 4353, or they can be decimals, also know
    
 Create a file named `numbers.js`.
 
-In that file define a variable named example that references the integer 123456789.
+In that file define a variable named `example` that references the integer `123456789`.
    
 Use `console.log()` to print that number to the terminal.
    

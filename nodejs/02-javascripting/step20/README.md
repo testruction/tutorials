@@ -40,8 +40,6 @@ Example:
 })() // the function is immediately invoked
 ```
 
----
-
 ## The challenge:
   
 Create a file named `scope.js`.
@@ -68,7 +66,7 @@ const a = 1; const b = 2; const c = 3;
 })()
 ```
 
-Use your knowledge of the variables' scope and place the following code inside one of the functions in `scope.js` so the output is `a: 1, b: 8, c: 6`
+Use your knowledge of the variable's scope and place the following code inside one of the functions in `scope.js` so the output is `a: 1, b: 8, c: 6`
 
 ```javascript
 console.log(`a: ${a}, b: ${b}, c: ${c}`);
@@ -78,4 +76,4 @@ Check to see if your program is correct by running this command:
   
 ```bash
 javascripting verify scope.js
-```
+```{{exec}}

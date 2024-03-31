@@ -2,24 +2,22 @@
    
 You will often need to know how many characters are in a string.
 
-For this you will use the .length property. Here's an example:
+For this you will use the `.length` property. Here's an example:
 
 ```bash
 const example = 'example string'
 example.length
 ```
 
-> **Note**: Make sure there is a period between example and length.
+> **Note**: Make sure there is a period (`.`) between example and length.
    
 The above code will return a number for the total number of characters in the string.
-
----
 
 ## The challenge:
    
 Create a file named `string-length.js`.
    
-In that file, create a variable named example.
+In that file, create a variable named `example`.
    
 Assign the string 'example string' to the variable example.
    

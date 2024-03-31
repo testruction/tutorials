@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select strings
+javascripting select 'STRINGS'

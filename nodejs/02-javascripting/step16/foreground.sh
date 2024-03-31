@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select object-properties
+javascripting select 'OBJECT PROPERTIES'

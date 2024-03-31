@@ -20,13 +20,11 @@ greetings[1]
 
 So inside a for loop we would use the `i` variable inside the square brackets instead of directly using an integer.
 
----
-
 ## The challenge:  
 
 Create a file named `looping-through-arrays.js`.
 
-In that file, define a variable named pets that references this array:
+In that file, define a variable named `pets` that references this array:
 
 ```javascript
 ['cat', 'dog', 'rat']

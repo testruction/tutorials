@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select number-to-string
+javascripting select 'NUMBER TO STRING'
