@@ -6,8 +6,6 @@ For more complex math, we can use the Math object.
 
 In this challenge we'll use the Math object to round numbers.
 
----
-
 ## The challenge:
 
 Create a file named `rounding-numbers.js`.
