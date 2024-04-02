@@ -17,7 +17,7 @@ console.log(keys)
 
 The above code will print an array of strings, where each string is a key in the car object. `['make', 'model', 'year']`
 
-## The challenge:  
+## The challenge
 
 Create a file named `object-keys.js`.
 
@@ -29,13 +29,13 @@ const car = {
   model: 'Accord',
   year: 2020
 }
-```
+```{{copy}}
 
 Then define another variable named `keys` like this:
 
 ```javascript
 const keys = Object.keys(car)
-```
+```{{copy}}
 
 Use `console.log()` to print the keys variable to the terminal.
 

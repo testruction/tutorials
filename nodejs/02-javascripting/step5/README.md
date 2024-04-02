@@ -14,11 +14,11 @@ console.log(example)
 
 > **Node**: To change the value that the example variable references, we need to use the equals sign again, this time with the `example.replace()` method to the right of the equals sign.
 
-## The challenge:  
+## The challenge
   
 Create a file named `revising-strings.js`.
   
-Define a variable named `pizza` that references this string: 'pizza is alright'
+Define a variable named `pizza` that references this string: `'pizza is alright'`.
   
 Use the `.replace()` method to change `alright` to `wonderful`.
   

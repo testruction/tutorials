@@ -15,7 +15,7 @@ The second part, `i < 10`, is checked at the beginning of every loop iteration b
 
 The final part, `i++`, is executed at the end of every loop. This increases the variable `i` by 1 after each loop. Once `i` reaches 10, the loop will exit.
 
-## The challenge:
+## The challenge
    
 Create a file named `for-loop.js`.
 

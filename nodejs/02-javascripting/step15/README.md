@@ -13,7 +13,7 @@ const foodPreferences = {
 }  
 ```
 
-## The challenge:  
+## The challenge
   
 Create a file named `objects.js`.
 
@@ -24,8 +24,8 @@ const pizza = {
   toppings: ['cheese', 'sauce', 'pepperoni'],  
   crust: 'deep dish',  
   serves: 2  
-}  
-```
+}  {{
+```{{copy}}
 
 Use `console.log()` to print the `pizza` object to the terminal.
 

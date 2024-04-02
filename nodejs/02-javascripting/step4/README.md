@@ -13,13 +13,13 @@ example.length
    
 The above code will return a number for the total number of characters in the string.
 
-## The challenge:
+## The challenge
    
 Create a file named `string-length.js`.
    
 In that file, create a variable named `example`.
    
-Assign the string '`example string`' to the variable example.
+Assign the string `'example string'` to the variable example.
    
 Use `console.log` to print the length of the string to the terminal.
    

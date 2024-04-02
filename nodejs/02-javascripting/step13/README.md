@@ -30,7 +30,7 @@ Invalid notation:
 console.log(pets.1);
 ```
 
-## The challenge:
+## The challenge
 
 Create a file named `accessing-array-values.js`.
 
@@ -38,7 +38,7 @@ In that file, define array named `food` :
 
 ```javascript
 const food = ['apple', 'pizza', 'pear']  
-```
+```{{copy}}
 
 Use `console.log()` to print the **second** value of array to the terminal.
 

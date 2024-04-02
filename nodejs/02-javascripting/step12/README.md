@@ -18,14 +18,14 @@ const filtered = pets.filter(function (pet) {
 
 The filtered variable will now only contain cat and dog.
    
-## The challenge:
+## The challenge
 
 Create a file named `array-filtering.js`.
 In that file, define a variable named `numbers` that references this array:  
 
 ```javascript
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-```
+```{{copy}}
 
 Like above, define a variable named `filtered` that references the result of `numbers.filter()`.
 
@@ -35,7 +35,7 @@ The function that you pass to the `.filter()` method will look something like th
 function evenNumbers (number) {
   return number % 2 === 0
 }
-```
+```{{copy}}
 
 Pay close attention to the syntax used throughout your solution. Use `console.log()` to print the filtered array to the terminal.
 

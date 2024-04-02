@@ -6,7 +6,7 @@ An array is a list of values. Here's an example:
 const pets = ['cat', 'dog', 'rat']  
 ```
 
-### The challenge:
+### The challenge
 
 Create a file named `arrays.js`.
 
