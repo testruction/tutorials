@@ -12,7 +12,7 @@ String values are surrounded by either single or double quotation marks.
 
 > **Node**: Try to stay consistent. In this workshop we'll only use single quotation marks.
 
-## The challenge:
+## The challenge
    
 For this challenge, create a file named `strings.js`.
    

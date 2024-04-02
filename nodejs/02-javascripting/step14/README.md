@@ -20,7 +20,7 @@ greetings[1]
 
 So inside a for loop we would use the `i` variable inside the square brackets instead of directly using an integer.
 
-## The challenge:  
+## The challenge
 
 Create a file named `looping-through-arrays.js`.
 
@@ -28,7 +28,7 @@ In that file, define a variable named `pets` that references this array:
 
 ```javascript
 ['cat', 'dog', 'rat']
-```
+```{{copy}}
 
 Create a for loop that changes each string in the array so that they are plural.
 
@@ -36,7 +36,7 @@ You will use a statement like this inside the for loop:
 
 ```javascript
 pets[i] = pets[i] + 's'
-```
+```{{copy}}
   
 After the for loop, use `console.log()` to print the pets array to the terminal.
 

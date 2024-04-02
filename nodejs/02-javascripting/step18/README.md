@@ -18,7 +18,7 @@ example(5)
 
 The above example assumes that the example function will take a number as an argument –– as input –– and will return that number multiplied by 2.
 
-## The challenge:  
+## The challenge
 
 Create a file named `functions.js`.
 
@@ -28,7 +28,7 @@ Inside the function return the `food` argument like this:
 
 ```javascript
 return food + ' tasted really good.'
-```
+```{{copy}}
 
 Inside of the parentheses of `console.log()`, call the `eat()` function with the string `bananas` as the argument.
 

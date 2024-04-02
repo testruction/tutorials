@@ -18,7 +18,7 @@ example('hello', 'world')
 
 The above example will print to the terminal `hello world`.
 
-## The challenge:
+## The challenge
 
 Create a file named `function-arguments.js`.
 
