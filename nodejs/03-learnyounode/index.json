@@ -1,8 +1,8 @@
 {
-    "title": "03. Learnyounode",
+    "title": "03. Learn You The Node.js For Much Win!",
     "description": "Learn the basics of node: asynchronous i/o, http.",
-    "difficulty": "easy",
-    "time": "20-30 minutes",
+    "difficulty": "intermediate",
+    "time": "30-60 minutes",
     "details": {
         "intro": {
             "text": "intro/README.md",
@@ -11,43 +11,69 @@
         },
         "steps": [
             {
-                "text": "step1/README.md"
+                "text": "step1/README.md",
+                "foreground": "step1/foreground.sh",
+                "verify": "step1/verify.sh"
             },
             {
-                "text": "step2/README.md"
+                "text": "step2/README.md",
+                "foreground": "step2/foreground.sh",
+                "verify": "step2/verify.sh"
             },
             {
-                "text": "step3/README.md"
+                "text": "step3/README.md",
+                "foreground": "step3/foreground.sh",
+                "verify": "step3/verify.sh"
             },
             {
-                "text": "step4/README.md"
+                "text": "step4/README.md",
+                "foreground": "step4/foreground.sh",
+                "verify": "step4/verify.sh"
             },
             {
-                "text": "step5/README.md"
+                "text": "step5/README.md",
+                "foreground": "step5/foreground.sh",
+                "verify": "step5/verify.sh"
             },
             {
-                "text": "step6/README.md"
+                "text": "step6/README.md",
+                "foreground": "step6/foreground.sh",
+                "verify": "step6/verify.sh"
             },
             {
-                "text": "step7/README.md"
+                "text": "step7/README.md",
+                "foreground": "step7/foreground.sh",
+                "verify": "step7/verify.sh"
             },
             {
-                "text": "step8/README.md"
+                "text": "step8/README.md",
+                "foreground": "step8/foreground.sh",
+                "verify": "step8/verify.sh"
             },
             {
-                "text": "step9/README.md"
+                "text": "step9/README.md",
+                "foreground": "step9/foreground.sh",
+                "verify": "step9/verify.sh"
             },
             {
-                "text": "step10/README.md"
+                "text": "step10/README.md",
+                "foreground": "step10/foreground.sh",
+                "verify": "step10/verify.sh"
             },
             {
-                "text": "step11/README.md"
+                "text": "step11/README.md",
+                "foreground": "step11/foreground.sh",
+                "verify": "step11/verify.sh"
             },
             {
-                "text": "step12/README.md"
+                "text": "step12/README.md",
+                "foreground": "step12/foreground.sh",
+                "verify": "step12/verify.sh"
             },
             {
-                "text": "step13/README.md"
+                "text": "step13/README.md",
+                "foreground": "step13/foreground.sh",
+                "verify": "step13/verify.sh"
             }
         ],
         "finish": {

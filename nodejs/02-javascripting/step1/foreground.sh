@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'INTRODUCTION'
+javascripting select 'HELLO WORLD'
