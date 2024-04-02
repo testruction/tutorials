@@ -19,7 +19,7 @@ console.log(process.argv)
 Run it with `node baby-steps.js` and some numbers as arguments. e.g:
 
 ```sh
-$ node baby-steps.js 1 2 3
+node baby-steps.js 1 2 3
 ```{{exec}}
 
 In which case the output would be an array looking something like:

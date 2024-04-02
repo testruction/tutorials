@@ -20,6 +20,7 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 sudo apt-get update -y
 sudo apt-get install nodejs -y
 
-npm install -g javascripting
+npm install -g learnyounode
+mkdir -p /root/learnyounode
 
 touch /ks/.nodejs_finished
