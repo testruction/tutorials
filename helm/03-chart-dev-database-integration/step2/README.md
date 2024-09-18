@@ -27,7 +27,7 @@ Add a YAML mapping for the `cockroachdb` configuration values.
 ```bash
 yq -i '
   .cockroachdb.create = true |
-  .cockroachdb.init.privisioning=true |
+  .cockroachdb.init.provisioning=true |
   .cockroachdb.tls.enabled=false
 ' chart/values.yaml
 ```{{exec}}
