@@ -30,7 +30,7 @@ Inside the function return the `food` argument like this:
 return food + ' tasted really good.'
 ```{{copy}}
 
-Inside of the parentheses of `console.log()`, call the `eat()` function with the string `bananas` as the argument.
+Inside of the parentheses of `console.log()`{{}}, call the `eat()`{{}} function with the string `bananas` as the argument.
 
 Check to see if your program is correct by running this command:
 

@@ -20,9 +20,9 @@ An example of using `Math.round()`.
 Math.round(0.5)  
 ```
 
-Define a second variable named `rounded` that references the output of the `Math.round()` method, passing in the `roundUp` variable as the argument.
+Define a second variable named `rounded` that references the output of the `Math.round()`{{}} method, passing in the `roundUp` variable as the argument.
 
-Use `console.log()` to print that number to the terminal.
+Use `console.log()`{{}} to print that number to the terminal.
 
 Check to see if your program is correct by running this command:
 

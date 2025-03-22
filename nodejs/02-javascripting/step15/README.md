@@ -27,7 +27,7 @@ const pizza = {
 }
 ```{{copy}}
 
-Use `console.log()` to print the `pizza` object to the terminal.
+Use `console.log()`{{copy}} to print the `pizza` object to the terminal.
 
 Check to see if your program is correct by running this command:
 

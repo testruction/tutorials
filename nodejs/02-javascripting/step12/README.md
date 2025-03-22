@@ -37,7 +37,7 @@ function evenNumbers (number) {
 }
 ```{{copy}}
 
-Pay close attention to the syntax used throughout your solution. Use `console.log()` to print the filtered array to the terminal.
+Pay close attention to the syntax used throughout your solution. Use `console.log()`{{}} to print the filtered array to the terminal.
 
 Check to see if your program is correct by running this command:
 

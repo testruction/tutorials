@@ -37,7 +37,7 @@ Then define another variable named `keys` like this:
 const keys = Object.keys(car)
 ```{{copy}}
 
-Use `console.log()` to print the keys variable to the terminal.
+Use `console.log()`{{}} to print the `keys` variable to the terminal.
 
 Check to see if your program is correct by running this command:
 
