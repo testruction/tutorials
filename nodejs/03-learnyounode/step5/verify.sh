@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify filtered-ls.js
+learnyounode verify filtered-ls.js

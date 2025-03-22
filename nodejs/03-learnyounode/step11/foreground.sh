@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'HTTP FILE SERVER'
+learnyounode select 'HTTP FILE SERVER'

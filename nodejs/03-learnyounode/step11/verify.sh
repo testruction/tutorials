@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify http-file-server.js
+learnyounode verify http-file-server.js

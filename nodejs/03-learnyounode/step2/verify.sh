@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify baby-steps.js
+learnyounode verify baby-steps.js

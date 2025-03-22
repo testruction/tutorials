@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'MY FIRST ASYNC I/O!'
+learnyounode select 'MY FIRST ASYNC I/O!'
