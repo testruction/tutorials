@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'TIME SERVER'
+learnyounode select 'TIME SERVER'

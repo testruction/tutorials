@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify make-it-modular.js
+learnyounode verify make-it-modular.js

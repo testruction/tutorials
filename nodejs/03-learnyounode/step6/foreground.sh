@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'MAKE IT MODULAR'
+learnyounode select 'MAKE IT MODULAR'

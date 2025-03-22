@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'HTTP UPPERCASERER'
+learnyounode select 'HTTP UPPERCASERER'

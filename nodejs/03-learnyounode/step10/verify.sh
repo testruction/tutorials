@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify time-server.js
+learnyounode verify time-server.js

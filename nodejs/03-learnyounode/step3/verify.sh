@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting verify my-first-io.js
+learnyounode verify my-first-io.js

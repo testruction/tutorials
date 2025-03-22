@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-javascripting select 'HTTP COLLECT'
+learnyounode select 'HTTP COLLECT'
