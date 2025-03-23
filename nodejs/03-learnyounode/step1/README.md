@@ -3,7 +3,7 @@
 Create the workshop directory where allow exercices will be performed.
 
 ```sh
-mkdir learnyounode && cd learnyounode/
+mkdir -p learnyounode && cd learnyounode/
 ```{{exec}}
 
 Create a file named `hello-world.js`.
