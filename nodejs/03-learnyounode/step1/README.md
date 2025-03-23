@@ -1,4 +1,4 @@
-# Hello world _(Exercise 1 of 13)
+# Hello world _(Exercise 1 of 13)_
 
 Create the workshop directory where allow exercices will be performed.
 
