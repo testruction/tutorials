@@ -17,7 +17,7 @@ Write a program that prints the text "HELLO WORLD" to the console (stdout).
 To make a Node.js program, create a new file with a `.js` extension and start writing JavaScript! Execute your program by running it with the `node` command. e.g.:
 
 ```sh
-$ node hello-world.js
+node hello-world.js
 ```{{exec}}
 
 You can write to the console in the same way as in the browser:
