@@ -1,17 +1,5 @@
 # Hello world _(Exercise 1 of 13)_
 
-Create the workshop directory where allow exercices will be performed.
-
-```bash
-mkdir -p learnyounode
-```{{exec}}
-
-Change directory into the `learnyounode`{{}} folder:
-
-```bash
-cd learnyounode
-```{{exec}}
-
 Create a file named `hello-world.js`.
 
 Write a program that prints the text "HELLO WORLD" to the console (stdout).
