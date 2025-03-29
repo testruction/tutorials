@@ -2,8 +2,14 @@
 
 Create the workshop directory where allow exercices will be performed.
 
-```sh
-mkdir -p learnyounode && cd learnyounode/
+```bash
+mkdir -p learnyounode
+```{{exec}}
+
+Change directory into the `learnyounode`{{}} folder:
+
+```bash
+cd learnyounode
 ```{{exec}}
 
 Create a file named `hello-world.js`.
