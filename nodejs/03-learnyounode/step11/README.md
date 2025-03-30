@@ -24,7 +24,7 @@ Where the two arguments are objects representing the HTTP request and the corres
 
 Both `request` and `response` are also Node streams! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
 
-`http.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+`http.createServer()`{{}} also returns an instance of your `server`. You must call `server.listen(portNumber)`{{}} to start listening on a particular port.
 
 A typical Node HTTP server looks like this:
 
@@ -39,7 +39,7 @@ server.listen(8000)
 Documentation on the `http` module can be found by pointing your browser here:
   <https://nodejs.org/docs/latest-v20.x/api/http.html>
 
-The `fs` core module also has some streaming APIs for files. You will need to use the `fs.createReadStream()` method to create a stream representing the file you are given as a command-line argument. The method returns a stream object which you can use `src.pipe(dst)` to pipe the data from the `src` stream to the `dst` stream. In this way you can connect a filesystem stream with an HTTP response stream.
+The `fs` core module also has some streaming APIs for files. You will need to use the `fs.createReadStream()`{{}} method to create a stream representing the file you are given as a command-line argument. The method returns a stream object which you can use `src.pipe(dst)`{{}} to pipe the data from the `src` stream to the `dst` stream. In this way you can connect a filesystem stream with an HTTP response stream.
 
 Check to see if your program is correct by running this command:
 
