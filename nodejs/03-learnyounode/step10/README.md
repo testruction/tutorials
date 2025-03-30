@@ -24,13 +24,13 @@ After sending the string, close the connection.
 
 For this exercise we'll be creating a raw TCP server. There's no HTTP involved here so we need to use the `net` module from Node core which has all the basic networking functions.
 
-The `net` module has a method named `net.createServer()` that takes a function. The function that you need to pass to `net.createServer()` is a connection listener that is called more than once. Every connection received by your server triggers another call to the listener. The listener function has the signature:
+The `net` module has a method named `net.createServer()`{{}} that takes a function. The function that you need to pass to `net.createServer()`{{}} is a connection listener that is called more than once. Every connection received by your server triggers another call to the listener. The listener function has the signature:
 
 ```js
 function listener (socket) { /* ... */ }
 ```{{copy}}
 
-`net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+`net.createServer()`{{}} also returns an instance of your `server`. You must call `server.listen(portNumber)`{{}} to start listening on a particular port.
 
 A typical Node TCP server looks like this:
 
@@ -46,7 +46,7 @@ Remember to use the port number supplied to you as the first command-line argume
 
 The `socket` object contains a lot of meta-data regarding the connection, but it is also a Node duplex Stream, in that it can be both read from, and written to. For this exercise we only need to write data and then close the socket.
 
-Use `socket.write(data)` to write data to the socket and `socket.end()` to close the socket. Alternatively, the `.end()` method also takes a data object so you can simplify to just: `socket.end(data)`.
+Use `socket.write(data)`{{}} to write data to the socket and `socket.end()`{{}} to close the socket. Alternatively, the `.end()`{{}} method also takes a data object so you can simplify to just: `socket.end(data)`{{}}.
 
 Documentation on the `net` module can be found by pointing your browser here:
   <https://nodejs.org/docs/latest-v20.x/api/net.html>
