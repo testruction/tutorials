@@ -20,7 +20,7 @@ Remember that idiomatic Node.js callbacks normally have the signature:
 function callback (err, data) { /* ... */ }
 ```{{copy}}
 
-so you can check if an error occurred by checking whether the first argument is truthy. If there is no error, you should have your `Buffer` object as the second argument. As with `readFile()`, you can supply 'utf8' as the second argument and put the callback as the third argument and you will get a `String` instead of a `Buffer`.
+so you can check if an error occurred by checking whether the first argument is truthy. If there is no error, you should have your `Buffer` object as the second argument. As with `readFile()`{{}}, you can supply 'utf8' as the second argument and put the callback as the third argument and you will get a `String` instead of a `Buffer`.
 
 Documentation on the `fs` module can be found by pointing your browser here:
   <https://nodejs.org/docs/latest-v20.x/api/fs.html>
