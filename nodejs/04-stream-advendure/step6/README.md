@@ -1,9 +1,9 @@
 # Transform _(Exercise 6 of 17)_
 
-Convert data from `process.stdin` to upper-case data on `process.stdout`
-using the `through2` module.
+Convert data from `process.stdin`{{}} to upper-case data on `process.stdout`{{}}
+using the `through2`{{}} module.
 
-To get the `through2` module you'll need to do:
+To get the `through2`{{}} module you'll need to do:
 ```sh
 $ npm install through2
 ```{{exec}}
@@ -11,14 +11,14 @@ $ npm install through2
 A transform stream takes input data and applies an operation to the data to
 produce the output data.
 
-Create a through stream with a `write` and `end` function:
+Create a through stream with a `write`{{}} and `end`{{}} function:
 
 ```js
 const through = require('through2')
 const stream = through(write, end)
 ```{{copy}}
 
-The `write` function is called for every buffer of available input:
+The `write`{{}} function is called for every buffer of available input:
 
 ```js
 function write (buffer, encoding, next) {
@@ -26,7 +26,7 @@ function write (buffer, encoding, next) {
 }
 ```{{copy}}
 
-and the `end` function is called when there is no more data:
+and the `end`{{}} function is called when there is no more data:
 
 ```js
 function end () {
@@ -34,8 +34,8 @@ function end () {
 }
 ```{{copy}}
 
-Inside the write function, call `this.push()` to produce output data and call
-`next()` when you're ready to receive the next chunk:
+Inside the write function, call `this.push()`{{}} to produce output data and call
+`next()`{{}} when you're ready to receive the next chunk:
 
 ```js
 function write (buffer, encoding, next) {
@@ -44,7 +44,7 @@ function write (buffer, encoding, next) {
 }
 ```{{copy}}
 
-and call `done()` to finish the output:
+and call `done()`{{}} to finish the output:
 
 ```js
 function end (done) {
@@ -52,19 +52,27 @@ function end (done) {
 }
 ```{{copy}}
 
-`write` and `end` are both optional.
+`write`{{}} and `end`{{}} are both optional.
 
-If `write` is not specified, the default implementation passes the input data to
+If `write`{{}} is not specified, the default implementation passes the input data to
 the output unmodified.
 
-If `end` is not specified, the default implementation calls `this.push(null)`
+If `end`{{}} is not specified, the default implementation calls `this.push(null)`
 to close the output side when the input side ends.
 
-Make sure to pipe `process.stdin` into your transform stream
+Make sure to pipe `process.stdin`{{}} into your transform stream
 and pipe your transform stream into `process.stdout`, like this:
 
 ```js
 process.stdin.pipe(stream).pipe(process.stdout)
 ```{{copy}}
 
-To convert a buffer to a string, call `buffer.toString()`.
+To convert a buffer to a string, call `buffer.toString()`{{}}.
+
+---
+
+To verify your program has the expected output, run:
+
+```sh
+stream-adventure verify transform.js
+```{{exec}

@@ -4,7 +4,7 @@ In this challenge, write an http server that uses a through stream to write back
 the request stream as upper-cased response data for POST requests.
 
 Streams aren't just for text files and stdin/stdout. Did you know that http
-request and response objects from node core's `http.createServer()` handler are
+request and response objects from node core's `http.createServer()`{{}} handler are
 also streams?
 
 For example, we can stream a file to the response object:
@@ -72,3 +72,9 @@ Do that, but send upper-case data in your http server in response to POST data.
 
 Make sure to `npm install through2` in the directory where your solution file
 lives.
+
+To verify your solution run:
+
+```sh
+stream-adventure verify http_server.js
+```{{exec}}

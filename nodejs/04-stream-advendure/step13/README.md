@@ -1,7 +1,7 @@
 # Duplexer _(Exercice 13 of 17)_
 
-Write a program that exports a function that spawns a process from a `cmd`
-string and an `args` array and returns a single duplex stream joining together
+Write a program that exports a function that spawns a process from a `cmd`{{}}
+string and an `args`{{}} array and returns a single duplex stream joining together
 the stdin and stdout of the spawned process:
 
 ```js
@@ -14,7 +14,7 @@ module.exports = function (cmd, args) {
 ```{{copy}}
 
 There is a very handy module you can use here: duplexer2. The duplexer2 module
-exports a single function `duplexer2(writable, readable)` that joins together a
+exports a single function `duplexer2(writable, readable)`{{}} that joins together a
 writable stream and a readable stream into a single, readable/writable duplex
 stream.
 
@@ -33,7 +33,7 @@ For child process you're outside so that process's stdin is writable to you.
     childProc.stdout is a Readable stream
 
 Also, have a look at the duplexer2 documentation and notice that signature
-of the exported function is `duplexer2([options], writable, readable)`
+of the exported function is `duplexer2([options], writable, readable)`{{}}
 which means that you might need to pass an options argument.
 
 Create a new file called duplexer.js which will hold your solution.

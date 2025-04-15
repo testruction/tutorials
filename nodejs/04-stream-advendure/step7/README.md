@@ -17,7 +17,7 @@ Your program should output:
     three
     FOUR
 
-Even though it's not obligatory, you can use the `split2` module
+Even though it's not obligatory, you can use the `split2`{{}} module
 to split input by newlines. For example:
 
 ```js
@@ -31,7 +31,7 @@ process.stdin
   }))
 ```{{copy}}
 
-`split2` will buffer chunks on newlines before you get them. With example
+`split2`{{}} will buffer chunks on newlines before you get them. With example
 above, we will get separate events for each line even though all the data
 probably arrives on the same chunk:
 
@@ -42,11 +42,17 @@ $ echo -e 'one\ntwo\nthree' | node split.js
 'three'
 ```{{exec}}
 
-Your own program could use `split2` in this way, and you should transform the
-input and pipe the output through to `process.stdout`.
+Your own program could use `split2`{{}} in this way, and you should transform the
+input and pipe the output through to `process.stdout`{{}}.
 
-You are free to solve the challenge without `split2` module. In this case,
+You are free to solve the challenge without `split2`{{}} module. In this case,
 you would have to add a new line after each line to have a passing match.
 
 Make sure to `npm install split2 through2` in the directory where your solution
 file lives.
+
+To verify your program has the expected output, run:
+
+```sh
+stream-adventure verify lines.js
+```{{exec}
