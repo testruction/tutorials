@@ -1,6 +1,6 @@
 # Duplexer redux _(Exercise 14 of 17)_
 
-In this example, you will be given a readable stream, `counter`, as the first
+In this example, you will be given a readable stream, `counter`{{}}, as the first
 argument to your exported function:
 
 ```js
@@ -10,8 +10,8 @@ module.exports = function (counter) {
 }
 ```{{copy}}
 
-Return a duplex stream with the `counter` as the readable side. You will be
-written objects with a 2-character `country` field as input, such as these:
+Return a duplex stream with the `counter`{{}} as the readable side. You will be
+written objects with a 2-character `country`{{}} field as input, such as these:
 
 ```json
   {"short":"OH","name":"Ohio","country":"US"}
@@ -26,9 +26,9 @@ For example:
   {"US": 2, "GB": 3, "CN": 1}
 ```
 
-Once the input ends, call `counter.setCounts()` with your counts object.
+Once the input ends, call `counter.setCounts()`{{}} with your counts object.
 
-The `duplexer2` module will again be very handy in this example.
+The `duplexer2`{{}} module will again be very handy in this example.
 
 If you use duplexer, make sure to `npm install duplexer2` in the directory where
 your solution file is located.
@@ -40,10 +40,10 @@ https://nodejs.org/api/stream.html#stream_object_mode
 When you switch on the object mode, remember to do the same for all
 additional dependencies that you work with (i.e. through2)
 
-Create a new file called duplexer-redux.js which will hold your solution.
+Create a new file called `duplexer_redux.js` which will hold your solution.
 
 To verify your solution run:
 
 ```sh
-stream-adventure verify duplexer-redux.js
+stream-adventure verify duplexer_redux.js
 ```{{exec}}

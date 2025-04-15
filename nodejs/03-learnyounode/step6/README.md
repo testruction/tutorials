@@ -65,4 +65,4 @@ Check to see if your program is correct by running this command:
 
 ```sh
 learnyounode verify make-it-modular.js
-```
+```{{exec}}

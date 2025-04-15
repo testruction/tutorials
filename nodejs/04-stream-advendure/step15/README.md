@@ -1,7 +1,7 @@
 # Combiner _(Exercise 15 of 17)_
 
 Create a module in a new file named combiner.js, it should return a readable/writable stream using the
-`stream-combiner` module.
+`stream-combiner`{{}} module.
 
 You can use this code to start with:
 
@@ -18,8 +18,8 @@ module.exports = function () {
 ```{{copy}}
 
 Your stream will be written a newline-separated JSON list of science fiction
-genres and books. All the books after a `"type":"genre"` row belong in that
-genre until the next `"type":"genre"` comes along in the output.
+genres and books. All the books after a `"type":"genre"`{{}} row belong in that
+genre until the next `"type":"genre"`{{}} comes along in the output.
 
 ```json
 {"type":"genre","name":"cyberpunk"}
@@ -31,7 +31,7 @@ genre until the next `"type":"genre"` comes along in the output.
 ```
 
 Your program should generate a newline-separated list of JSON lines of genres,
-each with a `"books"` array containing all the books in that genre. The input
+each with a `"books"`{{}} array containing all the books in that genre. The input
 above would yield the output:
 
 ```json
@@ -46,10 +46,10 @@ Your stream should take this list of JSON lines and gzip it with
 
 ## HINTS
 
-The `stream-combiner` module creates a pipeline from a list of streams,
+The `stream-combiner`{{}} module creates a pipeline from a list of streams,
 returning a single stream that exposes the first stream as the writable side and
-the last stream as the readable side like the `duplexer` module, but with an
-arbitrary number of streams in between. Unlike the `duplexer` module, each
+the last stream as the readable side like the `duplexer`{{}} module, but with an
+arbitrary number of streams in between. Unlike the `duplexer`{{}} module, each
 stream is piped to the next. For example:
 
 ```js
@@ -57,20 +57,20 @@ const combine = require('stream-combiner')
 const stream = combine(a, b, c, d)
 ```{{copy}}
 
-will internally do `a.pipe(b).pipe(c).pipe(d)` but the `stream` returned by
-`combine()` has its writable side hooked into `a` and its readable side hooked
-into `d`.
+will internally do `a.pipe(b).pipe(c).pipe(d)`{{}} but the `stream`{{}} returned by
+`combine()`{{}} has its writable side hooked into `a`{{}} and its readable side hooked
+into `d`{{}}.
 
 Your module should return the combined stream that will be fed input into the
 front 'end' of the stream, reads the associated JSON, processes the input book
 data by grouping it by genre and produces a gzipped result stream from which
 the result may be read.
 
-As in the previous LINES adventure, the `split2` module is very handy here. You
+As in the previous LINES adventure, the `split2`{{}} module is very handy here. You
 can put a split2 stream directly into the stream-combiner pipeline.
 Note that split2 can send empty lines too.
 
-If you end up using `split2` and `stream-combiner`, make sure to install them
+If you end up using `split2`{{}} and `stream-combiner`{{}}, make sure to install them
 into the directory where your solution file resides by doing:
 
 ```sh

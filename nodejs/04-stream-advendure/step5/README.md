@@ -2,8 +2,8 @@
 
 ## Writable Streams
 
-To create a custom `Writable` stream you must call the `new stream.Writable(options)`
-constructor and implement the `_write()` and/or `_writev()` method
+To create a custom `Writable`{{}} stream you must call the `new stream.Writable(options)`{{}}
+constructor and implement the `_write()`{{}} and/or `_writev()`{{}} method
 
 ```js
   const { Writable } = require('stream')
@@ -27,25 +27,25 @@ or
 
 ### `_write` method
 
-The `_write` method is used to send data to the underlying resource.
+The `_write`{{}} method is used to send data to the underlying resource.
 This method MUST NOT be called by your application code directly. Instead it's
-called by internal `Writable` class methods only.
+called by internal `Writable`{{}} class methods only.
 
 The method receive the following arguments:
 
-* `chunk` is the value to be written, commonly a Buffer converted from the
-string you passed to `stream.write()`.
-* `encoding`, if the chunk is a string, will be the character encoding for the
+* `chunk`{{}} is the value to be written, commonly a Buffer converted from the
+string you passed to `stream.write()`{{}}.
+* `encoding`{{}}, if the chunk is a string, will be the character encoding for the
 string. Otherwise it may be ignored.
-* `callback` function that will be called when the processing for the supplied
+* `callback`{{}} function that will be called when the processing for the supplied
 chunk is complete.
 
-The callback function receive one argument, this argument must be an `Error`
+The callback function receive one argument, this argument must be an `Error`{{}}
 object if the write process fail or `null` if succeded.
 
 ### Using a Writable stream
 
-To write data to a writable stream you need to call the `write()` method on the
+To write data to a writable stream you need to call the `write()`{{}} method on the
 stream instance.
 
 ```js
@@ -54,9 +54,15 @@ stream instance.
   })
 ```{{copy}}
 
-Also you can use the `pipe` method, that we'd learned before.
+Also you can use the `pipe`{{}} method, that we'd learned before.
 
 ### Challenge
 
-Implement a writable stream that writes in console `writing: ` + the given chunk
+Implement a writable stream that writes in console `writing: `{{}} + the given chunk
 New chunks are sent through stdin.
+
+To verify your program has the expected output, run:
+
+```sh
+stream-adventure verify write_to_me.js
+```{{exec}

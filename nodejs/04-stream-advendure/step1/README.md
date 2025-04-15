@@ -6,7 +6,7 @@ Create the workshop directory where allow exercices will be performed.
 mkdir stream-adventure && cd stream-adventure/
 ```{{exec}}
 
-Create a new file called beep_boop.js that uses console.log to output "beep boop".
+Create a new file called `beep_boop.js` that uses console.log to output `"beep boop"`.
 
 To verify your program has the expected output, run:
 

@@ -7,13 +7,13 @@ newline.
 
 You will receive the cipher algorithm name as process.argv[2], the cipher key as
 process.argv[3] and the cipher initialization vector as process.argv[4].
-You can pass these arguments directly through to `crypto.createDecipheriv()`.
+You can pass these arguments directly through to `crypto.createDecipheriv()`{{}}.
 
-The `tar` module from npm has a `tar.Parse()` constructor that can unzip gzipped
-tar files automatically ( if detected ) and  emits `entry` events for each file
+The `tar`{{}} module from npm has a `tar.Parse()`{{}} constructor that can unzip gzipped
+tar files automatically ( if detected ) and  emits `entry`{{}} events for each file
 in the tar input.
 
-Each `entry` object is a readable stream of the file contents from the archive and:
+Each `entry`{{}} object is a readable stream of the file contents from the archive and:
 
     `entry.type` is the kind of file ('File', 'Directory', etc)
     `entry.path` is the file path
@@ -30,10 +30,16 @@ const fs = require('fs')
 fs.createReadStream('file.tar').pipe(parser)
 ```{{copy}}
 
-Use `crypto.createHash('md5', { encoding: 'hex' })` to generate a stream that
+Use `crypto.createHash('md5', { encoding: 'hex' })`{{}} to generate a stream that
 outputs a hex md5 hash for the content written to it.
 
-The `concat-stream` module could be useful to concatenate all stream data.
+The `concat-stream`{{}} module could be useful to concatenate all stream data.
 
-Make sure to run `npm install tar concat-stream` in the directory where your solution
+Make sure to run `npm install tar concat-stream`{{}} in the directory where your solution
 file lives.
+
+To verify your solution run:
+
+```sh
+stream-adventure verify secretz.js
+```{{exec}}
