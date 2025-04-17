@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-stream-adventure select 'MEET PIPE'
+stream-adventure select 'INPUT OUTPUT'
