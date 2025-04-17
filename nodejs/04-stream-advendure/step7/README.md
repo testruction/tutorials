@@ -55,4 +55,4 @@ To verify your program has the expected output, run:
 
 ```sh
 stream-adventure verify lines.js
-```{{exec}
+```{{exec}}

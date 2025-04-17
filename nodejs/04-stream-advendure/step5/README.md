@@ -65,4 +65,4 @@ To verify your program has the expected output, run:
 
 ```sh
 stream-adventure verify write_to_me.js
-```{{exec}
+```{{exec}}

@@ -75,4 +75,4 @@ To verify your program has the expected output, run:
 
 ```sh
 stream-adventure verify transform.js
-```{{exec}
+```{{exec}}
