@@ -73,4 +73,4 @@ To verify your program has the expected output, run:
 
 ```sh
 stream-adventure verify read_it.js
-```{{exec}
+```{{exec}}
