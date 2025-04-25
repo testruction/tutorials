@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pip3 install locust httpie
+apt-get install -yqq python3-locust httpie
 
 touch /ks/.locust_finished
