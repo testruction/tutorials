@@ -199,14 +199,14 @@ spec:
 
             argocd:
               localDevelopment: true
-              # username: admin
-              # password: admin
+              username: admin
+              password: admin
               appLocatorMethods:
                 - type: 'config'
                   instances:
                     - name: argocd
                       url: http://gitops-argocd-server.argo-cd:10080
-                      token: ${ARGOCD_AUTH_TOKEN}
+                      # token: ${ARGOCD_AUTH_TOKEN}
 
             infraWallet:
               settings:
