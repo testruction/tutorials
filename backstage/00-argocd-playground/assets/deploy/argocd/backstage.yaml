@@ -205,6 +205,11 @@ spec:
                       url: http://gitops-argocd-server.argo-cd:10080
                       token: ${ARGOCD_AUTH_TOKEN}
 
+            infraWallet:
+              settings:
+                defaultGroupBy: none
+                defaultShowLastXMonths: 3
+
             techInsights:
               factRetrievers:
                 entityOwnershipFactRetriever:
