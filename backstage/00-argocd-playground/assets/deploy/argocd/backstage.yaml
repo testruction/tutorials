@@ -15,7 +15,7 @@ spec:
   source:
     chart: backstage
     repoURL: https://backstage.github.io/charts
-    targetRevision: 1.8.2
+    targetRevision: 2.5.2
     helm:
       releaseName: default
       valuesObject:
@@ -28,7 +28,7 @@ spec:
             path: /healthcheck
             port: 7007
             scheme: HTTP
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
           successThreshold: 2
           timeoutSeconds: 2
@@ -38,7 +38,7 @@ spec:
             path: /healthcheck
             port: 7007
             scheme: HTTP
-          initialDelaySeconds: 60
+          initialDelaySeconds: 120
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 2
