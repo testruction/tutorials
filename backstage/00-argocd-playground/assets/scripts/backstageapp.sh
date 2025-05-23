@@ -52,11 +52,17 @@ yq -i '
 # ----------------------------------------
 KC_URL=$(sed 's/PORT/7007/' /etc/killercoda/host)
 export KC_URL
+# yq -i '
+#   .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
+#   .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
+#   .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
+#   .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
+# ' ${HOME}/deploy/argocd/backstage.yaml
+
 yq -i '
   .spec.source.helm.valuesObject.backstage.appConfig.app.baseUrl = strenv(KC_URL) |
   .spec.source.helm.valuesObject.backstage.appConfig.backend.baseUrl = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL) |
-  .spec.source.helm.valuesObject.backstage.appConfig.argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
+  .spec.source.helm.valuesObject.backstage.appConfig.backend.cors.origin = strenv(KC_URL)
 ' ${HOME}/deploy/argocd/backstage.yaml
 
 unset BS_ARGO_TOKEN
