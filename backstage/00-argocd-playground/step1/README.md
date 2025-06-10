@@ -1,6 +1,6 @@
 # Environment
 
-![architecture](../assets/diagrams/architecture.drawio.png)
+![architecture](../assets/diagrams/architecture_v2.drawio.png)
 
 Use the following command to generate some load on the Demo App.
 
