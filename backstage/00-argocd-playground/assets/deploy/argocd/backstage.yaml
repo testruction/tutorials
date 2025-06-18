@@ -22,32 +22,6 @@ spec:
         serviceAccount:
           create: true
           name: backstage
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthcheck
-            port: 7007
-            scheme: HTTP
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          successThreshold: 2
-          timeoutSeconds: 2
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthcheck
-            port: 7007
-            scheme: HTTP
-          initialDelaySeconds: 120
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 2
-        service:
-          type: LoadBalancer
-          ports:
-            backend: 7007
-          annotations:
-            metallb.universe.tf/allow-shared-ip: edge-endpoint
         postgresql:
           enabled: true
           auth:
@@ -58,21 +32,36 @@ spec:
               requests:
                 cpu: 100m
                 memory: 128Mi
+        service:
+          type: LoadBalancer
+          ports:
+            backend: 7007
+          annotations:
+            metallb.universe.tf/allow-shared-ip: edge-endpoint
+          extraPorts:
+            - name: http-prom
+              port: 9464
+              targetPort: prometheus
+              protocol: TCP
         metrics:
           serviceMonitor:
             enabled: true
+            port: http-prom
         backstage:
           image:
             registry: ghcr.io
             repository: alithya-oss/backstage/demo
-            tag: 0.5.2
-          # extraEnvVarsSecrets:
-          #   - backstage-env
+            tag: 0.8.4
+          command: ["node", "--require", "/app/prometheus.js", "packages/backend"]
+          extraEnvVarsSecrets:
+            - backstage-env
+          extraPorts:
+            - name: prometheus
+              containerPort: 9464
+              protocol: TCP
           appConfig:
-            # Backstage override configuration for your local development environment
             app:
               title: Backstage tutorial
-              # Should be the same as backend.baseUrl when using the `app-backend` plugin.
               baseUrl: http://localhost
               listen:
                 host: 0.0.0.0
@@ -86,25 +75,29 @@ spec:
                 integrations:
                   mock:
                     - name: demo-mock-data
-              # Note that the baseUrl should be the URL that the browser and other clients
-              # should use when communicating with the backend, i.e. it needs to be
-              # reachable not just from within the backend host, but from all of your
-              # callers. When its value is "http://localhost:7007", it's strictly private
-              # and can't be reached by others.
               baseUrl: http://localhost
-              # The listener can also be expressed as a single <host>:<port> string. In this case we bind to
-              # all interfaces, the most permissive setting. The right value depends on your specific deployment.
               listen:
                 host: 0.0.0.0
                 port: 7007
 
               csp:
                 connect-src: ["'self'", 'http:', 'https:']
-                # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
-                # Default Helmet Content-Security-Policy values can be removed by setting the key to false
+                img-src:
+                  - "'self'"
+                  - 'data:'
+                  - 'https://backstage.io'
+                  - 'https://img.shields.io/'
+                  - 'https://api.dicebear.com/'
+                  - 'https://kroki.io/'
+                  - 'https://www.bestpractices.dev/'
+                  - 'https://api.securityscorecards.dev'
+                  - 'https://github.com'
+                  - 'https://raw.githubusercontent.com'
+                frame-src: ['https://www.youtube.com']
+              
               cors:
-                origin: http://localhost:3000
-              # config options: https://node-postgres.com/api/client
+                origin: http://localhost:7007
+
               database:
                 client: pg
                 connection:
@@ -112,79 +105,80 @@ spec:
                   port: ${POSTGRES_PORT}
                   user: ${POSTGRES_USER}
                   password: ${POSTGRES_PASSWORD}
-                  # https://node-postgres.com/features/ssl
-                  # you can set the sslmode configuration option via the `PGSSLMODE` environment variable
-                  # see https://www.postgresql.org/docs/current/libpq-ssl.html Table 33.1. SSL Mode Descriptions (e.g. require)
-                  # ssl:
-                  #   ca: # if you have a CA file and want to verify it you can uncomment this section
-                  #     $file: <file-path>/ca/server.crt
+
+              auth:
+                externalAccess:
+                  - type: static
+                    options:
+                      token: you-should-better-use-an-environment-variable-here
+                      subject: load-test
 
             integrations: {}
-              # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-              # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
-              # github:
-              #   - host: github.com
-              #     token: ${GITHUB_TOKEN}
-                ### Example for how to add your GitHub Enterprise instance using the API:
-                # - host: ghe.example.net
-                #   apiBaseUrl: https://ghe.example.net/api/v3
-                #   token: ${GHE_TOKEN}
 
             proxy:
-              ### Example for how to add a proxy endpoint for the frontend.
-              ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-              # endpoints:
-              #   '/test':
-              #     target: 'https://example.com'
-              #     changeOrigin: true
-              /prometheus0/api:
-                target: http://prometheus-operated.monitoring:9090/api/v1/
+              endpoints:
+                /prometheus0/api:
+                  target: http://prometheus-operated.monitoring:9090/api/v1/
+                  changeOrigin: true
+                  credentials: dangerously-allow-unauthenticated
 
-            # Reference documentation http://backstage.io/docs/features/techdocs/configuration
-            # Note: After experimenting with basic setup, use CI/CD to generate docs
-            # and an external cloud storage when deploying TechDocs for production use-case.
-            # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
             techdocs:
-              builder: 'local' # Alternatives - 'external'
+              builder: 'local'
               generator:
-                runIn: 'local' # Alternatives - 'local'
+                runIn: 'local'
               publisher:
-                type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+                type: 'local'
 
             auth:
-              # see https://backstage.io/docs/auth/ to learn about auth providers
+              environment: production
               providers:
                 guest:
                   dangerouslyAllowOutsideDevelopment: true
 
             scaffolder:
-              # see https://backstage.io/docs/features/software-templates/configuration for software template options
+
 
             catalog:
-              # Overrides the default list locations from app-config.yaml as these contain example data.
-              # See https://backstage.io/docs/features/entities/#adding-components-to-the-catalog for more details
-              # on how to get entities into the catalog.
               import:
                 entityFilename: catalog-info.yaml
                 pullRequestBranchName: backstage-integration
+              
               rules:
                 - allow: [Component, System, API, Resource, Location]
+              
               locations:
                 - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/main/entities/core/catalog-info.yaml
+                  target: https://github.com/alithya-oss/backstage-demo/blob/main/examples/entities.yaml
+                - type: url
+                  target: https://github.com/alithya-oss/backstage-demo/blob/main/examples/template/template.yaml
                   rules:
-                    - allow: [User, Group, Domain]
+                    - allow: [Template]
+                - type: url
+                  target: https://github.com/alithya-oss/backstage-demo/blob/main/examples/org.yaml
+                  rules:
+                    - allow: [User, Group]
                 - type: url
                   target: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/catalog-info.yaml
                 - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/main/catalog-info.yaml
-                - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/main/entities/paypal/catalog-info.yaml
-                - type: url
-                  target: https://github.com/testruction/backstage-tutorial/blob/main/entities/sock-shop/catalog-info.yaml
+                  target: https://github.com/alithya-oss/backstage-demo/blob/main/software-catalog/catalog-info.yaml
+                  rules:
+                    - allow: [API, Component, Domain, Group, Location, Resource, System, Template, User]
+              
+              providers:
+                backstageOpenapi:
+                  plugins:
+                    - catalog
+                    - events
+                    - search
+                  entityOverrides:
+                    spec:
+                      owner: group:default/devex
+                      system: developer-portal
+
             kubernetes:
               serviceLocatorMethod:
                 type: multiTenant
+              
               clusterLocatorMethods:
                 - type: config
                   clusters:
@@ -192,19 +186,20 @@ spec:
                       name: local
                       authProvider: serviceAccount
                       skipTLSVerify: false
-                      skipMetricsLookup: true
+                      skipMetricsLookup: false
 
             prometheus:
               proxyPath: /prometheus0/api
 
             argocd:
+              revisionsToLoad: 15
               localDevelopment: true
               username: admin
               password: admin
               appLocatorMethods:
                 - type: 'config'
                   instances:
-                    - name: argocd
+                    - name: instance0
                       url: http://gitops-argocd-server.argo-cd:10080
                       # token: ${ARGOCD_AUTH_TOKEN}
 
@@ -274,7 +269,7 @@ spec:
                     metadata:
                       category: Ownership
                       rank: 1
-                      solution: Add a group owner to the `spec.title` field in the entity YAML definition
+                      solution: Add a friendly name to the `spec.title` field in the entity YAML definition
 
                   techdocsCheck:
                     type: json-rules-engine
@@ -291,7 +286,9 @@ spec:
                     metadata:
                       category: Maintainability
                       rank: 2
-                      solution: Add a group owner to the `backstage.io/techdocs-ref` field in the entity YAML definition
+                      solution: >
+                        Add a the path to [Markdown/Mkdocs material](https://squidfunk.github.io/mkdocs-material/reference/) formatted documentation
+                        to the `backstage.io/techdocs-ref` field in the entity YAML definition
 
                   apiDefinitionCheck:
                     type: json-rules-engine
@@ -308,4 +305,20 @@ spec:
                     metadata:
                       category: Integration
                       rank: 2
-                      solution: Add a group owner to the `spec.definition` field in the entity YAML definition
+                      solution: >
+                        Add an [api definition](https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-api)
+                        or a [substitutions](https://backstage.io/docs/features/software-catalog/descriptor-format/#substitutions-in-the-descriptor-format) >
+                        to the `spec.definition` field in the entity YAML definition
+
+            explore:
+              tools:
+                - title: Infrawallet
+                  description: Cloud cost monitoring by Electrolux OSS
+                  url: /infrawallet
+                  image: https://github.com/electrolux-oss/infrawallet/raw/main/plugins/infrawallet/docs/images/iw_demo.gif
+                  tags: [ finops, cost, monitoring ]
+                - title: Maturity
+                  description: Best practices auditing based on tech-insight
+                  url: /maturity
+                  image: https://github.com/backstage/community-plugins/raw/main/workspaces/tech-insights/plugins/tech-insights-maturity/img/maturityScorecardContent.png
+                  tags: [ audit, maturity, compliance ]
