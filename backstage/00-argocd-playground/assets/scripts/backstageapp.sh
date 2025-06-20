@@ -43,7 +43,7 @@ yq -i '
   .argocd.password = "admin" |
   .argocd.appLocatorMethods[0].type = "config" |
   .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
-  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
+  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:32080" |
   .argocd.appLocatorMethods[0].instances[0].token = strenv(BS_ARGO_TOKEN)
 ' ./app-config.local.yaml
 
