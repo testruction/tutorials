@@ -17,7 +17,7 @@ helm upgrade --install \
   --set configs.secret.argocdServerAdminPassword="${ADMIN_BCRYPT}" \
   --set server.extraArgs[0]="--insecure" \
   --set server.service.type="LoadBalancer" \
-  --set server.service.servicePortHttp="10080" \
+  --set server.service.servicePortHttp="32080" \
   --set server.service.annotations."metallb\.universe\.tf/allow-shared-ip"="edge-endpoint" \
   --set controller.metrics.enabled="true" \
   --set controller.metrics.serviceMonitor.enabled="true" \
@@ -39,7 +39,7 @@ helm upgrade --install \
   gitops argo/argo-cd
 
 IP_ADDRESS="$(ip route get '8.8.8.8' | grep -oP 'src \K[^ ]+')"
-argocd login  ${IP_ADDRESS}:10080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
+argocd login  ${IP_ADDRESS}:32080 --insecure --plaintext --username "admin" --password "${ADMIN_PWD}"
 
 # GitOps account
 echo "Allocating \"sysops\" account"

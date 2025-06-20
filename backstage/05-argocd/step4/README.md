@@ -41,7 +41,7 @@ argocd:
     - type: 'config'
       instances:
         - name: argocd
-          url: http://localhost:10080
+          url: http://localhost:32080
           token: ${ARGOCD_AUTH_TOKEN} # Token to use to instance 1
 ```{{copy}}
 
@@ -65,7 +65,7 @@ yq -i '
   .argocd.password = "admin" |
   .argocd.appLocatorMethods[0].type = "config" |
   .argocd.appLocatorMethods[0].instances[0].name = "argocd" |
-  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:10080" |
+  .argocd.appLocatorMethods[0].instances[0].url = "http://localhost:32080" |
   .argocd.appLocatorMethods[0].instances[0].token = "${ARGOCD_AUTH_TOKEN}"
 ' ${HOME}/backstage-tutorial/app-config.local.yaml
 ```{{exec}}
