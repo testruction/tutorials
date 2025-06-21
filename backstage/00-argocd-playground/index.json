@@ -37,6 +37,7 @@
                 {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/metrics-server.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 
@@ -46,7 +47,8 @@
                 {"file": "deploy/argocd/kube-prometheus.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/backstage.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
                 {"file": "deploy/argocd/backstage-rbac.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
-                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
+                {"file": "deploy/argocd/fastapi-demo.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"},
+                {"file": "deploy/argocd/metrics-server.yaml", "target": "~/deploy/argocd/", "chmod": "+rw"}
             ]
         }
     },
