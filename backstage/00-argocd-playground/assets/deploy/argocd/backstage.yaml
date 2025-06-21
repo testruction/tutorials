@@ -185,7 +185,7 @@ spec:
                     - url: kubernetes.default.svc.cluster.local
                       name: local
                       authProvider: serviceAccount
-                      skipTLSVerify: false
+                      skipTLSVerify: true
                       skipMetricsLookup: false
 
             prometheus:
