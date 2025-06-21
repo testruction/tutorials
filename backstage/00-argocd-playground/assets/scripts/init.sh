@@ -10,5 +10,6 @@ set -euo pipefail
 /ks/metallb.sh
 /ks/argocd.sh
 /ks/prometheus.sh &
+/ks/metrics-server.sh &
 /ks/webapp.sh &
 /ks/backstageapp.sh &
