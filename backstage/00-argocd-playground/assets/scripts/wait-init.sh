@@ -31,5 +31,6 @@ wait_until_done "Deploying MetalLB." /ks/.metallb_finished
 wait_until_done "Deploying Kubernetes Custom Resource Definitions." /ks/.crds_finished
 wait_until_done "Deploying Argo CD." /ks/.argocd_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
-wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
-wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
+wait_until_done "Deploying Metrics Server." /ks/.metrics-server_finished
+wait_until_done "Deploying FastAPI demo app." /ks/.webapp_finished
+wait_until_done "Deploying Backstage demo app." /ks/.backstageapp_finished
