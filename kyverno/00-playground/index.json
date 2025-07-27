@@ -23,6 +23,7 @@
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "Taskfile.yaml", "target": "~/", "chmod": "+w"}
+                {"file": "manifests/malicious-nginx.yaml", "target": "~/", "chmod": "+w"}
             ]
         }
     },
