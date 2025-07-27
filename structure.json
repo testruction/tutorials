@@ -8,7 +8,12 @@
         {
             "path": "backstage",
             "title": "Backstage",
-            "description": "Develop a Helm charts for a multi-component application from scratch"
+            "description": "Learn how to build your own internel development portal"
+        },
+        {
+            "path": "kyverno",
+            "title": "Kyverno",
+            "description": "Learn how to manage the compliance of workload deployed in Kubernetes"
         },
         {
             "path": "sandboxes",

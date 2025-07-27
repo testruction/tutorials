@@ -1,0 +1,133 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: deploy:metallb
+      - task: deploy:prometheus-crds
+      - task: deploy:prometheus
+      - task: deploy:kyverno
+
+  deploy:metallb:
+    desc: Deploy Metallb loadbalancer service manager
+    summary: >
+      Provision MetalLB with an address pool allocated to the local internet routable network adapter
+    vars:
+      IP_ADDRESS:
+        sh: ip route get '1.1.1.1' | grep -oP 'src \K[^ ]+'
+    cmds:
+      - helm repo add metallb https://metallb.github.io/metallb
+      - helm repo update
+      - |
+          helm upgrade --install metallb \
+          --namespace metallb-system --create-namespace \
+          --wait \
+          metallb/metallb
+      - |
+          cat <<EOF | kubectl apply -f -
+          apiVersion: metallb.io/v1beta1
+          kind: IPAddressPool
+          metadata:
+            name: default
+            namespace: metallb-system
+          spec:
+            addresses:
+            - {{.IP_ADDRESS}}/32
+          ---
+          apiVersion: metallb.io/v1beta1
+          kind: L2Advertisement
+          metadata:
+            name: default
+            namespace: metallb-system
+          spec:
+            ipAddressPools:
+            - default
+          EOF
+      - defer: touch /ks/.metallb_finished
+    status:
+      - kubectl -n metallb-system | grep speaker
+      - test -f /ks/.metallb_finished
+
+  deploy:prometheus-crds:
+    desc: Deploy Prometheus-Operator CRDs
+    summary: >
+      Registers the Custom Resource Definitions
+      required to deploy the Kube-Prometheus stack in the Kubernetes cluster
+    vars:
+      PROMETHEUS_CRDS_VERSION: 22.0.1
+    cmds:
+      - helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+      - helm repo update
+      - |
+        helm upgrade --install \
+        --version "{{.PROMETHEUS_CRDS_VERSION}}" \
+        prometheus-operator-crds \
+        prometheus-community/prometheus-operator-crds
+      - defer: touch /ks/.crds_finished
+    status:
+      - kubectl api-resources | grep monitoring
+      - test -f /ks/.crds_finished
+
+  deploy:prometheus:
+    desc: Deploy Kube-Prometheus Stack
+    summary: Deploys Kube-Prometheus in the Kubernetes cluster
+    cmds:
+      - helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+      - helm repo update
+      - |
+        helm upgrade --install default \
+        --namespace monitoring \
+        --create-namespace \
+        --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
+        --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues="false" \
+        --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues="false" \
+        --set prometheus.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
+        --set prometheus.service.type="LoadBalancer" \
+        --set grafana.enabled="true" \
+        --set grafana.service.type="LoadBalancer" \
+        --set grafana.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
+        --set kubeApiServer.enabled="false" \
+        --set kubelet.enabled="false" \
+        --set kubeControllerManager.enabled="false" \
+        --set coreDns.enabled="false" \
+        --set kubeDns.enabled="false" \
+        --set kubeEtcd.enabled="false" \
+        --set kubeScheduler.enabled="false" \
+        --set kubeProxy.enabled="false" \
+        --set kubeStateMetrics.enabled="false" \
+        --set nodeExporter.enabled="false" \
+        --set thanosRuller.enabled="false" \
+        prometheus-community/kube-prometheus-stack
+      - defer: touch /ks/.prometheus_finished
+    status:
+      - kubectl -n monitoring get pods | grep kube-prometheus
+      - test -f /ks/.prometheus_finished
+
+  deploy:kyverno:
+    desc: Deploy Kyverno
+    summary: Deploys Kyverno and default policy set in the Kubernetes cluster
+    vars:
+      KYVERNO_VERSION: 1.11.4
+    cmds:
+      - helm repo add kyverno https://kyverno.github.io/kyverno/
+      - |
+        helm upgrade --install kyverno \
+        --create-namespace --namespace kyverno \
+        --set admissionController.serviceMonitor.enabled="true" \
+        --set backgroundController.serviceMonitor.enabled="true" \
+        --set cleanupController.serviceMonitor.enabled="true" \
+        --set reportsController.serviceMonitor.enabled="true" \
+        kyverno/kyverno
+      - helm upgrade --install kyverno-policies --namespace kyverno kyverno/kyverno-policies
+      - |
+        mkdir -vp /usr/local/kyverno/{{.KYVERNO_VERSION}} \
+        && curl -fsSL https://github.com/kyverno/kyverno/releases/download/v{{.KYVERNO_VERSION}}/kyverno-cli_v{{.KYVERNO_VERSION}}_linux_x86_64.tar.gz \
+        | tar -xvzf - \
+        --strip-components=1 \
+        --directory=/usr/local/kyverno/{{.KYVERNO_VERSION}} \
+        && ln -sf /usr/local/kyverno/{{.KYVERNO_VERSION}}/kyverno /usr/local/bin/kyverno
+      - defer: touch /ks/.kyverno_finished
+    status:
+      - kubectl -n kyverno get pods | grep kyverno
+      - test -f /ks/.kyverno_finished
+      - test -f /usr/local/kyverno/{{.KYVERNO_VERSION}}/kyverno
