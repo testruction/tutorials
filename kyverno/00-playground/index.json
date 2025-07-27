@@ -1,0 +1,32 @@
+{
+    "title": "00. Kyverno Playground ",
+    "description": "Play with Kyverno. Does not have any taks or questions. Created to develop scenarios and test things related to Kyverno",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md",
+                "background": "step1/background.sh"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "Taskfile.yaml", "target": "~/", "chmod": "+w"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
+    }
+}
