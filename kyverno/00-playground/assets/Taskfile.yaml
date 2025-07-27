@@ -97,6 +97,7 @@ tasks:
         --set kubeStateMetrics.enabled="false" \
         --set nodeExporter.enabled="false" \
         --set thanosRuller.enabled="false" \
+        --wait \
         prometheus-community/kube-prometheus-stack
       - defer: touch /ks/.prometheus_finished
     status:
@@ -117,6 +118,7 @@ tasks:
         --set backgroundController.serviceMonitor.enabled="true" \
         --set cleanupController.serviceMonitor.enabled="true" \
         --set reportsController.serviceMonitor.enabled="true" \
+        --wait \
         kyverno/kyverno
       - helm upgrade --install kyverno-policies --namespace kyverno kyverno/kyverno-policies
       - |
