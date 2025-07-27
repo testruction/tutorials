@@ -121,6 +121,17 @@ tasks:
         --wait \
         kyverno/kyverno
       - helm upgrade --install kyverno-policies --namespace kyverno kyverno/kyverno-policies
+      - helm repo add policy-reporter https://kyverno.github.io/policy-reporter
+      - |
+        helm upgrade --install policy-reporter \
+        --create-namespace --namespace policy-reporter \
+        --set metrics.enabled=true \
+        --set api.enabled=true \
+        --set ui.enabled=true \
+        --set ui.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
+        --set ui.service.type="LoadBalancer" \
+        --set ui.service.port=8081 \
+        policy-reporter/policy-reporter
       - |
         mkdir -vp /usr/local/kyverno/{{.KYVERNO_VERSION}} \
         && curl -fsSL https://github.com/kyverno/kyverno/releases/download/v{{.KYVERNO_VERSION}}/kyverno-cli_v{{.KYVERNO_VERSION}}_linux_x86_64.tar.gz \
