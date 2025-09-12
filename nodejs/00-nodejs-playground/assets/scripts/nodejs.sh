@@ -19,7 +19,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NODEJS_VERSION}/install
 
 # Install Node.Js
 nvm install --lts \
-&& nvm use --lts \
 && corepack enable
 
 NODE_OPTIONS="--max-old-space-size=1500"
