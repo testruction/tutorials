@@ -25,7 +25,7 @@ sudo systemctl stop docker
 clear
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
-wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
+wait_until_done "Installing NodeJS 24.x." /ks/.nodejs_finished
 wait_until_done "Installing Docker BuildX plugin" /ks/.docker_finished
 wait_until_done "Configuring Kubernetes client." /ks/.kubeconfig_finished
 wait_until_done "Upgrading Helm." /ks/.helm_finished

@@ -11,7 +11,7 @@ kubectl proxy &
 Run the Backstage development server.
 
 ```bash
-yarn dev
+yarn start
 ```{{exec}}
 
 > [Click here]({{TRAFFIC_HOST1_3000}}) to open the Web console.
