@@ -3,13 +3,13 @@ set -euo pipefail
 
 if [ ! -d "${HOME}/backstage-tutorial" ]
 then
-  git clone --single-branch \
-  --branch feature/kubernetes-plugin \
-  https://github.com/testruction/backstage-tutorial \
-  "${HOME}/backstage-tutorial"
-else
+  # Make sure Node.js is available (Backstage requires Node.js 24 or later)
+  command -v node >/dev/null 2>&1 || /ks/nodejs.sh
+  # Generate a new Backstage application (new frontend system) with the latest framework version
+  cd "${HOME}"
+  echo "backstage-tutorial" | npx --yes @backstage/create-app@latest --skip-install
   cd "${HOME}/backstage-tutorial/"
-  git pull
+  yarn install
 fi
 
 cd "${HOME}/backstage-tutorial/"

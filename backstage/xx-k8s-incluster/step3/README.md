@@ -1,42 +1,37 @@
-# # Implement Kubernetes frontend plugins
+# Check the Kubernetes frontend plugin
 
-Install the `@backstage/plugin-kubernetes` package in Backstage Frontend component (i.e. `packages/frontend`).
+Backstage applications now use the [new frontend system](https://backstage.io/docs/frontend-system/).
+Plugins provide **extensions** (pages, entity tabs, entity cards, ...) which the application discovers automatically, so there is no longer an `EntityPage.tsx` file to edit.
+
+The feature discovery is enabled by the following setting of the `app-config.yaml` file.
 
 ```bash
-yarn add --cwd packages/app @backstage/plugin-kubernetes
+yq '.app.packages' app-config.yaml
 ```{{exec}}
 
-Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
+> The value `all` tells Backstage to load every plugin listed in the `packages/app/package.json` file.
 
-```typescript
-// Below the line beginning by "import { ReportIssue }".
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+The application template already lists the `@backstage/plugin-kubernetes` package.
 
-// In the "serviceEntityPage",
-// Above the line "</EntityLayout>".
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
-```
-
-<details><summary>Dot it for me</summary>
-
-```typescript
-vi -e packages/app/src/components/catalog/EntityPage.tsx <<EOF
-/import { ReportIssue }
-a
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-.
-/const serviceEntityPage
-/<\/EntityLayout>
-i
-
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
-.
-w
-EOF
+```bash
+grep -n "plugin-kubernetes" packages/app/package.json
 ```{{exec}}
 
-</details>
+The plugin adds a **Kubernetes** tab to the entity pages. It is displayed only for entities having the `backstage.io/kubernetes-id` annotation.
+
+> **Notice**:
+> On an application that does not include the plugin yet, installing the package is enough.
+>
+> ```bash
+> yarn --cwd packages/app add @backstage/plugin-kubernetes
+> ```
+>
+> The tab can be disabled or customized from `app-config.yaml`, for example:
+>
+> ```yaml
+> app:
+>   extensions:
+>     - entity-content:kubernetes/kubernetes:
+>         config:
+>           title: Workloads
+> ```
