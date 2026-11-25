@@ -4,7 +4,7 @@ Edit the `web-app/src/backend/catalog-info.yaml`, then add the following annotat
 
 ```yaml
 metadata:
-  annotions:
+  annotations:
     prometheus.io/alert: >-
       demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
@@ -15,7 +15,7 @@ Edit the `web-app/src/frontend/catalog-info.yaml`, then add the following annota
 
 ```yaml
 metadata:
-  annotions:
+  annotations:
     prometheus.io/alert: >-
       demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-

@@ -1,70 +1,19 @@
-# Implement Argo CD frontend plugins
+# Implement the Argo CD frontend plugin
 
-Install the `@roadiehq/backstage-plugin-argo-cd` package in Backstage Frontend component (i.e. `packages/frontend`).
+Install the `@roadiehq/backstage-plugin-argo-cd` package in the Backstage frontend component (i.e. `packages/app`).
 
 ```bash
-yarn add --cwd packages/app @roadiehq/backstage-plugin-argo-cd
+yarn --cwd ${HOME}/backstage-tutorial/packages/app add @roadiehq/backstage-plugin-argo-cd
 ```{{exec}}
 
-Edit the `backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx`, then insert the following content **without** the comments:
+Backstage uses the [new frontend system](https://backstage.io/docs/frontend-system/). The package exposes its extensions through the `@roadiehq/backstage-plugin-argo-cd/alpha` entry point, which is discovered automatically because `app.packages` is set to `all` in the `app-config.yaml` file.
 
-Below the line beginning by **`import { ReportIssue }`**.
+There is **no** `EntityPage.tsx` file to edit anymore. The plugin provides the following extensions:
 
-```typescript
-import {
-  EntityArgoCDOverviewCard,
-  isArgocdAvailable
-} from '@roadiehq/backstage-plugin-argo-cd';
-```
+* The **Argo CD overview card** and **history card** displayed on the entity overview tab.
+* The Argo CD API client.
 
-<!--At the **`serviceEntityPage`**, above the line **`</EntityLayout>`**.
+> **Notice**:
+> The cards are displayed only on entities having the `argocd/app-name` annotation, which is added later in this lab.
 
-```typescript
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
-``` -->
-
-At the **`overviewContent`**, below the line **`{entityWarningContent}`**.
-
-```typescript
-    <EntitySwitch>
-      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
-        <Grid item sm={12}>
-          <EntityArgoCDOverviewCard />
-        </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
-```
-
-<details><summary>Dot it for me</summary>
-
-```typescript
-yarn add --cwd packages/app @roadiehq/backstage-plugin-argo-cd
-
-vi -e ${HOME}/backstage-tutorial/packages/app/src/components/catalog/EntityPage.tsx <<EOF
-/import { ReportIssue }
-a
-import {
-  EntityArgoCDOverviewCard,
-  isArgocdAvailable
-} from '@roadiehq/backstage-plugin-argo-cd';
-.
-/const overviewContent
-/{entityWarningContent}
-a
-
-    <EntitySwitch>
-      <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
-        <Grid item sm={4}>
-          <EntityArgoCDOverviewCard />
-        </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
-
-.
-w
-EOF
-```{{exec}}
-
-</details>
+The installed extensions can be inspected from the application, at the `/visualizer` page.

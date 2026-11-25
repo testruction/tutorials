@@ -7,7 +7,7 @@ This lab walks through the integration and deployment operations required to run
 The objective of this lab is to learn how to:
 
 1. Create a Backstage application locally
-2. Configure the Kubernetes plugin
+2. Configure the Kubernetes plugin with the new frontend system
 3. Configure PostgreSQL as the backend database
 4. Build a container image
 5. Deploy the image to a local Kubernetes cluster

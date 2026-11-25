@@ -1,0 +1,35 @@
+{
+    "title": "03. Backstage: TechDocs",
+    "description": "Learn how to publish docs-as-code with the TechDocs plugin of the Backstage new frontend system",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {"text": "step1/README.md"},
+            {"text": "step2/README.md"},
+            {"text": "step3/README.md"},
+            {"text": "step4/README.md"},
+            {"text": "step5/README.md"}
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/mkdocs.sh", "target": "/ks/", "chmod": "+x"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "ubuntu-4GB"
+    }
+}
