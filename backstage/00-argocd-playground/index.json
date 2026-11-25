@@ -22,22 +22,8 @@
             "host01": [
                 {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
                 {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "Taskfile.yaml", "target": "~/", "chmod": "+w"},
 
-                {"file": "scripts/yq.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/nodejs.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/docker.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/kubeconfig.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/helm.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/metallb.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/bats.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/prometheus.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/argocd.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/webapp.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/appdb.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/backstageapp.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/locust.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/crds.sh", "target": "/ks/", "chmod": "+x"},
-                {"file": "scripts/metrics-server.sh", "target": "/ks/", "chmod": "+x"},
 
                 {"file": "tests/locustfile.py", "target": "~/tests/", "chmod": "+rw"},
 
