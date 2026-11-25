@@ -1,11 +1,11 @@
 # Add Prometheus plugin configuration
-
-Edit the `backstage-tutorial/app-config.local.yaml` configuration file, the append the following settings to bastage Backstage to query the Prometheus API endpoint.
+Edit the `backstage-tutorial/app-config.local.yaml` configuration file, then append the following settings to let Backstage query the Prometheus API endpoint through the backend proxy.
 
 ```yaml
 proxy:
-  '/prometheus/api':
-    target: http://localhost:9090/api/v1/
+  endpoints:
+    '/prometheus/api':
+      target: http://localhost:9090/api/v1/
 prometheus:
   proxyPath: /prometheus/api
 ```{{copy}}
@@ -14,8 +14,8 @@ prometheus:
 
 ```bash
 yq -i '
-  .proxy.'/prometheus0/api'.target = "http://localhost:9090/api/v1/" |
-  .prometheus.proxyPath = "/prometheus0/api"
+  .proxy.endpoints."/prometheus/api".target = "http://localhost:9090/api/v1/" |
+  .prometheus.proxyPath = "/prometheus/api"
 ' ${HOME}/backstage-tutorial/app-config.local.yaml
 ```{{exec}}
 

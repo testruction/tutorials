@@ -20,6 +20,6 @@ rm $0
 clear
 
 wait_until_done "Installing YQ command line." /ks/.yq_finished
-wait_until_done "Installing NodeJS 18.x." /ks/.nodejs_finished
+wait_until_done "Installing NodeJS 24.x." /ks/.nodejs_finished
 wait_until_done "Deploying MetalLB." /ks/.metallb_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished

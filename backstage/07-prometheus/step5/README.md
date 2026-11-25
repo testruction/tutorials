@@ -9,7 +9,7 @@ kubectl get pods --all-namespaces
 Run the Backstage development server.
 
 ```bash
-yarn dev
+yarn start
 ```{{exec}}
 
 > Wait for the message `webpack compiled successfully`.

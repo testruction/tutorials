@@ -34,4 +34,4 @@ wait_until_done "Deploying Kubernetes Custom Resource Definitions." /ks/.crds_fi
 wait_until_done "Deploying Flux." /ks/.flux_finished
 wait_until_done "Deploying Prometheus Operator." /ks/.prometheus_finished
 wait_until_done "Cloning & deploying example WebApp." /ks/.webapp_finished
-wait_until_done "Cloning Backstage tutorial app." /ks/.backstageapp_finished
+wait_until_done "Creating Backstage tutorial app." /ks/.backstageapp_finished
