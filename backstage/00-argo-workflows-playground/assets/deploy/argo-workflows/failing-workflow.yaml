@@ -1,0 +1,32 @@
+# A workflow that fails at its second step, to show the Failed status and the partial DAG.
+# Create it with `kubectl create`: the name is generated.
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: demo-failing-
+  namespace: demo
+  labels:
+    app: demo
+spec:
+  serviceAccountName: workflow
+  entrypoint: pipeline
+  templates:
+    - name: pipeline
+      dag:
+        tasks:
+          - name: build
+            template: ok
+          - name: test
+            dependencies: [build]
+            template: fail
+          - name: publish
+            dependencies: [test]
+            template: ok
+    - name: ok
+      container:
+        image: busybox:1.37
+        command: [sh, -c, 'echo done']
+    - name: fail
+      container:
+        image: busybox:1.37
+        command: [sh, -c, 'echo "tests failed" && exit 1']
