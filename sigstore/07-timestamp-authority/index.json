@@ -1,0 +1,49 @@
+{
+    "title": "07. Sigstore: Timestamp Authority",
+    "description": "Prove when an artifact was signed with RFC 3161 signed timestamps",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            },
+            {
+                "text": "step3/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {
+                    "file": "scripts/wait-init.sh",
+                    "target": "/ks/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "scripts/init.sh",
+                    "target": "/ks/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "Taskfile.yaml",
+                    "target": "~/",
+                    "chmod": "+w"
+                }
+            ]
+        }
+    },
+    "backend": {
+        "imageid": "ubuntu"
+    }
+}

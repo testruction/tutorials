@@ -21,6 +21,11 @@
             "Description": "Sandboxes used to develop courses"
         },
         {
+            "path": "sigstore",
+            "title": "Sigstore",
+            "description": "Learn how to sign and verify software artifacts with Cosign, Fulcio, Rekor, the Policy Controller, Gitsign and the Timestamp Authority"
+        },
+        {
             "path": "nodejs",
             "title": "Node.js",
             "Description": "Learn Node.js"

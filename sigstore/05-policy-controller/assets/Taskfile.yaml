@@ -1,0 +1,50 @@
+# 05. Sigstore: Policy Controller - environment provisioning
+version: '3'
+
+vars:
+  COSIGN_VERSION: 3.1.6
+  CRANE_VERSION: 0.22.1
+  POLICY_CONTROLLER_VERSION: 0.15.1
+  POLICY_CONTROLLER_CHART_VERSION: 0.10.8
+  POLICY_CONTROLLER_IMAGE_DIGEST: sha256:0492bb264fb1d9bdc8e3f343ef542cc85b7dd7c7fd8d9524b453c2bd31a1d128
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:cosign
+      - task: install:crane
+      - task: install:helm
+      - task: deploy:policy-controller
+
+  install:cosign:
+    desc: Install the cosign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/cosign https://github.com/sigstore/cosign/releases/download/v{{.COSIGN_VERSION}}/cosign-linux-amd64
+      - sudo chmod +x /usr/local/bin/cosign
+      - touch /ks/.cosign_finished
+
+  install:crane:
+    desc: Install the crane registry client
+    cmds:
+      - curl -fsSL https://github.com/google/go-containerregistry/releases/download/v{{.CRANE_VERSION}}/go-containerregistry_Linux_x86_64.tar.gz | sudo tar -xz -C /usr/local/bin crane
+      - touch /ks/.crane_finished
+
+  install:helm:
+    desc: Upgrade the Helm client
+    cmds:
+      - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - touch /ks/.helm_finished
+
+  deploy:policy-controller:
+    desc: Deploy the Sigstore Policy Controller with Helm
+    cmds:
+      - helm repo add sigstore https://sigstore.github.io/helm-charts
+      - helm repo update
+      - |
+          # The chart lags behind the controller releases: pin the v{{.POLICY_CONTROLLER_VERSION}} image by digest
+          helm upgrade --install policy-controller sigstore/policy-controller \
+            --version {{.POLICY_CONTROLLER_CHART_VERSION}} \
+            --namespace cosign-system --create-namespace --wait \
+            --set webhook.image.version={{.POLICY_CONTROLLER_IMAGE_DIGEST}}
+      - touch /ks/.policy-controller_finished
