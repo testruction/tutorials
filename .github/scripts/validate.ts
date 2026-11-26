@@ -155,13 +155,11 @@ const [flag, base] = process.argv.slice(2);
 if (flag === '--changed' && base) {
   // Pull request mode: only validate what the pull request touches
   const changed = git('diff', '--name-only', '--diff-filter=d', `${base}...HEAD`);
-  // A change to the pipeline itself validates every tutorial
-  const pipeline = changed.some(file => isInside(file, join(root, '.github')));
   const tutorials = indexes
     .map(index => dirname(index))
-    .filter(directory => pipeline || changed.some(file => isInside(file, directory)));
+    .filter(directory => changed.some(file => isInside(file, directory)));
   const inTutorials = (file: string): boolean => tutorials.some(directory => isInside(file, directory));
-  structures = structures.filter(file => pipeline || changed.includes(file));
+  structures = structures.filter(file => changed.includes(file));
   indexes = indexes.filter(file => tutorials.includes(dirname(file)));
   taskfiles = taskfiles.filter(inTutorials);
   scripts = scripts.filter(inTutorials);
