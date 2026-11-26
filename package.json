@@ -1,0 +1,19 @@
+{
+  "name": "tutorials-tooling",
+  "private": true,
+  "type": "module",
+  "description": "Pull request validation of the KillerCoda tutorials",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "validate": "node .github/scripts/validate.ts",
+    "validate:changed": "node .github/scripts/validate.ts --changed"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0",
+    "yaml": "^2.8.0"
+  }
+}
