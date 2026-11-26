@@ -1,4 +1,9 @@
+# Backstage Prometheus plugin - environment provisioning
 version: '3'
+
+vars:
+  YQ_VERSION: 4.46.1
+  NODE_MAJOR: 24
 
 tasks:
   default:
@@ -10,26 +15,24 @@ tasks:
       - task: install:locust
       - task: deploy:prometheus
       - task: deploy:apps
+
   deploy:apps:
     desc: Deploy the applications in parallel
     deps:
       - deploy:webapp
       - setup:backstage
+
   deploy:metallb:
-    desc: Deploy MetalLB load balancer
+    desc: Deploy MetalLB and give it the host IP address as address pool
     vars:
-      IP_ADDRESS: 
-        sh: ip route get '1.1.1.1' | grep -oP 'src \K[^ ]+'
+      IP_ADDRESS:
+        sh: ip route get 1.1.1.1 | grep -oP 'src \K[^ ]+'
     cmds:
-      - "helm repo add metallb https://metallb.github.io/metallb"
-      - "helm repo update"
+      - helm repo add metallb https://metallb.github.io/metallb
+      - helm repo update
+      - helm upgrade --install metallb metallb/metallb --namespace metallb-system --create-namespace --wait
       - |
-          helm upgrade --install metallb \
-          --namespace metallb-system --create-namespace \
-          --wait \
-          metallb/metallb
-      - |
-          cat <<EOF | kubectl apply -f -
+          kubectl apply -f - <<EOF
           apiVersion: metallb.io/v1beta1
           kind: IPAddressPool
           metadata:
@@ -37,7 +40,7 @@ tasks:
             namespace: metallb-system
           spec:
             addresses:
-            - {{.IP_ADDRESS}}/32
+              - {{.IP_ADDRESS}}/32
           ---
           apiVersion: metallb.io/v1beta1
           kind: L2Advertisement
@@ -46,197 +49,203 @@ tasks:
             namespace: metallb-system
           spec:
             ipAddressPools:
-            - default
+              - default
           EOF
       - touch /ks/.metallb_finished
-    status:
-      - test -f /ks/.metallb_finished
+
   install:yq:
     desc: Install the yq command line
-    vars:
-      YQ_VERSION: 4.46.1
     cmds:
-      - "sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64"
-      - "sudo chmod +x /usr/local/bin/yq"
+      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
+      - sudo chmod +x /usr/local/bin/yq
       - touch /ks/.yq_finished
-    status:
-      - test -f /ks/.yq_finished
+
   install:nodejs:
-    desc: Install Node.js 24 and Yarn 4 (Corepack)
-    vars:
-      NODE_MAJOR: 24
+    desc: Install Node.js and Yarn 4 (Corepack)
     cmds:
-      - |
-          sudo apt-get update \
-          && sudo apt-get install -y \
-              'ca-certificates' \
-              'curl' \
-              'gnupg' \
-              'build-essential' \
-              'python3' \
-          && sudo mkdir -p /etc/apt/keyrings \
-          && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
-          | sudo gpg --dearmor --yes -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_{{.NODE_MAJOR}}.x nodistro main" \
-          | sudo tee /etc/apt/sources.list.d/nodesource.list
-          sudo apt-get update \
-          && sudo apt-get install -y nodejs
-      - "sudo npm install --global corepack"
-      - "sudo corepack enable"
-      - "yarn --version"
+      - curl -fsSL https://deb.nodesource.com/setup_{{.NODE_MAJOR}}.x | sudo -E bash -
+      - sudo apt-get install -y nodejs build-essential python3
+      - sudo npm install --global corepack
+      - sudo corepack enable
       - touch /ks/.nodejs_finished
-    status:
-      - test -f /ks/.nodejs_finished
+
   install:locust:
     desc: Install the Locust.io load generator
     cmds:
-      - "sudo apt-get install -yqq python3-locust httpie"
+      - sudo apt-get install -yqq python3-locust httpie
       - touch /ks/.locust_finished
-    status:
-      - test -f /ks/.locust_finished
+
   deploy:prometheus:
-    desc: Deploy Kube-Prometheus stack
+    desc: Deploy the Kube-Prometheus stack (Prometheus only, no exporters)
     cmds:
-      - "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
-      - "helm repo update"
+      - helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+      - helm repo update
       - |
-          helm upgrade --install default \
-          --namespace monitoring \
-          --create-namespace \
-          --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues="false" \
-          --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues="false" \
-          --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues="false" \
-          --set prometheus.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
-          --set prometheus.service.type="LoadBalancer" \
-          --set grafana.enabled="false" \
-          --set kubeApiServer.enabled="false" \
-          --set kubelet.enabled="false" \
-          --set kubeControllerManager.enabled="false" \
-          --set coreDns.enabled="false" \
-          --set kubeDns.enabled="false" \
-          --set kubeEtcd.enabled="false" \
-          --set kubeScheduler.enabled="false" \
-          --set kubeProxy.enabled="false" \
-          --set kubeStateMetrics.enabled="false" \
-          --set nodeExporter.enabled="false" \
-          --set thanosRuller.enabled="false" \
-          prometheus-community/kube-prometheus-stack
+          helm upgrade --install default prometheus-community/kube-prometheus-stack \
+            --namespace monitoring --create-namespace --wait \
+            --values - <<EOF
+          prometheus:
+            service:
+              type: LoadBalancer
+              annotations:
+                metallb.io/allow-shared-ip: edge-endpoint
+            prometheusSpec:
+              # Select every ServiceMonitor, PodMonitor and rule of the cluster
+              podMonitorSelectorNilUsesHelmValues: false
+              serviceMonitorSelectorNilUsesHelmValues: false
+              ruleSelectorNilUsesHelmValues: false
+          grafana:
+            enabled: false
+          # Keep the stack small: disable the scrapers and exporters
+          kubeApiServer:
+            enabled: false
+          kubelet:
+            enabled: false
+          kubeControllerManager:
+            enabled: false
+          coreDns:
+            enabled: false
+          kubeDns:
+            enabled: false
+          kubeEtcd:
+            enabled: false
+          kubeScheduler:
+            enabled: false
+          kubeProxy:
+            enabled: false
+          kubeStateMetrics:
+            enabled: false
+          nodeExporter:
+            enabled: false
+          thanosRuler:
+            enabled: false
+          EOF
       - touch /ks/.prometheus_finished
-    status:
-      - test -f /ks/.prometheus_finished
+
   deploy:webapp:
-    desc: Clone and deploy the example web application
-    vars:
-      NS: fastapi-demo
-      RELEASE: demo
+    desc: Clone the example web application and deploy it with Helm
     cmds:
       - |
-          if [ ! -d "${HOME}/web-app" ]
+          if [ -d ${HOME}/web-app ]
           then
-            git clone --single-branch --branch main \
-            https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
-            "${HOME}/web-app"
+            git -C ${HOME}/web-app pull
           else
-            git -C "${HOME}/web-app" pull
+            git clone --single-branch --branch main https://github.com/testruction/fastapi-sqlalchemy-cockroachdb ${HOME}/web-app
           fi
+      - helm dependency update ${HOME}/web-app/chart/
       - |
-          cd "${HOME}/web-app/"
-          helm dependency update ./chart/
           until kubectl api-resources --api-group=monitoring.coreos.com | grep -q servicemonitors
           do
-            echo "Waiting for Prometheus Operator"
+            echo "Waiting for the Prometheus Operator CRDs"
             sleep 2
           done
-          helm upgrade --install \
-          --create-namespace \
-          --namespace "{{.NS}}" \
-          --set jaeger.create="false" \
-          --set cockroachdb.create="false" \
-          --set backend.service.type="LoadBalancer" \
-          --set backend.service.port="18180" \
-          --set backend.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
-          --set backend.metrics.serviceMonitor.enabled="true" \
-          --set backend.extraEnv[0].name="DATABASE_ENGINE" \
-          --set backend.extraEnv[0].value="sqlite" \
-          --set frontend.service.type="LoadBalancer" \
-          --set frontend.service.port="18080" \
-          --set frontend.service.annotations."metallb\.io/allow-shared-ip"="edge-endpoint" \
-          --set frontend.metrics.serviceMonitor.enabled="true" \
-          "{{.RELEASE}}" ./chart/
-          kubectl label namespace "{{.NS}}" "prometheus=enabled" --overwrite
+      - |
+          helm upgrade --install demo ${HOME}/web-app/chart/ \
+            --namespace fastapi-demo --create-namespace \
+            --values - <<EOF
+          jaeger:
+            create: false
+          cockroachdb:
+            create: false
+          backend:
+            service:
+              type: LoadBalancer
+              port: 18180
+              annotations:
+                metallb.io/allow-shared-ip: edge-endpoint
+            metrics:
+              serviceMonitor:
+                enabled: true
+            extraEnv:
+              - name: DATABASE_ENGINE
+                value: sqlite
+          frontend:
+            service:
+              type: LoadBalancer
+              port: 18080
+              annotations:
+                metallb.io/allow-shared-ip: edge-endpoint
+            metrics:
+              serviceMonitor:
+                enabled: true
+          EOF
+      - kubectl label namespace fastapi-demo prometheus=enabled --overwrite
       - touch /ks/.webapp_finished
-    status:
-      - test -f /ks/.webapp_finished
-  setup:backstage:
-    desc: Create the Backstage tutorial application
+
+  backstage:create:
+    desc: Generate the Backstage application with the latest create-app
     cmds:
       - |
-          if [ ! -d "${HOME}/backstage-tutorial" ]
+          if [ ! -d ${HOME}/backstage-tutorial ]
           then
-            # Generate a new Backstage application (new frontend system) with the latest framework version
-            cd "${HOME}"
-            echo "backstage-tutorial" | npx --yes @backstage/create-app@latest --skip-install
-            cd "${HOME}/backstage-tutorial/"
+            cd ${HOME}
+            echo backstage-tutorial | npx --yes @backstage/create-app@latest --skip-install
+            cd backstage-tutorial
             yarn install
           fi
-          cd "${HOME}/backstage-tutorial/"
-          touch app-config.local.yaml
-          KC_FRONTEND_URL="$(sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host)"
-          KC_BACKEND_URL="$(sed 's/PORT/7007/' /etc/killercoda/host)"
-          export KC_FRONTEND_URL KC_BACKEND_URL
-          yq -i '
-            .app.listen.host = "0.0.0.0" |
-            .app.listen.port = 3000 |
-            .app.baseUrl = strenv(KC_FRONTEND_URL) |
-            .backend.listen.host = "0.0.0.0" |
-            .backend.listen.port = 7007 |
-            .backend.baseUrl = strenv(KC_BACKEND_URL) |
-            .backend.cors.origin = strenv(KC_FRONTEND_URL) |
-            .catalog.locations[0].type = "file" |
-            .catalog.locations[0].target = "../../../web-app/catalog-info.yaml" |
-            .kubernetes.serviceLocatorMethod.type = "multiTenant" |
-            .kubernetes.clusterLocatorMethods[0].type = "localKubectlProxy"
-          ' ./app-config.local.yaml
+
+  backstage:configure:
+    desc: Write app-config.local.yaml (listeners, catalog, Kubernetes)
+    vars:
+      KC_FRONTEND_URL:
+        sh: sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host
+      KC_BACKEND_URL:
+        sh: sed 's/PORT/7007/' /etc/killercoda/host
+    cmds:
+      - |
+          cat > ${HOME}/backstage-tutorial/app-config.local.yaml <<EOF
+          app:
+            listen:
+              host: 0.0.0.0
+              port: 3000
+            baseUrl: {{.KC_FRONTEND_URL}}
+          backend:
+            listen:
+              host: 0.0.0.0
+              port: 7007
+            baseUrl: {{.KC_BACKEND_URL}}
+            cors:
+              origin: {{.KC_FRONTEND_URL}}
+          catalog:
+            locations:
+              - type: file
+                target: ../../../web-app/catalog-info.yaml
+          kubernetes:
+            serviceLocatorMethod:
+              type: multiTenant
+            clusterLocatorMethods:
+              - type: localKubectlProxy
+          EOF
+
+  setup:backstage:
+    desc: Create, configure and deploy the Backstage tutorial application
+    cmds:
+      - task: backstage:create
+      - task: backstage:configure
       - touch /ks/.backstageapp_finished
-    status:
-      - test -f /ks/.backstageapp_finished
+
   install:helm:
     desc: Upgrade the Helm client
     cmds:
-      - "curl -fsSL -o /tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
-      - "chmod 700 /tmp/get_helm.sh"
-      - "/tmp/get_helm.sh"
-      - "rm -f /tmp/get_helm.sh"
-      - "ln -sf /usr/local/bin/helm /usr/bin/helm"
+      - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - ln -sf /usr/local/bin/helm /usr/bin/helm
       - touch /ks/.helm_finished
-    status:
-      - test -f /ks/.helm_finished
+
   install:docker-buildx:
-    desc: Install the Docker BuildX plugin
+    desc: Install the Docker BuildX plugin from the Docker apt repository
     cmds:
+      - sudo install -m 0755 -d /etc/apt/keyrings
+      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
       - |
-          sudo install -m 0755 -d /etc/apt/keyrings
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-          | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
-          sudo chmod a+r /etc/apt/keyrings/docker.gpg
-          echo \
-          "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-          $(. /etc/os-release && echo ${VERSION_CODENAME}) stable" \
-          | sudo tee /etc/apt/sources.list.d/docker.list
-      - "sudo apt-get update -y && sudo apt-get install -y docker-buildx-plugin"
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo ${VERSION_CODENAME}) stable" \
+            | sudo tee /etc/apt/sources.list.d/docker.list
+      - sudo apt-get update -y && sudo apt-get install -y docker-buildx-plugin
       - touch /ks/.docker_finished
-    status:
-      - test -f /ks/.docker_finished
+
   install:bats:
     desc: Install the Bats test framework
     cmds:
-      - |
-          cd /tmp
-          git clone https://github.com/bats-core/bats-core.git
-          cd bats-core
-          ./install.sh /usr/local
-          cd ..
-          rm -rf bats-core
+      - git clone https://github.com/bats-core/bats-core.git /tmp/bats-core
+      - /tmp/bats-core/install.sh /usr/local
+      - rm -rf /tmp/bats-core
       - touch /ks/.bats_core_finished
-    status:
-      - test -f /ks/.bats_core_finished
