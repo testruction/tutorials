@@ -1,4 +1,9 @@
+# Backstage in-cluster deployment - environment provisioning
 version: '3'
+
+vars:
+  YQ_VERSION: 4.46.1
+  NODE_MAJOR: 24
 
 tasks:
   default:
@@ -11,73 +16,45 @@ tasks:
       - task: install:helm
       - task: deploy:webapp
       - task: install:appdb
+
   install:yq:
     desc: Install the yq command line
-    vars:
-      YQ_VERSION: 4.46.1
     cmds:
-      - "sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64"
-      - "sudo chmod +x /usr/local/bin/yq"
+      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
+      - sudo chmod +x /usr/local/bin/yq
       - touch /ks/.yq_finished
-    status:
-      - test -f /ks/.yq_finished
+
   install:nodejs:
-    desc: Install Node.js 24 and Yarn 4 (Corepack)
-    vars:
-      NODE_MAJOR: 24
+    desc: Install Node.js and Yarn 4 (Corepack)
     cmds:
-      - |
-          sudo apt-get update \
-          && sudo apt-get install -y \
-              'ca-certificates' \
-              'curl' \
-              'gnupg' \
-              'build-essential' \
-              'python3' \
-          && sudo mkdir -p /etc/apt/keyrings \
-          && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
-          | sudo gpg --dearmor --yes -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_{{.NODE_MAJOR}}.x nodistro main" \
-          | sudo tee /etc/apt/sources.list.d/nodesource.list
-          sudo apt-get update \
-          && sudo apt-get install -y nodejs
-      - "sudo npm install --global corepack"
-      - "sudo corepack enable"
-      - "yarn --version"
+      - curl -fsSL https://deb.nodesource.com/setup_{{.NODE_MAJOR}}.x | sudo -E bash -
+      - sudo apt-get install -y nodejs build-essential python3
+      - sudo npm install --global corepack
+      - sudo corepack enable
       - touch /ks/.nodejs_finished
-    status:
-      - test -f /ks/.nodejs_finished
+
   install:docker-buildx:
-    desc: Install the Docker BuildX plugin
+    desc: Install the Docker BuildX plugin from the Docker apt repository
     cmds:
+      - sudo install -m 0755 -d /etc/apt/keyrings
+      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
       - |
-          sudo install -m 0755 -d /etc/apt/keyrings
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-          | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
-          sudo chmod a+r /etc/apt/keyrings/docker.gpg
-          echo \
-          "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-          $(. /etc/os-release && echo ${VERSION_CODENAME}) stable" \
-          | sudo tee /etc/apt/sources.list.d/docker.list
-      - "sudo apt-get update -y && sudo apt-get install -y docker-buildx-plugin"
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo ${VERSION_CODENAME}) stable" \
+            | sudo tee /etc/apt/sources.list.d/docker.list
+      - sudo apt-get update -y && sudo apt-get install -y docker-buildx-plugin
       - touch /ks/.docker_finished
-    status:
-      - test -f /ks/.docker_finished
+
   deploy:metallb:
-    desc: Deploy MetalLB load balancer
+    desc: Deploy MetalLB and give it the host IP address as address pool
     vars:
-      IP_ADDRESS: 
-        sh: ip route get '1.1.1.1' | grep -oP 'src \K[^ ]+'
+      IP_ADDRESS:
+        sh: ip route get 1.1.1.1 | grep -oP 'src \K[^ ]+'
     cmds:
-      - "helm repo add metallb https://metallb.github.io/metallb"
-      - "helm repo update"
+      - helm repo add metallb https://metallb.github.io/metallb
+      - helm repo update
+      - helm upgrade --install metallb metallb/metallb --namespace metallb-system --create-namespace --wait
       - |
-          helm upgrade --install metallb \
-          --namespace metallb-system --create-namespace \
-          --wait \
-          metallb/metallb
-      - |
-          cat <<EOF | kubectl apply -f -
+          kubectl apply -f - <<EOF
           apiVersion: metallb.io/v1beta1
           kind: IPAddressPool
           metadata:
@@ -85,7 +62,7 @@ tasks:
             namespace: metallb-system
           spec:
             addresses:
-            - {{.IP_ADDRESS}}/32
+              - {{.IP_ADDRESS}}/32
           ---
           apiVersion: metallb.io/v1beta1
           kind: L2Advertisement
@@ -94,48 +71,32 @@ tasks:
             namespace: metallb-system
           spec:
             ipAddressPools:
-            - default
+              - default
           EOF
       - touch /ks/.metallb_finished
-    status:
-      - test -f /ks/.metallb_finished
+
   install:helm:
     desc: Upgrade the Helm client
     cmds:
-      - "curl -fsSL -o /tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
-      - "chmod 700 /tmp/get_helm.sh"
-      - "/tmp/get_helm.sh"
-      - "rm -f /tmp/get_helm.sh"
-      - "ln -sf /usr/local/bin/helm /usr/bin/helm"
+      - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - ln -sf /usr/local/bin/helm /usr/bin/helm
       - touch /ks/.helm_finished
-    status:
-      - test -f /ks/.helm_finished
+
   deploy:webapp:
     desc: Clone the example web application
     cmds:
       - |
-          if [ ! -d "${HOME}/web-app" ]
+          if [ -d ${HOME}/web-app ]
           then
-            git clone --single-branch --branch main \
-            https://github.com/testruction/fastapi-sqlalchemy-cockroachdb \
-            "${HOME}/web-app"
+            git -C ${HOME}/web-app pull
           else
-            git -C "${HOME}/web-app" pull
+            git clone --single-branch --branch main https://github.com/testruction/fastapi-sqlalchemy-cockroachdb ${HOME}/web-app
           fi
       - touch /ks/.webapp_finished
-    status:
-      - test -f /ks/.webapp_finished
+
   install:appdb:
     desc: Install the sample application database tooling
     cmds:
-      - |
-          if [ ! -d /usr/local/pytest-sqlalchemy-cockroachdb ]
-          then
-            git clone --single-branch --branch main \
-            https://github.com/testruction/pytest-sqlalchemy-cockroachdb \
-            /usr/local/pytest-sqlalchemy-cockroachdb
-          fi
-          pip3 install -r /usr/local/pytest-sqlalchemy-cockroachdb/requirements.txt
+      - git clone --single-branch --branch main https://github.com/testruction/pytest-sqlalchemy-cockroachdb /usr/local/pytest-sqlalchemy-cockroachdb
+      - pip3 install -r /usr/local/pytest-sqlalchemy-cockroachdb/requirements.txt
       - touch /ks/.appdb_finished
-    status:
-      - test -f /ks/.appdb_finished
