@@ -1,0 +1,37 @@
+# 07. Sigstore: Timestamp Authority - environment provisioning
+version: '3'
+
+vars:
+  COSIGN_VERSION: 3.1.6
+  TSA_VERSION: 2.2.2
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:cosign
+      - task: install:jq
+      - task: deploy:tsa
+
+  install:cosign:
+    desc: Install the cosign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/cosign https://github.com/sigstore/cosign/releases/download/v{{.COSIGN_VERSION}}/cosign-linux-amd64
+      - sudo chmod +x /usr/local/bin/cosign
+      - touch /ks/.cosign_finished
+
+  install:jq:
+    desc: Install the jq JSON processor
+    cmds:
+      - sudo apt-get update -y && sudo apt-get install -y jq
+      - touch /ks/.jq_finished
+
+  deploy:tsa:
+    desc: Run a Sigstore Timestamp Authority on port 3000 (in-memory signer, for testing only)
+    cmds:
+      - |
+          docker run -d --restart=always --name timestamp-authority -p 3000:3000 \
+            ghcr.io/sigstore/timestamp-server:v{{.TSA_VERSION}} \
+            timestamp-server serve --host 0.0.0.0 --port 3000 --timestamp-signer memory --disable-ntp-monitoring
+      - until curl -fsS http://localhost:3000/ping > /dev/null; do sleep 1; done
+      - touch /ks/.tsa_finished

@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "path": "01-introduction"
+    },
+    {
+      "path": "02-cosign"
+    },
+    {
+      "path": "03-fulcio"
+    },
+    {
+      "path": "04-rekor"
+    },
+    {
+      "path": "05-policy-controller"
+    },
+    {
+      "path": "06-gitsign"
+    },
+    {
+      "path": "07-timestamp-authority"
+    }
+  ]
+}

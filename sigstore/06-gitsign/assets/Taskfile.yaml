@@ -1,0 +1,34 @@
+# 06. Sigstore: Gitsign - environment provisioning
+version: '3'
+
+vars:
+  COSIGN_VERSION: 3.1.6
+  GITSIGN_VERSION: 0.18.0
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:cosign
+      - task: install:gitsign
+      - task: install:jq
+
+  install:cosign:
+    desc: Install the cosign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/cosign https://github.com/sigstore/cosign/releases/download/v{{.COSIGN_VERSION}}/cosign-linux-amd64
+      - sudo chmod +x /usr/local/bin/cosign
+      - touch /ks/.cosign_finished
+
+  install:gitsign:
+    desc: Install the gitsign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/gitsign https://github.com/sigstore/gitsign/releases/download/v{{.GITSIGN_VERSION}}/gitsign_{{.GITSIGN_VERSION}}_linux_amd64
+      - sudo chmod +x /usr/local/bin/gitsign
+      - touch /ks/.gitsign_finished
+
+  install:jq:
+    desc: Install the jq JSON processor
+    cmds:
+      - sudo apt-get update -y && sudo apt-get install -y jq
+      - touch /ks/.jq_finished
