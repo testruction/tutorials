@@ -1,0 +1,23 @@
+# Hooks for prek (https://prek.j178.dev) or pre-commit (https://pre-commit.com)
+#
+#   prek install     # run the hooks before every commit
+#   prek run         # run them on the staged files
+#   prek run --all-files
+#
+# Requires Node.js 24, `npm ci` and the Task command line (https://taskfile.dev).
+repos:
+  - repo: local
+    hooks:
+      - id: validate-tutorials
+        name: Validate the modified tutorials
+        description: Same checks as the pull request pipeline, on the staged tutorials only
+        entry: node .github/scripts/validate.ts --staged
+        language: system
+        pass_filenames: false
+        files: ^(backstage|fastapi|helm|kyverno|lfcs1|lfcs6|nodejs|sandboxes|yaml1)/|^structure\.json$
+      - id: typecheck-validation-script
+        name: Type-check the validation script
+        entry: npm run --silent typecheck
+        language: system
+        pass_filenames: false
+        files: ^(\.github/scripts/.*\.ts|tsconfig\.json)$
