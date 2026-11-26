@@ -42,8 +42,7 @@
                 {"file": "Taskfile.yaml", "target": "~/", "chmod": "+w"},
 
 
-                {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"},
-                {"file": "tools/populatedb.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+                {"file": "tests/locustfile.py", "target": "~/tests", "chmod": "+rw"}
                 
             ]
         }

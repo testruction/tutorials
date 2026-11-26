@@ -1,0 +1,46 @@
+name: Pull request
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate tutorials
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Task
+        uses: go-task/setup-task@v1
+        with:
+          version: 3.x
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check the validation script
+        run: npm run typecheck
+
+      # Pull requests only validate the tutorials they change
+      # (a manual run validates the whole repository).
+      - name: Validate changed tutorials
+        if: github.event_name == 'pull_request'
+        run: npm run validate:changed -- "origin/${{ github.base_ref }}"
+
+      - name: Validate all tutorials
+        if: github.event_name != 'pull_request'
+        run: npm run validate
