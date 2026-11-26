@@ -4,6 +4,7 @@
  * Usage:
  *   node .github/scripts/validate.ts                validate the whole repository
  *   node .github/scripts/validate.ts --changed REF  validate only what changed since REF
+ *   node .github/scripts/validate.ts --staged       validate only what is staged (pre-commit hook)
  *
  * Checks:
  *   - every structure.json / index.json is valid JSON
@@ -152,9 +153,12 @@ let taskfiles = tracked('**/Taskfile.yaml');
 let scripts = tracked('**/*.sh');
 
 const [flag, base] = process.argv.slice(2);
-if (flag === '--changed' && base) {
-  // Pull request mode: only validate what the pull request touches
-  const changed = git('diff', '--name-only', '--diff-filter=d', `${base}...HEAD`);
+if ((flag === '--changed' && base) || flag === '--staged') {
+  // Only validate what the pull request (or the commit) touches
+  const changed =
+    flag === '--staged'
+      ? git('diff', '--cached', '--name-only', '--diff-filter=d')
+      : git('diff', '--name-only', '--diff-filter=d', `${base}...HEAD`);
   const tutorials = indexes
     .map(index => dirname(index))
     .filter(directory => changed.some(file => isInside(file, directory)));
