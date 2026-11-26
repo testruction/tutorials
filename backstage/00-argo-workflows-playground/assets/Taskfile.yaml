@@ -1,0 +1,176 @@
+# Backstage + Argo Workflows playground - environment provisioning
+version: '3'
+
+vars:
+  YQ_VERSION: 4.46.1
+  NODE_MAJOR: 24
+  ARGO_WORKFLOWS_PORT: 2746
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:helm
+      - task: install:yq
+      - task: install:nodejs
+      - task: deploy:metallb
+      - task: deploy:argo-workflows
+      - task: deploy:apps
+
+  deploy:apps:
+    desc: Deploy the applications in parallel
+    deps:
+      - deploy:demo
+      - setup:backstage
+
+  install:helm:
+    desc: Upgrade the Helm client
+    cmds:
+      - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - ln -sf /usr/local/bin/helm /usr/bin/helm
+      - touch /ks/.helm_finished
+
+  install:yq:
+    desc: Install the yq command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
+      - sudo chmod +x /usr/local/bin/yq
+      - touch /ks/.yq_finished
+
+  install:nodejs:
+    desc: Install Node.js and Yarn 4 (Corepack)
+    cmds:
+      - curl -fsSL https://deb.nodesource.com/setup_{{.NODE_MAJOR}}.x | sudo -E bash -
+      - sudo apt-get install -y nodejs build-essential python3
+      - sudo npm install --global corepack
+      - sudo corepack enable
+      - touch /ks/.nodejs_finished
+
+  deploy:metallb:
+    desc: Deploy MetalLB and give it the host IP address as address pool
+    vars:
+      IP_ADDRESS:
+        sh: ip route get 1.1.1.1 | grep -oP 'src \K[^ ]+'
+    cmds:
+      - helm repo add metallb https://metallb.github.io/metallb
+      - helm repo update
+      - helm upgrade --install metallb metallb/metallb --namespace metallb-system --create-namespace --wait
+      - |
+          kubectl apply -f - <<EOF
+          apiVersion: metallb.io/v1beta1
+          kind: IPAddressPool
+          metadata:
+            name: default
+            namespace: metallb-system
+          spec:
+            addresses:
+              - {{.IP_ADDRESS}}/32
+          ---
+          apiVersion: metallb.io/v1beta1
+          kind: L2Advertisement
+          metadata:
+            name: default
+            namespace: metallb-system
+          spec:
+            ipAddressPools:
+              - default
+          EOF
+      - touch /ks/.metallb_finished
+
+  deploy:argo-workflows:
+    desc: Deploy Argo Workflows and a read-only account for Backstage
+    cmds:
+      - helm repo add argo https://argoproj.github.io/argo-helm
+      - helm repo update
+      - |
+          helm upgrade --install argo-workflows argo/argo-workflows \
+            --namespace argo --create-namespace --wait \
+            --values - <<EOF
+          crds:
+            # Minified CRDs: no pre-install hook job
+            full: false
+          server:
+            # "server": the web console needs no login. "client": the Backstage plugin sends a service account token.
+            authModes:
+              - server
+              - client
+            serviceType: LoadBalancer
+            servicePort: {{.ARGO_WORKFLOWS_PORT}}
+            serviceAnnotations:
+              metallb.io/allow-shared-ip: edge-endpoint
+          EOF
+      - kubectl apply -f ${HOME}/deploy/argo-workflows/backstage-rbac.yaml
+      - touch /ks/.argo-workflows_finished
+
+  deploy:demo:
+    desc: Run the demo workflows (a cron pipeline and a failing workflow)
+    cmds:
+      - kubectl apply -f ${HOME}/deploy/argo-workflows/demo-rbac.yaml
+      - kubectl apply -f ${HOME}/deploy/argo-workflows/cron-workflow.yaml
+      - kubectl create -f ${HOME}/deploy/argo-workflows/failing-workflow.yaml
+      - touch /ks/.demo_finished
+
+  backstage:create:
+    desc: Generate the Backstage application with the latest create-app
+    cmds:
+      - |
+          if [ ! -d ${HOME}/backstage-tutorial ]
+          then
+            cd ${HOME}
+            echo backstage-tutorial | npx --yes @backstage/create-app@latest --skip-install
+            cd backstage-tutorial
+            yarn install
+          fi
+
+  backstage:plugins:
+    desc: Add the Argo Workflows plugins (frontend and backend)
+    cmds:
+      - yarn --cwd ${HOME}/backstage-tutorial/packages/app add @backstage-community/plugin-argo-workflows
+      - yarn --cwd ${HOME}/backstage-tutorial/packages/backend add @backstage-community/plugin-argo-workflows-backend
+      - |
+          # The frontend plugin is discovered automatically (app.packages: all), the backend one must be registered
+          sed -i "/^backend.start();/i backend.add(import('@backstage-community/plugin-argo-workflows-backend'));" \
+            ${HOME}/backstage-tutorial/packages/backend/src/index.ts
+
+  backstage:configure:
+    desc: Write app-config.local.yaml (listeners, catalog, Argo Workflows)
+    vars:
+      KC_FRONTEND_URL:
+        sh: sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host
+      KC_BACKEND_URL:
+        sh: sed 's/PORT/7007/' /etc/killercoda/host
+    cmds:
+      - |
+          ARGO_WORKFLOWS_TOKEN=$(kubectl -n argo get secret backstage-token -o jsonpath='{.data.token}' | base64 -d)
+          cat > ${HOME}/backstage-tutorial/app-config.local.yaml <<EOF
+          app:
+            listen:
+              host: 0.0.0.0
+              port: 3000
+            baseUrl: {{.KC_FRONTEND_URL}}
+          backend:
+            listen:
+              host: 0.0.0.0
+              port: 7007
+            baseUrl: {{.KC_BACKEND_URL}}
+            cors:
+              origin: {{.KC_FRONTEND_URL}}
+          catalog:
+            locations:
+              - type: file
+                target: ../../../deploy/backstage/catalog-info.yaml
+          argoWorkflows:
+            defaultInstance: main
+            instances:
+              - name: main
+                baseUrl: http://localhost:{{.ARGO_WORKFLOWS_PORT}}
+                token: ${ARGO_WORKFLOWS_TOKEN}
+          EOF
+
+  setup:backstage:
+    desc: Create, extend and configure the Backstage tutorial application
+    cmds:
+      - task: backstage:create
+      - task: backstage:plugins
+      - task: backstage:configure
+      - touch /ks/.backstageapp_finished

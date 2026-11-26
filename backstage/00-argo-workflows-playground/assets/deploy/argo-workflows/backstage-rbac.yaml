@@ -1,0 +1,41 @@
+# Read-only access to the workflows of every namespace for the Backstage plugin.
+# The Argo server runs in "client" auth mode: it forwards the token below to the Kubernetes API.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backstage
+  namespace: argo
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backstage-token
+  namespace: argo
+  annotations:
+    kubernetes.io/service-account.name: backstage
+type: kubernetes.io/service-account-token
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: backstage-argo-workflows-read-only
+rules:
+  - apiGroups: [argoproj.io]
+    resources: [workflows, workflowtemplates, cronworkflows]
+    verbs: [get, list, watch]
+  - apiGroups: ['']
+    resources: [pods, pods/log, events]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: backstage-argo-workflows-read-only
+subjects:
+  - kind: ServiceAccount
+    name: backstage
+    namespace: argo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: backstage-argo-workflows-read-only
