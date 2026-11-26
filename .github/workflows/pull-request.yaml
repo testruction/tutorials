@@ -1,0 +1,39 @@
+name: Pull request
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate tutorials
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Task
+        uses: go-task/setup-task@v1
+        with:
+          version: 3.x
+
+      - name: Install PyYAML
+        run: python3 -m pip install --quiet pyyaml
+
+      # Pull requests only validate the tutorials they change
+      # (a manual run validates the whole repository).
+      - name: Validate changed tutorials
+        if: github.event_name == 'pull_request'
+        run: python3 .github/scripts/validate.py --changed "origin/${{ github.base_ref }}"
+
+      - name: Validate all tutorials
+        if: github.event_name != 'pull_request'
+        run: python3 .github/scripts/validate.py
