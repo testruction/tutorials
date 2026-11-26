@@ -1,4 +1,9 @@
+# Backstage TechDocs - environment provisioning
 version: '3'
+
+vars:
+  YQ_VERSION: 4.46.1
+  NODE_MAJOR: 24
 
 tasks:
   default:
@@ -7,49 +12,28 @@ tasks:
       - task: install:yq
       - task: install:nodejs
       - task: install:mkdocs
+
   install:yq:
     desc: Install the yq command line
-    vars:
-      YQ_VERSION: 4.46.1
     cmds:
-      - "sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64"
-      - "sudo chmod +x /usr/local/bin/yq"
+      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
+      - sudo chmod +x /usr/local/bin/yq
       - touch /ks/.yq_finished
-    status:
-      - test -f /ks/.yq_finished
+
   install:nodejs:
-    desc: Install Node.js 24 and Yarn 4 (Corepack)
-    vars:
-      NODE_MAJOR: 24
+    desc: Install Node.js and Yarn 4 (Corepack)
     cmds:
-      - |
-          sudo apt-get update \
-          && sudo apt-get install -y \
-              'ca-certificates' \
-              'curl' \
-              'gnupg' \
-              'build-essential' \
-              'python3' \
-          && sudo mkdir -p /etc/apt/keyrings \
-          && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
-          | sudo gpg --dearmor --yes -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_{{.NODE_MAJOR}}.x nodistro main" \
-          | sudo tee /etc/apt/sources.list.d/nodesource.list
-          sudo apt-get update \
-          && sudo apt-get install -y nodejs
-      - "sudo npm install --global corepack"
-      - "sudo corepack enable"
-      - "yarn --version"
+      - curl -fsSL https://deb.nodesource.com/setup_{{.NODE_MAJOR}}.x | sudo -E bash -
+      - sudo apt-get install -y nodejs build-essential python3
+      - sudo npm install --global corepack
+      - sudo corepack enable
       - touch /ks/.nodejs_finished
-    status:
-      - test -f /ks/.nodejs_finished
+
   install:mkdocs:
-    desc: Install MkDocs with the TechDocs core plugin
+    desc: Install MkDocs with the TechDocs core plugin in a virtualenv
     cmds:
-      - "sudo apt-get update && sudo apt-get install -y python3-venv python3-pip"
-      - "python3 -m venv \"${HOME}/techdocs-venv\""
-      - "\"${HOME}/techdocs-venv/bin/pip\" install --quiet mkdocs-techdocs-core"
-      - "echo 'export PATH=\"${HOME}/techdocs-venv/bin:${PATH}\"' >> \"${HOME}/.bashrc\""
+      - sudo apt-get update -y && sudo apt-get install -y python3-venv python3-pip
+      - python3 -m venv ${HOME}/techdocs-venv
+      - ${HOME}/techdocs-venv/bin/pip install --quiet mkdocs-techdocs-core
+      - echo 'export PATH="${HOME}/techdocs-venv/bin:${PATH}"' >> ${HOME}/.bashrc
       - touch /ks/.mkdocs_finished
-    status:
-      - test -f /ks/.mkdocs_finished
