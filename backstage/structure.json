@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "path": "00-argo-workflows-playground"
+    },
+    {
       "path": "00-argocd-playground"
     },
     {

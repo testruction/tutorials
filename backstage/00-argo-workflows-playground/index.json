@@ -1,0 +1,36 @@
+{
+    "title": "00. Backstage Playground (Argo Workflows)",
+    "description": "Play with Backstage and the Argo Workflows plugin. Does not have any tasks or questions. Created to develop scenarios and test things related to Backstage",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "scripts/wait-init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "scripts/init.sh", "target": "/ks/", "chmod": "+x"},
+                {"file": "Taskfile.yaml", "target": "~/", "chmod": "+w"},
+                {"file": "deploy/argo-workflows/backstage-rbac.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
+                {"file": "deploy/argo-workflows/demo-rbac.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
+                {"file": "deploy/argo-workflows/cron-workflow.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
+                {"file": "deploy/argo-workflows/failing-workflow.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
+                {"file": "deploy/backstage/catalog-info.yaml", "target": "~/deploy/backstage/", "chmod": "+rw"}
+            ]
+        }
+    },
+    "backend": {
+      "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
+    }
+}

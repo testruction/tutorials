@@ -1,0 +1,48 @@
+# A pipeline started every two minutes. The Backstage plugin selects its runs with the label app=demo.
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: demo-pipeline
+  namespace: demo
+spec:
+  schedule: '*/2 * * * *'
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  workflowMetadata:
+    labels:
+      app: demo
+  workflowSpec:
+    serviceAccountName: workflow
+    entrypoint: pipeline
+    templates:
+      - name: pipeline
+        dag:
+          tasks:
+            - name: checkout
+              template: step
+              arguments: {parameters: [{name: message, value: checkout}]}
+            - name: build
+              dependencies: [checkout]
+              template: step
+              arguments: {parameters: [{name: message, value: build}]}
+            - name: test
+              dependencies: [build]
+              template: step
+              arguments: {parameters: [{name: message, value: test}]}
+            - name: scan
+              dependencies: [build]
+              template: step
+              arguments: {parameters: [{name: message, value: scan}]}
+            - name: publish
+              dependencies: [test, scan]
+              template: step
+              arguments: {parameters: [{name: message, value: publish}]}
+      - name: step
+        inputs:
+          parameters:
+            - name: message
+        container:
+          image: busybox:1.37
+          command: [sh, -c]
+          args: ['echo "{{inputs.parameters.message}}" && sleep 10']
