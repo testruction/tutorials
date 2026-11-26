@@ -18,13 +18,8 @@
         "assets": {
             "host01": [
                 {"file": "scripts/wait.sh", "target": "~/", "chmod": "+rwx"},
-                {"file": "scripts/install-ssh.sh", "target": "~/", "chmod": "+rwx"},
-                {"file": "scripts/install-lxd.sh", "target": "~/", "chmod": "+rwx"},
-                {"file": "scripts/install-salt.sh", "target": "~/", "chmod": "+rwx"},
-                {"file": "scripts/install-iscsi.sh", "target": "~/", "chmod": "+x"},
-                {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+rw"},
-                {"file": "scripts/write-localusers.sh", "target": "~/", "chmod": "+rwx"},
-                {"file": "scripts/write-files.sh", "target": "~/", "chmod": "+rwx"}
+                {"file": "Taskfile.yaml", "target": "~/", "chmod": "+rw"},
+                {"file": "lxc/cloud-init/default-user-data.yml", "target": "/tmp/", "chmod": "+rw"}
             ]
         }
     },
