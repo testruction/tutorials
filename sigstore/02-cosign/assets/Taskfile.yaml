@@ -1,0 +1,48 @@
+# 02. Sigstore: Cosign - environment provisioning
+version: '3'
+
+vars:
+  COSIGN_VERSION: 3.1.6
+  CRANE_VERSION: 0.22.1
+  SYFT_VERSION: 1.57.2
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:cosign
+      - task: install:crane
+      - task: install:syft
+      - task: install:jq
+      - task: deploy:registry
+
+  install:cosign:
+    desc: Install the cosign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/cosign https://github.com/sigstore/cosign/releases/download/v{{.COSIGN_VERSION}}/cosign-linux-amd64
+      - sudo chmod +x /usr/local/bin/cosign
+      - touch /ks/.cosign_finished
+
+  install:crane:
+    desc: Install the crane registry client
+    cmds:
+      - curl -fsSL https://github.com/google/go-containerregistry/releases/download/v{{.CRANE_VERSION}}/go-containerregistry_Linux_x86_64.tar.gz | sudo tar -xz -C /usr/local/bin crane
+      - touch /ks/.crane_finished
+
+  install:syft:
+    desc: Install the syft SBOM generator
+    cmds:
+      - curl -fsSL https://github.com/anchore/syft/releases/download/v{{.SYFT_VERSION}}/syft_{{.SYFT_VERSION}}_linux_amd64.tar.gz | sudo tar -xz -C /usr/local/bin syft
+      - touch /ks/.syft_finished
+
+  install:jq:
+    desc: Install the jq JSON processor
+    cmds:
+      - sudo apt-get update -y && sudo apt-get install -y jq
+      - touch /ks/.jq_finished
+
+  deploy:registry:
+    desc: Run a local OCI registry on port 5000
+    cmds:
+      - docker run -d --restart=always --name registry -p 5000:5000 registry:3
+      - touch /ks/.registry_finished

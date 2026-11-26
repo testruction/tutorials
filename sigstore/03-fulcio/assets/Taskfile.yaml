@@ -1,0 +1,25 @@
+# 03. Sigstore: Fulcio - environment provisioning
+version: '3'
+
+vars:
+  COSIGN_VERSION: 3.1.6
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    cmds:
+      - task: install:cosign
+      - task: install:jq
+
+  install:cosign:
+    desc: Install the cosign command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/cosign https://github.com/sigstore/cosign/releases/download/v{{.COSIGN_VERSION}}/cosign-linux-amd64
+      - sudo chmod +x /usr/local/bin/cosign
+      - touch /ks/.cosign_finished
+
+  install:jq:
+    desc: Install the jq JSON processor
+    cmds:
+      - sudo apt-get update -y && sudo apt-get install -y jq
+      - touch /ks/.jq_finished

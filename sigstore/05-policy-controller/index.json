@@ -1,0 +1,52 @@
+{
+    "title": "05. Sigstore: Policy Controller",
+    "description": "Admit only signed container images in a Kubernetes cluster",
+    "difficulty": "easy",
+    "time": "20-30 minutes",
+    "details": {
+        "intro": {
+            "text": "intro/README.md",
+            "foreground": "intro/foreground.sh",
+            "background": "intro/background.sh"
+        },
+        "steps": [
+            {
+                "text": "step1/README.md"
+            },
+            {
+                "text": "step2/README.md"
+            },
+            {
+                "text": "step3/README.md"
+            },
+            {
+                "text": "step4/README.md"
+            }
+        ],
+        "finish": {
+            "text": "finish/README.md"
+        },
+        "assets": {
+            "host01": [
+                {
+                    "file": "scripts/wait-init.sh",
+                    "target": "/ks/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "scripts/init.sh",
+                    "target": "/ks/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "Taskfile.yaml",
+                    "target": "~/",
+                    "chmod": "+w"
+                }
+            ]
+        }
+    },
+    "backend": {
+        "imageid": "kubernetes-kubeadm-1node-4GB-rapid"
+    }
+}
