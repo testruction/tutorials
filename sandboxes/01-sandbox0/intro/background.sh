@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
-
-wait_file() {
-  local file="$1"; shift
-  local wait_seconds="${1:-10}"; shift # 10 seconds as default timeout
-
-  until test $((wait_seconds--)) -eq 0 -o -e "$file" ; do sleep 1; done
-
-  ((++wait_seconds))
-}
-
+# will run in background. can setup various things for the scenario for user not to see
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 echo "done" >> /tmp/killercoda-finished
-
-~/hello_world.sh
-
+task --taskfile "${HOME}/Taskfile.yaml" hello-world
 echo "done" >> /tmp/killercoda-background-finished
