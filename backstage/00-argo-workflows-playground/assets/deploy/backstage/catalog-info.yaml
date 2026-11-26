@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-pipeline
+  description: A component whose delivery pipeline runs on Argo Workflows.
+  annotations:
+    # Label selector of the workflows displayed in the Argo Workflows tab
+    argoworkflows.argoproj.io/workflow-selector: app=demo
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
