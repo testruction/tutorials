@@ -1,0 +1,37 @@
+# Node.js playground - environment provisioning
+version: '3'
+
+vars:
+  YQ_VERSION: 4.46.1
+  NVM_VERSION: 0.40.3
+
+tasks:
+  default:
+    desc: Provision the tutorial environment
+    deps:
+      - install:yq
+      - install:bats
+      - install:nodejs
+
+  install:yq:
+    desc: Install the yq command line
+    cmds:
+      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
+      - sudo chmod +x /usr/local/bin/yq
+      - touch /ks/.yq_finished
+
+  install:bats:
+    desc: Install the Bats test framework
+    cmds:
+      - git clone https://github.com/bats-core/bats-core.git /tmp/bats-core
+      - /tmp/bats-core/install.sh /usr/local
+      - rm -rf /tmp/bats-core
+      - touch /ks/.bats_core_finished
+
+  install:nodejs:
+    desc: Install the latest Node.js LTS with nvm
+    cmds:
+      - curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v{{.NVM_VERSION}}/install.sh | bash
+      - bash -c ". ${HOME}/.nvm/nvm.sh && nvm install --lts && corepack enable"
+      - echo "export NODE_OPTIONS='--max-old-space-size=1500'" >> ${HOME}/.bashrc
+      - touch /ks/.nodejs_finished
