@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
-
-/ks/yq.sh &
-/ks/bats.sh &
-/ks/nodejs.sh &
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+task --taskfile "${HOME}/Taskfile.yaml"
