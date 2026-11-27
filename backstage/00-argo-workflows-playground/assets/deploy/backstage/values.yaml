@@ -58,8 +58,8 @@ postgresql:
     # Created by the Taskfile, with the admin-password and user-password keys
     existingSecret: backstage-postgresql
   primary:
+    # Default storage class of the cluster
     persistence:
-      storageClass: local-path
       size: 1Gi
     resources:
       requests:
