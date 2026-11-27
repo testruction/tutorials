@@ -26,7 +26,6 @@ clear
 
 wait_until_done "Upgrading Helm." /ks/.helm_finished
 wait_until_done "Deploying MetalLB." /ks/.metallb_finished
-wait_until_done "Deploying the local-path provisioner." /ks/.local-path_finished
 wait_until_done "Deploying Argo Workflows." /ks/.argo-workflows_finished
 wait_until_done "Running the demo workflows." /ks/.demo_finished
 wait_until_done "Deploying Backstage." /ks/.backstageapp_finished
