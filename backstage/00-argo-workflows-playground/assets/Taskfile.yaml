@@ -2,18 +2,17 @@
 version: '3'
 
 vars:
-  YQ_VERSION: 4.46.1
-  NODE_MAJOR: 24
   ARGO_WORKFLOWS_PORT: 2746
+  BACKSTAGE_CHART_VERSION: 2.11.0
+  LOCAL_PATH_PROVISIONER_VERSION: 0.0.37
 
 tasks:
   default:
     desc: Provision the tutorial environment
     cmds:
       - task: install:helm
-      - task: install:yq
-      - task: install:nodejs
       - task: deploy:metallb
+      - task: deploy:local-path
       - task: deploy:argo-workflows
       - task: deploy:apps
 
@@ -21,7 +20,7 @@ tasks:
     desc: Deploy the applications in parallel
     deps:
       - deploy:demo
-      - setup:backstage
+      - deploy:backstage
 
   install:helm:
     desc: Upgrade the Helm client
@@ -29,22 +28,6 @@ tasks:
       - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
       - ln -sf /usr/local/bin/helm /usr/bin/helm
       - touch /ks/.helm_finished
-
-  install:yq:
-    desc: Install the yq command line
-    cmds:
-      - sudo curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v{{.YQ_VERSION}}/yq_linux_amd64
-      - sudo chmod +x /usr/local/bin/yq
-      - touch /ks/.yq_finished
-
-  install:nodejs:
-    desc: Install Node.js and Yarn 4 (Corepack)
-    cmds:
-      - curl -fsSL https://deb.nodesource.com/setup_{{.NODE_MAJOR}}.x | sudo -E bash -
-      - sudo apt-get install -y nodejs build-essential python3
-      - sudo npm install --global corepack
-      - sudo corepack enable
-      - touch /ks/.nodejs_finished
 
   deploy:metallb:
     desc: Deploy MetalLB and give it the host IP address as address pool
@@ -76,6 +59,13 @@ tasks:
               - default
           EOF
       - touch /ks/.metallb_finished
+
+  deploy:local-path:
+    desc: Deploy the local-path provisioner (local-path storage class)
+    cmds:
+      - kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v{{.LOCAL_PATH_PROVISIONER_VERSION}}/deploy/local-path-storage.yaml
+      - kubectl -n local-path-storage rollout status deployment/local-path-provisioner --timeout=5m
+      - touch /ks/.local-path_finished
 
   deploy:argo-workflows:
     desc: Deploy Argo Workflows and a read-only account for Backstage
@@ -110,67 +100,33 @@ tasks:
       - kubectl create -f ${HOME}/deploy/argo-workflows/failing-workflow.yaml
       - touch /ks/.demo_finished
 
-  backstage:create:
-    desc: Generate the Backstage application with the latest create-app
-    cmds:
-      - |
-          if [ ! -d ${HOME}/backstage-tutorial ]
-          then
-            cd ${HOME}
-            echo backstage-tutorial | npx --yes @backstage/create-app@latest --skip-install
-            cd backstage-tutorial
-            yarn install
-          fi
-
-  backstage:plugins:
-    desc: Add the Argo Workflows plugins (frontend and backend)
-    cmds:
-      - yarn --cwd ${HOME}/backstage-tutorial/packages/app add @backstage-community/plugin-argo-workflows
-      - yarn --cwd ${HOME}/backstage-tutorial/packages/backend add @backstage-community/plugin-argo-workflows-backend
-      - |
-          # The frontend plugin is discovered automatically (app.packages: all), the backend one must be registered
-          sed -i "/^backend.start();/i backend.add(import('@backstage-community/plugin-argo-workflows-backend'));" \
-            ${HOME}/backstage-tutorial/packages/backend/src/index.ts
-
-  backstage:configure:
-    desc: Write app-config.local.yaml (listeners, catalog, Argo Workflows)
+  deploy:backstage:
+    desc: Deploy Backstage and its PostgreSQL database with the Backstage Helm chart
     vars:
-      KC_FRONTEND_URL:
-        sh: sed -e 's/PORT/3000/' -e 's/https/http/' /etc/killercoda/host
-      KC_BACKEND_URL:
+      KC_BACKSTAGE_URL:
         sh: sed 's/PORT/7007/' /etc/killercoda/host
     cmds:
+      - kubectl create namespace backstage --dry-run=client -o yaml | kubectl apply -f -
       - |
-          ARGO_WORKFLOWS_TOKEN=$(kubectl -n argo get secret backstage-token -o jsonpath='{.data.token}' | base64 -d)
-          cat > ${HOME}/backstage-tutorial/app-config.local.yaml <<EOF
-          app:
-            listen:
-              host: 0.0.0.0
-              port: 3000
-            baseUrl: {{.KC_FRONTEND_URL}}
-          backend:
-            listen:
-              host: 0.0.0.0
-              port: 7007
-            baseUrl: {{.KC_BACKEND_URL}}
-            cors:
-              origin: {{.KC_FRONTEND_URL}}
-          catalog:
-            locations:
-              - type: file
-                target: ../../../deploy/backstage/catalog-info.yaml
-          argoWorkflows:
-            defaultInstance: main
-            instances:
-              - name: main
-                baseUrl: http://localhost:{{.ARGO_WORKFLOWS_PORT}}
-                token: ${ARGO_WORKFLOWS_TOKEN}
-          EOF
-
-  setup:backstage:
-    desc: Create, extend and configure the Backstage tutorial application
-    cmds:
-      - task: backstage:create
-      - task: backstage:plugins
-      - task: backstage:configure
+          # Generated once: re-running the task keeps the password of the existing database
+          kubectl -n backstage get secret backstage-postgresql > /dev/null 2>&1 || kubectl -n backstage create secret generic backstage-postgresql \
+            --from-literal=admin-password="$(head -c 18 /dev/urandom | base64)" \
+            --from-literal=user-password="$(head -c 18 /dev/urandom | base64)"
+      - |
+          # Base URL seen by the browser, and token of the read-only Argo Workflows account
+          kubectl -n backstage create secret generic backstage-env \
+            --from-literal=BACKSTAGE_BASE_URL={{.KC_BACKSTAGE_URL}} \
+            --from-literal=ARGO_WORKFLOWS_TOKEN="$(kubectl -n argo get secret backstage-token -o jsonpath='{.data.token}' | base64 -d)" \
+            --dry-run=client -o yaml | kubectl apply -f -
+      - |
+          kubectl -n backstage create configmap backstage-catalog \
+            --from-file=${HOME}/deploy/backstage/catalog-info.yaml \
+            --dry-run=client -o yaml | kubectl apply -f -
+      - helm repo add backstage https://backstage.github.io/charts
+      - helm repo update
+      - |
+          helm upgrade --install backstage backstage/backstage \
+            --version {{.BACKSTAGE_CHART_VERSION}} \
+            --namespace backstage --wait --timeout 10m \
+            --values ${HOME}/deploy/backstage/values.yaml
       - touch /ks/.backstageapp_finished
