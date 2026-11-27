@@ -26,7 +26,8 @@
                 {"file": "deploy/argo-workflows/demo-rbac.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
                 {"file": "deploy/argo-workflows/cron-workflow.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
                 {"file": "deploy/argo-workflows/failing-workflow.yaml", "target": "~/deploy/argo-workflows/", "chmod": "+rw"},
-                {"file": "deploy/backstage/catalog-info.yaml", "target": "~/deploy/backstage/", "chmod": "+rw"}
+                {"file": "deploy/backstage/catalog-info.yaml", "target": "~/deploy/backstage/", "chmod": "+rw"},
+                {"file": "deploy/backstage/values.yaml", "target": "~/deploy/backstage/", "chmod": "+rw"}
             ]
         }
     },

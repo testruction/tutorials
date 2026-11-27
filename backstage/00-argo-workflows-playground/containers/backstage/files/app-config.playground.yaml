@@ -1,0 +1,46 @@
+# Playground configuration of Backstage, copied in the image by the Dockerfile.
+# URLs and credentials (Backstage, PostgreSQL, Argo Workflows) come from the environment.
+app:
+  title: Argo Workflows playground
+  baseUrl: ${BACKSTAGE_BASE_URL}
+backend:
+  baseUrl: ${BACKSTAGE_BASE_URL}
+  listen:
+    port: 7007
+  cors:
+    origin: ${BACKSTAGE_BASE_URL}
+  # One database, one schema per plugin: the database user does not need the CREATEDB privilege
+  database:
+    client: pg
+    pluginDivisionMode: schema
+    connection:
+      host: ${POSTGRES_HOST}
+      port: ${POSTGRES_PORT}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+      database: backstage
+auth:
+  providers:
+    guest:
+      dangerouslyAllowOutsideDevelopment: true
+catalog:
+  locations:
+    - type: file
+      target: ./examples/entities.yaml
+    - type: file
+      target: ./examples/org.yaml
+      rules:
+        - allow: [User, Group]
+    - type: file
+      target: ./examples/template/template.yaml
+      rules:
+        - allow: [Template]
+    # Mount the catalog entities of the playground in this directory
+    - type: file
+      target: ./catalog/catalog-info.yaml
+argoWorkflows:
+  defaultInstance: main
+  instances:
+    - name: main
+      baseUrl: ${ARGO_WORKFLOWS_URL}
+      token: ${ARGO_WORKFLOWS_TOKEN}
