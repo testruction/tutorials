@@ -1,0 +1,12 @@
+# hadolint configuration: https://github.com/hadolint/hadolint
+#
+# The pull request pipeline (.github/workflows/hadolint.yaml) reports every
+# finding as an annotation, and only fails at `error` severity.
+failure-threshold: error
+ignored:
+  # DL3008: apt package versions are not pinned; tool versions are pinned with
+  # build arguments instead.
+  - DL3008
+trustedRegistries:
+  - docker.io
+  - ghcr.io

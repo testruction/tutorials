@@ -16,6 +16,8 @@ ARG NODE_VERSION=24
 # ---- Stage 1: generate and build the application ------------------------------
 FROM node:${NODE_VERSION}-trixie-slim AS build
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ARG CREATE_APP_VERSION=0.9.4
 ARG ARGO_WORKFLOWS_PLUGIN_VERSION=0.3.1
 ARG ARGO_WORKFLOWS_BACKEND_PLUGIN_VERSION=0.2.0
