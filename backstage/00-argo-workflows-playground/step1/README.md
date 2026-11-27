@@ -1,17 +1,14 @@
 # Environment
 
-Run the Backstage application in development mode.
+Backstage runs in the `backstage` namespace.
 
 ```bash
-cd ~/backstage-tutorial
-yarn start
+kubectl -n backstage get pods,services
 ```{{exec}}
-
-> Wait for the message `webpack compiled successfully`.
 
 Application | URL
 --- | ---
-Backstage | [Click here]({{TRAFFIC_HOST1_3000}}) (sign in as **guest**)
+Backstage | [Click here]({{TRAFFIC_HOST1_7007}}) (sign in as **guest**)
 Argo Workflows | [Click here]({{TRAFFIC_HOST1_2746}})
 
 1. In Backstage, open the **demo-pipeline** component from the catalog.
@@ -31,4 +28,4 @@ kubectl create -f ~/deploy/argo-workflows/failing-workflow.yaml
 ```{{exec}}
 
 > **Notice**:
-> The plugin only needs two things on the entity: the `argoworkflows.argoproj.io/workflow-selector` annotation (see `~/deploy/backstage/catalog-info.yaml`) and an `argoWorkflows` instance in the `app-config.local.yaml` file of the application. The instance holds the URL and the service account token of the `backstage` account created in the `argo` namespace.
+> The plugin needs the `argoworkflows.argoproj.io/workflow-selector` and `backstage.io/kubernetes-namespace` annotations on the entity (see `~/deploy/backstage/catalog-info.yaml`), and an `argoWorkflows` instance in the configuration of Backstage. The image reads the URL and the service account token of the `backstage` account (created in the `argo` namespace) from the `ARGO_WORKFLOWS_URL` and `ARGO_WORKFLOWS_TOKEN` variables.

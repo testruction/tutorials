@@ -6,6 +6,8 @@ metadata:
   annotations:
     # Label selector of the workflows displayed in the Argo Workflows tab
     argoworkflows.argoproj.io/workflow-selector: app=demo
+    # Namespace of the workflows: the Argo server API does not list workflows across namespaces
+    backstage.io/kubernetes-namespace: demo
 spec:
   type: service
   lifecycle: experimental
