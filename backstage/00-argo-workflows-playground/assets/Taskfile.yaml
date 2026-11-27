@@ -4,7 +4,6 @@ version: '3'
 vars:
   ARGO_WORKFLOWS_PORT: 2746
   BACKSTAGE_CHART_VERSION: 2.11.0
-  LOCAL_PATH_PROVISIONER_VERSION: 0.0.37
 
 tasks:
   default:
@@ -12,7 +11,6 @@ tasks:
     cmds:
       - task: install:helm
       - task: deploy:metallb
-      - task: deploy:local-path
       - task: deploy:argo-workflows
       - task: deploy:apps
 
@@ -59,13 +57,6 @@ tasks:
               - default
           EOF
       - touch /ks/.metallb_finished
-
-  deploy:local-path:
-    desc: Deploy the local-path provisioner (local-path storage class)
-    cmds:
-      - kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v{{.LOCAL_PATH_PROVISIONER_VERSION}}/deploy/local-path-storage.yaml
-      - kubectl -n local-path-storage rollout status deployment/local-path-provisioner --timeout=5m
-      - touch /ks/.local-path_finished
 
   deploy:argo-workflows:
     desc: Deploy Argo Workflows and a read-only account for Backstage
